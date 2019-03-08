@@ -11,7 +11,7 @@ typedef struct
 typedef struct
 {
     int width;
-    int heigh;
+    int height;
     
 } board;
 
