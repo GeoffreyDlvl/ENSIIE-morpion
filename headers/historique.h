@@ -8,3 +8,4 @@ void cancel_move(Board* board, Pcoord* ppcoord)
 void replay_move(Board* board, Pcoord* ppcoord)
 
 #endif
+
