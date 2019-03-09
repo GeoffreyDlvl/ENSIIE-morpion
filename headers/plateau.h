@@ -19,12 +19,12 @@ typedef struct
 } Board;
 
 int check_file(char* path); 
-int read_file(Board* board, char* path); 
-void create_empty_board(Board* board); 
-Pcoord* get_valid_moves(Board* board);
-int is_move_valid(Board* board,Pcoord pcoord);
-Board* initialize_rand(int width,int height);
-int play_move(Board* board,Pcoord pcoord);
-int is_game_over(Board* board);
+int read_file(Board* pboard, char* path); 
+void create_empty_board(Board* pboard); 
+Pcoord* get_valid_moves(Board* pboard);
+int is_move_valid(Board* pboard,Pcoord pcoord);
+Board* initialize_rand();
+int play_move(Board* pboard,Pcoord pcoord);
+int is_game_over(Board* pboard);
 
 #endif

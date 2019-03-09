@@ -3,13 +3,13 @@
 
 #include "plateau.h"
 
-void print_board(int hint,Board* board);
+void print_board(int hint,Board* pboard);
 
-int select_move(Board* board);
+void select_move(Board* pboard,int move_number);
 
-void list_available_moves(Board* board);
+void list_available_moves(Board* pboard);
 
-void ask_help(Board* board);
+void ask_help(Board* pboard);
 
 void print_help();
 

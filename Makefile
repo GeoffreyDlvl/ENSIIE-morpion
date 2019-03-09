@@ -1,4 +1,4 @@
 CC = gcc -Wall -Wextra -ansi
 
-main.o : main.c plateau.h historique.h interface.h
+sources/main.o : sources/main.c headers/plateau.h headers/historique.h headers/interface.h
 	$(CC) -c $< -o $@
