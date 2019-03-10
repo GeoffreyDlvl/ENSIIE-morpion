@@ -16,19 +16,6 @@
 #include "board.h"
 
 /**
- * \enum action
- * \brief Represents an game action.
- */
-enum action 
-{ 
-	PLAY_MOVE, /**< Play a move */ 
-	CANCEL_MOVE, /**< Cancel last move */
-	REPLAY_MOVE, /**< Replay a canceled move */
-	LIST_MOVES, /**< List all valid moves */
-	ASK_HELP /**< Ask for help to be displayed */
-};
-
-/**
  * \fn print_board(Board* pboard, bool hint)
  * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
  *

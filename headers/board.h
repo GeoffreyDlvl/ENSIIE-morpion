@@ -13,7 +13,19 @@
  */
 
 #include <stdbool.h> 
-#include "interface.h"
+
+/**
+ * \enum action
+ * \brief Represents a game action.
+ */
+enum action 
+{ 
+	PLAY_MOVE, /**< Play a move */ 
+	CANCEL_MOVE, /**< Cancel last move */
+	REPLAY_MOVE, /**< Replay a canceled move */
+	LIST_MOVES, /**< List all valid moves */
+	ASK_HELP /**< Ask for help to be displayed */
+};
 
 /**
  * \struct Coord
