@@ -37,7 +37,13 @@ int main(int argc,char* argv[]){
   int move_number=1;
   while(!is_game_over(pboard)){
     print_board(0,pboard);
-    select_move(pboard,move_number);
+    enum action playerAction = select_action(pboard, move_number);
+    execute_action(pboard, playerAction);
+
+    if (playerAction == PLAY_MOVE || playerAction == REPLAY_MOVE)
+      move_number++;
+    else if (playerAction == CANCEL_MOVE)
+      move_number--;
   }
   return 0;
 }
