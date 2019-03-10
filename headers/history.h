@@ -13,17 +13,18 @@
  *
  */
 
+#include <stdbool.h> 
 #include "board.h"
 
 /**
- * \fn int play_move(Board* pboard, Pcoord pcoord)
+ * \fn bool play_move(Board* pboard, Pcoord pcoord)
  * \brief Add a point on the Board.
  *
  * \param pboard Pointer to the Board being played.
  * \param pcoord Pointer to selected coordinates.
- * \return 1 if point successfully added, 0 otherwise.
+ * \return true if point successfully added, false otherwise.
  */
-int play_move(Board* pboard, Pcoord pcoord);
+bool play_move(Board* pboard, Pcoord pcoord);
 
 /**
  * \fn void cancel_move(Board* pboard, Pcoord* ppcoord)

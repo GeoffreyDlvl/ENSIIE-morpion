@@ -12,6 +12,8 @@
  *
  */
 
+#include <stdbool.h> 
+
 /**
  * \struct Coord
  * \brief Coordinates on the Board
@@ -38,25 +40,24 @@ typedef struct
     Pcoord** points; /**< Bidimensionnal array of Pcoord */ 
 } Board;
 
-
 /**
- * \fn int check_file(char* path)
+ * \fn bool check_file(char* path)
  * \brief Check the integrity and structure of a file.
  *
  * \param path : the path to the file to verify
- * \return 1 if file structure is correct, 0 otherwise
+ * \return true if file structure is correct, false otherwise
  */
-int check_file(char* path); 
+bool check_file(char* path); 
 
 /**
- * \fn int read_file(Board* pboard, char* path)
+ * \fn bool read_file(Board* pboard, char* path)
  * \brief Read the given file and initialize the Board accordingly.
  *
  * \param pboard Board pointer, SHOULD be NULL
  * \param path File absolute path
- * \return 1 if no error occured, 0 otherwise
+ * \return true if no error occured, false otherwise
  */
-int read_file(Board* pboard, char* path); 
+bool read_file(Board* pboard, char* path); 
 
 /**
  * \fn void create_empty_board(Board* pboard)
@@ -76,40 +77,40 @@ void create_empty_board(Board* pboard);
 Pcoord* get_valid_moves(Board* pboard);
 
 /**
- * \fn int is_move_valid(Board* pboard,Pcoord pcoord);
+ * \fn bool is_move_valid(Board* pboard,Pcoord pcoord);
  * \brief Check if a move is valid.
  *
  * \param pboard Board pointer
  * \param pcoord Coordinates of the selected move
- * \return 1 if no error occured, 0 otherwise
+ * \return true if no error occured, false otherwise
  */
-int is_move_valid(Board* pboard,Pcoord pcoord);
+bool is_move_valid(Board* pboard,Pcoord pcoord);
 
 /**
  * \fn Board* initialize_rand()
  * \brief Randomly initalize a Board.
- ù
+ *
  * \return Pointer to a Board
  */
 Board* initialize_rand();
 
 /**
- * \fn int play_move(Board* pboard, Pcoord pcoord)
+ * \fn bool play_move(Board* pboard, Pcoord pcoord)
  * \brief Add a point on the Board.
  *
  * \param pboard Pointer to the Board being played.
  * \param pcoord Pointer to selected coordinates.
- * \return 1 if point successfully added, 0 otherwise.
+ * \return true if point successfully added, false otherwise.
  */
-int play_move(Board* pboard,Pcoord pcoord);
+bool play_move(Board* pboard,Pcoord pcoord);
 
 /**
- * \fn int is_game_over(Board* pboard);
+ * \fn bool is_game_over(Board* pboard);
  * \brief Check if game is over. 
  *
  * \param pboard Pointer to the Board being played.
- * \return 1 if game is over, 0 otherwise.
+ * \return true if game is over, false otherwise.
  */
-int is_game_over(Board* pboard);
+bool is_game_over(Board* pboard);
 
 #endif

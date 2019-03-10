@@ -12,24 +12,26 @@
  *
  */
 
+#include <stdbool.h> 
 #include "board.h"
 
 /**
- * \fn print_board(Board* pboard, int hint)
+ * \fn print_board(Board* pboard, bool hint)
  * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
  *
  * \param pboard Board pointer 
- * \param hint 1 if hint requested, 0 if hint NOT requested
+ * \param hint true if hint requested, false if hint NOT requested
  */
-void print_board(Board* pboard, int hint);
+void print_board(Board* pboard, bool hint);
 
 /**
  * \fn select_move(Board* pboard,int move_number)
  * \brief Ask the user to play a move.
  *
  * \param pboard Pointer to the Board
+ * \param move_number Move number since game started
  */
-void select_move(Board* pboard,int move_number);
+void select_move(Board* pboard, int move_number);
 
 /**
  * \fn list_available_moves(Board* pboard)
