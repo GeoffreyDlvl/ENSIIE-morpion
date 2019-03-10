@@ -1,8 +1,8 @@
-#ifndef PLATEAU_H
-#define PLATEAU_H
+#ifndef BOARD_H
+#define BOARD_H
 
 /**
- * \file plateau.h
+ * \file board.h
  * \brief This file handles the Board.
  * \authors Geoffrey DELVAL, Rémi GUIJARRO ESPINOSA, Gabriel MORAN, Clément PERESSE
  * \version lot_a
