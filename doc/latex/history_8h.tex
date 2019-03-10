@@ -1,0 +1,70 @@
+\hypertarget{history_8h}{}\section{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/history.h File Reference}
+\label{history_8h}\index{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/history.\+h@{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/history.\+h}}
+
+
+Records player moves during a game.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}board.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{history_8h_afe23ec837d11f38398ad928e0bec55b9}\label{history_8h_afe23ec837d11f38398ad928e0bec55b9}} 
+bool {\bfseries play\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
+\item 
+void \hyperlink{history_8h_a7547f6701284c7d81f582e287994d83c}{cancel\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ppcoord)
+\begin{DoxyCompactList}\small\item\em Withdraw a point from the \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\item 
+void \hyperlink{history_8h_a7c0bc5f65ff5ed18831e0700fb9aea15}{replay\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ppcoord)
+\begin{DoxyCompactList}\small\item\em Add a previously withdrawn point to the \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Records player moves during a game. 
+
+\begin{DoxyAuthor}{Authors}
+Geoffrey D\+E\+L\+V\+AL, Rémi G\+U\+I\+J\+A\+R\+RO E\+S\+P\+I\+N\+O\+SA, Gabriel M\+O\+R\+AN, Clément P\+E\+R\+E\+S\+SE 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+lot\+\_\+a 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+03.\+2019
+\end{DoxyDate}
+Represents \hyperlink{board_8h}{board.\+h} upper layer. This class records player moves and allows to cancel or replay a move. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{history_8h_a7547f6701284c7d81f582e287994d83c}\label{history_8h_a7547f6701284c7d81f582e287994d83c}} 
+\index{history.\+h@{history.\+h}!cancel\+\_\+move@{cancel\+\_\+move}}
+\index{cancel\+\_\+move@{cancel\+\_\+move}!history.\+h@{history.\+h}}
+\subsubsection{\texorpdfstring{cancel\+\_\+move()}{cancel\_move()}}
+{\footnotesize\ttfamily void cancel\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$}]{ppcoord }\end{DoxyParamCaption})}
+
+
+
+Withdraw a point from the \hyperlink{struct_board}{Board}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} being played. \\
+\hline
+{\em ppcoord} & Pointer to pointer to canceled coordinates. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{history_8h_a7c0bc5f65ff5ed18831e0700fb9aea15}\label{history_8h_a7c0bc5f65ff5ed18831e0700fb9aea15}} 
+\index{history.\+h@{history.\+h}!replay\+\_\+move@{replay\+\_\+move}}
+\index{replay\+\_\+move@{replay\+\_\+move}!history.\+h@{history.\+h}}
+\subsubsection{\texorpdfstring{replay\+\_\+move()}{replay\_move()}}
+{\footnotesize\ttfamily void replay\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$}]{ppcoord }\end{DoxyParamCaption})}
+
+
+
+Add a previously withdrawn point to the \hyperlink{struct_board}{Board}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} being played. \\
+\hline
+{\em ppcoord} & Pointer to pointer to replayed coordinates. \\
+\hline
+\end{DoxyParams}

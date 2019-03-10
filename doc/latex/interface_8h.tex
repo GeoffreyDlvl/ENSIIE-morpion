@@ -1,0 +1,126 @@
+\hypertarget{interface_8h}{}\section{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/interface.h File Reference}
+\label{interface_8h}\index{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/interface.\+h@{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/interface.\+h}}
+
+
+Displays the \hyperlink{struct_board}{Board} and manages the user/program interactions.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}board.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{interface_8h_a8ad7b6fdcab6025f32be230471f5aec1}{print\+\_\+board} (\hyperlink{struct_board}{Board} $\ast$pboard, bool hint)
+\begin{DoxyCompactList}\small\item\em Print the \hyperlink{struct_board}{Board}, as well as a hint (i.\+e. a list of available moves) if required. \end{DoxyCompactList}\item 
+void \hyperlink{interface_8h_a246c58952c341d242dd05b532bfc275f}{select\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, int move\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Ask the user to play a move. \end{DoxyCompactList}\item 
+enum \hyperlink{board_8h_a2f4ab7bf743142dae2e459aa18f9f1d4}{action} \hyperlink{interface_8h_ad148755c0d85f8ec548880f20451628a}{select\+\_\+action} (\hyperlink{struct_board}{Board} $\ast$pboard, int move\+\_\+number)
+\begin{DoxyCompactList}\small\item\em Ask the user for the next action. \end{DoxyCompactList}\item 
+void \hyperlink{interface_8h_a0bbf1cb282e55f7ef1b9a2f497731862}{list\+\_\+available\+\_\+moves} (\hyperlink{struct_board}{Board} $\ast$pboard)
+\begin{DoxyCompactList}\small\item\em Prints a list of all valid moves. \end{DoxyCompactList}\item 
+void \hyperlink{interface_8h_a2f19b99811b1ccd67e49806b8678a46e}{ask\+\_\+help} (\hyperlink{struct_board}{Board} $\ast$pboard)
+\begin{DoxyCompactList}\small\item\em Ask the user for help (i.\+e. after a few failed moves). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{interface_8h_a066fe22ef9cb4a0cdca7e2f7245a71f1}\label{interface_8h_a066fe22ef9cb4a0cdca7e2f7245a71f1}} 
+void \hyperlink{interface_8h_a066fe22ef9cb4a0cdca7e2f7245a71f1}{print\+\_\+help} ()
+\begin{DoxyCompactList}\small\item\em Print help for the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Displays the \hyperlink{struct_board}{Board} and manages the user/program interactions. 
+
+\begin{DoxyAuthor}{Authors}
+Geoffrey D\+E\+L\+V\+AL, Rémi G\+U\+I\+J\+A\+R\+RO E\+S\+P\+I\+N\+O\+SA, Gabriel M\+O\+R\+AN, Clément P\+E\+R\+E\+S\+SE 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+lot\+\_\+a 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+03.\+2019
+\end{DoxyDate}
+Handles displaying and asks the user for input. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{interface_8h_a2f19b99811b1ccd67e49806b8678a46e}\label{interface_8h_a2f19b99811b1ccd67e49806b8678a46e}} 
+\index{interface.\+h@{interface.\+h}!ask\+\_\+help@{ask\+\_\+help}}
+\index{ask\+\_\+help@{ask\+\_\+help}!interface.\+h@{interface.\+h}}
+\subsubsection{\texorpdfstring{ask\+\_\+help()}{ask\_help()}}
+{\footnotesize\ttfamily ask\+\_\+help (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
+
+
+
+Ask the user for help (i.\+e. after a few failed moves). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{interface_8h_a0bbf1cb282e55f7ef1b9a2f497731862}\label{interface_8h_a0bbf1cb282e55f7ef1b9a2f497731862}} 
+\index{interface.\+h@{interface.\+h}!list\+\_\+available\+\_\+moves@{list\+\_\+available\+\_\+moves}}
+\index{list\+\_\+available\+\_\+moves@{list\+\_\+available\+\_\+moves}!interface.\+h@{interface.\+h}}
+\subsubsection{\texorpdfstring{list\+\_\+available\+\_\+moves()}{list\_available\_moves()}}
+{\footnotesize\ttfamily list\+\_\+available\+\_\+moves (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
+
+
+
+Prints a list of all valid moves. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interface_8h_a8ad7b6fdcab6025f32be230471f5aec1}\label{interface_8h_a8ad7b6fdcab6025f32be230471f5aec1}} 
+\index{interface.\+h@{interface.\+h}!print\+\_\+board@{print\+\_\+board}}
+\index{print\+\_\+board@{print\+\_\+board}!interface.\+h@{interface.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+board()}{print\_board()}}
+{\footnotesize\ttfamily print\+\_\+board (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{bool}]{hint }\end{DoxyParamCaption})}
+
+
+
+Print the \hyperlink{struct_board}{Board}, as well as a hint (i.\+e. a list of available moves) if required. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & \hyperlink{struct_board}{Board} pointer \\
+\hline
+{\em hint} & true if hint requested, false if hint N\+OT requested \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interface_8h_ad148755c0d85f8ec548880f20451628a}\label{interface_8h_ad148755c0d85f8ec548880f20451628a}} 
+\index{interface.\+h@{interface.\+h}!select\+\_\+action@{select\+\_\+action}}
+\index{select\+\_\+action@{select\+\_\+action}!interface.\+h@{interface.\+h}}
+\subsubsection{\texorpdfstring{select\+\_\+action()}{select\_action()}}
+{\footnotesize\ttfamily enum choice select\+\_\+action (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{int}]{move\+\_\+number }\end{DoxyParamCaption})}
+
+
+
+Ask the user for the next action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} \\
+\hline
+{\em move\+\_\+number} & Move number since game started \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interface_8h_a246c58952c341d242dd05b532bfc275f}\label{interface_8h_a246c58952c341d242dd05b532bfc275f}} 
+\index{interface.\+h@{interface.\+h}!select\+\_\+move@{select\+\_\+move}}
+\index{select\+\_\+move@{select\+\_\+move}!interface.\+h@{interface.\+h}}
+\subsubsection{\texorpdfstring{select\+\_\+move()}{select\_move()}}
+{\footnotesize\ttfamily select\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{int}]{move\+\_\+number }\end{DoxyParamCaption})}
+
+
+
+Ask the user to play a move. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} \\
+\hline
+{\em move\+\_\+number} & Move number since game started \\
+\hline
+\end{DoxyParams}
