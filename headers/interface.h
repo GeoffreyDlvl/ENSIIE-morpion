@@ -15,6 +15,8 @@
 #include <stdbool.h> 
 #include "board.h"
 
+enum choice { PLAY_MOVE, CANCEL_MOVE, REPLAY_MOVE, LIST_MOVES, ASK_HELP };
+
 /**
  * \fn print_board(Board* pboard, bool hint)
  * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
