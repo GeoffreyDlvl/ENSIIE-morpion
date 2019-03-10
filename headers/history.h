@@ -1,19 +1,19 @@
-#ifndef HISTORIQUE_H
-#define HISTORIQUE_H
+#ifndef HISTORY_H
+#define HISTORY_H
 
 /**
- * \file historique.h
+ * \file history.h
  * \brief Records player moves during a game.
  * \authors Geoffrey DELVAL, Rémi GUIJARRO ESPINOSA, Gabriel MORAN, Clément PERESSE
  * \version lot_a
  * \date 03.2019
  *
- * Represents plateau.h upper layer. 
+ * Represents board.h upper layer. 
  * This class records player moves and allows to cancel or replay a move.
  *
  */
 
-#include "plateau.h"
+#include "board.h"
 
 /**
  * \fn int play_move(Board* pboard, Pcoord pcoord)
