@@ -23,14 +23,16 @@
  * \return 1 if point successfully added, 0 otherwise.
  */
 int play_move(Board* pboard, Pcoord pcoord);
+
 /**
- * \fn void cancel_move(Board* pboard, Pcoord pcoord)
+ * \fn void cancel_move(Board* pboard, Pcoord* ppcoord)
  * \brief Withdraw a point from the board.
  *
  * \param pboard Pointer to the board being played.
  * \param ppcoord Pointer to pointer to canceled coordinates.
  */
 void cancel_move(Board* pboard, Pcoord* ppcoord);
+
 /**
  * \fn void replay_move(Board* pboard, Pcoord* ppcoord)
  * \brief Add a previously withdrawn point to the board.
