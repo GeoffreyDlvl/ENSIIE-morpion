@@ -106,7 +106,7 @@ int play_move(Board* pboard,Pcoord pcoord);
  * \fn int is_game_over(Board* pboard);
  * \brief check that no points can be added 
  * \param pboard Pointer to the board being played.
- * \return 1 if point successfully added, 0 otherwise.
+ * \return 1 if game is over, 0 otherwise.
  */
 int is_game_over(Board* pboard);
 
