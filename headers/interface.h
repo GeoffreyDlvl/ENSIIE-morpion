@@ -3,55 +3,55 @@
 
 /**
  * \file interface.h
- * \brief Manages the user/programm interaction
+ * \brief Displays the Board and manages the user/program interactions.
  * \authors Geoffrey DELVAL, Rémi GUIJARRO ESPINOSA, Gabriel MORAN, Clément PERESSE
  * \version lot_a
  * \date 03.2019 
  *
- * This class shows the current status of the game and asks for the users
- * instructions.
+ * Handles displaying and asks the user for input.
+ *
  */
 
-#include "plateau.h"
+#include "board.h"
 
 /**
- * \fn print_board(int hint,Board* pboard)
- * \brief Function which prints the current status of the game, as well as a hint
- * \param hint : An integer
- * \param pboard : A board pointer, can't be NULL 
- * \return void
+ * \fn print_board(Board* pboard, int hint)
+ * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
+ *
+ * \param pboard Board pointer 
+ * \param hint 1 if hint requested, 0 if hint NOT requested
  */
-void print_board(int hint,Board* pboard);
+void print_board(Board* pboard, int hint);
 
 /**
  * \fn select_move(Board* pboard,int move_number)
- * \brief Function which allows the user to add another valid point
- * \param pboard : A board pointer, can't be NULL 
- * \return void
+ * \brief Ask the user to play a move.
+ *
+ * \param pboard Pointer to the Board
  */
 void select_move(Board* pboard,int move_number);
 
 /**
  * \fn list_available_moves(Board* pboard)
- * \brief Function which prints a list of all valid moves
- * \param pboard : A board pointer, can't be NULL 
- * \return void
+ * \brief Prints a list of all valid moves.
+ *
+ * \param pboard Pointer to the Board 
  */
 void list_available_moves(Board* pboard);
 
 /**
  * \fn ask_help(Board* pboard)
- * \brief Function which asks the user if he needs help (i.e. after a few failed
+ * \brief Ask the user for help (i.e. after a few failed
  * moves).
- * \param pboard : A board pointer, can't be NULL 
+ *
+ * \param pboard Pointer to the Board 
  * \return void
  */
 void ask_help(Board* pboard);
 
 /**
  * \fn print_help()
- * \brief Function which prints some help for the user
- * \return void
+ * \brief Print help for the user
  */
 void print_help();
 
