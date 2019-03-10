@@ -1,6 +1,6 @@
-#include "../headers/plateau.h"
+#include "../headers/board.h"
 #include "../headers/interface.h"
-#include "../headers/historique.h"
+#include "../headers/history.h"
 #include<stdio.h>                                                               
 #include<stdlib.h>                                                              
 #include<unistd.h>                                                              
