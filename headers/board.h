@@ -13,6 +13,7 @@
  */
 
 #include <stdbool.h> 
+#include "interface.h"
 
 /**
  * \struct Coord
@@ -98,11 +99,20 @@ Board* initialize_rand();
  * \fn bool play_move(Board* pboard, Pcoord pcoord)
  * \brief Add a point on the Board.
  *
- * \param pboard Pointer to the Board being played.
- * \param pcoord Pointer to selected coordinates.
+ * \param pboard Pointer to the Board being played
+ * \param pcoord Pointer to selected coordinates
  * \return true if point successfully added, false otherwise.
  */
-bool play_move(Board* pboard,Pcoord pcoord);
+bool play_move(Board* pboard, Pcoord pcoord);
+
+/**
+ * \fn void execute_action(Board* pboard, enum choice choice)
+ * \brief Execute action passed as a parameter.
+ * 
+ * \param pboard Pointer to the Board being played
+ * \param action Action to execute
+ */
+void execute_action(Board* pboard, enum action action);
 
 /**
  * \fn bool is_game_over(Board* pboard);

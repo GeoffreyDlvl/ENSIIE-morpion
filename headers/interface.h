@@ -15,7 +15,18 @@
 #include <stdbool.h> 
 #include "board.h"
 
-enum choice { PLAY_MOVE, CANCEL_MOVE, REPLAY_MOVE, LIST_MOVES, ASK_HELP };
+/**
+ * \enum action
+ * \brief Represents an game action.
+ */
+enum action 
+{ 
+	PLAY_MOVE, /**< Play a move */ 
+	CANCEL_MOVE, /**< Cancel last move */
+	REPLAY_MOVE, /**< Replay a canceled move */
+	LIST_MOVES, /**< List all valid moves */
+	ASK_HELP /**< Ask for help to be displayed */
+};
 
 /**
  * \fn print_board(Board* pboard, bool hint)
@@ -34,6 +45,15 @@ void print_board(Board* pboard, bool hint);
  * \param move_number Move number since game started
  */
 void select_move(Board* pboard, int move_number);
+
+/**
+ * \fn enum choice select_action(Board* pboard, int move_number)
+ * \brief Ask the user for the next action.
+ *
+ * \param pboard Pointer to the Board
+ * \param move_number Move number since game started
+ */
+enum action select_action(Board* pboard, int move_number);
 
 /**
  * \fn list_available_moves(Board* pboard)
