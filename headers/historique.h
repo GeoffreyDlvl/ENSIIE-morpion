@@ -1,5 +1,6 @@
 #ifndef HISTORIQUE_H
 #define HISTORIQUE_H
+
 /**
  * \file historique.h
  * \brief Records player moves during a game.
@@ -16,9 +17,9 @@
 
 /**
  * \fn int play_move(Board* pboard, Pcoord pcoord)
- * \brief Add a point on the board.
+ * \brief Add a point on the Board.
  *
- * \param pboard Pointer to the board being played.
+ * \param pboard Pointer to the Board being played.
  * \param pcoord Pointer to selected coordinates.
  * \return 1 if point successfully added, 0 otherwise.
  */
@@ -26,18 +27,18 @@ int play_move(Board* pboard, Pcoord pcoord);
 
 /**
  * \fn void cancel_move(Board* pboard, Pcoord* ppcoord)
- * \brief Withdraw a point from the board.
+ * \brief Withdraw a point from the Board.
  *
- * \param pboard Pointer to the board being played.
+ * \param pboard Pointer to the Board being played.
  * \param ppcoord Pointer to pointer to canceled coordinates.
  */
 void cancel_move(Board* pboard, Pcoord* ppcoord);
 
 /**
  * \fn void replay_move(Board* pboard, Pcoord* ppcoord)
- * \brief Add a previously withdrawn point to the board.
+ * \brief Add a previously withdrawn point to the Board.
  *
- * \param pboard Pointer to the board being played.
+ * \param pboard Pointer to the Board being played.
  * \param ppcoord Pointer to pointer to replayed coordinates.
  */
 void replay_move(Board* pboard, Pcoord* ppcoord);
