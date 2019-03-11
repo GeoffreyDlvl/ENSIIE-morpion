@@ -115,7 +115,7 @@ Board* initialize_rand();
  * \param pcoord Pointer to selected coordinates
  * \return true if point successfully added, false otherwise.
  */
-bool play_move(Board* pboard, Pcoord pcoord,HistoryList* historyList);
+bool play_move(Board* pboard, Pcoord pcoord,HistoryList* phistoryList);
 
 /**
  * \fn void execute_action(Board* pboard, enum choice choice)
