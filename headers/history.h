@@ -14,7 +14,23 @@
  */
 
 #include <stdbool.h> 
+#include <stddef.h>
 #include "board.h"
+
+struct playedMove
+{
+	Pcoord* coord;
+	struct playedMove* PpreviousPlayedMove;
+	struct playedMove* PnextPlayedMove;
+};
+
+typedef struct historyList
+{
+	size_t moves;
+	struct playedMove* PfirstMove;
+	struct playedMove* PlastPlayedMove;
+	struct playedMove* PlastSavedMove;
+} HistoryList;
 
 /**
  * \fn bool play_move(Board* pboard, Pcoord pcoord)
