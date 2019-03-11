@@ -17,12 +17,27 @@
 #include <stddef.h>
 #include "board.h"
 
+/**
+ * \struct playedMove
+ * \brief A double linked-list which contains all the played moves
+ */
+
 struct playedMove
 {
 	Pcoord* coord;
 	struct playedMove* PpreviousPlayedMove;
 	struct playedMove* PnextPlayedMove;
 };
+
+
+/**
+ * \struct HistoryList
+ * \brief An upper layer of the double linked-list which allow to access easily to : 
+ * moves :  the size of the list
+ * PfirstMove : A pointer to the first move 
+ * PlastPlayedMove : A pointer to the last played move
+ * PlastSavedMove : A pointer to the last saved move 
+ */
 
 typedef struct historyList
 {
