@@ -34,16 +34,19 @@ int main(int argc,char* argv[]){
       }
     }
   }
-  int move_number=1;
-  while(!is_game_over(pboard)){
-    print_board(0,pboard);
-    enum action playerAction = select_action(pboard, move_number);
-    execute_action(pboard, playerAction);
+  bool *hint = false; 
+  while(!is_game_over(pboard))
+  {
+    // Declare a new NULL pointer: it will be manipulated in functions
+    Pcoord pcoord = NULL;
+    print_board(pboard, hint);
+    enum action playerAction = select_action(pboard, pcoord, hint);
+    execute_action(pboard, playerAction, pcoord);
 
-    if (playerAction == PLAY_MOVE || playerAction == REPLAY_MOVE)
-      move_number++;
-    else if (playerAction == CANCEL_MOVE)
-      move_number--;
+    /* If pointer is still NULL, i.e. a move has not been set,
+    then free the pointer.*/
+    if (pcoord == NULL)
+      free (pcoord);
   }
   return EXIT_SUCCESS;
 }
