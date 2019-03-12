@@ -37,7 +37,7 @@ int main(int argc,char* argv[]){
   bool *hint = false; 
   while(!is_game_over(pboard))
   {
-    // Declare a new NULL pointer: it will be manipulated in functions
+    /* Declare a new NULL pointer: it will be manipulated in functions */
     Pcoord pcoord = NULL;
     print_board(pboard, hint);
     enum action playerAction = select_action(pboard, pcoord, hint);
