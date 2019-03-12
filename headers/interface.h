@@ -34,7 +34,7 @@ void print_board(Board* pboard, bool hint);
 void select_move(Board* pboard, int move_number);
 
 /**
- * \fn enum action select_action(Board* pboard, int move_number)
+ * \fn enum action select_action(Board* pboard, Pcoord pcoord, bool* hint)
  * \brief Ask the user for the next action.
  *
  * \param pboard Pointer to the Board
@@ -62,9 +62,9 @@ void list_available_moves(Board* pboard);
 void ask_help(Board* pboard);
 
 /**
- * \fn print_help()
+ * \fn print_help(void)
  * \brief Print help for the user
  */
-void print_help();
+void print_help(void);
 
 #endif

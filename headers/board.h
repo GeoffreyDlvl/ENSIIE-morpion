@@ -28,30 +28,32 @@ enum action
 };
 
 /**
- * \struct Coord
+ * \struct coord
  * \brief Coordinates on the Board
  */
-typedef struct 
+typedef struct coord
 {
     int x; /**< Horizontal address */
     int y; /**< Vertical address */
 } Coord;
+/**< \brief coord structure alias */
 
 /**
- * \brief Define the type Pcoord as a Coord pointer.
+ * \brief Pointer to Coord
  */
 typedef struct Coord* Pcoord; 
 
 /**
- * \struct Board
- * \brief Represent the Board of the game with width, height and his 2d table of coord pointers.
+ * \struct board
+ * \brief Represent the Board of the game with width, height and a 2d table of Coord pointers.
  */
-typedef struct
+typedef struct board
 {
     int width; /**< Board width */
     int height; /**< Board height */
     Pcoord** points; /**< Bidimensionnal array of Pcoord */ 
 } Board;
+/**< \brief board structure alias */
 
 /**
  * \fn bool check_file(char* path)
@@ -100,7 +102,7 @@ Pcoord* get_valid_moves(Board* pboard);
 bool is_move_valid(Board* pboard,Pcoord pcoord);
 
 /**
- * \fn Board* initialize_rand()
+ * \fn Board* initialize_rand(void)
  * \brief Randomly initalize a Board.
  *
  * \return Pointer to a Board
@@ -108,22 +110,22 @@ bool is_move_valid(Board* pboard,Pcoord pcoord);
 Board* initialize_rand(void);
 
 /**
- * \fn bool play_move(Board* pboard, Pcoord pcoord)
+ * \fn bool add_point(Board* pboard, Pcoord pcoord)
  * \brief Add a point on the Board.
  *
  * \param pboard Pointer to the Board being played
  * \param pcoord Pointer to selected coordinates
  * \return true if point successfully added, false otherwise.
  */
-bool play_move(Board* pboard, Pcoord pcoord);
+bool add_point(Board* pboard, Pcoord pcoord);
 
 /**
- * \fn void execute_action(Board* pboard, enum choice choice)
+ * \fn void execute_action(Board* pboard, enum choice choice, Pcoord pcoord)
  * \brief Execute action passed as a parameter.
  * 
  * \param pboard Pointer to the Board being played
  * \param action Action to execute
- * \param pcoord Coordinates affected by the action (NULL if action does not affect any coodinate)
+ * \param pcoord Coordinates affected by the action (NULL if action does not affect any coordinate)
  */
 void execute_action(Board* pboard, enum action action, Pcoord pcoord);
 

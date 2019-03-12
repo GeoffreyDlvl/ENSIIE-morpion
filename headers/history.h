@@ -32,7 +32,7 @@ struct playedMove
 
 
 /**
- * \struct HistoryList
+ * \struct historyList
  * \brief Convenience structure for accessing played moves.
  *
  * Upper layer of the double linked-list that allows to 
@@ -48,10 +48,11 @@ typedef struct historyList
 	struct playedMove* PlastPlayedMove; /**< Pointer to the last played move */
 	struct playedMove* PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
 } HistoryList;
+/**< \brief historyList structure alias */
 
 /**
  * \fn bool play_move(Board* pboard, Pcoord pcoord)
- * \brief Add a point on the Board.
+ * \brief Play a move, i.e. add a point on the Board.
  *
  * \param pboard Pointer to the Board being played.
  * \param pcoord Pointer to selected coordinates.
