@@ -38,6 +38,8 @@ struct playedMove
  * Upper layer of the double linked-list that allows to 
  * decrease memory load by offering direct access to head
  * and tail of playedMoved double-linked list data structure. 
+ *
+ * It is intended to be used as a static variable inside history source.
  */
 typedef struct historyList
 {
