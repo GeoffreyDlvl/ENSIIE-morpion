@@ -105,7 +105,7 @@ bool is_move_valid(Board* pboard,Pcoord pcoord);
  *
  * \return Pointer to a Board
  */
-Board* initialize_rand();
+Board* initialize_rand(void);
 
 /**
  * \fn bool play_move(Board* pboard, Pcoord pcoord)
@@ -123,8 +123,9 @@ bool play_move(Board* pboard, Pcoord pcoord);
  * 
  * \param pboard Pointer to the Board being played
  * \param action Action to execute
+ * \param pcoord Coordinates affected by the action (NULL if action does not affect any coodinate)
  */
-void execute_action(Board* pboard, enum action action);
+void execute_action(Board* pboard, enum action action, Pcoord pcoord);
 
 /**
  * \fn bool is_game_over(Board* pboard);

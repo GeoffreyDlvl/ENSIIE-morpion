@@ -34,13 +34,14 @@ void print_board(Board* pboard, bool hint);
 void select_move(Board* pboard, int move_number);
 
 /**
- * \fn enum choice select_action(Board* pboard, int move_number)
+ * \fn enum action select_action(Board* pboard, int move_number)
  * \brief Ask the user for the next action.
  *
  * \param pboard Pointer to the Board
  * \param move_number Move number since game started
+ * \param hint Hold the boolean signifying whether the user wishes to get a hint
  */
-enum action select_action(Board* pboard, int move_number);
+enum action select_action(Board* pboard, Pcoord pcoord, bool* hint);
 
 /**
  * \fn list_available_moves(Board* pboard)
