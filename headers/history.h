@@ -55,7 +55,7 @@ typedef struct historyList
  * \param pcoord Pointer to selected coordinates.
  * \return true if point successfully added, false otherwise.
  */
-bool play_move(Board* pboard, Pcoord pcoord,HistoryList* phistorylist);
+bool play_move(Board* pboard, Pcoord pcoord);
 
 /**
  * \fn void cancel_move(Board* pboard, Pcoord* ppcoord)
@@ -64,7 +64,7 @@ bool play_move(Board* pboard, Pcoord pcoord,HistoryList* phistorylist);
  * \param pboard Pointer to the Board being played.
  * \param ppcoord Pointer to pointer to canceled coordinates.
  */
-void cancel_move(Board* pboard, Pcoord* ppcoord,HistoryList* phistorylist);
+void cancel_move(Board* pboard, Pcoord* ppcoord);
 
 /**
  * \fn void replay_move(Board* pboard, Pcoord* ppcoord)
@@ -73,7 +73,7 @@ void cancel_move(Board* pboard, Pcoord* ppcoord,HistoryList* phistorylist);
  * \param pboard Pointer to the Board being played.
  * \param ppcoord Pointer to pointer to replayed coordinates.
  */
-void replay_move(Board* pboard, Pcoord* ppcoord,HistoryList* phistorylist);
+void replay_move(Board* pboard, Pcoord* ppcoord);
 
 #endif
 
