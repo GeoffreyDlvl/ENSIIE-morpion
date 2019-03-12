@@ -19,32 +19,32 @@
 
 /**
  * \struct playedMove
- * \brief A double linked-list which contains all the played moves
+ * \brief Played moves since the beginning of the game.
+ *
+ * Data are saved in a double linked-list structure that contains all the played moves.
  */
-
 struct playedMove
 {
-	Pcoord* coord;
-	struct playedMove* PpreviousPlayedMove;
-	struct playedMove* PnextPlayedMove;
+	Pcoord* coord; /**< Data: Pcoord pointer to this played move */
+	struct playedMove* PpreviousPlayedMove; /**< Pointer to previous playedMove */
+	struct playedMove* PnextPlayedMove; /**< Pointer to the next playedMove */
 };
 
 
 /**
  * \struct HistoryList
- * \brief An upper layer of the double linked-list which allow to access easily to : 
- * moves :  the size of the list
- * PfirstMove : A pointer to the first move 
- * PlastPlayedMove : A pointer to the last played move
- * PlastSavedMove : A pointer to the last saved move 
+ * \brief Convenience structure for accessing played moves.
+ *
+ * Upper layer of the double linked-list that allows to 
+ * decrease memory load by offering direct access to head
+ * and tail of playedMoved double-linked list data structure. 
  */
-
 typedef struct historyList
 {
-	size_t moves;
-	struct playedMove* PfirstMove;
-	struct playedMove* PlastPlayedMove;
-	struct playedMove* PlastSavedMove;
+	size_t moves; /**< Number of played moves since the beginning of the game */
+	struct playedMove* PfirstMove; /**< Pointer to the first move */ 
+	struct playedMove* PlastPlayedMove; /**< Pointer to the last played move */
+	struct playedMove* PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
 } HistoryList;
 
 /**
