@@ -25,13 +25,12 @@
 void print_board(Board* pboard, bool hint);
 
 /**
- * \fn select_move(Board* pboard,int move_number)
+ * \fn select_move(Board* pboard)
  * \brief Ask the user to play a move.
  *
  * \param pboard Pointer to the Board
- * \param move_number Move number since game started
  */
-void select_move(Board* pboard, int move_number);
+void select_move(Board* pboard);
 
 /**
  * \fn enum action select_action(Board* pboard, Pcoord pcoord, bool* hint)
