@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('interface_8h.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Displays the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> and manages the user/program interactions.  
+<p>Displays the Board and manages the user/program interactions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br />
@@ -96,28 +96,28 @@ $(document).ready(function(){initNavTree('interface_8h.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8ad7b6fdcab6025f32be230471f5aec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a8ad7b6fdcab6025f32be230471f5aec1">print_board</a> (<a class="el" href="struct_board.html">Board</a> *pboard, bool hint)</td></tr>
-<tr class="memdesc:a8ad7b6fdcab6025f32be230471f5aec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a>, as well as a hint (i.e. a list of available moves) if required.  <a href="#a8ad7b6fdcab6025f32be230471f5aec1">More...</a><br /></td></tr>
+<tr class="memitem:a8ad7b6fdcab6025f32be230471f5aec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a8ad7b6fdcab6025f32be230471f5aec1">print_board</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, bool hint)</td></tr>
+<tr class="memdesc:a8ad7b6fdcab6025f32be230471f5aec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the Board, as well as a hint (i.e. a list of available moves) if required.  <a href="#a8ad7b6fdcab6025f32be230471f5aec1">More...</a><br /></td></tr>
 <tr class="separator:a8ad7b6fdcab6025f32be230471f5aec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a246c58952c341d242dd05b532bfc275f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a246c58952c341d242dd05b532bfc275f">select_move</a> (<a class="el" href="struct_board.html">Board</a> *pboard, int move_number)</td></tr>
+<tr class="memitem:a246c58952c341d242dd05b532bfc275f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a246c58952c341d242dd05b532bfc275f">select_move</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, int move_number)</td></tr>
 <tr class="memdesc:a246c58952c341d242dd05b532bfc275f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user to play a move.  <a href="#a246c58952c341d242dd05b532bfc275f">More...</a><br /></td></tr>
 <tr class="separator:a246c58952c341d242dd05b532bfc275f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad148755c0d85f8ec548880f20451628a"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ad148755c0d85f8ec548880f20451628a">select_action</a> (<a class="el" href="struct_board.html">Board</a> *pboard, int move_number)</td></tr>
-<tr class="memdesc:ad148755c0d85f8ec548880f20451628a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for the next action.  <a href="#ad148755c0d85f8ec548880f20451628a">More...</a><br /></td></tr>
-<tr class="separator:ad148755c0d85f8ec548880f20451628a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bbf1cb282e55f7ef1b9a2f497731862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a0bbf1cb282e55f7ef1b9a2f497731862">list_available_moves</a> (<a class="el" href="struct_board.html">Board</a> *pboard)</td></tr>
+<tr class="memitem:ae1534f32f3fb80e9b226dc817d9bb572"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ae1534f32f3fb80e9b226dc817d9bb572">select_action</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> pcoord, bool *hint)</td></tr>
+<tr class="memdesc:ae1534f32f3fb80e9b226dc817d9bb572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for the next action.  <a href="#ae1534f32f3fb80e9b226dc817d9bb572">More...</a><br /></td></tr>
+<tr class="separator:ae1534f32f3fb80e9b226dc817d9bb572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bbf1cb282e55f7ef1b9a2f497731862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a0bbf1cb282e55f7ef1b9a2f497731862">list_available_moves</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard)</td></tr>
 <tr class="memdesc:a0bbf1cb282e55f7ef1b9a2f497731862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a list of all valid moves.  <a href="#a0bbf1cb282e55f7ef1b9a2f497731862">More...</a><br /></td></tr>
 <tr class="separator:a0bbf1cb282e55f7ef1b9a2f497731862"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f19b99811b1ccd67e49806b8678a46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a2f19b99811b1ccd67e49806b8678a46e">ask_help</a> (<a class="el" href="struct_board.html">Board</a> *pboard)</td></tr>
+<tr class="memitem:a2f19b99811b1ccd67e49806b8678a46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a2f19b99811b1ccd67e49806b8678a46e">ask_help</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard)</td></tr>
 <tr class="memdesc:a2f19b99811b1ccd67e49806b8678a46e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for help (i.e. after a few failed moves).  <a href="#a2f19b99811b1ccd67e49806b8678a46e">More...</a><br /></td></tr>
 <tr class="separator:a2f19b99811b1ccd67e49806b8678a46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a066fe22ef9cb4a0cdca7e2f7245a71f1"><td class="memItemLeft" align="right" valign="top"><a id="a066fe22ef9cb4a0cdca7e2f7245a71f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a066fe22ef9cb4a0cdca7e2f7245a71f1">print_help</a> ()</td></tr>
-<tr class="memdesc:a066fe22ef9cb4a0cdca7e2f7245a71f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help for the user. <br /></td></tr>
-<tr class="separator:a066fe22ef9cb4a0cdca7e2f7245a71f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fa0edb5266bb1f8ca0473473e982829"><td class="memItemLeft" align="right" valign="top"><a id="a3fa0edb5266bb1f8ca0473473e982829"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a3fa0edb5266bb1f8ca0473473e982829">print_help</a> (void)</td></tr>
+<tr class="memdesc:a3fa0edb5266bb1f8ca0473473e982829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help for the user. <br /></td></tr>
+<tr class="separator:a3fa0edb5266bb1f8ca0473473e982829"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Displays the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> and manages the user/program interactions. </p>
+<div class="textblock"><p>Displays the Board and manages the user/program interactions. </p>
 <dl class="section author"><dt>Authors</dt><dd>Geoffrey DELVAL, Rémi GUIJARRO ESPINOSA, Gabriel MORAN, Clément PERESSE </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>lot_a </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>03.2019</dd></dl>
@@ -132,7 +132,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
         <tr>
           <td class="memname">ask_help </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em></td><td>)</td>
           <td></td>
         </tr>
@@ -142,7 +142,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 <p>Ask the user for help (i.e. after a few failed moves). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> </td></tr>
+    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
   </table>
   </dd>
 </dl>
@@ -159,7 +159,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
         <tr>
           <td class="memname">list_available_moves </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em></td><td>)</td>
           <td></td>
         </tr>
@@ -169,7 +169,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 <p>Prints a list of all valid moves. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> </td></tr>
+    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,7 +185,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
         <tr>
           <td class="memname">print_board </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em>, </td>
         </tr>
         <tr>
@@ -202,10 +202,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
       </table>
 </div><div class="memdoc">
 
-<p>Print the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a>, as well as a hint (i.e. a list of available moves) if required. </p>
+<p>Print the Board, as well as a hint (i.e. a list of available moves) if required. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td><a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> pointer </td></tr>
+    <tr><td class="paramname">pboard</td><td>Board pointer </td></tr>
     <tr><td class="paramname">hint</td><td>true if hint requested, false if hint NOT requested </td></tr>
   </table>
   </dd>
@@ -213,23 +213,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 
 </div>
 </div>
-<a id="ad148755c0d85f8ec548880f20451628a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad148755c0d85f8ec548880f20451628a">&#9670;&nbsp;</a></span>select_action()</h2>
+<a id="ae1534f32f3fb80e9b226dc817d9bb572"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1534f32f3fb80e9b226dc817d9bb572">&#9670;&nbsp;</a></span>select_action()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum choice select_action </td>
+          <td class="memname">enum <a class="el" href="board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4">action</a> select_action </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>move_number</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a>&#160;</td>
+          <td class="paramname"><em>pcoord</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>hint</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -242,8 +248,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 <p>Ask the user for the next action. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> </td></tr>
+    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
     <tr><td class="paramname">move_number</td><td>Move number since game started </td></tr>
+    <tr><td class="paramname">hint</td><td>Hold the boolean signifying whether the user wishes to get a hint </td></tr>
   </table>
   </dd>
 </dl>
@@ -259,7 +266,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
         <tr>
           <td class="memname">select_move </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em>, </td>
         </tr>
         <tr>
@@ -279,7 +286,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 <p>Ask the user to play a move. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> </td></tr>
+    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
     <tr><td class="paramname">move_number</td><td>Move number since game started </td></tr>
   </table>
   </dd>

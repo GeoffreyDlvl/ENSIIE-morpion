@@ -81,6 +81,8 @@ $(document).ready(function(){initNavTree('history_8h.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">history.h File Reference</div>  </div>
@@ -90,20 +92,37 @@ $(document).ready(function(){initNavTree('history_8h.html','');});
 <p>Records player moves during a game.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br />
 </div>
 <p><a href="history_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplayed_move.html">playedMove</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Played moves since the beginning of the game.  <a href="structplayed_move.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhistory_list.html">historyList</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience structure for accessing played moves.  <a href="structhistory_list.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aa8bec297ffa88424d994cf0f8888f101"><td class="memItemLeft" align="right" valign="top"><a id="aa8bec297ffa88424d994cf0f8888f101"></a>
+typedef struct <a class="el" href="structhistory_list.html">historyList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history_8h.html#aa8bec297ffa88424d994cf0f8888f101">HistoryList</a></td></tr>
+<tr class="memdesc:aa8bec297ffa88424d994cf0f8888f101"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structhistory_list.html" title="Convenience structure for accessing played moves. ">historyList</a> structure alias <br /></td></tr>
+<tr class="separator:aa8bec297ffa88424d994cf0f8888f101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afe23ec837d11f38398ad928e0bec55b9"><td class="memItemLeft" align="right" valign="top"><a id="afe23ec837d11f38398ad928e0bec55b9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>play_move</b> (<a class="el" href="struct_board.html">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> pcoord)</td></tr>
+<tr class="memitem:afe23ec837d11f38398ad928e0bec55b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history_8h.html#afe23ec837d11f38398ad928e0bec55b9">play_move</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> pcoord)</td></tr>
+<tr class="memdesc:afe23ec837d11f38398ad928e0bec55b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play a move, i.e. add a point on the Board.  <a href="#afe23ec837d11f38398ad928e0bec55b9">More...</a><br /></td></tr>
 <tr class="separator:afe23ec837d11f38398ad928e0bec55b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7547f6701284c7d81f582e287994d83c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history_8h.html#a7547f6701284c7d81f582e287994d83c">cancel_move</a> (<a class="el" href="struct_board.html">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> *ppcoord)</td></tr>
-<tr class="memdesc:a7547f6701284c7d81f582e287994d83c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Withdraw a point from the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a>.  <a href="#a7547f6701284c7d81f582e287994d83c">More...</a><br /></td></tr>
+<tr class="memitem:a7547f6701284c7d81f582e287994d83c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history_8h.html#a7547f6701284c7d81f582e287994d83c">cancel_move</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> *ppcoord)</td></tr>
+<tr class="memdesc:a7547f6701284c7d81f582e287994d83c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Withdraw a point from the Board.  <a href="#a7547f6701284c7d81f582e287994d83c">More...</a><br /></td></tr>
 <tr class="separator:a7547f6701284c7d81f582e287994d83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c0bc5f65ff5ed18831e0700fb9aea15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history_8h.html#a7c0bc5f65ff5ed18831e0700fb9aea15">replay_move</a> (<a class="el" href="struct_board.html">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> *ppcoord)</td></tr>
-<tr class="memdesc:a7c0bc5f65ff5ed18831e0700fb9aea15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a previously withdrawn point to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a>.  <a href="#a7c0bc5f65ff5ed18831e0700fb9aea15">More...</a><br /></td></tr>
+<tr class="memitem:a7c0bc5f65ff5ed18831e0700fb9aea15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="history_8h.html#a7c0bc5f65ff5ed18831e0700fb9aea15">replay_move</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> *ppcoord)</td></tr>
+<tr class="memdesc:a7c0bc5f65ff5ed18831e0700fb9aea15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a previously withdrawn point to the Board.  <a href="#a7c0bc5f65ff5ed18831e0700fb9aea15">More...</a><br /></td></tr>
 <tr class="separator:a7c0bc5f65ff5ed18831e0700fb9aea15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -122,7 +141,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>play_move</b> (<a cla
         <tr>
           <td class="memname">void cancel_move </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em>, </td>
         </tr>
         <tr>
@@ -139,14 +158,52 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>play_move</b> (<a cla
       </table>
 </div><div class="memdoc">
 
-<p>Withdraw a point from the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a>. </p>
+<p>Withdraw a point from the Board. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> being played. </td></tr>
+    <tr><td class="paramname">pboard</td><td>Pointer to the Board being played. </td></tr>
     <tr><td class="paramname">ppcoord</td><td>Pointer to pointer to canceled coordinates. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="afe23ec837d11f38398ad928e0bec55b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe23ec837d11f38398ad928e0bec55b9">&#9670;&nbsp;</a></span>play_move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool play_move </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
+          <td class="paramname"><em>pboard</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a>&#160;</td>
+          <td class="paramname"><em>pcoord</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Play a move, i.e. add a point on the Board. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pboard</td><td>Pointer to the Board being played. </td></tr>
+    <tr><td class="paramname">pcoord</td><td>Pointer to selected coordinates. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if point successfully added, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -159,7 +216,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>play_move</b> (<a cla
         <tr>
           <td class="memname">void replay_move </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em>, </td>
         </tr>
         <tr>
@@ -176,10 +233,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>play_move</b> (<a cla
       </table>
 </div><div class="memdoc">
 
-<p>Add a previously withdrawn point to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a>. </p>
+<p>Add a previously withdrawn point to the Board. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the <a class="el" href="struct_board.html" title="Represent the Board of the game with width, height and his 2d table of coord pointers. ">Board</a> being played. </td></tr>
+    <tr><td class="paramname">pboard</td><td>Pointer to the Board being played. </td></tr>
     <tr><td class="paramname">ppcoord</td><td>Pointer to pointer to replayed coordinates. </td></tr>
   </table>
   </dd>

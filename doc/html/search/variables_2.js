@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['width',['width',['../struct_board.html#a2474a5474cbff19523a51eb1de01cda4',1,'Board']]]
+  ['moves',['moves',['../structhistory_list.html#aa8ce773e4eb2cb8a58847adeba38dd0b',1,'historyList']]]
 ];

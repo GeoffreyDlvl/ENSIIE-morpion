@@ -2,23 +2,29 @@
 \label{board_8h}\index{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/board.\+h@{/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/board.\+h}}
 
 
-This file handles the \hyperlink{struct_board}{Board}.  
+This file handles the Board.  
 
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
 \subsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{struct_coord}{Coord}
-\begin{DoxyCompactList}\small\item\em Coordinates on the \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\item 
-struct \hyperlink{struct_board}{Board}
-\begin{DoxyCompactList}\small\item\em Represent the \hyperlink{struct_board}{Board} of the game with width, height and his 2d table of coord pointers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \hyperlink{structcoord}{coord}
+\begin{DoxyCompactList}\small\item\em Coordinates on the Board. \end{DoxyCompactList}\item 
+struct \hyperlink{structboard}{board}
+\begin{DoxyCompactList}\small\item\em Represent the Board of the game with width, height and a 2d table of Coord pointers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{board_8h_a071b7f0468b2f683ac3f7051c93b9264}\label{board_8h_a071b7f0468b2f683ac3f7051c93b9264}} 
+typedef struct \hyperlink{structcoord}{coord} \hyperlink{board_8h_a071b7f0468b2f683ac3f7051c93b9264}{Coord}
+\begin{DoxyCompactList}\small\item\em coord structure alias \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{board_8h_ab8cc720589a392832ddcc5e65efcbb47}\label{board_8h_ab8cc720589a392832ddcc5e65efcbb47}} 
-typedef struct \hyperlink{struct_coord}{Coord} $\ast$ \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}
-\begin{DoxyCompactList}\small\item\em Define the type Pcoord as a \hyperlink{struct_coord}{Coord} pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+typedef struct \hyperlink{board_8h_a071b7f0468b2f683ac3f7051c93b9264}{Coord} $\ast$ \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}
+\begin{DoxyCompactList}\small\item\em Pointer to Coord. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{board_8h_ae032fdcf74f6a7ee3aca153eda146374}\label{board_8h_ae032fdcf74f6a7ee3aca153eda146374}} 
+typedef struct \hyperlink{structboard}{board} \hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board}
+\begin{DoxyCompactList}\small\item\em board structure alias \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -36,27 +42,27 @@ enum \hyperlink{board_8h_a2f4ab7bf743142dae2e459aa18f9f1d4}{action} \{ \newline
 \item 
 bool \hyperlink{board_8h_a9e5ad6b1d72df2036e4cc86eabe8e549}{check\+\_\+file} (char $\ast$path)
 \begin{DoxyCompactList}\small\item\em Check the integrity and structure of a file. \end{DoxyCompactList}\item 
-bool \hyperlink{board_8h_a44e3978c82e006d1c88847d8853ea1b4}{read\+\_\+file} (\hyperlink{struct_board}{Board} $\ast$pboard, char $\ast$path)
-\begin{DoxyCompactList}\small\item\em Read the given file and initialize the \hyperlink{struct_board}{Board} accordingly. \end{DoxyCompactList}\item 
-void \hyperlink{board_8h_a691a2b50a077aad7b0d2903a2e05b369}{create\+\_\+empty\+\_\+board} (\hyperlink{struct_board}{Board} $\ast$pboard)
-\begin{DoxyCompactList}\small\item\em Initialize an empty \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\item 
-\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ \hyperlink{board_8h_a3d42656b98b9b768f1ba3fb013195c2c}{get\+\_\+valid\+\_\+moves} (\hyperlink{struct_board}{Board} $\ast$pboard)
+bool \hyperlink{board_8h_a44e3978c82e006d1c88847d8853ea1b4}{read\+\_\+file} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Read the given file and initialize the Board accordingly. \end{DoxyCompactList}\item 
+void \hyperlink{board_8h_a691a2b50a077aad7b0d2903a2e05b369}{create\+\_\+empty\+\_\+board} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard)
+\begin{DoxyCompactList}\small\item\em Initialize an empty Board. \end{DoxyCompactList}\item 
+\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ \hyperlink{board_8h_a3d42656b98b9b768f1ba3fb013195c2c}{get\+\_\+valid\+\_\+moves} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard)
 \begin{DoxyCompactList}\small\item\em Give a list of all valid moves. \end{DoxyCompactList}\item 
-bool \hyperlink{board_8h_ad8e222030ce787a7b324ef875bb47629}{is\+\_\+move\+\_\+valid} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
+bool \hyperlink{board_8h_ad8e222030ce787a7b324ef875bb47629}{is\+\_\+move\+\_\+valid} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
 \begin{DoxyCompactList}\small\item\em Check if a move is valid. \end{DoxyCompactList}\item 
-\hyperlink{struct_board}{Board} $\ast$ \hyperlink{board_8h_af1ad0502898d00d5829dd1ad8f58ce8f}{initialize\+\_\+rand} ()
-\begin{DoxyCompactList}\small\item\em Randomly initalize a \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\item 
-bool \hyperlink{board_8h_afe23ec837d11f38398ad928e0bec55b9}{play\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
-\begin{DoxyCompactList}\small\item\em Add a point on the \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{board_8h_a96cbadaa6f1835495fe41bbc70e40287}\label{board_8h_a96cbadaa6f1835495fe41bbc70e40287}} 
-void {\bfseries execute\+\_\+action} (\hyperlink{struct_board}{Board} $\ast$pboard, enum \hyperlink{board_8h_a2f4ab7bf743142dae2e459aa18f9f1d4}{action} \hyperlink{board_8h_a2f4ab7bf743142dae2e459aa18f9f1d4}{action})
+\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$ \hyperlink{board_8h_a6b1404f3fadcea941e50356fa372b065}{initialize\+\_\+rand} (void)
+\begin{DoxyCompactList}\small\item\em Randomly initalize a Board. \end{DoxyCompactList}\item 
+bool \hyperlink{board_8h_a216bb76d6199f88548c97e8e8a5760d6}{add\+\_\+point} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
+\begin{DoxyCompactList}\small\item\em Add a point on the Board. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{board_8h_ab587941c74a20f9a840996e762a18f85}\label{board_8h_ab587941c74a20f9a840996e762a18f85}} 
+void {\bfseries execute\+\_\+action} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, enum \hyperlink{board_8h_a2f4ab7bf743142dae2e459aa18f9f1d4}{action} \hyperlink{board_8h_a2f4ab7bf743142dae2e459aa18f9f1d4}{action}, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
 \item 
-bool \hyperlink{board_8h_ad2f7f36f846fb4cff7a1fc576cd4ad65}{is\+\_\+game\+\_\+over} (\hyperlink{struct_board}{Board} $\ast$pboard)
+bool \hyperlink{board_8h_ad2f7f36f846fb4cff7a1fc576cd4ad65}{is\+\_\+game\+\_\+over} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard)
 \begin{DoxyCompactList}\small\item\em Check if game is over. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-This file handles the \hyperlink{struct_board}{Board}. 
+This file handles the Board. 
 
 \begin{DoxyAuthor}{Authors}
 Geoffrey D\+E\+L\+V\+AL, Rémi G\+U\+I\+J\+A\+R\+RO E\+S\+P\+I\+N\+O\+SA, Gabriel M\+O\+R\+AN, Clément P\+E\+R\+E\+S\+SE 
@@ -105,6 +111,26 @@ A\+S\+K\+\_\+\+H\+E\+LP&Ask for help to be displayed \\
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{board_8h_a216bb76d6199f88548c97e8e8a5760d6}\label{board_8h_a216bb76d6199f88548c97e8e8a5760d6}} 
+\index{board.\+h@{board.\+h}!add\+\_\+point@{add\+\_\+point}}
+\index{add\+\_\+point@{add\+\_\+point}!board.\+h@{board.\+h}}
+\subsubsection{\texorpdfstring{add\+\_\+point()}{add\_point()}}
+{\footnotesize\ttfamily bool add\+\_\+point (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}}]{pcoord }\end{DoxyParamCaption})}
+
+
+
+Add a point on the Board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the Board being played \\
+\hline
+{\em pcoord} & Pointer to selected coordinates \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if point successfully added, false otherwise. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{board_8h_a9e5ad6b1d72df2036e4cc86eabe8e549}\label{board_8h_a9e5ad6b1d72df2036e4cc86eabe8e549}} 
 \index{board.\+h@{board.\+h}!check\+\_\+file@{check\+\_\+file}}
 \index{check\+\_\+file@{check\+\_\+file}!board.\+h@{board.\+h}}
@@ -127,22 +153,22 @@ true if file structure is correct, false otherwise
 \index{board.\+h@{board.\+h}!create\+\_\+empty\+\_\+board@{create\+\_\+empty\+\_\+board}}
 \index{create\+\_\+empty\+\_\+board@{create\+\_\+empty\+\_\+board}!board.\+h@{board.\+h}}
 \subsubsection{\texorpdfstring{create\+\_\+empty\+\_\+board()}{create\_empty\_board()}}
-{\footnotesize\ttfamily void create\+\_\+empty\+\_\+board (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void create\+\_\+empty\+\_\+board (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
 
 
 
-Initialize an empty \hyperlink{struct_board}{Board}. 
+Initialize an empty Board. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em pboard} & \+: Pointer to \hyperlink{struct_board}{Board}, S\+H\+O\+U\+LD be N\+U\+LL \\
+{\em pboard} & \+: Pointer to Board, S\+H\+O\+U\+LD be N\+U\+LL \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{board_8h_a3d42656b98b9b768f1ba3fb013195c2c}\label{board_8h_a3d42656b98b9b768f1ba3fb013195c2c}} 
 \index{board.\+h@{board.\+h}!get\+\_\+valid\+\_\+moves@{get\+\_\+valid\+\_\+moves}}
 \index{get\+\_\+valid\+\_\+moves@{get\+\_\+valid\+\_\+moves}!board.\+h@{board.\+h}}
 \subsubsection{\texorpdfstring{get\+\_\+valid\+\_\+moves()}{get\_valid\_moves()}}
-{\footnotesize\ttfamily \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ get\+\_\+valid\+\_\+moves (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ get\+\_\+valid\+\_\+moves (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
 
 
 
@@ -150,30 +176,30 @@ Give a list of all valid moves.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pboard} & \hyperlink{struct_board}{Board} pointer \\
+{\em pboard} & Board pointer \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A Pcoord list 
 \end{DoxyReturn}
-\mbox{\Hypertarget{board_8h_af1ad0502898d00d5829dd1ad8f58ce8f}\label{board_8h_af1ad0502898d00d5829dd1ad8f58ce8f}} 
+\mbox{\Hypertarget{board_8h_a6b1404f3fadcea941e50356fa372b065}\label{board_8h_a6b1404f3fadcea941e50356fa372b065}} 
 \index{board.\+h@{board.\+h}!initialize\+\_\+rand@{initialize\+\_\+rand}}
 \index{initialize\+\_\+rand@{initialize\+\_\+rand}!board.\+h@{board.\+h}}
 \subsubsection{\texorpdfstring{initialize\+\_\+rand()}{initialize\_rand()}}
-{\footnotesize\ttfamily \hyperlink{struct_board}{Board} $\ast$ initialize\+\_\+rand (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$ initialize\+\_\+rand (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
 
 
 
-Randomly initalize a \hyperlink{struct_board}{Board}. 
+Randomly initalize a Board. 
 
 \begin{DoxyReturn}{Returns}
-Pointer to a \hyperlink{struct_board}{Board} 
+Pointer to a Board 
 \end{DoxyReturn}
 \mbox{\Hypertarget{board_8h_ad2f7f36f846fb4cff7a1fc576cd4ad65}\label{board_8h_ad2f7f36f846fb4cff7a1fc576cd4ad65}} 
 \index{board.\+h@{board.\+h}!is\+\_\+game\+\_\+over@{is\+\_\+game\+\_\+over}}
 \index{is\+\_\+game\+\_\+over@{is\+\_\+game\+\_\+over}!board.\+h@{board.\+h}}
 \subsubsection{\texorpdfstring{is\+\_\+game\+\_\+over()}{is\_game\_over()}}
-{\footnotesize\ttfamily bool is\+\_\+game\+\_\+over (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool is\+\_\+game\+\_\+over (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
 
 
 
@@ -181,7 +207,7 @@ Check if game is over.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} being played. \\
+{\em pboard} & Pointer to the Board being played. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -191,7 +217,7 @@ true if game is over, false otherwise.
 \index{board.\+h@{board.\+h}!is\+\_\+move\+\_\+valid@{is\+\_\+move\+\_\+valid}}
 \index{is\+\_\+move\+\_\+valid@{is\+\_\+move\+\_\+valid}!board.\+h@{board.\+h}}
 \subsubsection{\texorpdfstring{is\+\_\+move\+\_\+valid()}{is\_move\_valid()}}
-{\footnotesize\ttfamily bool is\+\_\+move\+\_\+valid (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}}]{pcoord }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool is\+\_\+move\+\_\+valid (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}}]{pcoord }\end{DoxyParamCaption})}
 
 
 
@@ -199,7 +225,7 @@ Check if a move is valid.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pboard} & \hyperlink{struct_board}{Board} pointer \\
+{\em pboard} & Board pointer \\
 \hline
 {\em pcoord} & Coordinates of the selected move \\
 \hline
@@ -207,49 +233,19 @@ Check if a move is valid.
 \begin{DoxyReturn}{Returns}
 true if no error occured, false otherwise 
 \end{DoxyReturn}
-\mbox{\Hypertarget{board_8h_afe23ec837d11f38398ad928e0bec55b9}\label{board_8h_afe23ec837d11f38398ad928e0bec55b9}} 
-\index{board.\+h@{board.\+h}!play\+\_\+move@{play\+\_\+move}}
-\index{play\+\_\+move@{play\+\_\+move}!board.\+h@{board.\+h}}
-\subsubsection{\texorpdfstring{play\+\_\+move()}{play\_move()}}
-{\footnotesize\ttfamily bool play\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}}]{pcoord }\end{DoxyParamCaption})}
-
-
-
-Add a point on the \hyperlink{struct_board}{Board}. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} being played \\
-\hline
-{\em pcoord} & Pointer to selected coordinates \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if point successfully added, false otherwise.
-\end{DoxyReturn}
-
-\begin{DoxyParams}{Parameters}
-{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} being played. \\
-\hline
-{\em pcoord} & Pointer to selected coordinates. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if point successfully added, false otherwise. 
-\end{DoxyReturn}
 \mbox{\Hypertarget{board_8h_a44e3978c82e006d1c88847d8853ea1b4}\label{board_8h_a44e3978c82e006d1c88847d8853ea1b4}} 
 \index{board.\+h@{board.\+h}!read\+\_\+file@{read\+\_\+file}}
 \index{read\+\_\+file@{read\+\_\+file}!board.\+h@{board.\+h}}
 \subsubsection{\texorpdfstring{read\+\_\+file()}{read\_file()}}
-{\footnotesize\ttfamily bool read\+\_\+file (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool read\+\_\+file (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard,  }\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
 
 
 
-Read the given file and initialize the \hyperlink{struct_board}{Board} accordingly. 
+Read the given file and initialize the Board accordingly. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em pboard} & \hyperlink{struct_board}{Board} pointer, S\+H\+O\+U\+LD be N\+U\+LL \\
+{\em pboard} & Board pointer, S\+H\+O\+U\+LD be N\+U\+LL \\
 \hline
 {\em path} & File absolute path \\
 \hline

@@ -6,17 +6,30 @@ Records player moves during a game.
 
 
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}board.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structplayed_move}{played\+Move}
+\begin{DoxyCompactList}\small\item\em Played moves since the beginning of the game. \end{DoxyCompactList}\item 
+struct \hyperlink{structhistory_list}{history\+List}
+\begin{DoxyCompactList}\small\item\em Convenience structure for accessing played moves. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{history_8h_aa8bec297ffa88424d994cf0f8888f101}\label{history_8h_aa8bec297ffa88424d994cf0f8888f101}} 
+typedef struct \hyperlink{structhistory_list}{history\+List} \hyperlink{history_8h_aa8bec297ffa88424d994cf0f8888f101}{History\+List}
+\begin{DoxyCompactList}\small\item\em \hyperlink{structhistory_list}{history\+List} structure alias \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{history_8h_afe23ec837d11f38398ad928e0bec55b9}\label{history_8h_afe23ec837d11f38398ad928e0bec55b9}} 
-bool {\bfseries play\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
-\item 
-void \hyperlink{history_8h_a7547f6701284c7d81f582e287994d83c}{cancel\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ppcoord)
-\begin{DoxyCompactList}\small\item\em Withdraw a point from the \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\item 
-void \hyperlink{history_8h_a7c0bc5f65ff5ed18831e0700fb9aea15}{replay\+\_\+move} (\hyperlink{struct_board}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ppcoord)
-\begin{DoxyCompactList}\small\item\em Add a previously withdrawn point to the \hyperlink{struct_board}{Board}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+bool \hyperlink{history_8h_afe23ec837d11f38398ad928e0bec55b9}{play\+\_\+move} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord)
+\begin{DoxyCompactList}\small\item\em Play a move, i.\+e. add a point on the Board. \end{DoxyCompactList}\item 
+void \hyperlink{history_8h_a7547f6701284c7d81f582e287994d83c}{cancel\+\_\+move} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ppcoord)
+\begin{DoxyCompactList}\small\item\em Withdraw a point from the Board. \end{DoxyCompactList}\item 
+void \hyperlink{history_8h_a7c0bc5f65ff5ed18831e0700fb9aea15}{replay\+\_\+move} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ppcoord)
+\begin{DoxyCompactList}\small\item\em Add a previously withdrawn point to the Board. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -38,32 +51,52 @@ Represents \hyperlink{board_8h}{board.\+h} upper layer. This class records playe
 \index{history.\+h@{history.\+h}!cancel\+\_\+move@{cancel\+\_\+move}}
 \index{cancel\+\_\+move@{cancel\+\_\+move}!history.\+h@{history.\+h}}
 \subsubsection{\texorpdfstring{cancel\+\_\+move()}{cancel\_move()}}
-{\footnotesize\ttfamily void cancel\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$}]{ppcoord }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void cancel\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$}]{ppcoord }\end{DoxyParamCaption})}
 
 
 
-Withdraw a point from the \hyperlink{struct_board}{Board}. 
+Withdraw a point from the Board. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} being played. \\
+{\em pboard} & Pointer to the Board being played. \\
 \hline
 {\em ppcoord} & Pointer to pointer to canceled coordinates. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{history_8h_afe23ec837d11f38398ad928e0bec55b9}\label{history_8h_afe23ec837d11f38398ad928e0bec55b9}} 
+\index{history.\+h@{history.\+h}!play\+\_\+move@{play\+\_\+move}}
+\index{play\+\_\+move@{play\+\_\+move}!history.\+h@{history.\+h}}
+\subsubsection{\texorpdfstring{play\+\_\+move()}{play\_move()}}
+{\footnotesize\ttfamily bool play\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}}]{pcoord }\end{DoxyParamCaption})}
+
+
+
+Play a move, i.\+e. add a point on the Board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pboard} & Pointer to the Board being played. \\
+\hline
+{\em pcoord} & Pointer to selected coordinates. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if point successfully added, false otherwise. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{history_8h_a7c0bc5f65ff5ed18831e0700fb9aea15}\label{history_8h_a7c0bc5f65ff5ed18831e0700fb9aea15}} 
 \index{history.\+h@{history.\+h}!replay\+\_\+move@{replay\+\_\+move}}
 \index{replay\+\_\+move@{replay\+\_\+move}!history.\+h@{history.\+h}}
 \subsubsection{\texorpdfstring{replay\+\_\+move()}{replay\_move()}}
-{\footnotesize\ttfamily void replay\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{struct_board}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$}]{ppcoord }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void replay\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard,  }\item[{\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$}]{ppcoord }\end{DoxyParamCaption})}
 
 
 
-Add a previously withdrawn point to the \hyperlink{struct_board}{Board}. 
+Add a previously withdrawn point to the Board. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em pboard} & Pointer to the \hyperlink{struct_board}{Board} being played. \\
+{\em pboard} & Pointer to the Board being played. \\
 \hline
 {\em ppcoord} & Pointer to pointer to replayed coordinates. \\
 \hline

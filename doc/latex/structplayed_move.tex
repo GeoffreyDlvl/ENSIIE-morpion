@@ -1,0 +1,51 @@
+\hypertarget{structplayed_move}{}\section{played\+Move Struct Reference}
+\label{structplayed_move}\index{played\+Move@{played\+Move}}
+
+
+Played moves since the beginning of the game.  
+
+
+
+
+{\ttfamily \#include $<$history.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} $\ast$ \hyperlink{structplayed_move_a31936ecfefc6cca619f5fbb6bbe5d62a}{coord}
+\item 
+struct \hyperlink{structplayed_move}{played\+Move} $\ast$ \hyperlink{structplayed_move_ae1f0ee9fe8e8a08023879b9656a55f62}{Pprevious\+Played\+Move}
+\item 
+struct \hyperlink{structplayed_move}{played\+Move} $\ast$ \hyperlink{structplayed_move_a3d7384aebd5f0ff66a5ab19773ea1136}{Pnext\+Played\+Move}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Played moves since the beginning of the game. 
+
+Data are saved in a double linked-\/list structure that contains all the played moves. 
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{structplayed_move_a31936ecfefc6cca619f5fbb6bbe5d62a}\label{structplayed_move_a31936ecfefc6cca619f5fbb6bbe5d62a}} 
+\index{played\+Move@{played\+Move}!coord@{coord}}
+\index{coord@{coord}!played\+Move@{played\+Move}}
+\subsubsection{\texorpdfstring{coord}{coord}}
+{\footnotesize\ttfamily \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord}$\ast$ \hyperlink{structcoord}{coord}}
+
+Data\+: Pcoord pointer to this played move \mbox{\Hypertarget{structplayed_move_a3d7384aebd5f0ff66a5ab19773ea1136}\label{structplayed_move_a3d7384aebd5f0ff66a5ab19773ea1136}} 
+\index{played\+Move@{played\+Move}!Pnext\+Played\+Move@{Pnext\+Played\+Move}}
+\index{Pnext\+Played\+Move@{Pnext\+Played\+Move}!played\+Move@{played\+Move}}
+\subsubsection{\texorpdfstring{Pnext\+Played\+Move}{PnextPlayedMove}}
+{\footnotesize\ttfamily struct \hyperlink{structplayed_move}{played\+Move}$\ast$ Pnext\+Played\+Move}
+
+Pointer to the next \hyperlink{structplayed_move}{played\+Move} \mbox{\Hypertarget{structplayed_move_ae1f0ee9fe8e8a08023879b9656a55f62}\label{structplayed_move_ae1f0ee9fe8e8a08023879b9656a55f62}} 
+\index{played\+Move@{played\+Move}!Pprevious\+Played\+Move@{Pprevious\+Played\+Move}}
+\index{Pprevious\+Played\+Move@{Pprevious\+Played\+Move}!played\+Move@{played\+Move}}
+\subsubsection{\texorpdfstring{Pprevious\+Played\+Move}{PpreviousPlayedMove}}
+{\footnotesize\ttfamily struct \hyperlink{structplayed_move}{played\+Move}$\ast$ Pprevious\+Played\+Move}
+
+Pointer to previous \hyperlink{structplayed_move}{played\+Move} 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/geoffrey/cours/projet-\/morpion/\+E\+N\+S\+I\+I\+E-\/morpion/headers/\hyperlink{history_8h}{history.\+h}\end{DoxyCompactItemize}

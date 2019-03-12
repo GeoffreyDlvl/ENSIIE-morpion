@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['coord',['Coord',['../struct_coord.html',1,'']]]
+  ['coord',['coord',['../structcoord.html',1,'']]]
 ];
