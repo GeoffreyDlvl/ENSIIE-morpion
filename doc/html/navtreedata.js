@@ -1,7 +1,7 @@
 var NAVTREE =
 [
   [ "ENSIIE-Morpion", "index.html", [
-    [ "Morpion", "md__home_geoffrey_cours_projet-morpion__e_n_s_i_i_e-morpion__r_e_a_d_m_e.html", null ],
+    [ "Morpion", "index.html", null ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],

@@ -12,7 +12,7 @@ Displays the Board and manages the user/program interactions.
 \item 
 void \hyperlink{interface_8h_a8ad7b6fdcab6025f32be230471f5aec1}{print\+\_\+board} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, bool hint)
 \begin{DoxyCompactList}\small\item\em Print the Board, as well as a hint (i.\+e. a list of available moves) if required. \end{DoxyCompactList}\item 
-void \hyperlink{interface_8h_a246c58952c341d242dd05b532bfc275f}{select\+\_\+move} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, int move\+\_\+number)
+void \hyperlink{interface_8h_ae62e7ad92bd875150ff3c26bb2be372f}{select\+\_\+move} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard)
 \begin{DoxyCompactList}\small\item\em Ask the user to play a move. \end{DoxyCompactList}\item 
 enum \hyperlink{board_8h_a2f4ab7bf743142dae2e459aa18f9f1d4}{action} \hyperlink{interface_8h_ae1534f32f3fb80e9b226dc817d9bb572}{select\+\_\+action} (\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$pboard, \hyperlink{board_8h_ab8cc720589a392832ddcc5e65efcbb47}{Pcoord} pcoord, bool $\ast$hint)
 \begin{DoxyCompactList}\small\item\em Ask the user for the next action. \end{DoxyCompactList}\item 
@@ -109,11 +109,11 @@ Ask the user for the next action.
 {\em hint} & Hold the boolean signifying whether the user wishes to get a hint \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{interface_8h_a246c58952c341d242dd05b532bfc275f}\label{interface_8h_a246c58952c341d242dd05b532bfc275f}} 
+\mbox{\Hypertarget{interface_8h_ae62e7ad92bd875150ff3c26bb2be372f}\label{interface_8h_ae62e7ad92bd875150ff3c26bb2be372f}} 
 \index{interface.\+h@{interface.\+h}!select\+\_\+move@{select\+\_\+move}}
 \index{select\+\_\+move@{select\+\_\+move}!interface.\+h@{interface.\+h}}
 \subsubsection{\texorpdfstring{select\+\_\+move()}{select\_move()}}
-{\footnotesize\ttfamily select\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard,  }\item[{int}]{move\+\_\+number }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily select\+\_\+move (\begin{DoxyParamCaption}\item[{\hyperlink{board_8h_ae032fdcf74f6a7ee3aca153eda146374}{Board} $\ast$}]{pboard }\end{DoxyParamCaption})}
 
 
 
@@ -122,7 +122,5 @@ Ask the user to play a move.
 
 \begin{DoxyParams}{Parameters}
 {\em pboard} & Pointer to the Board \\
-\hline
-{\em move\+\_\+number} & Move number since game started \\
 \hline
 \end{DoxyParams}

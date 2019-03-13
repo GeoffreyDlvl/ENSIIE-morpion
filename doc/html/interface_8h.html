@@ -99,9 +99,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a8ad7b6fdcab6025f32be230471f5aec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a8ad7b6fdcab6025f32be230471f5aec1">print_board</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, bool hint)</td></tr>
 <tr class="memdesc:a8ad7b6fdcab6025f32be230471f5aec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the Board, as well as a hint (i.e. a list of available moves) if required.  <a href="#a8ad7b6fdcab6025f32be230471f5aec1">More...</a><br /></td></tr>
 <tr class="separator:a8ad7b6fdcab6025f32be230471f5aec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a246c58952c341d242dd05b532bfc275f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a246c58952c341d242dd05b532bfc275f">select_move</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, int move_number)</td></tr>
-<tr class="memdesc:a246c58952c341d242dd05b532bfc275f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user to play a move.  <a href="#a246c58952c341d242dd05b532bfc275f">More...</a><br /></td></tr>
-<tr class="separator:a246c58952c341d242dd05b532bfc275f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae62e7ad92bd875150ff3c26bb2be372f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ae62e7ad92bd875150ff3c26bb2be372f">select_move</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard)</td></tr>
+<tr class="memdesc:ae62e7ad92bd875150ff3c26bb2be372f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user to play a move.  <a href="#ae62e7ad92bd875150ff3c26bb2be372f">More...</a><br /></td></tr>
+<tr class="separator:ae62e7ad92bd875150ff3c26bb2be372f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1534f32f3fb80e9b226dc817d9bb572"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ae1534f32f3fb80e9b226dc817d9bb572">select_action</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> pcoord, bool *hint)</td></tr>
 <tr class="memdesc:ae1534f32f3fb80e9b226dc817d9bb572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for the next action.  <a href="#ae1534f32f3fb80e9b226dc817d9bb572">More...</a><br /></td></tr>
 <tr class="separator:ae1534f32f3fb80e9b226dc817d9bb572"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -257,8 +257,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 
 </div>
 </div>
-<a id="a246c58952c341d242dd05b532bfc275f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a246c58952c341d242dd05b532bfc275f">&#9670;&nbsp;</a></span>select_move()</h2>
+<a id="ae62e7ad92bd875150ff3c26bb2be372f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae62e7ad92bd875150ff3c26bb2be372f">&#9670;&nbsp;</a></span>select_move()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -267,18 +267,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
           <td class="memname">select_move </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
-          <td class="paramname"><em>pboard</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>pboard</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>move_number</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -287,7 +277,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
-    <tr><td class="paramname">move_number</td><td>Move number since game started </td></tr>
   </table>
   </dd>
 </dl>
