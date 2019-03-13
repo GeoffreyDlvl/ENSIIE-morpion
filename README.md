@@ -1,7 +1,7 @@
 # Morpion
 
 *Imperative programming project.*<br /><br />   
-Morpion is a solitaire game. Rules and goals are explained in ['instruction.pdf'](doc/instructions.pdf).
+Morpion is a solitaire game. Rules and goals are explained in ['instructions.pdf'](doc/instructions.pdf).
 
 ## Getting Started
 
@@ -56,5 +56,5 @@ We use [Git](http://git-scm.com) for versioning.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
