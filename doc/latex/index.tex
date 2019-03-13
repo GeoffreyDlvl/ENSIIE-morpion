@@ -1,104 +1,72 @@
-{\itshape Imperative programming project.} Morpion is a solitaire game. Rules and goals are explained in \textquotesingle{}instruction.\+pdf\textquotesingle{}.
+{\itshape Imperative programming project.}~\newline
+~\newline
+ Morpion is a solitaire game. Rules and goals are explained in \href{doc/instructions.pdf}{\tt \textquotesingle{}instruction.\+pdf\textquotesingle{}}.
 
 \subsection*{Getting Started}
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine.
 
 \subsubsection*{Prerequisites}
 
-What things you need to install the software and how to install them
+The project runs preferably on a linux machine. The only required tools are G\+CC, the G\+NU Compiler Collection, and make, the G\+NU make utility. They should be installed by default. If they are not, the following linux command will install gcc
 
 
 \begin{DoxyCode}
-Give examples
+sudo apt install gcc
 \end{DoxyCode}
 
 
-\subsubsection*{Installing}
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+And this command will install make
 
 
 \begin{DoxyCode}
-Give the example
+sudo apt install build-essential
 \end{DoxyCode}
 
 
-And repeat
+\subsubsection*{Building}
+
+To build the project, simple type the following command on the root of the project
 
 
 \begin{DoxyCode}
-until finished
+make
 \end{DoxyCode}
 
 
-End with an example of getting some data out of the system or using it for a little demo
+\subsection*{Running the game}
 
-\subsection*{Running the tests}
-
-Explain how to run the automated tests for this system
-
-\subsubsection*{Break down into end to end tests}
-
-Explain what these tests test and why
+Go to the sources directory and execute the program
 
 
 \begin{DoxyCode}
-Give an example
+./run
 \end{DoxyCode}
 
 
-\subsubsection*{And coding style tests}
-
-Explain what these tests test and why
-
-
-\begin{DoxyCode}
-Give an example
-\end{DoxyCode}
-
-
-\subsection*{Deployment}
-
-Add additional notes about how to deploy this on a live system
+Note that the executable is not produced during the build yet. The game cannot be run in {\itshape lot a} version.
 
 \subsection*{Built With}
 
 
 \begin{DoxyItemize}
-\item \href{http://www.dropwizard.io/1.0.2/docs/}{\tt Dropwizard} -\/ The web framework used
-\item \href{https://maven.apache.org/}{\tt Maven} -\/ Dependency Management
-\item \href{https://rometools.github.io/rome/}{\tt R\+O\+ME} -\/ Used to generate R\+SS Feeds
+\item \href{http://gcc.gnu.org}{\tt G\+CC} -\/ The G\+NU Compiler Collection
 \end{DoxyItemize}
-
-\subsection*{Contributing}
-
-Please read \href{https://gist.github.com/PurpleBooth/b24679402957c63ec426}{\tt C\+O\+N\+T\+R\+I\+B\+U\+T\+I\+N\+G.\+md} for details on our code of conduct, and the process for submitting pull requests to us.
 
 \subsection*{Versioning}
 
-We use \href{http://semver.org/}{\tt Sem\+Ver} for versioning. For the versions available, see the \href{https://github.com/your/project/tags}{\tt tags on this repository}.
+We use \href{http://git-scm.com}{\tt Git} for versioning.
 
 \subsection*{Authors}
 
 
 \begin{DoxyItemize}
-\item {\bfseries Billie Thompson} -\/ {\itshape Initial work} -\/ \href{https://github.com/PurpleBooth}{\tt Purple\+Booth}
+\item {\bfseries Geoffrey Delval} -\/ \href{https://github.com/GeoffreyDlvl}{\tt Geoffrey\+Dlvl}
+\item {\bfseries Rémi Guijarro Espinosa} -\/ \href{https://github.com/Remi-Guijarro}{\tt Remi-\/\+Guijarro}
+\item {\bfseries Gabriel Moran} -\/ \href{https://github.com/ggabimoran}{\tt ggabimoran}
+\item {\bfseries Clément Peresse} -\/ \href{https://github.com/LTRobot}{\tt L\+T\+Robot}
 \end{DoxyItemize}
-
-See also the list of \href{https://github.com/your/project/contributors}{\tt contributors} who participated in this project.
 
 \subsection*{License}
 
-This project is licensed under the M\+IT License -\/ see the L\+I\+C\+E\+N\+SE.md file for details
-
-\subsection*{Acknowledgments}
-
-
-\begin{DoxyItemize}
-\item Hat tip to anyone whose code was used
-\item Inspiration
-\item etc 
-\end{DoxyItemize}
+This project is licensed under the M\+IT License -\/ see the L\+I\+C\+E\+N\+SE.md file for details 

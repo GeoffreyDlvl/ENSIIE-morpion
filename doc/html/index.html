@@ -84,47 +84,34 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="title">Morpion </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><em>Imperative programming project.</em> Morpion is a solitaire game. Rules and goals are explained in 'instruction.pdf'.</p>
+<div class="textblock"><p><em>Imperative programming project.</em><br />
+<br />
+ Morpion is a solitaire game. Rules and goals are explained in <a href="doc/instructions.pdf">'instruction.pdf'</a>.</p>
 <h2>Getting Started</h2>
-<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
+<p>These instructions will get you a copy of the project up and running on your local machine.</p>
 <h3>Prerequisites</h3>
-<p>What things you need to install the software and how to install them</p>
-<div class="fragment"><div class="line">Give examples</div></div><!-- fragment --><h3>Installing</h3>
-<p>A step by step series of examples that tell you how to get a development env running</p>
-<p>Say what the step will be</p>
-<div class="fragment"><div class="line">Give the example</div></div><!-- fragment --><p>And repeat</p>
-<div class="fragment"><div class="line">until finished</div></div><!-- fragment --><p>End with an example of getting some data out of the system or using it for a little demo</p>
-<h2>Running the tests</h2>
-<p>Explain how to run the automated tests for this system</p>
-<h3>Break down into end to end tests</h3>
-<p>Explain what these tests test and why</p>
-<div class="fragment"><div class="line">Give an example</div></div><!-- fragment --><h3>And coding style tests</h3>
-<p>Explain what these tests test and why</p>
-<div class="fragment"><div class="line">Give an example</div></div><!-- fragment --><h2>Deployment</h2>
-<p>Add additional notes about how to deploy this on a live system</p>
+<p>The project runs preferably on a linux machine. The only required tools are GCC, the GNU Compiler Collection, and make, the GNU make utility. They should be installed by default. If they are not, the following linux command will install gcc</p>
+<div class="fragment"><div class="line">sudo apt install gcc</div></div><!-- fragment --><p>And this command will install make</p>
+<div class="fragment"><div class="line">sudo apt install build-essential</div></div><!-- fragment --><h3>Building</h3>
+<p>To build the project, simple type the following command on the root of the project</p>
+<div class="fragment"><div class="line">make</div></div><!-- fragment --><h2>Running the game</h2>
+<p>Go to the sources directory and execute the program</p>
+<div class="fragment"><div class="line">./run</div></div><!-- fragment --><p>Note that the executable is not produced during the build yet. The game cannot be run in <em>lot a</em> version.</p>
 <h2>Built With</h2>
 <ul>
-<li><a href="http://www.dropwizard.io/1.0.2/docs/">Dropwizard</a> - The web framework used</li>
-<li><a href="https://maven.apache.org/">Maven</a> - Dependency Management</li>
-<li><a href="https://rometools.github.io/rome/">ROME</a> - Used to generate RSS Feeds</li>
+<li><a href="http://gcc.gnu.org">GCC</a> - The GNU Compiler Collection</li>
 </ul>
-<h2>Contributing</h2>
-<p>Please read <a href="https://gist.github.com/PurpleBooth/b24679402957c63ec426">CONTRIBUTING.md</a> for details on our code of conduct, and the process for submitting pull requests to us.</p>
 <h2>Versioning</h2>
-<p>We use <a href="http://semver.org/">SemVer</a> for versioning. For the versions available, see the <a href="https://github.com/your/project/tags">tags on this repository</a>.</p>
+<p>We use <a href="http://git-scm.com">Git</a> for versioning.</p>
 <h2>Authors</h2>
 <ul>
-<li><b>Billie Thompson</b> - <em>Initial work</em> - <a href="https://github.com/PurpleBooth">PurpleBooth</a></li>
+<li><b>Geoffrey Delval</b> - <a href="https://github.com/GeoffreyDlvl">GeoffreyDlvl</a></li>
+<li><b>Rémi Guijarro Espinosa</b> - <a href="https://github.com/Remi-Guijarro">Remi-Guijarro</a></li>
+<li><b>Gabriel Moran</b> - <a href="https://github.com/ggabimoran">ggabimoran</a></li>
+<li><b>Clément Peresse</b> - <a href="https://github.com/LTRobot">LTRobot</a></li>
 </ul>
-<p>See also the list of <a href="https://github.com/your/project/contributors">contributors</a> who participated in this project.</p>
 <h2>License</h2>
-<p>This project is licensed under the MIT License - see the LICENSE.md file for details</p>
-<h2>Acknowledgments</h2>
-<ul>
-<li>Hat tip to anyone whose code was used</li>
-<li>Inspiration</li>
-<li>etc </li>
-</ul>
+<p>This project is licensed under the MIT License - see the LICENSE.md file for details </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

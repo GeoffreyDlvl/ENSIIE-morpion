@@ -1,89 +1,60 @@
 # Morpion
 
-*Imperative programming project.*
-Morpion is a solitaire game. Rules and goals are explained in 'instruction.pdf'.
+*Imperative programming project.*<br /><br />   
+Morpion is a solitaire game. Rules and goals are explained in ['instruction.pdf'](doc/instructions.pdf).
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+The project runs preferably on a linux machine. The only required tools are GCC, the GNU Compiler Collection, and make, the GNU make utility. They should be installed by default. If they are not, the following linux command will install gcc
 
 ```
-Give examples
+sudo apt install gcc
 ```
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+And this command will install make
 
 ```
-Give the example
+sudo apt install build-essential
 ```
 
-And repeat
+### Building
+
+To build the project, simple type the following command on the root of the project
 
 ```
-until finished
+make
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+## Running the game
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Go to the sources directory and execute the program
 
 ```
-Give an example
+./run
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Note that the executable is not produced during the build yet. The game cannot be run in *lot a* version.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* [GCC](http://gcc.gnu.org) - The GNU Compiler Collection
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [Git](http://git-scm.com) for versioning. 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Geoffrey Delval** - [GeoffreyDlvl](https://github.com/GeoffreyDlvl)
+* **Rémi Guijarro Espinosa** - [Remi-Guijarro](https://github.com/Remi-Guijarro)
+* **Gabriel Moran** - [ggabimoran](https://github.com/ggabimoran)
+* **Clément Peresse** - [LTRobot](https://github.com/LTRobot)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
 
