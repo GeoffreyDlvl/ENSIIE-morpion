@@ -25,7 +25,7 @@
  */
 struct playedMove
 {
-	Pcoord* coord; /**< Data: Pcoord pointer to this played move */
+	Pcoord pcoord; /**< Data: Coord pointer to the played move */
 	struct playedMove* PpreviousPlayedMove; /**< Pointer to previous playedMove */
 	struct playedMove* PnextPlayedMove; /**< Pointer to the next playedMove */
 };
