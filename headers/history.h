@@ -78,5 +78,11 @@ void cancel_move(Board* pboard, Pcoord* ppcoord);
  */
 void replay_move(Board* pboard, Pcoord* ppcoord);
 
+/**
+ * \fn void free_history();
+ * \brief free allocated memory of static history list
+ */
+void free_history();
+
 #endif
 

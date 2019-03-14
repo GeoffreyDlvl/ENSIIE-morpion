@@ -138,4 +138,12 @@ void execute_action(Board* pboard, enum action action, Pcoord pcoord);
  */
 bool is_game_over(Board* pboard);
 
+/**
+ * \fn void free_board(Board* pboard);
+ * \brief free allocated memory of board
+ *
+ * \param Board* pboard pointer to board 
+ */
+void free_board(Board* pboard);
+
 #endif

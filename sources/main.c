@@ -49,6 +49,8 @@ int main(int argc,char* argv[]){
     if (pcoord == NULL)
       free (pcoord);
   }
+  free_history();
+  free_board(pboard);
   return EXIT_SUCCESS;
 }
       
