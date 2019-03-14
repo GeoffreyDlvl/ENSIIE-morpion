@@ -34,7 +34,8 @@ int main(int argc,char* argv[]){
       }
     }
   }
-  bool hint = false; 
+  bool hint = false;
+  /*Loop termination : board size is finite therefore number of playable moves if finite*/
   while(!is_game_over(pboard))
   {
     /* Declare a new NULL pointer: it will be manipulated in functions */
