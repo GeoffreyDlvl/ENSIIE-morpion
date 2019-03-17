@@ -78,7 +78,7 @@ bool read_file(Board* pboard, char* path);
  * \fn void create_empty_board(Board* pboard)
  * \brief Initialize an empty Board
  *
- * \param pboard : Pointer to Board, SHOULD be NULL
+ * \param pboard : Pointer to Board, pboard->points SHOULD be NULL
  */
 void create_empty_board(Board* pboard); 
 
