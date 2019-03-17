@@ -65,9 +65,8 @@ bool play_move(Board* pboard, Pcoord pcoord);
  * \brief Withdraw a point from the Board.
  *
  * \param pboard Pointer to the Board being played.
- * \param ppcoord Pointer to pointer to canceled coordinates.
  */
-void cancel_move(Board* pboard, Pcoord* ppcoord);
+void cancel_move(Board* pboard);
 
 /**
  * \fn void replay_move(Board* pboard, Pcoord* ppcoord)
@@ -76,13 +75,13 @@ void cancel_move(Board* pboard, Pcoord* ppcoord);
  * \param pboard Pointer to the Board being played.
  * \param ppcoord Pointer to pointer to replayed coordinates.
  */
-void replay_move(Board* pboard, Pcoord* ppcoord);
+void replay_move(Board* pboard);
 
 /**
  * \fn void free_history();
- * \brief free allocated memory of static history list
+ * \brief Free allocated memory of static history list
  */
-void free_history();
+void free_history(void);
 
 #endif
 
