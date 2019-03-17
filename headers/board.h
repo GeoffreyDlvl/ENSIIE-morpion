@@ -31,11 +31,12 @@ enum action
  * \struct coord
  * \brief Coordinates on the Board
  */
-typedef struct coord
+struct Coord
 {
     int x; /**< Horizontal address */
     int y; /**< Vertical address */
-} Coord;
+};
+typedef struct Coord Coord;
 /**< \brief coord structure alias */
 
 /**
