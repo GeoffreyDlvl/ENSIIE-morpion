@@ -1,5 +1,4 @@
 #include "../headers/board.h"
-#include <stdbool.h>
 #include "stdlib.h"
 
 void create_empty_board(Board* pboard){
@@ -39,4 +38,45 @@ bool add_point(Board* pboard, Pcoord pcoord){
   else{
     return false;
   }
+}
+
+bool check_file(char* path)
+{
+  /* TO DO */
+  return NULL;
+}
+
+bool read_file(Board* pboard, char* path)
+{
+  /* TO DO */
+  return NULL;
+}
+
+Pcoord* get_valid_moves(Board* pboard)
+{
+  /* TO DO */
+  return NULL;
+}
+
+bool is_move_valid(Board* pboard,Pcoord pcoord)
+{
+  /* TO DO */
+  return NULL;
+}
+
+Board* initialize_rand(void)
+{
+  /* TO DO */
+  return NULL;
+}
+
+void execute_action(Board* pboard, enum action action, Pcoord pcoord)
+{
+  /* TO DO */
+}
+
+bool is_game_over(Board* pboard)
+{
+  /* TO DO */
+  return NULL;
 }
