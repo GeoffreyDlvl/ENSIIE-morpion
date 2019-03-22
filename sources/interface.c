@@ -6,7 +6,7 @@ void print_board(Board* pboard, bool hint)
 	int m = pboard.width;
 	int n = pboard.height;
 	int i,j;
-	if !(hint) {
+	if (!hint) {
 	for(i=0;i<n;i+=1) {
 		printf("    ");
 		for(j=0;j<m;j+1) {
@@ -78,8 +78,8 @@ enum action select_action(Board* pboard, Coord* coord, bool* hint)
 
 void list_available_moves(Board* pboard)
 {
-  /* TO DO */
-	Coord coord = get_valid_moves(pBoard);
+	/* TO DO */
+	/*Coord coord = get_valid_moves(pboard);*/
 }
 
 void ask_help(Board* pboard)
