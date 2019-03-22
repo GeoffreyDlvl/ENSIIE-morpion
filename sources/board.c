@@ -1,7 +1,9 @@
 #include "../headers/board.h"
 #include "../headers/history.h"
+
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 void create_empty_board(Board* pboard){
   pboard->points = (Ppoint**)malloc(pboard->height*sizeof(Ppoint*));
@@ -55,8 +57,20 @@ bool read_file(Board* pboard, char* path)
 
 Coord* get_valid_moves(Board* pboard)
 {
-  /* TO DO */
-  return NULL;
+  int i;
+  int j;
+  Coord* valid_moves = NULL;
+  Coord coord_temp;
+  for(i=0 ; i < pboard->width ; i++){
+    for(j=0 ; j < pboard->height ; j++){
+        coord_temp.x = i;
+        coord_temp.y = j;
+        if(is_move_valid(pboard,coord_temp))
+          printf("TO DO");
+          // Add into valid_moves(valid_moves);
+    }
+  }
+  return valid_moves;
 }
 
 bool is_move_valid(Board* pboard,Coord coord)
