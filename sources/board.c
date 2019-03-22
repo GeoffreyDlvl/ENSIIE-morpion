@@ -76,6 +76,7 @@ void execute_action(Board* pboard, enum action action, Coord coord)
 
 bool is_game_over(Board* pboard)
 {
-  /* TO DO */
-  return NULL;
+  if(!get_valid_moves(pboard))
+    return true;
+  return false;
 }
