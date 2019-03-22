@@ -28,10 +28,9 @@ void free_board(Board* pboard){
 }
 
 bool add_point(Board* pboard, Coord coord){
-  if (is_move_valid(pboard,p_point){
-    pboard->points[i][j] = (Ppoint)malloc(sizeof(Coord));
-    pboard->points[i][j]->x = i;
-    pboard->points[i][j]->y = j;
+  if (is_move_valid(pboard,coord){
+    pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
+    pboard->points[i][j]=1;
     return true;
   }
   else{
