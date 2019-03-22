@@ -46,10 +46,10 @@ int main(int argc, char* argv[]){
   while(!is_game_over(pboard))
   {
     /* Declare a new unallocated pointer: it will be allocated if required and manipulated in functions */
-    Ppoint p_point=NULL;
+    Coord* coord=NULL;
     print_board(pboard, hint);
-    enum action playerAction = select_action(pboard, p_point, &hint);
-    execute_action(pboard, playerAction, p_point);
+    enum action playerAction = select_action(pboard, coord, &hint);
+    execute_action(pboard, playerAction, *coord);
   }
   /* Free all allocated pointers */
   free_history();

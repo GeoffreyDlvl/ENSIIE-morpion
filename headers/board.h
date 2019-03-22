@@ -27,6 +27,16 @@ enum action
 	ASK_HELP /**< Ask for help to be displayed */
 };
 
+/**
+ * \struct coord
+ * \brief Coordinates on the Board
+ */
+typedef struct coord
+{
+    int x; /**< Horizontal address */
+    int y; /**< Vertical address */
+} Coord;
+/**< \brief coord structure alias */
 
 /**
  * \brief Pointer to Coord
@@ -79,7 +89,7 @@ void create_empty_board(Board* pboard);
  * \param pboard Board pointer
  * \return A p_point list
  */
-Ppoint* get_valid_moves(Board* pboard);
+Coord* get_valid_moves(Board* pboard);
 
 /**
  * \fn bool is_move_valid(Board* pboard,p_point p_point);
@@ -89,7 +99,7 @@ Ppoint* get_valid_moves(Board* pboard);
  * \param p_point Coordinates of the selected move
  * \return true if no error occured, false otherwise
  */
-bool is_move_valid(Board* pboard,Ppoint p_point);
+bool is_move_valid(Board* pboard,Coord coord);
 
 /**
  * \fn Board* initialize_rand(void)
@@ -117,7 +127,7 @@ bool add_point(Board* pboard, Ppoint p_point);
  * \param action Action to execute
  * \param p_point Coordinates affected by the action (NULL if action does not affect any coordinate)
  */
-void execute_action(Board* pboard, enum action action, Ppoint p_point);
+void execute_action(Board* pboard, enum action action, Coord coord);
 
 /**
  * \fn bool is_game_over(Board* pboard);

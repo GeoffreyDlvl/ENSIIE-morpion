@@ -1,6 +1,6 @@
 #include "../headers/history.h"
 
-bool play_move(Board* pboard, Pcoord pcoord)
+bool play_move(Board* pboard,Coord coord)
 {
   /* TO DO */
   return NULL;

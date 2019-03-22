@@ -1,43 +1,18 @@
 #include "../headers/board.h"
+#include "../headers/history.h"
 #include "stdlib.h"
 
 void create_empty_board(Board* pboard){
-  pboard->points = (Pcoord**)malloc(pboard->height*sizeof(Pcoord*));
-  int i;
-  for (i=0;i<pboard->height;i++){
-    pboard->points[i] = (Pcoord*)malloc(pboard->width*sizeof(Pcoord));
-  }
-  i=0;
-  int j;
-  for (i=0;i<pboard->height;i++){
-    for (j=0;j<pboard->width;j++){
-      pboard->points[i][j]=NULL;
-    }
-  }
+  /*TO DO*/
 }
 
 void free_board(Board* pboard){
-  int i;
-  for (i=0;i<pboard->height;i++){
-    free(pboard->points[i]);
-    pboard->points[i]=NULL;
-  }
-  free(pboard->points);
-  pboard->points=NULL;
+  /*TO DO*/
 }
 
-bool add_point(Board* pboard, Pcoord pcoord){
-  if (is_move_valid(pboard,pcoord)){
-    int i=pcoord->x;
-    int j=pcoord->y;
-    pboard->points[i][j] = (Pcoord)malloc(sizeof(Coord));
-    pboard->points[i][j]->x = i;
-    pboard->points[i][j]->y = j;
-    return true;
-  }
-  else{
-    return false;
-  }
+bool add_point(Board* pboard, Ppoint p_point){
+  /*TO DO*/
+  return NULL;
 }
 
 bool check_file(char* path)
@@ -52,13 +27,13 @@ bool read_file(Board* pboard, char* path)
   return NULL;
 }
 
-Pcoord* get_valid_moves(Board* pboard)
+Coord* get_valid_moves(Board* pboard)
 {
   /* TO DO */
   return NULL;
 }
 
-bool is_move_valid(Board* pboard,Pcoord pcoord)
+bool is_move_valid(Board* pboard,Coord coord)
 {
   /* TO DO */
   return NULL;
@@ -70,7 +45,7 @@ Board* initialize_rand(void)
   return NULL;
 }
 
-void execute_action(Board* pboard, enum action action, Pcoord pcoord)
+void execute_action(Board* pboard, enum action action, Coord coord)
 {
   /* TO DO */
 }

@@ -17,16 +17,7 @@
 #include <stddef.h>
 #include "board.h"
 
-/**
- * \struct coord
- * \brief Coordinates on the Board
- */
-typedef struct coord
-{
-    int x; /**< Horizontal address */
-    int y; /**< Vertical address */
-} Coord;
-/**< \brief coord structure alias */
+
 
 /**
  * \struct playedMove
@@ -69,7 +60,7 @@ typedef struct historyList
  * \param p_point Pointer to selected coordinates.
  * \return true if point successfully added, false otherwise.
  */
-bool play_move(Board* pboard, Ppoint p_point);
+bool play_move(Board* pboard, Coord coord);
 
 /**
  * \fn void cancel_move(Board* pboard, p_point* pp_point)

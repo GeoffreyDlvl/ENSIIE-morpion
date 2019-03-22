@@ -1,3 +1,4 @@
+#include "../headers/history.h"
 #include "../headers/interface.h"
 
 void print_board(Board* pboard, bool hint)
@@ -10,7 +11,7 @@ void select_move(Board* pboard)
   /* TO DO */
 }
 
-enum action select_action(Board* pboard, Pcoord pcoord, bool* hint)
+enum action select_action(Board* pboard, Coord* coord, bool* hint)
 {
   /* TO DO */
   return -1;
