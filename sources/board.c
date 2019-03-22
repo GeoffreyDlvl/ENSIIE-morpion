@@ -1,5 +1,6 @@
 #include "../headers/board.h"
 #include "../headers/history.h"
+#include <stdio.h>
 #include "stdlib.h"
 
 void create_empty_board(Board* pboard){
