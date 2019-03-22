@@ -1,6 +1,7 @@
 #include "../headers/board.h"
 #include "../headers/history.h"
-#include "stdlib.h"
+#include <stdlib.h>
+#include <time.h>
 
 void create_empty_board(Board* pboard){
   pboard->points = (Ppoint**)malloc(pboard->height*sizeof(Ppoint*));
@@ -66,8 +67,30 @@ bool is_move_valid(Board* pboard,Coord coord)
 
 Board* initialize_rand(void)
 {
-  /* TO DO */
-  return NULL;
+  int width = get_random_number(10, 15);
+  int height = get_random_number(10, 15);
+  Board* p_board = malloc(sizeof(Board));
+  p_board->width = width;
+  p_board->height = height;
+  
+  int i, j;
+  int random;
+  for (i = 0 ; i < height ; i++)
+  {
+    for (j = 0 ; j < width ; j++)
+    {
+      random = get_random_number(0, 100);
+      /* 30% chance to add a point */
+      if (random < 30)
+      {
+        int* point = malloc(sizeof(int));
+        *point = 1;
+        p_board->points[i][j] = point;
+      }
+    }
+  }
+
+  return p_board;
 }
 
 void execute_action(Board* pboard, enum action action, Coord coord)
@@ -80,4 +103,10 @@ bool is_game_over(Board* pboard)
   if(!get_valid_moves(pboard))
     return true;
   return false;
+}
+
+int get_random_number(int min, int max)
+{
+  int random = rand() % (max - min + 1) + min;
+  return random;
 }

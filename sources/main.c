@@ -8,9 +8,11 @@
 #include<sys/stat.h>                                                            
 #include<fcntl.h>                                                               
 #include<string.h>                                                              
-#include<errno.h>                                                               
+#include<errno.h>  
+#include <time.h>                                                             
                                                                                 
 int main(int argc, char* argv[]){   
+  srand(time(NULL));
   /* If user gives more than 2 arguments */                                             
   if (argc>3){
     fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc);

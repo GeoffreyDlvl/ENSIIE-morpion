@@ -146,4 +146,6 @@ bool is_game_over(Board* pboard);
  */
 void free_board(Board* pboard);
 
+int get_random_number(int min, int max);
+
 #endif
