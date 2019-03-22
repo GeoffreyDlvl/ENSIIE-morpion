@@ -117,7 +117,7 @@ Board* initialize_rand(void);
  * \param p_point Pointer to selected coordinates
  * \return true if point successfully added, false otherwise.
  */
-bool add_point(Board* pboard, Ppoint p_point);
+bool add_point(Board* pboard, Coord coord);
 
 /**
  * \fn void execute_action(Board* pboard, enum choice choice, p_point p_point)
