@@ -27,21 +27,11 @@ enum action
 	ASK_HELP /**< Ask for help to be displayed */
 };
 
-/**
- * \struct coord
- * \brief Coordinates on the Board
- */
-typedef struct coord
-{
-    int x; /**< Horizontal address */
-    int y; /**< Vertical address */
-} Coord;
-/**< \brief coord structure alias */
 
 /**
  * \brief Pointer to Coord
  */
-typedef struct coord* Pcoord; 
+typedef int* Ppoint; 
 
 /**
  * \struct board
@@ -51,7 +41,7 @@ typedef struct board
 {
     int width; /**< Board width */
     int height; /**< Board height */
-    Pcoord** points; /**< Bidimensionnal array of Pcoord */ 
+    Ppoint** points; /**< Bidimensionnal array of Ppoint */ 
 } Board;
 /**< \brief board structure alias */
 
@@ -83,23 +73,23 @@ bool read_file(Board* pboard, char* path);
 void create_empty_board(Board* pboard); 
 
 /**
- * \fn Pcoord* get_valid_moves(Board* pboard)
+ * \fn p_point* get_valid_moves(Board* pboard)
  * \brief Give a list of all valid moves.
  *
  * \param pboard Board pointer
- * \return A Pcoord list
+ * \return A p_point list
  */
-Pcoord* get_valid_moves(Board* pboard);
+Ppoint* get_valid_moves(Board* pboard);
 
 /**
- * \fn bool is_move_valid(Board* pboard,Pcoord pcoord);
+ * \fn bool is_move_valid(Board* pboard,p_point p_point);
  * \brief Check if a move is valid.
  *
  * \param pboard Board pointer
- * \param pcoord Coordinates of the selected move
+ * \param p_point Coordinates of the selected move
  * \return true if no error occured, false otherwise
  */
-bool is_move_valid(Board* pboard,Pcoord pcoord);
+bool is_move_valid(Board* pboard,Ppoint p_point);
 
 /**
  * \fn Board* initialize_rand(void)
@@ -110,24 +100,24 @@ bool is_move_valid(Board* pboard,Pcoord pcoord);
 Board* initialize_rand(void);
 
 /**
- * \fn bool add_point(Board* pboard, Pcoord pcoord)
+ * \fn bool add_point(Board* pboard, p_point p_point)
  * \brief Add a point on the Board.
  *
  * \param pboard Pointer to the Board being played
- * \param pcoord Pointer to selected coordinates
+ * \param p_point Pointer to selected coordinates
  * \return true if point successfully added, false otherwise.
  */
-bool add_point(Board* pboard, Pcoord pcoord);
+bool add_point(Board* pboard, Ppoint p_point);
 
 /**
- * \fn void execute_action(Board* pboard, enum choice choice, Pcoord pcoord)
+ * \fn void execute_action(Board* pboard, enum choice choice, p_point p_point)
  * \brief Execute action passed as a parameter.
  * 
  * \param pboard Pointer to the Board being played
  * \param action Action to execute
- * \param pcoord Coordinates affected by the action (NULL if action does not affect any coordinate)
+ * \param p_point Coordinates affected by the action (NULL if action does not affect any coordinate)
  */
-void execute_action(Board* pboard, enum action action, Pcoord pcoord);
+void execute_action(Board* pboard, enum action action, Ppoint p_point);
 
 /**
  * \fn bool is_game_over(Board* pboard);

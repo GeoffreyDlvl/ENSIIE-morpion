@@ -18,6 +18,17 @@
 #include "board.h"
 
 /**
+ * \struct coord
+ * \brief Coordinates on the Board
+ */
+typedef struct coord
+{
+    int x; /**< Horizontal address */
+    int y; /**< Vertical address */
+} Coord;
+/**< \brief coord structure alias */
+
+/**
  * \struct playedMove
  * \brief Played moves since the beginning of the game.
  *
@@ -25,7 +36,7 @@
  */
 struct playedMove
 {
-	Pcoord pcoord; /**< Data: Coord pointer to the played move */
+	Coord* pcoord; /**< Data: Coord pointer to the played move */
 	struct playedMove* PpreviousPlayedMove; /**< Pointer to previous playedMove */
 	struct playedMove* PnextPlayedMove; /**< Pointer to the next playedMove */
 };
@@ -51,17 +62,17 @@ typedef struct historyList
 /**< \brief historyList structure alias */
 
 /**
- * \fn bool play_move(Board* pboard, Pcoord pcoord)
+ * \fn bool play_move(Board* pboard, p_point p_point)
  * \brief Play a move, i.e. add a point on the Board.
  *
  * \param pboard Pointer to the Board being played.
- * \param pcoord Pointer to selected coordinates.
+ * \param p_point Pointer to selected coordinates.
  * \return true if point successfully added, false otherwise.
  */
-bool play_move(Board* pboard, Pcoord pcoord);
+bool play_move(Board* pboard, Ppoint p_point);
 
 /**
- * \fn void cancel_move(Board* pboard, Pcoord* ppcoord)
+ * \fn void cancel_move(Board* pboard, p_point* pp_point)
  * \brief Withdraw a point from the Board.
  *
  * \param pboard Pointer to the Board being played.
@@ -69,11 +80,11 @@ bool play_move(Board* pboard, Pcoord pcoord);
 void cancel_move(Board* pboard);
 
 /**
- * \fn void replay_move(Board* pboard, Pcoord* ppcoord)
+ * \fn void replay_move(Board* pboard, p_point* pp_point)
  * \brief Add a previously withdrawn point to the Board.
  *
  * \param pboard Pointer to the Board being played.
- * \param ppcoord Pointer to pointer to replayed coordinates.
+ * \param pp_point Pointer to pointer to replayed coordinates.
  */
 void replay_move(Board* pboard);
 
