@@ -25,12 +25,13 @@
 void print_board(Board* pboard, bool hint);
 
 /**
- * \fn select_move(Board* pboard)
+ * \fn select_move(Board* pboard, Coord coord)
  * \brief Ask the user to play a move.
  *
  * \param pboard Pointer to the Board
+ * \param coord Coordinates of the moves 
  */
-void select_move(Board* pboard);
+void select_move(Board* pboard, Coord coord);
 
 /**
  * \fn enum action select_action(Board* pboard, p_point p_point, bool* hint)
