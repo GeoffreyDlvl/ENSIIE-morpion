@@ -3,16 +3,40 @@
 #include "stdlib.h"
 
 void create_empty_board(Board* pboard){
-  /*TO DO*/
+  pboard->points = (Ppoint**)malloc(pboard->height*sizeof(Ppoint*));
+  int i;
+  for (i=0;i<pboard->height;i++){
+    pboard->points[i] = (Ppoint*)malloc(pboard->width*sizeof(Ppoint));
+  }
+  i=0;
+  int j;
+  for (i=0;i<pboard->height;i++){
+    for (j=0;j<pboard->width;j++){
+      pboard->points[i][j]=NULL;
+    }
+  }
 }
 
 void free_board(Board* pboard){
-  /*TO DO*/
+  int i;
+  for (i=0;i<pboard->height;i++){
+    free(pboard->points[i]);
+    pboard->points[i]=NULL;
+  }
+  free(pboard->points);
+  pboard->points=NULL;
 }
 
-bool add_point(Board* pboard, Ppoint p_point){
-  /*TO DO*/
-  return NULL;
+bool add_point(Board* pboard, Coord coord){
+  if (is_move_valid(pboard,p_point){
+    pboard->points[i][j] = (Ppoint)malloc(sizeof(Coord));
+    pboard->points[i][j]->x = i;
+    pboard->points[i][j]->y = j;
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 
 bool check_file(char* path)
