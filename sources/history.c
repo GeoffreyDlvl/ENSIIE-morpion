@@ -1,5 +1,7 @@
 #include "../headers/history.h"
 #include "../headers/board.h"
+#include "../headers/interface.h"
+
 #include "stdlib.h"
 #include <stdbool.h>
 
@@ -47,15 +49,18 @@ void pMove_free(Move* pMove){
   }
 }
 
-bool Move_search(Move move,int x, int y){
+void Move_search(Move move,int x, int y,int index[]){
   Move current=move;
+  int i=0;
+  int line=0;
   while (!Move_isEmpty(current)){
     if (current->x==x && current->y==y){
-      return true;
+      index[line]=i;
+      line++;
     }
+    i++;
     current=current->previous;
   }
-  return false;
 }
 
 static HistoryList history;
@@ -104,4 +109,26 @@ void replay_move(Board* pboard)
 void free_history(void)
 {
   pMove_free(history.PlastSavedMove);
+}
+
+void add_line(Move* pmove){
+  if (pMove_length(pmove)!=5){
+    pmove=select_line(pmove);
+  }
+  Move_addM(lines.lines_history,(*pmove)->x,(*pmove)->y);
+  lines.n_lines+=1;
+}
+  
+void remove_line(Move move){
+  int x=move->x;
+  int y=move->y;
+  int index[4]={-1,-1,-1,-1};
+  Move_search(move,x,y,index);
+  int i;
+  for (i=0;i<4;i++){
+    if (index[i]!=-1){
+      index[i]=(int)index[i]/5;
+    }
+  }
+  /* à terminer */
 }

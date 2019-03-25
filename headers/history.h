@@ -45,7 +45,7 @@ typedef struct{
  */
 typedef struct{
   size_t n_lines;
-  Move** lines_history;
+  Move* lines_history; /* lines (of length 5) are concatenated */
 }LinesList;
 
 /**
@@ -111,8 +111,7 @@ void Move_popM(Move* pMove);
 
 /**
  * \fn function pMove_length(Move* pMove);
- * \brief returns pMove length (may be useful for LinesList
- * manipulation)
+ * \brief returns pMove length 
  */
 int pMove_length(Move* pMove);
 
@@ -124,20 +123,34 @@ int pMove_length(Move* pMove);
 void pMove_free(Move* pMove);
 
 /**
- * \fn function pMove_search(Move move,int x,int y);
- * \brief returns true if element in move list else false
- * (may be useful in LinesList manipulation) 
- */
-bool Move_search(Move move,int x, int y);
+ * \fn void pMove_search(Move move,int x,int y,int index[]);
+ * \brief returns index list of element position of length 4 
+ * (a point can belong to maximum 4 lines) 
+*/  
+void Move_search(Move move,int x, int y,int index[]);
 
+/**
+ * \fn void initialize_HistoryList();
+ * \brief initializes HistoryList 
+ */
 void initialize_HistoryList();
 
+/**
+ * \fn void initialize_LinesList();
+ * \brief initializes LinesList 
+ */
 void initialize_LinesList();
 
-/* appelera la fonction select_line de interface.h */
+/**
+ * \fn function add_line(Move* pmove)
+ * \brief adds line to LinesList
+ */
 void add_line(Move* pmove);
 
-/* removes line containing move (appelera sans doute Move_search) */
+/**
+ * \fn void remove_line(Move move)
+ * \brief removes all lines containing element Move
+ */
 void remove_line(Move move);
 
 #endif
