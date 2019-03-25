@@ -38,11 +38,8 @@ void select_move(Board* pboard,Coord coord)
 	int n = pboard->height;
 	printf("Select next point coordinates [x,y] :\n");
 	scanf("%d%d",&i,&j);
-	if(i >= 0 && j >= 0 && i < n && j < m) {
-		if(is_move_valid(pboard, coord)) {
-		
-		/* TO DO: Add new move */
-		}	
+	if(i >= 0 && j >= 0 && i < n && j < m){
+	  play_move(pboard, coord); 
 	}
 }
 

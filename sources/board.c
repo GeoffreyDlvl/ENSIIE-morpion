@@ -1,6 +1,7 @@
 #include "../headers/board.h"
 #include "../headers/history.h"
 
+
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
@@ -33,9 +34,11 @@ void free_board(Board* pboard){
 bool add_point(Board* pboard, Coord coord){
   int i=coord.x;
   int j=coord.y;
-  if (is_move_valid(pboard,coord)){
+  Move* pmove=NULL;
+  if (is_move_valid(pboard,coord,pmove)){
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
     *(pboard->points[i][j])=1;
+    add_line(pmove);
     return true;
   }
   else{
@@ -48,6 +51,7 @@ void remove_point(Board* pboard,Coord coord){
   int j=coord.y;
   free(pboard->points[i][j]);
   pboard->points[i][j]=NULL;
+  remove_line(&coord);
 }
 
 void remove_points(Board* pboard){
@@ -79,13 +83,14 @@ Move get_valid_moves(Board* pboard)
 {
   int i;
   int j;
+  Move* pmove=NULL;
   Move valid_moves = Move_create();
   Coord coord_temp;
   for(i=0 ; i < pboard->width ; i++){
     for(j=0 ; j < pboard->height ; j++){
         coord_temp.x = i;
         coord_temp.y = j;
-        if(is_move_valid(pboard,coord_temp)){
+        if(is_move_valid(pboard,coord_temp,pmove)){
           Move_addM(&valid_moves,i,j);
 	}
     }
@@ -93,7 +98,7 @@ Move get_valid_moves(Board* pboard)
   return valid_moves;
 }
 
-bool is_move_valid(Board* pboard,Coord coord)
+bool is_move_valid(Board* pboard,Coord coord,Move* pMove)
 {
   /* TO DO */
   return NULL;

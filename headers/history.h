@@ -134,5 +134,11 @@ void initialize_HistoryList();
 
 void initialize_LinesList();
 
+/* appelera la fonction select_line de interface.h */
+void add_line(Move* pmove);
+
+/* removes line containing move (appelera sans doute Move_search) */
+void remove_line(Move move);
+
 #endif
 

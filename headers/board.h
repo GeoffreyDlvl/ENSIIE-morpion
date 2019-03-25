@@ -108,7 +108,7 @@ Coord* get_valid_moves(Board* pboard);
  * \param p_point Coordinates of the selected move
  * \return true if no error occured, false otherwise
  */
-bool is_move_valid(Board* pboard,Coord coord);
+bool is_move_valid(Board* pboard,Coord coord,Move* pmove);
 
 /**
  * \fn Board* initialize_rand(void)

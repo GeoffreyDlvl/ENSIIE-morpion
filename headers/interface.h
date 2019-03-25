@@ -67,4 +67,10 @@ void ask_help(Board* pboard);
  */
 void print_help(void);
 
+/**
+ * \fn select_line(Move* pmove)
+ * \brief select among available lines (if more than 1 are available)
+ */
+Move* select_line(Move* pmove);
+
 #endif
