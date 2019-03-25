@@ -43,6 +43,26 @@ bool add_point(Board* pboard, Coord coord){
   }
 }
 
+void remove_point(Board* pboard,Coord coord){
+  int i=coord.x;
+  int j=coord.y;
+  free(pboard->points[i][j]);
+  pboard->points[i][j]=NULL;
+}
+
+void remove_points(Board* pboard){
+  int i;
+  int j;
+  for (i=0;pboard->height;i++){
+    for (j=0;pboard->width;j++){
+      if (pboard->points[i][j]){
+	free(pboard->points[i][j]);
+	pboard->points[i][j]=NULL;
+      }
+    }
+  }
+}
+
 bool check_file(char* path)
 {
   /* TO DO */
@@ -55,19 +75,19 @@ bool read_file(Board* pboard, char* path)
   return NULL;
 }
 
-Coord* get_valid_moves(Board* pboard)
+Move get_valid_moves(Board* pboard)
 {
   int i;
   int j;
-  Coord* valid_moves = NULL;
+  Move valid_moves = Move_create();
   Coord coord_temp;
   for(i=0 ; i < pboard->width ; i++){
     for(j=0 ; j < pboard->height ; j++){
         coord_temp.x = i;
         coord_temp.y = j;
-        if(is_move_valid(pboard,coord_temp))
-          printf("TO DO");
-          // Add into valid_moves(valid_moves);
+        if(is_move_valid(pboard,coord_temp)){
+          Move_addM(&valid_moves,i,j);
+	}
     }
   }
   return valid_moves;

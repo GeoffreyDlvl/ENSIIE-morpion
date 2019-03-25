@@ -45,6 +45,8 @@ int main(int argc, char* argv[]){
   }
   bool hint = false;
   /* Loop termination : board size is finite therefore number of playable moves if finite */
+  initialize_HistoryList();
+  initialize_LinesList();
   while(!is_game_over(pboard))
   {
     /* Declare a new unallocated pointer: it will be allocated if required and manipulated in functions */

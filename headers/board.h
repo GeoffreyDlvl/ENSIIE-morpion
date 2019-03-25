@@ -28,13 +28,22 @@ enum action
 };
 
 /**
+ * \struct playedMove
+ * \brief Played moves since the beginning of the game.
+ *
+ * Data are saved in a double linked-list structure that contains all the played moves.
+ */
+
+/**
  * \struct coord
  * \brief Coordinates on the Board
  */
-typedef struct coord
-{
-    int x; /**< Horizontal address */
-    int y; /**< Vertical address */
+typedef struct coord* Move;
+typedef struct coord{
+  int x; /**< Horizontal address */
+  int y; /**< Vertical address */
+  Move next;
+  Move previous;
 } Coord;
 /**< \brief coord structure alias */
 
@@ -148,4 +157,7 @@ void free_board(Board* pboard);
 
 int get_random_number(int min, int max);
 
+void remove_point(Board* pboard,Coord coord);
+
+void remove_points(Board* pboard);
 #endif

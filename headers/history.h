@@ -18,21 +18,6 @@
 #include "board.h"
 
 
-
-/**
- * \struct playedMove
- * \brief Played moves since the beginning of the game.
- *
- * Data are saved in a double linked-list structure that contains all the played moves.
- */
-struct playedMove
-{
-	Coord* pcoord; /**< Data: Coord pointer to the played move */
-	struct playedMove* PpreviousPlayedMove; /**< Pointer to previous playedMove */
-	struct playedMove* PnextPlayedMove; /**< Pointer to the next playedMove */
-};
-
-
 /**
  * \struct historyList
  * \brief Convenience structure for accessing played moves.
@@ -43,14 +28,25 @@ struct playedMove
  *
  * It is intended to be used as a static variable inside history source.
  */
-typedef struct historyList
-{
+typedef struct{
 	size_t moves; /**< Number of played moves since the beginning of the game */
-	struct playedMove* PfirstMove; /**< Pointer to the first move */ 
-	struct playedMove* PlastPlayedMove; /**< Pointer to the last played move */
-	struct playedMove* PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
-} HistoryList;
+	Move* PfirstMove; /**< Pointer to the first move */ 
+	Move* PlastPlayedMove; /**< Pointer to the last played move */
+        Move* PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
+}HistoryList;
 /**< \brief historyList structure alias */
+
+/**
+ * \struct LinesList
+ * \brief Convenience structure for accessing lines list.
+ * 
+ *
+ * It is intended to be used as a static variable inside history source.
+ */
+typedef struct{
+  size_t n_lines;
+  Move** lines_history;
+}LinesList;
 
 /**
  * \fn bool play_move(Board* pboard, p_point p_point)
@@ -84,6 +80,59 @@ void replay_move(Board* pboard);
  * \brief Free allocated memory of static history list
  */
 void free_history(void);
+
+/**
+ * \fn function Move Move_create();
+ * \brief creates empty Move
+ *
+ */
+Move Move_create();
+
+/**
+ * \fn function Move Move_isEmpty();
+ * \brief checks if move is empty
+ *
+ */
+bool Move_isEmpty(Move move);
+
+/**
+ * \fn function Move Move_addM(Move* pMove,int x,int y);
+ * \brief adds Move to pMove allocating memory on heap
+ *
+ */
+void Move_addM(Move* pMove,int x,int y);
+
+/**
+ * \fn function Move Move_popM(Move* pMove);
+ * \brief removes last move, pMove points to previous and
+ * frees allocated memory
+ */
+void Move_popM(Move* pMove);
+
+/**
+ * \fn function pMove_length(Move* pMove);
+ * \brief returns pMove length (may be useful for LinesList
+ * manipulation)
+ */
+int pMove_length(Move* pMove);
+
+/**
+ * \fn function pMove_free(Move* pMove);
+ * \brief frees all allocated memory of pMove
+ * 
+ */
+void pMove_free(Move* pMove);
+
+/**
+ * \fn function pMove_search(Move move,int x,int y);
+ * \brief returns true if element in move list else false
+ * (may be useful in LinesList manipulation) 
+ */
+bool Move_search(Move move,int x, int y);
+
+void initialize_HistoryList();
+
+void initialize_LinesList();
 
 #endif
 
