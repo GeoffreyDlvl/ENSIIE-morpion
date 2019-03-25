@@ -100,8 +100,31 @@ Move get_valid_moves(Board* pboard)
 
 bool is_move_valid(Board* pboard,Coord coord,Move* pMove)
 {
-  /* TO DO */
-  return NULL;
+  if (!is_move_in_board(pboard,coord)){
+    return false;
+  }
+  if (!is_move_exists_already(pboard,coord)){
+    return false;
+  }
+  return true;
+}
+
+bool is_move_in_board(Board* pboard,Coord coord){
+  int x=coord.x;
+  int y=coord.y;
+  if (x >= 0 && y>= 0 && x <= pboard->width && y <= pboard->height){
+    return true;
+  }
+  return false;
+}
+
+bool is_move_exists_already(Board* pboard,Coord coord){
+  int x=coord.x;
+  int y=coord.y;
+  if (pboard->points[x][y]){
+    return false;
+  }
+  return true;
 }
 
 Board* initialize_rand(void)

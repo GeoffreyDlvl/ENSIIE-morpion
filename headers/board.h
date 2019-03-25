@@ -110,6 +110,11 @@ Coord* get_valid_moves(Board* pboard);
  */
 bool is_move_valid(Board* pboard,Coord coord,Move* pmove);
 
+bool is_move_in_board(Board* pboard,Coord coord);
+
+bool is_move_exists_already(Board* pboard,Coord coord);
+
+
 /**
  * \fn Board* initialize_rand(void)
  * \brief Randomly initalize a Board.
