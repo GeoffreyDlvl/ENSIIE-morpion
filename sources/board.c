@@ -6,6 +6,8 @@
 #include <time.h>
 #include <stdio.h>
 
+static char knownChars[4] = {'X','O','[',']'}; /* the known chars according to display */
+
 void create_empty_board(Board* pboard){
   pboard->points = (Ppoint**)malloc(pboard->height*sizeof(Ppoint*));
   int i;
@@ -67,10 +69,29 @@ void remove_points(Board* pboard){
   }
 }
 
+bool checkIfCharExist(char c){
+  for(int i=0 ; i < sizeof(knownChars) ; i++){
+    if(c == knownChars[i])
+      return true;
+  }
+  return false;
+}
+
 bool check_file(char* path)
 {
-  /* TO DO */
-  return NULL;
+  FILE *fp;
+  char currentChar;
+  fp = fopen(path, "r");
+  if(fp == NULL){
+    return false; // perhaps should return an error code instead of just a bool to know the error status ex :  -1 can't open file..
+  }else{
+    while((currentChar = fgetc(fp)) != EOF){
+      if(!checkIfCharExist(currentChar)){
+        return false; // TO DO : Specify the file verification process in order to enrich it
+      }
+    }
+  }
+  return true;
 }
 
 bool read_file(Board* pboard, char* path)
@@ -92,7 +113,7 @@ Move get_valid_moves(Board* pboard)
         coord_temp.y = j;
         if(is_move_valid(pboard,coord_temp,pmove)){
           Move_addM(&valid_moves,i,j);
-	}
+	      }
     }
   }
   return valid_moves;
