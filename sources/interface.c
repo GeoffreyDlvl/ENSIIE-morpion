@@ -89,3 +89,8 @@ void print_help(void)
 {
   /* TO DO */
 }
+
+Move* select_line(Move* pmove){
+	/* TO DO */
+	return NULL;
+}
