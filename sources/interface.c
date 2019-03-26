@@ -1,5 +1,6 @@
 #include "../headers/history.h"
 #include "../headers/interface.h"
+#include <stdio.h>
 
 void print_board(Board* pboard, bool hint)
 {
@@ -9,13 +10,13 @@ void print_board(Board* pboard, bool hint)
 	if (!hint) {
 	for(i=0;i<n;i+=1) {
 		printf("    ");
-		for(j=0;j<m;j+1) {
-			printf(" %d ");
+		for(j=0;j<m;j++) {
+			//printf(" %d "); 
 		}
-		printf("%t",i);
+		// printf("%t",i);
 		for(j=0;j<m;j+=1) {
 			printf("[");
-			if(pboard->points[i][j] == 1) {
+			if(*(pboard->points[i][j]) == 1) {
 				printf("X");
 			} else {
 				printf(" ");
@@ -33,7 +34,7 @@ void print_board(Board* pboard, bool hint)
 void select_move(Board* pboard,Coord coord)
 {
 	int i,j;
-	Ppoint p_point;
+	// Ppoint p_point;
 	int m = pboard->width;
 	int n = pboard->height;
 	printf("Select next point coordinates [x,y] :\n");
