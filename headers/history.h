@@ -148,8 +148,19 @@ void initialize_LinesList();
 void add_line(Move* pmove);
 
 /**
+ * \fn void line_numbers_of_Move(Move move,int index[])
+ * \brief 
+ */
+void line_numbers_of_Move(Move move,int index[]);
+
+bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2);
+
+bool candidate_line(Move* cand_line,Move move);
+
+/**
  * \fn void remove_line(Move move)
- * \brief removes all lines containing element Move
+ * \param index={-1,-1,-1,-1}
+ * \brief index contains line numbers containing move
  */
 void remove_lines(Move move);
 

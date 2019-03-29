@@ -128,6 +128,48 @@ void line_numbers_of_Move(Move move,int index[]){
   }
 }
 
+bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2){
+  int i,j;
+  int same_move=0;
+  Move current1=*line1;
+  Move current2=*line2;
+  for (i=0;i<5;i++){
+    current2=*line2;
+    for (j=0;j<5;j++){
+      if (current1->x == current2->x && current1->y == current2->y){
+	same_move+=1;
+	if (same_move > 1){
+	  return false;
+	}
+      }
+      current2=current2->previous;
+    }
+    current1=current1->previous;
+  }
+  return true;
+}
+
+bool candidate_line(Move* cand_line,Move move){
+  int index[4]={-1,-1,-1,-1};
+  line_numbers_of_Move(move,index);
+  Move current=*(lines.lines_history);
+  int i;
+  int counter=0;
+  for (i=0;i<4;i++){
+    if (index[i]!=-1){
+      while (!Move_isEmpty(current) && counter<5*index[i]){
+	current=current->previous;
+	counter++;
+      }
+      if(!no_more_than_one_move_in_two_lines(cand_line,&current)){
+	return false;
+      }
+    }
+  }
+  return true;
+}
+
+
 void remove_lines(Move move){
   int index[4]={-1,-1,-1,-1};
   line_numbers_of_Move(move,index);
