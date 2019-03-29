@@ -115,20 +115,23 @@ void add_line(Move* pmove){
   Move_addM(lines.lines_history,(*pmove)->x,(*pmove)->y);
   lines.n_lines+=1;
 }
-  
-void remove_lines(Move move){
+
+void line_numbers_of_Move(Move move,int index[]){
   int x=move->x;
   int y=move->y;
-  int index[4]={-1,-1,-1,-1};
-  Move_search(move,x,y,index);
   int i;
+  Move_search(move,x,y,index);
   for (i=0;i<4;i++){
     if (index[i]!=-1){
       index[i]=(int)index[i]/5;
     }
   }
-  i=0;
-  int j;
+}
+
+void remove_lines(Move move){
+  int index[4]={-1,-1,-1,-1};
+  line_numbers_of_Move(move,index);
+  int i,j;
   int counter=0;
   Move current=*(lines.lines_history);
   Move next=current;

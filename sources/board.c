@@ -137,6 +137,7 @@ bool is_move_in_board(Board* pboard,Coord coord){
   if (x >= 0 && y>= 0 && x <= pboard->width && y <= pboard->height){
     return true;
   }
+  printf("Selected coordinates are invalid.\n");
   return false;
 }
 
@@ -144,7 +145,30 @@ bool is_move_exists_already(Board* pboard,Coord coord){
   int x=coord.x;
   int y=coord.y;
   if (pboard->points[x][y]){
+    printf("This point exists already.\n");
     return false;
+  }
+  return true;
+}
+
+bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2){
+  int i,j;
+  int same_move=0;
+  Move current1=*line1;
+  Move current2=*line2;
+  for (i=0;i<5;i++){
+    current2=*line2;
+    for (j=0;j<5;j++){
+      if (current1->x == current2->x && current1->y == current2->y){
+	same_move+=1;
+	if (same_move > 1){
+	  printf("Desired point invalid : two lines must not have more than one point in common.\n");
+	  return false;
+	}
+      }
+      current2=current2->previous;
+    }
+    current1=current1->previous;
   }
   return true;
 }
