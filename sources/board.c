@@ -70,7 +70,8 @@ void remove_points(Board* pboard){
 }
 
 bool checkIfCharExist(char c){
-  for(int i=0 ; i < sizeof(knownChars) ; i++){
+  int i;
+  for(i=0 ; i < sizeof(knownChars) ; i++){
     if(c == knownChars[i])
       return true;
   }
@@ -83,11 +84,11 @@ bool check_file(char* path)
   char currentChar;
   fp = fopen(path, "r");
   if(fp == NULL){
-    return false; // perhaps should return an error code instead of just a bool to know the error status ex :  -1 can't open file..
+    return false; /* perhaps should return an error code instead of just a bool to know the error status ex :  -1 can't open file.. */
   }else{
     while((currentChar = fgetc(fp)) != EOF){
       if(!checkIfCharExist(currentChar)){
-        return false; // TO DO : Specify the file verification process in order to enrich it
+        return false; /* TO DO : Specify the file verification process in order to enrich it */
       }
     }
   }
