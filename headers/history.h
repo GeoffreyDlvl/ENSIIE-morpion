@@ -124,7 +124,7 @@ void pMove_free(Move* pMove);
 
 /**
  * \fn void pMove_search(Move move,int x,int y,int index[]);
- * \brief returns index list of element position of length 4 
+ * \brief returns ordered index list of element position of length 4 
  * (a point can belong to maximum 4 lines) 
 */  
 void Move_search(Move move,int x, int y,int index[]);
@@ -151,7 +151,7 @@ void add_line(Move* pmove);
  * \fn void remove_line(Move move)
  * \brief removes all lines containing element Move
  */
-void remove_line(Move move);
+void remove_lines(Move move);
 
 #endif
 

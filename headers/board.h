@@ -42,7 +42,6 @@ typedef struct coord* Move;
 typedef struct coord{
   int x; /**< Horizontal address */
   int y; /**< Vertical address */
-  Move next;
   Move previous;
 } Coord;
 /**< \brief coord structure alias */

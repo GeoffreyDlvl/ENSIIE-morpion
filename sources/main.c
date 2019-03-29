@@ -57,6 +57,7 @@ int main(int argc, char* argv[]){
   }
   /* Free all allocated pointers */
   free_history();
+  remove_points(pboard);
   free_board(pboard);
   return EXIT_SUCCESS;
 }

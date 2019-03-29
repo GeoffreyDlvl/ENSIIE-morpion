@@ -53,7 +53,7 @@ void remove_point(Board* pboard,Coord coord){
   int j=coord.y;
   free(pboard->points[i][j]);
   pboard->points[i][j]=NULL;
-  remove_line(&coord);
+  remove_lines(&coord);
 }
 
 void remove_points(Board* pboard){
