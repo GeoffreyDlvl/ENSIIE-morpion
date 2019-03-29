@@ -72,10 +72,12 @@ void initialize_LinesList(){
   *(lines.lines_history)=Move_create();
 }
 
-bool play_move(Board* pboard,Coord coord)
-{
+bool play_move(Board* pboard,Coord coord){
   if (!add_point(pboard,coord)){
     return false;
+  }
+  if (*(history.PlastSavedMove)!=*(history.PlastPlayedMove)){
+    Move_popM(history.PlastPlayedMove);
   }
   Move_addM(history.PlastPlayedMove,coord.x,coord.y);
   history.moves+=1;
