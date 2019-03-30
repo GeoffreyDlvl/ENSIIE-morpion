@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
   srand(time(NULL));
   /* If user gives more than 2 arguments */                                             
   if (argc>3){
-    fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc);
+    fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc-1);
     return EXIT_FAILURE;
   }
   Board* pboard=NULL;
@@ -33,12 +33,12 @@ int main(int argc, char* argv[]){
     }
     /* If first argument is option -h */
     if (strcmp(argv[1],"-h")==0){
-      print_help();
+      /*print_help();*/
       return EXIT_SUCCESS;
     }
     else{
       /* If file given as a parameter (following option -r) is invalid */
-      if (!read_file(pboard,argv[2])){
+      if (0){ /*(!read_file(pboard,argv[2])){*/
         return EXIT_FAILURE;
       }
     }
@@ -47,13 +47,15 @@ int main(int argc, char* argv[]){
   /* Loop termination : board size is finite therefore number of playable moves if finite */
   initialize_HistoryList();
   initialize_LinesList();
-  while(!is_game_over(pboard))
+  /* Declare a new unallocated pointer: it will be allocated if required and manipulated in functions */
+  Move move=Move_create();
+  enum action playerAction = PLAY_MOVE;
+  while(!is_game_over(pboard)) /* erreurs de segmentation résolus jusqu'ici */
   {
-    /* Declare a new unallocated pointer: it will be allocated if required and manipulated in functions */
-    Coord* coord=NULL;
+    printf("ok3\n");
     print_board(pboard, hint);
-    enum action playerAction = select_action(pboard, coord, &hint);
-    execute_action(pboard, playerAction, *coord);
+    playerAction = select_action();
+    execute_action(pboard, playerAction, move);
   }
   /* Free all allocated pointers */
   free_history();

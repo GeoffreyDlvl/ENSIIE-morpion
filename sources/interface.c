@@ -11,9 +11,9 @@ void print_board(Board* pboard, bool hint)
 	for(i=0;i<n;i+=1) {
 		printf("    ");
 		for(j=0;j<m;j++) {
-			//printf(" %d "); 
+		  /*printf(" %d ")*/; 
 		}
-		// printf("%t",i);
+		/*printf("%t",i)*/;
 		for(j=0;j<m;j+=1) {
 			printf("[");
 			if(*(pboard->points[i][j]) == 1) {
@@ -26,25 +26,26 @@ void print_board(Board* pboard, bool hint)
 		printf("\n");
 	}
 	} else {
-		list_available_moves(pboard);
+	  printf("lets make the truc compile\n");
+	  /*list_available_moves(pboard);*/
 	}
 	
 }
 
-void select_move(Board* pboard,Coord coord)
+void select_move(Move move)
 {
 	int i,j;
-	// Ppoint p_point;
-	int m = pboard->width;
-	int n = pboard->height;
+	/* Ppoint p_point ;*/
 	printf("Select next point coordinates [x,y] :\n");
 	scanf("%d%d",&i,&j);
-	if(i >= 0 && j >= 0 && i < n && j < m){
-	  play_move(pboard, coord); 
-	}
+	Coord coord;
+	coord.x=j;
+	coord.y=i;
+	coord.previous=NULL;
+	*(move)=coord;
 }
 
-enum action select_action(Board* pboard, Coord* coord, bool* hint)
+enum action select_action()
 {
 	char c;
 	while (1) {
@@ -55,11 +56,10 @@ enum action select_action(Board* pboard, Coord* coord, bool* hint)
 			return PLAY_MOVE;
 		break;
 		case 'c':
-			if(coord != NULL) { /* If no move already done */
-				return CANCEL_MOVE;
-			}
+		        return CANCEL_MOVE;
+
 		break;
-		case 'r': /* TO DO: If previous move deleted */
+		case 'r': 
 			return REPLAY_MOVE;
 		break;
 		case 'l':
@@ -73,24 +73,25 @@ enum action select_action(Board* pboard, Coord* coord, bool* hint)
 
   return -1;
 }
-
+/*
 void list_available_moves(Board* pboard)
 {
-	/* TO DO */
-	/*Coord coord = get_valid_moves(pboard);*/
+   TO DO 
+	Coord coord = get_valid_moves(pboard);
 }
 
+
+	 
 void ask_help(Board* pboard)
 {
-  /* TO DO */
+   TO DO 
 }
 
 void print_help(void)
 {
-  /* TO DO */
+   TO DO 
 }
-
+*/
 Move* select_line(Move* pmove){
-	/* TO DO */
-	return NULL;
+	return pmove;
 }

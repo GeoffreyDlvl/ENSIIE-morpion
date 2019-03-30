@@ -61,15 +61,17 @@ void Move_search(Move move,int x, int y,int index[]){
 static HistoryList history;
 void initialize_HistoryList(){
   history.moves=0;
-  *(history.PfirstMove)=Move_create();
-  *(history.PlastPlayedMove)=*(history.PfirstMove);
-  *(history.PlastSavedMove)=*(history.PfirstMove);
+  Move move=Move_create();
+  history.PfirstMove=&move;
+  history.PlastPlayedMove=history.PfirstMove;
+  history.PlastSavedMove=history.PfirstMove;
 }
 
 static LinesList lines;
 void initialize_LinesList(){
   lines.n_lines=0;
-  *(lines.lines_history)=Move_create();
+  Move move=Move_create();
+  lines.lines_history=&move;
 }
 
 bool play_move(Board* pboard,Coord coord){

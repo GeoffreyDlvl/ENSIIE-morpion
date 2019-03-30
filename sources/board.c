@@ -1,6 +1,6 @@
 #include "../headers/board.h"
 #include "../headers/history.h"
-
+#include "../headers/interface.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -71,7 +71,7 @@ void remove_points(Board* pboard){
 
 bool checkIfCharExist(char c){
   int i;
-  for(i=0 ; i < sizeof(knownChars) ; i++){
+  for(i=0 ; i < (int)sizeof(knownChars) ; i++){
     if(c == knownChars[i])
       return true;
   }
@@ -94,13 +94,13 @@ bool check_file(char* path)
   }
   return true;
 }
-
+/*
 bool read_file(Board* pboard, char* path)
 {
-  /* TO DO */
+   TO DO 
   return NULL;
 }
-
+*/
 Move get_valid_moves(Board* pboard)
 {
   int i;
@@ -340,10 +340,13 @@ Board* initialize_rand(void)
 {
   int width = get_random_number(10, 15);
   int height = get_random_number(10, 15);
-  Board* p_board = malloc(sizeof(Board));
-  p_board->width = width;
-  p_board->height = height;
-  
+  Board* p_board=NULL;
+  Board board;
+  board.width = width;
+  board.height = height;
+  board.points=NULL;
+  p_board=&board;
+  create_empty_board(p_board);
   int i, j;
   int random;
   for (i = 0 ; i < height ; i++)
@@ -364,9 +367,21 @@ Board* initialize_rand(void)
   return p_board;
 }
 
-void execute_action(Board* pboard, enum action action, Coord coord)
+void execute_action(Board* pboard, enum action action, Move move)
 {
-  /* TO DO */
+  if (action == PLAY_MOVE){
+    select_move(move);
+    play_move(pboard,*move);
+  }
+  else if (action == CANCEL_MOVE){
+    cancel_move(pboard);
+  }
+  else if (action == REPLAY_MOVE){
+    replay_move(pboard);
+  }
+  else{
+    printf("On essaie déjà de faire compiler puis on verra après\n");
+  }
 }
 
 bool is_game_over(Board* pboard)
