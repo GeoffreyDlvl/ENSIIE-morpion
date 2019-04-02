@@ -18,10 +18,10 @@ int main(int argc, char* argv[]){
     fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc-1);
     return EXIT_FAILURE;
   }
-  Board* pboard=NULL;
+  Board board;
   /* If user does not give any argument */
   if (argc == 1){
-    pboard = initialize_rand();
+    board = initialize_rand();
   }
   else{
     /* If first argument is neither option -r and -h  
@@ -48,19 +48,19 @@ int main(int argc, char* argv[]){
   initialize_HistoryList();
   initialize_LinesList();
   /* Declare a new unallocated pointer: it will be allocated if required and manipulated in functions */
-  Move move=Move_create();
   enum action playerAction = PLAY_MOVE;
-  print_board(pboard, hint);
-  while (!is_game_over(pboard))  /*erreurs de segmentation résolus jusqu'ici */
+  int i=0;
+  while(i<1)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici */
   {
-    print_board(pboard, hint);
+    print_board(&board, hint);
     playerAction = select_action();
-    execute_action(pboard, playerAction, move);
+    execute_action(&board, playerAction);
+    i++;
   }
   /* Free all allocated pointers */
   free_history();
-  remove_points(pboard);
-  free_board(pboard);
+  remove_points(&board);
+  free_board(&board);
   return EXIT_SUCCESS;
 }
       

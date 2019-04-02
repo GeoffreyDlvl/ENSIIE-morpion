@@ -8,19 +8,23 @@
 
 static char knownChars[4] = {'X','O','[',']'}; /* the known chars according to display */
 
-void create_empty_board(Board* pboard){
-  pboard->points = (Ppoint**)malloc(pboard->height*sizeof(Ppoint*));
+Board create_empty_board(int width,int height){
+  Board board;
+  board.width=width;
+  board.height=height;
+  board.points = (Ppoint**)malloc(board.height*sizeof(Ppoint*));
   int i;
-  for (i=0;i<pboard->height;i++){
-    pboard->points[i] = (Ppoint*)malloc(pboard->width*sizeof(Ppoint));
+  for (i=0;i<board.height;i++){
+    board.points[i] = (Ppoint*)malloc(board.width*sizeof(Ppoint));
   }
   i=0;
   int j;
-  for (i=0;i<pboard->height;i++){
-    for (j=0;j<pboard->width;j++){
-      pboard->points[i][j]=NULL;
+  for (i=0;i<board.height;i++){
+    for (j=0;j<board.width;j++){
+      board.points[i][j]=NULL;
     }
   }
+  return board;
 }
 
 void free_board(Board* pboard){
@@ -36,11 +40,14 @@ void free_board(Board* pboard){
 bool add_point(Board* pboard, Coord coord){
   int i=coord.x;
   int j=coord.y;
-  Move* pmove=NULL;
-  if (is_move_valid(pboard,coord,pmove)){
+  Move move=Move_create();
+  if (is_move_valid(pboard,coord,&move)){
+    printf("okmovevalid\n");
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
     *(pboard->points[i][j])=1;
-    add_line(pmove);
+    printf("okbeforeaddline\n");
+    add_line(&move);
+    printf("ok7\n");
     return true;
   }
   else{
@@ -59,8 +66,8 @@ void remove_point(Board* pboard,Coord coord){
 void remove_points(Board* pboard){
   int i;
   int j;
-  for (i=0;pboard->height;i++){
-    for (j=0;pboard->width;j++){
+  for (i=0;i<pboard->height;i++){
+    for (j=0;j<pboard->width;j++){
       if (pboard->points[i][j]){
 	free(pboard->points[i][j]);
 	pboard->points[i][j]=NULL;
@@ -129,10 +136,18 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   }
   Move candidate_lines=Move_create();
   horizontal_search(candidate_lines,coord,pboard);
+  printf("okh\n");
   vertical_search(candidate_lines,coord,pboard);
+  printf("okv\n");
   NE_diagonal_search(candidate_lines,coord,pboard);
+  printf("okne\n");
   NW_diagonal_search(candidate_lines,coord,pboard);
-  *(pMove)=candidate_lines;
+  printf("oknw\n");
+  if (Move_isEmpty(candidate_lines)){
+    printf("This movement is not possible\n");
+  }
+  *pMove=candidate_lines;
+  printf("ok4\n");
   return true;
 }
 
@@ -162,9 +177,10 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
   int j;
   int counter=1;
   for (j=test;j<test+5;j++){
-    if (j<pboard->width && pboard->points[i][j]){
-      counter++;
+    if (!(j<pboard->width && pboard->points[i][j])){
+      break;
     }
+    counter++;
   }
   if (counter == 5){
     j=test;
@@ -182,10 +198,11 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
   j=test;
   int firstpoint;
   for (j=test;j>test-5;j--){
-    if (j>=0 && pboard->points[i][j]){
-      counter++;
-      firstpoint=j;
+    if (!(j>=0 && pboard->points[i][j])){
+      break;
     }
+    counter++;
+    firstpoint=j;
   }
   if (counter == 5){
     j=firstpoint;
@@ -207,9 +224,10 @@ void vertical_search(Move cand_lines,Coord coord,Board* pboard){
   int i;
   int counter=1;
   for (i=test;i<test+5;i++){
-    if (i<pboard->height && pboard->points[i][j]){
-      counter++;
+    if (!(i<pboard->height && pboard->points[i][j])){
+      break;
     }
+    counter++;
   }
   if (counter == 5){
     i=test;
@@ -227,10 +245,11 @@ void vertical_search(Move cand_lines,Coord coord,Board* pboard){
   i=test;
   int firstpoint;
   for (i=test;i>test-5;i--){
-    if (i>=0 && pboard->points[i][j]){
-      counter++;
-      firstpoint=i;
+    if (!(i>=0 && pboard->points[i][j])){
+      break;
     }
+    counter++;
+    firstpoint=i;
   }
   if (counter == 5){
     i=firstpoint;
@@ -252,9 +271,10 @@ void NE_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   int i;
   int counter=1;
   for (i=0;i<5;i++){
-    if (testx+i<pboard->width && testy-i>=0 && pboard->points[testy-i][testx+i]){
-      counter++;
+    if (!(testx+i<pboard->width && testy-i>=0 && pboard->points[testy-i][testx+i])){
+      break;
     }
+    counter++;
   }
   if (counter == 5){
     i=0;
@@ -272,10 +292,11 @@ void NE_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   i=0;
   int firstpoint;
   for (i=0;i<5;i++){
-    if (testy+i<pboard->height && testx-i>=0 && pboard->points[testy+i][testx-i]){
-      counter++;
-      firstpoint=i;
+    if (!(testy+i<pboard->height && testx-i>=0 && pboard->points[testy+i][testx-i])){
+      break;
     }
+    counter++;
+    firstpoint=i;
   }
   if (counter == 5){
     i=firstpoint;
@@ -297,9 +318,10 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   int i;
   int counter=1;
   for (i=0;i<5;i++){
-    if (testx-i>=0 && testy-i>=0 && pboard->points[testy-i][testx-i]){
-      counter++;
+    if (!(testx-i>=0 && testy-i>=0 && pboard->points[testy-i][testx-i])){
+      break;
     }
+    counter++;
   }
   if (counter == 5){
     i=0;
@@ -317,10 +339,11 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   i=0;
   int firstpoint;
   for (i=0;i<5;i++){
-    if (testy+i<pboard->height && testx+i<pboard->width && pboard->points[testy+i][testx+i]){
-      counter++;
-      firstpoint=i;
+    if (!(testy+i<pboard->height && testx+i<pboard->width && pboard->points[testy+i][testx+i])){
+      break;
     }
+    counter++;
+    firstpoint=i;
   }
   if (counter == 5){
     i=firstpoint;
@@ -336,17 +359,11 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   }
 }
 
-Board* initialize_rand(void)
+Board initialize_rand(void)
 {
   int width = get_random_number(10, 15);
   int height = get_random_number(10, 15);
-  Board* p_board=NULL;
-  Board board;
-  board.width = width;
-  board.height = height;
-  board.points=NULL;
-  p_board=&board;
-  create_empty_board(p_board);
+  Board board=create_empty_board(width,height);
   int i, j;
   int random;
   for (i = 0 ; i < height ; i++)
@@ -359,19 +376,18 @@ Board* initialize_rand(void)
       {
         int* point = malloc(sizeof(int));
         *point = 1;
-        p_board->points[i][j] = point;
+        board.points[i][j] = point;
       }
     }
   }
-
-  return p_board;
+  return board;
 }
 
-void execute_action(Board* pboard, enum action action, Move move)
+void execute_action(Board* pboard, enum action action)
 {
   if (action == PLAY_MOVE){
-    select_move(move);
-    play_move(pboard,*move);
+    Coord coord=select_move();
+    play_move(pboard,coord);
   }
   else if (action == CANCEL_MOVE){
     cancel_move(pboard);

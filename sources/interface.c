@@ -4,45 +4,55 @@
 
 void print_board(Board* pboard, bool hint)
 {
-	int m = pboard->width;
-	int n = pboard->height;
-	int i,j;
-	if (!hint) {
-	for(i=0;i<n;i+=1) {
-		printf("    ");
-		for(j=0;j<m;j++) {
-		  /*printf(" %d ")*/; 
-		}
-		/*printf("%t",i)*/;
-		for(j=0;j<m;j+=1) {
-			printf("[");
-			if(*(pboard->points[i][j]) == 1) {
-				printf("X");
-			} else {
-				printf(" ");
-			}
-			printf("]");
-		}
-		printf("\n");
+  int m = pboard->width;
+  int n = pboard->height;
+  int i,j;
+    for(i=-1;i<n;i+=1) {
+      for(j=-1;j<m;j+=1) {
+	if (i==-1 && j==-1){
+	  printf("   ");
 	}
-	} else {
-	  printf("lets make the truc compile\n");
-	  /*list_available_moves(pboard);*/
+	else if (i==-1){
+	  printf(" %d ",j);
 	}
-	
+	else if (j==-1){
+	  if (i<10){
+	    printf(" %d ",i);
+	  }
+	  else if (i<100){
+	    printf(" %d",i);
+	  }
+	  else{
+	    printf("%d",i);
+	  }
+	}
+        else{
+	  if(pboard->points[i][j]) {
+	  printf("[X]");
+	  }
+	  else{
+	    printf("[ ]");
+	  }
+	}
+      }
+      printf("\n");
+    }
+    if (hint){
+    /*list_available_moves(pboard);*/
+    }
 }
 
-void select_move(Move move)
+Coord select_move()
 {
 	int i,j;
 	/* Ppoint p_point ;*/
-	printf("Select next point coordinates [x,y] :\n");
+	printf("Select next point coordinates [x,y] (press x then ENTER then press y then ENTER) :\n");
 	scanf("%d%d",&i,&j);
 	Coord coord;
 	coord.x=j;
 	coord.y=i;
 	coord.previous=NULL;
-	*(move)=coord;
+	return coord;
 }
 
 enum action select_action()

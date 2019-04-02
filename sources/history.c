@@ -3,6 +3,7 @@
 #include "../headers/interface.h"
 
 #include "stdlib.h"
+#include "stdio.h"
 #include <stdbool.h>
 
 Move Move_create(){
@@ -116,7 +117,9 @@ void add_line(Move* pmove){
   if (pMove_length(pmove)>5){
     pmove=select_line(pmove);
   }
+  printf("ok_semiaddline\n");
   Move_addM(lines.lines_history,(*pmove)->x,(*pmove)->y);
+  printf("okaddline\n");
   lines.n_lines+=1;
 }
 

@@ -88,7 +88,7 @@ bool read_file(Board* pboard, char* path);
  *
  * \param pboard : Pointer to Board, pboard->points SHOULD be NULL
  */
-void create_empty_board(Board* pboard); 
+Board create_empty_board(int width,int height); 
 
 /**
  * \fn p_point* get_valid_moves(Board* pboard)
@@ -128,7 +128,7 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard);
  *
  * \return Pointer to a Board
  */
-Board* initialize_rand(void);
+Board initialize_rand(void);
 
 /**
  * \fn bool add_point(Board* pboard, p_point p_point)
@@ -148,7 +148,7 @@ bool add_point(Board* pboard, Coord coord);
  * \param action Action to execute
  * \param p_point Coordinates affected by the action (NULL if action does not affect any coordinate)
  */
-void execute_action(Board* pboard, enum action action, Move move);
+void execute_action(Board* pboard, enum action action);
 
 /**
  * \fn bool is_game_over(Board* pboard);

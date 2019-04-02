@@ -31,7 +31,7 @@ void print_board(Board* pboard, bool hint);
  * \param pboard Pointer to the Board
  * \param coord Coordinates of the moves 
  */
-void select_move(Move move);
+Coord select_move();
 
 /**
  * \fn enum action select_action(Board* pboard, p_point p_point, bool* hint)
