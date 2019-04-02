@@ -42,12 +42,9 @@ bool add_point(Board* pboard, Coord coord){
   int j=coord.y;
   Move move=Move_create();
   if (is_move_valid(pboard,coord,&move)){
-    printf("okmovevalid\n");
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
     *(pboard->points[i][j])=1;
-    printf("okbeforeaddline\n");
     add_line(&move);
-    printf("ok7\n");
     return true;
   }
   else{
@@ -147,7 +144,6 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
     printf("This movement is not possible\n");
   }
   *pMove=candidate_lines;
-  printf("ok4\n");
   return true;
 }
 

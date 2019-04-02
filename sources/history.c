@@ -29,6 +29,16 @@ void Move_popM(Move* pMove){
   tmp=NULL;
 }
 
+/* to test validity of lists */
+void Move_print(Move move){
+  Move currentMove=move;
+  while (!Move_isEmpty(currentMove)){
+    printf("[%d,%d]->",currentMove->x,currentMove->y);
+    currentMove=currentMove->previous;
+  }
+  printf("[  ]\n");
+}
+
 int pMove_length(Move* pMove){
   Move current=*pMove;
   int counter=0;
@@ -109,17 +119,21 @@ void replay_move(Board* pboard)
 
 void free_history(void)
 {
-  pMove_free(history.PlastSavedMove);
-  pMove_free(lines.lines_history);
+  Move moveH=*history.PlastSavedMove;
+  Move moveL=*lines.lines_history;
+  pMove_free(&moveH);
+  pMove_free(&moveL);
 }
 
 void add_line(Move* pmove){
   if (pMove_length(pmove)>5){
     pmove=select_line(pmove);
   }
-  printf("ok_semiaddline\n");
-  Move_addM(lines.lines_history,(*pmove)->x,(*pmove)->y);
-  printf("okaddline\n");
+  Move move=*lines.lines_history;
+  while(!Move_isEmpty(*pmove)){
+    Move_addM(&move,(*pmove)->x,(*pmove)->y);
+    Move_popM(pmove);
+  }
   lines.n_lines+=1;
 }
 
