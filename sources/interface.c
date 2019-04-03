@@ -54,13 +54,13 @@ void print_board(Board* pboard, bool hint)
 
 Coord select_move()
 {
-	int i,j;
+	int x,y;
 	/* Ppoint p_point ;*/
 	printf("Select next point coordinates [x,y] (press x then ENTER then press y then ENTER) :\n");
-	scanf("%d%d",&i,&j);
+	scanf("%d%d",&x,&y);
 	Coord coord;
-	coord.x=j;
-	coord.y=i;
+	coord.x=x;
+	coord.y=y;
 	coord.previous=NULL;
 	return coord;
 }

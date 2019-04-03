@@ -38,8 +38,8 @@ void free_board(Board* pboard){
 }
 
 bool add_point(Board* pboard, Coord coord){
-  int i=coord.x;
-  int j=coord.y;
+  int i=coord.y;
+  int j=coord.x;
   Move move=Move_create();
   if (is_move_valid(pboard,coord,&move)){
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
@@ -161,7 +161,7 @@ bool is_move_in_board(Board* pboard,Coord coord){
 bool is_move_exists_already(Board* pboard,Coord coord){
   int x=coord.x;
   int y=coord.y;
-  if (pboard->points[x][y]){
+  if (pboard->points[y][x]){
     printf("This point exists already.\n");
     return false;
   }
@@ -173,12 +173,13 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
   int test=coord.x;
   int j;
   int counter=1;
-  for (j=test;j<test+5;j++){
+  for (j=test+1;j<test+5;j++){
     if (!(j<pboard->width && pboard->points[i][j])){
       break;
     }
     counter++;
   }
+  printf("counter_right %d\n",counter);
   if (counter == 5){
     printf("Move is possible!\n");
     j=test;
@@ -195,14 +196,16 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
   }
   j=test;
   int firstpoint;
-  for (j=test;j>test-5;j--){
+  for (j=test-1;j>test-5;j--){
     if (!(j>=0 && pboard->points[i][j])){
       break;
     }
     counter++;
     firstpoint=j;
   }
+  printf("final_counter %d\n",counter);
   if (counter == 5){
+    /* need to test cases where counter > 5 idem for other searches */
     printf("Move is possible!\n");
     j=firstpoint;
     for (j=firstpoint;j<firstpoint+5;j++){
@@ -222,7 +225,7 @@ void vertical_search(Move cand_lines,Coord coord,Board* pboard){
   int test=coord.y;
   int i;
   int counter=1;
-  for (i=test;i<test+5;i++){
+  for (i=test+1;i<test+5;i++){
     if (!(i<pboard->height && pboard->points[i][j])){
       break;
     }
@@ -243,7 +246,7 @@ void vertical_search(Move cand_lines,Coord coord,Board* pboard){
   }
   i=test;
   int firstpoint;
-  for (i=test;i>test-5;i--){
+  for (i=test-1;i>test-5;i--){
     if (!(i>=0 && pboard->points[i][j])){
       break;
     }
@@ -269,7 +272,7 @@ void NE_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   int testy=coord.y;
   int i;
   int counter=1;
-  for (i=0;i<5;i++){
+  for (i=1;i<5;i++){
     if (!(testx+i<pboard->width && testy-i>=0 && pboard->points[testy-i][testx+i])){
       break;
     }
@@ -290,7 +293,7 @@ void NE_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   }
   i=0;
   int firstpoint;
-  for (i=0;i<5;i++){
+  for (i=1;i<5;i++){
     if (!(testy+i<pboard->height && testx-i>=0 && pboard->points[testy+i][testx-i])){
       break;
     }
@@ -316,7 +319,7 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   int testy=coord.y;
   int i;
   int counter=1;
-  for (i=0;i<5;i++){
+  for (i=1;i<5;i++){
     if (!(testx-i>=0 && testy-i>=0 && pboard->points[testy-i][testx-i])){
       break;
     }
@@ -337,7 +340,7 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
   }
   i=0;
   int firstpoint;
-  for (i=0;i<5;i++){
+  for (i=1;i<5;i++){
     if (!(testy+i<pboard->height && testx+i<pboard->width && pboard->points[testy+i][testx+i])){
       break;
     }
