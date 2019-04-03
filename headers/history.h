@@ -120,6 +120,9 @@ int pMove_length(Move* pMove);
  * \brief frees all allocated memory of pMove
  * 
  */
+
+void Move_print(Move move);
+
 void pMove_free(Move* pMove);
 
 /**

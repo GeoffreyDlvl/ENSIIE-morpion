@@ -50,8 +50,9 @@ int pMove_length(Move* pMove){
 }
 
 void pMove_free(Move* pMove){
-  while (!Move_isEmpty(*pMove)){
-    Move_popM(pMove);
+  Move move=*pMove;
+  while (!Move_isEmpty(move)){
+    Move_popM(&move);
   }
 }
 
@@ -74,8 +75,8 @@ void initialize_HistoryList(){
   history.moves=0;
   Move move=Move_create();
   history.PfirstMove=&move;
-  history.PlastPlayedMove=history.PfirstMove;
-  history.PlastSavedMove=history.PfirstMove;
+  history.PlastPlayedMove=&move;
+  history.PlastSavedMove=&move;
 }
 
 static LinesList lines;
@@ -121,8 +122,10 @@ void free_history(void)
 {
   Move moveH=*history.PlastSavedMove;
   Move moveL=*lines.lines_history;
-  pMove_free(&moveH);
-  pMove_free(&moveL);
+  Move_print(moveL);
+  Move_print(moveH);
+  /*pMove_free(&moveH);
+    pMove_free(&moveL);*/
 }
 
 void add_line(Move* pmove){
@@ -134,6 +137,7 @@ void add_line(Move* pmove){
     Move_addM(&move,(*pmove)->x,(*pmove)->y);
     Move_popM(pmove);
   }
+  lines.lines_history=&move;
   lines.n_lines+=1;
 }
 

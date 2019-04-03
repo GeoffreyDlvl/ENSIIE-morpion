@@ -143,6 +143,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   if (Move_isEmpty(candidate_lines)){
     printf("This movement is not possible\n");
   }
+  Move_print(candidate_lines);
   *pMove=candidate_lines;
   return true;
 }
@@ -179,6 +180,7 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
     counter++;
   }
   if (counter == 5){
+    printf("Move is possible!\n");
     j=test;
     for (j=test;j<test+5;j++){
       Move_addM(&cand_lines,i,j);
@@ -201,6 +203,7 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
     firstpoint=j;
   }
   if (counter == 5){
+    printf("Move is possible!\n");
     j=firstpoint;
     for (j=firstpoint;j<firstpoint+5;j++){
       Move_addM(&cand_lines,i,j);
@@ -367,8 +370,8 @@ Board initialize_rand(void)
     for (j = 0 ; j < width ; j++)
     {
       random = get_random_number(0, 100);
-      /* 30% chance to add a point */
-      if (random < 30)
+      /* 50% chance to add a point */
+      if (random < 50)
       {
         int* point = malloc(sizeof(int));
         *point = 1;

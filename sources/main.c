@@ -57,10 +57,9 @@ int main(int argc, char* argv[]){
     execute_action(&board, playerAction);
     i++;
   }
+  print_board(&board,hint);
   /* Free all allocated pointers */
-  printf("its all good\n");
-  free_history();
-  printf("historyfreed\n");
+  /*free_history();*/
   remove_points(&board);
   free_board(&board);
   return EXIT_SUCCESS;

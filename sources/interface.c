@@ -6,6 +6,8 @@ void print_board(Board* pboard, bool hint)
 {
   int m = pboard->width;
   int n = pboard->height;
+  printf("width: %d\n",m);
+  printf("height: %d\n",n);
   int i,j;
     for(i=-1;i<n;i+=1) {
       for(j=-1;j<m;j+=1) {
@@ -13,7 +15,15 @@ void print_board(Board* pboard, bool hint)
 	  printf("   ");
 	}
 	else if (i==-1){
-	  printf(" %d ",j);
+	  if (j<10){
+	    printf(" %d ",j);
+	  }
+	  else if (j<100){
+	    printf(" %d",j);
+	  }
+	  else{
+	    printf("%d",j);
+	  }
 	}
 	else if (j==-1){
 	  if (i<10){
