@@ -189,6 +189,7 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
     firstpoint=j;
   }
   if (counter >= 5){
+    printf("LINE_IS_CANDIDATE\n");
     j=firstpoint;
     int k=firstpoint;
     for (firstpoint=k;firstpoint<=test;firstpoint++){
@@ -196,6 +197,7 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
 	Move_addM(&cand_lines,i,j);
       }
       if (!candidate_line(&cand_lines,&coord)){
+	printf("CANDIDATE_LINES_WORKS\n");
 	j=0;
 	for (j=0;j<5;j++){
 	  Move_popM(&cand_lines);
