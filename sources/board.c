@@ -179,23 +179,8 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
     }
     counter++;
   }
-  printf("counter_right %d\n",counter);
-  if (counter == 5){
-    printf("Move is possible!\n");
-    j=test;
-    for (j=test;j<test+5;j++){
-      Move_addM(&cand_lines,i,j);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      j=0;
-      for (j=0;j<5;j++){
-	Move_popM(&cand_lines);
-      }
-    }
-    counter=1;
-  }
   j=test;
-  int firstpoint;
+  int firstpoint=test;
   for (j=test-1;j>test-5;j--){
     if (!(j>=0 && pboard->points[i][j])){
       break;
@@ -203,18 +188,18 @@ void horizontal_search(Move cand_lines,Coord coord,Board* pboard){
     counter++;
     firstpoint=j;
   }
-  printf("final_counter %d\n",counter);
-  if (counter == 5){
-    /* need to test cases where counter > 5 idem for other searches */
-    printf("Move is possible!\n");
+  if (counter >= 5){
     j=firstpoint;
-    for (j=firstpoint;j<firstpoint+5;j++){
-      Move_addM(&cand_lines,i,j);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      j=0;
-      for (j=0;j<5;j++){
-	Move_popM(&cand_lines);
+    int k=firstpoint;
+    for (firstpoint=k;firstpoint<=test;firstpoint++){
+      for (j=firstpoint;j<firstpoint+5;j++){
+	Move_addM(&cand_lines,i,j);
+      }
+      if (!candidate_line(&cand_lines,&coord)){
+	j=0;
+	for (j=0;j<5;j++){
+	  Move_popM(&cand_lines);
+	}
       }
     }
   }
@@ -231,21 +216,8 @@ void vertical_search(Move cand_lines,Coord coord,Board* pboard){
     }
     counter++;
   }
-  if (counter == 5){
-    i=test;
-    for (i=test;i<test+5;i++){
-      Move_addM(&cand_lines,i,j);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      i=0;
-      for (i=0;i<5;i++){
-	Move_popM(&cand_lines);
-      }
-    }
-    counter=1;
-  }
   i=test;
-  int firstpoint;
+  int firstpoint=test;
   for (i=test-1;i>test-5;i--){
     if (!(i>=0 && pboard->points[i][j])){
       break;
@@ -253,15 +225,18 @@ void vertical_search(Move cand_lines,Coord coord,Board* pboard){
     counter++;
     firstpoint=i;
   }
-  if (counter == 5){
+  if (counter >= 5){
     i=firstpoint;
-    for (i=firstpoint;i<firstpoint+5;i++){
-      Move_addM(&cand_lines,i,j);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      i=0;
-      for (i=0;i<5;i++){
-	Move_popM(&cand_lines);
+    int k=firstpoint;
+    for (firstpoint=k;firstpoint<=test;firstpoint++){
+      for (i=firstpoint;i<firstpoint+5;i++){
+	Move_addM(&cand_lines,i,j);
+      }
+      if (!candidate_line(&cand_lines,&coord)){
+	i=0;
+	for (i=0;i<5;i++){
+	  Move_popM(&cand_lines);
+	}
       }
     }
   }
@@ -278,21 +253,8 @@ void NE_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
     }
     counter++;
   }
-  if (counter == 5){
-    i=0;
-    for (i=0;i<5;i++){
-      Move_addM(&cand_lines,testy-i,testx+i);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      i=0;
-      for (i=0;i<5;i++){
-	Move_popM(&cand_lines);
-      }
-    }
-    counter=1;
-  }
   i=0;
-  int firstpoint;
+  int firstpoint=0;
   for (i=1;i<5;i++){
     if (!(testy+i<pboard->height && testx-i>=0 && pboard->points[testy+i][testx-i])){
       break;
@@ -300,15 +262,18 @@ void NE_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
     counter++;
     firstpoint=i;
   }
-  if (counter == 5){
+  if (counter >= 5){
     i=firstpoint;
-    for (i=firstpoint;i>firstpoint-5;i--){
-      Move_addM(&cand_lines,testy-i,testx+i);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      i=0;
-      for (i=0;i<5;i++){
-	Move_popM(&cand_lines);
+    int k=firstpoint;
+    for (firstpoint=k;firstpoint>=0;firstpoint--){
+      for (i=firstpoint;i>firstpoint-5;i--){
+	Move_addM(&cand_lines,testy+i,testx-i);
+      }
+      if (!candidate_line(&cand_lines,&coord)){
+	i=0;
+	for (i=0;i<5;i++){
+	  Move_popM(&cand_lines);
+	}
       }
     }
   }
@@ -325,21 +290,8 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
     }
     counter++;
   }
-  if (counter == 5){
-    i=0;
-    for (i=0;i<5;i++){
-      Move_addM(&cand_lines,testy-i,testx-i);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      i=0;
-      for (i=0;i<5;i++){
-	Move_popM(&cand_lines);
-      }
-    }
-    counter=1;
-  }
   i=0;
-  int firstpoint;
+  int firstpoint=0;
   for (i=1;i<5;i++){
     if (!(testy+i<pboard->height && testx+i<pboard->width && pboard->points[testy+i][testx+i])){
       break;
@@ -347,15 +299,18 @@ void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard){
     counter++;
     firstpoint=i;
   }
-  if (counter == 5){
+  if (counter >= 5){
     i=firstpoint;
-    for (i=firstpoint;i>firstpoint-5;i--){
-      Move_addM(&cand_lines,testy-i,testx-i);
-    }
-    if (!candidate_line(&cand_lines,&coord)){
-      i=0;
-      for (i=0;i<5;i++){
-	Move_popM(&cand_lines);
+    int k=firstpoint;
+    for (firstpoint=k;firstpoint>=0;firstpoint--){
+      for (i=firstpoint;i>firstpoint-5;i--){
+	Move_addM(&cand_lines,testy+i,testx+i);
+      }
+      if (!candidate_line(&cand_lines,&coord)){
+	i=0;
+	for (i=0;i<5;i++){
+	  Move_popM(&cand_lines);
+	}
       }
     }
   }
