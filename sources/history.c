@@ -77,6 +77,8 @@ void initialize_HistoryList(){
   history.PfirstMove=&move;
   history.PlastPlayedMove=&move;
   history.PlastSavedMove=&move;
+  printf("Points history:\n");
+  Move_print(*history.PlastSavedMove);
 }
 
 static LinesList lines;
@@ -84,6 +86,8 @@ void initialize_LinesList(){
   lines.n_lines=0;
   Move move=Move_create();
   lines.lines_history=&move;
+  printf("Lines history:\n");
+  Move_print(*lines.lines_history);
 }
 
 bool play_move(Board* pboard,Coord coord){
