@@ -104,23 +104,35 @@ bool check_file(char* path)
   char currentChar;
   fp = fopen(path, "r");
   if(fp == NULL){
-    return false; /* perhaps should return an error code instead of just a bool to know the error status ex :  -1 can't open file.. */
+    return false;
   }else{
     while((currentChar = fgetc(fp)) != EOF){
       if(!checkIfCharExist(currentChar)){
-        return false; /* TO DO : Specify the file verification process in order to enrich it */
+        return false;
       }
     }
   }
   return true;
 }
 /*
+int get_file_board_width(char* path){
+
+}
+
+int get_file_board_height(char* path){
+
+}
 bool read_file(Board* pboard, char* path)
 {
-   TO DO 
+    if(!check_file(path)){
+        return -1;
+    }else {
+        pboard = create_empty_board()
+    }
   return NULL;
 }
 */
+
 Move get_valid_moves(Board* pboard)
 {
   int i;
