@@ -50,11 +50,11 @@ void free_board(Board* pboard){
 bool add_point(Board* pboard, Coord coord){
   int i=coord.y;
   int j=coord.x;
-  Move move=Move_create();
+  Move move=Move_create(); /* <- becomes list of possible moves after is_move_valid is called */
   if (is_move_valid(pboard,coord,&move)){
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
     *(pboard->points[i][j])=1;
-    add_line(&move);
+    add_line(&move);/* adds line to line history, calls select_line if there is more than 1 possible line*/
     return true;
   }
   else{
@@ -70,7 +70,7 @@ void remove_point(Board* pboard,Coord coord){
   int j=coord.y;
   free(pboard->points[i][j]);
   pboard->points[i][j]=NULL;
-  remove_lines(&coord);
+  remove_lines(&coord); /* remove all lines containing coord in lines history */
 }
 
 /*@requires pboard not null
@@ -158,7 +158,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   if (Move_isEmpty(candidate_lines)){
     printf("This movement is not possible\n");
   }
-  *pMove=candidate_lines; /*will be used by add_line in add_point*/
+  *pMove=candidate_lines; /*at this stage *pMove is the list of all possible lines */
   return true;
 }
 

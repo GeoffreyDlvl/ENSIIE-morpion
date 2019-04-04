@@ -41,7 +41,9 @@ void Move_popM(Move* pMove){
   tmp=NULL;
 }
 
-/* to test validity of lists, prints Move list */
+/* @requires nothing
+   @assigns nothing
+   @ensures prints Move list */
 void Move_print(Move move){
   Move currentMove=move;
   while (!Move_isEmpty(currentMove)){
@@ -50,7 +52,9 @@ void Move_print(Move move){
   }
   printf("[  ]\n");
 }
-/*returns Move list length*/
+/*@requires pMove not null
+  @assigns nothing
+  @ensures returns Move list length*/
 int pMove_length(Move* pMove){
   Move current=*pMove;
   int counter=0;
@@ -60,14 +64,18 @@ int pMove_length(Move* pMove){
   }
   return counter;
 }
-/*frees allocated memory of Move list*/
+/*@requires pMove not null
+  @assigns pMove
+  @ensures frees allocated memory of Move list*/
 void pMove_free(Move* pMove){
   Move move=*pMove;
   while (!Move_isEmpty(move)){
-    Move_popM(&move);
+    Move_popM(&move); /*while move list isn't empty pop the first Move */
   }
 }
-/*searches for Move of coordinates x,y in Move list and assigns index to positions*/
+/*@requires index of length 8 (this function is mainly used by lines_list and a point can belong to 8 lines maximum) 
+  @assigns index
+  @ensures searches for Move of coordinates x,y in Move list and assigns index to positions*/
 bool Move_search(Move move,int x, int y,int index[]){
   Move current=move;
   int i=0;
@@ -79,7 +87,7 @@ bool Move_search(Move move,int x, int y,int index[]){
     }
     i++;
     current=current->previous;
-  }
+  }/* at this stage, index contains positions of all the occurences of Coord(x,y) in Move list */
   if (line > 0){
     return true;
   }
@@ -100,31 +108,42 @@ void initialize_LinesList(){
   lines.n_lines=0;
   lines.lines_history=Move_create();
 }
-
+/*@requires nothing
+  @assigns nothing
+  @ensures makes lines history accessible outside of history.c */
 Move get_lines_history(){
   return lines.lines_history;
 }
 
+/*@requires nothing
+  @assigns nothing
+  @ensures makes points history accessible outside of history.c */
 Move get_points_history(){
   return history.PlastPlayedMove;
 }
 
+/*@requires pboard not null
+  @assigns pboard
+  @ensures plays desired move, returning true if successful, else false */
 bool play_move(Board* pboard,Coord coord){
   if (!add_point(pboard,coord)){
     return false;
   }
   if (history.moves >= 1 && history.PlastSavedMove->x!=history.PlastPlayedMove->x && history.PlastSavedMove->y!=history.PlastPlayedMove->y){
-    Move_popM(&history.PlastSavedMove);/* <- removes last saved move if PlastPlayedMove and PlastSavedMove are not same moves*/
+    Move_popM(&history.PlastSavedMove);/* <- removes last saved move if PlastPlayedMove and PlastSavedMove are not same moves (player is cancelling more than once consecutively) */
   }
   Move_addM(&history.PlastPlayedMove,coord.x,coord.y);
   history.moves+=1;
-  if (history.moves==1){
-    history.PfirstMove=&coord;
+  if (history.moves==1){ 
+    history.PfirstMove=&coord; 
   }
-  history.PlastSavedMove=&coord;
+  history.PlastSavedMove=&coord; /* once a move is played PlastSavedMove and PlastPlayedMove point to same Coord */
   return true;
 }
 
+/*@requires pboard not null
+  @assigns pboard
+  @ensures cancels last played move by calling remove point*/
 void cancel_move(Board* pboard)
 {
   Move cancelled_move=history.PlastPlayedMove;
@@ -135,12 +154,18 @@ void cancel_move(Board* pboard)
   }
 }
 
+/*@requires pboard not null
+  @assigns pboard
+  @ensures replays last saved move */
 void replay_move(Board* pboard)
 {
   Move cancelled_move=history.PlastSavedMove;
   play_move(pboard,*cancelled_move);
 }
 
+/*@requires nothing
+  @assings lines and points histories
+  @ensures frees allocated memory of lines and points histories */
 void free_history(void)
 {
   Move moveH=history.PlastSavedMove;
@@ -151,6 +176,9 @@ void free_history(void)
     pMove_free(&moveL);*/
 }
 
+/*@requires pmove not null
+  @assings pmove,lines history
+  @ensures adds line to lines history, calls select line if more than 1 */
 void add_line(Move* pmove){
   Move line=*pmove;
   if (pMove_length(&line)>5){
@@ -163,14 +191,17 @@ void add_line(Move* pmove){
   lines.n_lines+=1;
 }
 
+/*@requires line1 and line2 not null AND BOTH LISTS OF LENGTH AT LEAST 5
+  @assigns nothing
+  @ensures returns true if no more than one common move in both lines, else false*/
 bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2){
   int i,j;
   int same_move=0;
   Move current1=*line1;
   Move current2=*line2;
-  for (i=0;i<5;i++){
+  for (i=0;i<5;i++){/*loop on first list */
     current2=*line2;
-    for (j=0;j<5;j++){
+    for (j=0;j<5;j++){/*loop on second list */
       if (current1->x == current2->x && current1->y == current2->y){
 	same_move+=1;
 	if (same_move > 1){
@@ -184,22 +215,28 @@ bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2){
   return true;
 }
 
-void line_numbers_of_Move(Move move,int index[]){
+/*@requires index of length 8 initialized with -1 values
+  @assigns index
+  @ensures index contains positions of lines containing move in lines history */
+void line_numbers_of_Move(Move move,int index[]){ /* <- function mainly useful for remove_line */
   int x=move->x;
   int y=move->y;
   int i;
-  Move_search(move,x,y,index);
-  for (i=0;i<4;i++){
+  Move_search(lines.lines_history,x,y,index);/*at this stage index contains positions of move in lines history */
+  for (i=0;i<8;i++){
     if (index[i]!=-1){
       index[i]=(int)index[i]/5;
     }
-  }
+  }/* at this stage index contains positions of lines containing move in lines history */
 }
 
+/*@requires cand_line not null and of length at least 5
+  @assigns nothing
+  @ensures returns true if candidate line has no more than one move in common with other lines, else false */
 bool candidate_line(Move* cand_line){
   int i;
   Move current=lines.lines_history;
-  while (!Move_isEmpty(current)){
+  while (!Move_isEmpty(current)){/*loop on lines history to compare with each line of lines history */
     if(!no_more_than_one_move_in_two_lines(cand_line,&current)){
       printf("MORE_THAN_ONE_POINT_IN_COMMON\n");
       return false;
@@ -211,9 +248,11 @@ bool candidate_line(Move* cand_line){
   return true;
 }
 
-
+/*@requires nothing
+  @assigns lines history
+  @ensures removes all lines containing move from lines history */
 void remove_lines(Move move){
-  int index[4]={-1,-1,-1,-1};
+  int index[4]={-1,-1,-1,-1,-1,-1,-1,-1};
   line_numbers_of_Move(move,index);
   int i,j;
   int counter=0;

@@ -2,11 +2,14 @@
 #include "../headers/interface.h"
 #include <stdio.h>
 
+/*@requires pboard not null
+  @assigns nothing
+  @ensures prints board, shows possible moves if hint set to true */
 void print_board(Board* pboard, bool hint)
 {
   int m = pboard->width;
   int n = pboard->height;
-  int index[4]={-1,-1,-1,-1};
+  int index[4]={-1,-1,-1,-1,-1,-1,-1,-1};
   int i,j;
     for(i=-1;i<n;i+=1) {
       for(j=-1;j<m;j+=1) {
@@ -117,6 +120,9 @@ void print_help(void)
 }
 */
 
+/*@requires pmove not null
+  @assings pmove
+  @ensures asks player to chose amongst possible lines and frees all those not chosen*/
 void select_line(Move* pmove){
   int choice;
   Move current=*pmove;
