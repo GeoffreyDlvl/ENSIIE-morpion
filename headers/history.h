@@ -30,9 +30,9 @@
  */
 typedef struct{
 	size_t moves; /**< Number of played moves since the beginning of the game */
-	Move* PfirstMove; /**< Pointer to the first move */ 
-	Move* PlastPlayedMove; /**< Pointer to the last played move */
-        Move* PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
+	Move PfirstMove; /**< Pointer to the first move */ 
+	Move PlastPlayedMove; /**< Pointer to the last played move */
+        Move PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
 }HistoryList;
 /**< \brief historyList structure alias */
 
@@ -45,7 +45,7 @@ typedef struct{
  */
 typedef struct{
   size_t n_lines;
-  Move* lines_history; /* lines (of length 5) are concatenated */
+  Move lines_history; /* lines (of length 5) are concatenated */
 }LinesList;
 
 /**
@@ -130,13 +130,17 @@ void pMove_free(Move* pMove);
  * \brief returns ordered index list of element position of length 4 
  * (a point can belong to maximum 4 lines) 
 */  
-void Move_search(Move move,int x, int y,int index[]);
+bool Move_search(Move move,int x, int y,int index[]);
 
 /**
  * \fn void initialize_HistoryList();
  * \brief initializes HistoryList 
  */
 void initialize_HistoryList();
+
+Move get_lines_history();
+
+Move get_points_history();
 
 /**
  * \fn void initialize_LinesList();
@@ -150,15 +154,12 @@ void initialize_LinesList();
  */
 void add_line(Move* pmove);
 
-/**
- * \fn void line_numbers_of_Move(Move move,int index[])
- * \brief 
- */
+
 void line_numbers_of_Move(Move move,int index[]);
 
 bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2);
 
-bool candidate_line(Move* cand_line,Move move);
+bool candidate_line(Move* cand_line);
 
 /**
  * \fn void remove_line(Move move)

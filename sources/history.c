@@ -56,7 +56,7 @@ void pMove_free(Move* pMove){
   }
 }
 
-void Move_search(Move move,int x, int y,int index[]){
+bool Move_search(Move move,int x, int y,int index[]){
   Move current=move;
   int i=0;
   int line=0;
@@ -68,64 +68,71 @@ void Move_search(Move move,int x, int y,int index[]){
     i++;
     current=current->previous;
   }
+  if (line > 0){
+    return true;
+  }
+  return false;
 }
 
 static HistoryList history;
 void initialize_HistoryList(){
   history.moves=0;
   Move move=Move_create();
-  history.PfirstMove=&move;
-  history.PlastPlayedMove=&move;
-  history.PlastSavedMove=&move;
-  printf("Points history:\n");
-  Move_print(*history.PlastSavedMove);
+  history.PfirstMove=move;
+  history.PlastPlayedMove=move;
+  history.PlastSavedMove=move;
 }
 
 static LinesList lines;
 void initialize_LinesList(){
   lines.n_lines=0;
-  Move move=Move_create();
-  lines.lines_history=&move;
-  printf("Lines history:\n");
-  Move_print(*lines.lines_history);
+  lines.lines_history=Move_create();
+}
+
+Move get_lines_history(){
+  return lines.lines_history;
+}
+
+Move get_points_history(){
+  return history.PlastSavedMove;
 }
 
 bool play_move(Board* pboard,Coord coord){
   if (!add_point(pboard,coord)){
     return false;
   }
-  if (*(history.PlastSavedMove)!=*(history.PlastPlayedMove)){
-    Move_popM(history.PlastPlayedMove);
+  if (history.moves >= 1 && history.PlastSavedMove->x!=history.PlastPlayedMove->x && history.PlastSavedMove->y!=history.PlastPlayedMove->y){
+    Move_popM(&history.PlastPlayedMove);
   }
-  Move_addM(history.PlastPlayedMove,coord.x,coord.y);
+  Move_addM(&history.PlastPlayedMove,coord.x,coord.y);
   history.moves+=1;
   if (history.moves==1){
-    *(history.PfirstMove)=*(history.PlastPlayedMove);
+    *history.PfirstMove=*history.PlastPlayedMove;
   }
-  *(history.PlastSavedMove)=*(history.PlastPlayedMove);
+  *history.PlastSavedMove=*history.PlastPlayedMove;
   return true;
 }
 
 void cancel_move(Board* pboard)
 {
-  Move cancelled_move=*(history.PlastPlayedMove);
+  Move cancelled_move=history.PlastPlayedMove;
   remove_point(pboard,*cancelled_move);
-  *(history.PlastPlayedMove)=cancelled_move->previous;
-  if (*(history.PlastSavedMove) != cancelled_move){
-    Move_popM(history.PlastSavedMove);
+  history.PlastPlayedMove=cancelled_move->previous;
+  if (history.moves >= 1 && history.PlastSavedMove->x != cancelled_move->x && history.PlastSavedMove->y != cancelled_move->y){
+    Move_popM(&history.PlastSavedMove);
   }
 }
 
 void replay_move(Board* pboard)
 {
-  Move cancelled_move=*(history.PlastSavedMove);
+  Move cancelled_move=history.PlastSavedMove;
   play_move(pboard,*cancelled_move);
 }
 
 void free_history(void)
 {
-  Move moveH=*history.PlastSavedMove;
-  Move moveL=*lines.lines_history;
+  Move moveH=history.PlastSavedMove;
+  Move moveL=lines.lines_history;
   Move_print(moveL);
   Move_print(moveH);
   /*pMove_free(&moveH);
@@ -133,28 +140,15 @@ void free_history(void)
 }
 
 void add_line(Move* pmove){
-  if (pMove_length(pmove)>5){
-    pmove=select_line(pmove);
+  Move line=*pmove;
+  if (pMove_length(&line)>5){
+    line=select_line(&line);
   }
-  Move move=*lines.lines_history;
-  while(!Move_isEmpty(*pmove)){
-    Move_addM(&move,(*pmove)->x,(*pmove)->y);
-    Move_popM(pmove);
+  while(!Move_isEmpty(line)){
+    Move_addM(&lines.lines_history,line->x,line->y);
+    Move_popM(&line);
   }
-  lines.lines_history=&move;
   lines.n_lines+=1;
-}
-
-void line_numbers_of_Move(Move move,int index[]){
-  int x=move->x;
-  int y=move->y;
-  int i;
-  Move_search(move,x,y,index);
-  for (i=0;i<4;i++){
-    if (index[i]!=-1){
-      index[i]=(int)index[i]/5;
-    }
-  }
 }
 
 bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2){
@@ -178,21 +172,29 @@ bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2){
   return true;
 }
 
-bool candidate_line(Move* cand_line,Move move){
-  int index[4]={-1,-1,-1,-1};
-  line_numbers_of_Move(move,index);
-  Move current=*(lines.lines_history);
+void line_numbers_of_Move(Move move,int index[]){
+  int x=move->x;
+  int y=move->y;
   int i;
-  int counter=0;
+  Move_search(move,x,y,index);
   for (i=0;i<4;i++){
     if (index[i]!=-1){
-      while (!Move_isEmpty(current) && counter<5*index[i]){
-	current=current->previous;
-	counter++;
-      }
-      if(!no_more_than_one_move_in_two_lines(cand_line,&current)){
-	return false;
-      }
+      index[i]=(int)index[i]/5;
+    }
+  }
+}
+
+bool candidate_line(Move* cand_line){
+  int i;
+  Move current=lines.lines_history;
+  while (!Move_isEmpty(current)){
+    if(!no_more_than_one_move_in_two_lines(cand_line,&current)){
+      printf("MORE_THAN_ONE_POINT\n");
+      return false;
+    }
+    printf("TWO_LINES_COMPARISON_WORKS\n");
+    for (i=0;i<5;i++){
+      current=current->previous;
     }
   }
   return true;
@@ -204,7 +206,7 @@ void remove_lines(Move move){
   line_numbers_of_Move(move,index);
   int i,j;
   int counter=0;
-  Move current=*(lines.lines_history);
+  Move current=lines.lines_history;
   Move next=current;
   for (i=0;i<4;i++){
     if (index[i]!=-1){
@@ -215,7 +217,7 @@ void remove_lines(Move move){
       }
       if (counter==0){
 	for (j=0;j<5;j++){
-	  Move_popM(lines.lines_history);
+	  Move_popM(&lines.lines_history);
 	}
       }
       else{

@@ -113,13 +113,13 @@ bool is_move_in_board(Board* pboard,Coord coord);
 
 bool is_move_exists_already(Board* pboard,Coord coord);
 
-void horizontal_search(Move cand_lines,Coord coord,Board* pboard);
+void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
-void vertical_search(Move cand_lines,Coord coord,Board* pboard);
+void vertical_search(Move* pcand_lines,Coord coord,Board* pboard);
 
-void NE_diagonal_search(Move cand_lines,Coord coord,Board* pboard);
+void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
-void NW_diagonal_search(Move cand_lines,Coord coord,Board* pboard);
+void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
 
 /**

@@ -6,8 +6,7 @@ void print_board(Board* pboard, bool hint)
 {
   int m = pboard->width;
   int n = pboard->height;
-  printf("width: %d\n",m);
-  printf("height: %d\n",n);
+  int index[4]={-1,-1,-1,-1};
   int i,j;
     for(i=-1;i<n;i+=1) {
       for(j=-1;j<m;j+=1) {
@@ -38,7 +37,12 @@ void print_board(Board* pboard, bool hint)
 	}
         else{
 	  if(pboard->points[i][j]) {
-	  printf("[X]");
+	    if (Move_search(get_lines_history(),i,j,index)){
+	      printf("[0]");
+	    }
+	    else{
+	      printf("[X]");
+	    }
 	  }
 	  else{
 	    printf("[ ]");
@@ -112,6 +116,37 @@ void print_help(void)
    TO DO 
 }
 */
-Move* select_line(Move* pmove){
-	return pmove;
+
+Move select_line(Move* pmove){
+  int choice;
+  Move current=*pmove;
+  int i=0;
+  printf("List of possible moves :\n");
+  printf("1 : ");
+  while(!Move_isEmpty(current)){
+    printf("[%d,%d]->",current->x,current->y);
+    current=current->previous;
+    i++;
+    if (i%5==0){
+      printf("[ ]\n");
+      printf("%d : ",(i/5)+1);
+    }
+  }
+  printf("Choose your line.\n");
+  scanf("%d",&choice);
+  i=0;
+  current=*pmove;
+  Move current2=*pmove;
+  for (i=0;i<(choice-1)*5;i++){
+    current=current->previous;
+  }
+  for (i=0;i<choice*5-1;i++){
+    current2=current2->previous;
+  }
+  Move tmp=current2->previous;
+  current2->previous=NULL;
+  pMove_free(&tmp);
+  printf("You have chosen:\n");
+  Move_print(current);
+  return current;
 }
