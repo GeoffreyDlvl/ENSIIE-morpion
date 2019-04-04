@@ -37,7 +37,7 @@ void print_board(Board* pboard, bool hint)
 	}
         else{
 	  if(pboard->points[i][j]) {
-	    if (Move_search(get_lines_history(),i,j,index)){
+	    if (Move_search(get_lines_history(),j,i,index)){
 	      printf("[0]");
 	    }
 	    else{
@@ -117,7 +117,7 @@ void print_help(void)
 }
 */
 
-Move select_line(Move* pmove){
+void select_line(Move* pmove){
   int choice;
   Move current=*pmove;
   int i=0;
@@ -148,5 +148,5 @@ Move select_line(Move* pmove){
   pMove_free(&tmp);
   printf("You have chosen:\n");
   Move_print(current);
-  return current;
+  *pmove=current;
 }

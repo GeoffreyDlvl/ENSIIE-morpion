@@ -54,7 +54,7 @@ int main(int argc, char* argv[]){
   {
     printf("Lines_history :\n");
     Move_print(get_lines_history());
-    printf("Points_history :\n");
+    printf("Points_history_from_last_played_move :\n");
     Move_print(get_points_history());
     print_board(&board, hint);
     playerAction = select_action();

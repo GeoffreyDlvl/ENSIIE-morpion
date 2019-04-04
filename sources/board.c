@@ -8,10 +8,14 @@
 
 static char knownChars[4] = {'X','O','[',']'}; /* the known chars according to display */
 
+/*@requires width and height greater than 0
+  @assigns board
+  @ensures return empty board (all points set to NULL) */
 Board create_empty_board(int width,int height){
   Board board;
   board.width=width;
   board.height=height;
+  /*allocated memory for points*/
   board.points = (Ppoint**)malloc(board.height*sizeof(Ppoint*));
   int i;
   for (i=0;i<board.height;i++){
@@ -21,12 +25,15 @@ Board create_empty_board(int width,int height){
   int j;
   for (i=0;i<board.height;i++){
     for (j=0;j<board.width;j++){
-      board.points[i][j]=NULL;
+      board.points[i][j]=NULL; /*all points set to NULL */
     }
   }
   return board;
 }
 
+/*@requires pboard not NULL
+  @assigns pboard
+  @ensures frees allocated memory of board */
 void free_board(Board* pboard){
   int i;
   for (i=0;i<pboard->height;i++){
@@ -37,6 +44,9 @@ void free_board(Board* pboard){
   pboard->points=NULL;
 }
 
+/*@requires pboard not null
+  @assigns pboard
+  @ensures calls is_move_valid, allocates memory for square, sets it to 1 and adds associated line*/
 bool add_point(Board* pboard, Coord coord){
   int i=coord.y;
   int j=coord.x;
@@ -52,6 +62,9 @@ bool add_point(Board* pboard, Coord coord){
   }
 }
 
+/*@requires pboard not null,point of coord exists in board
+  @assigns pboard->points[i][j]
+  @ensures frees allocated memory of point of coordinates coord and removes associates line*/
 void remove_point(Board* pboard,Coord coord){
   int i=coord.x;
   int j=coord.y;
@@ -60,6 +73,9 @@ void remove_point(Board* pboard,Coord coord){
   remove_lines(&coord);
 }
 
+/*@requires pboard not null
+  @assigns pboard
+  @ensures frees all points from board */
 void remove_points(Board* pboard){
   int i;
   int j;
@@ -124,6 +140,9 @@ Move get_valid_moves(Board* pboard)
   return valid_moves;
 }
 
+/*@requires pboard not null
+  @assigns pMove
+  @ensures tests if point is valid -> see subsequent functions for details on conditions */
 bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   if (!is_move_in_board(pboard,coord)){
     return false;
@@ -133,23 +152,19 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   }
   Move candidate_lines=Move_create();
   horizontal_search(&candidate_lines,coord,pboard);
-  printf("okh\n");
   vertical_search(&candidate_lines,coord,pboard);
-  printf("okv\n");
   NE_diagonal_search(&candidate_lines,coord,pboard);
-  printf("okne\n");
   NW_diagonal_search(&candidate_lines,coord,pboard);
-  printf("oknw\n");
   if (Move_isEmpty(candidate_lines)){
     printf("This movement is not possible\n");
   }
-  printf("candidate_lines:\n");
-  Move_print(candidate_lines);
-  *pMove=candidate_lines;
-  printf("is_move_valid_done\n");
+  *pMove=candidate_lines; /*will be used by add_line in add_point*/
   return true;
 }
 
+/*@requires pboard not null
+  @assigns nothing
+  @ensures returns true if point of coordinates coord is in board, else false*/
 bool is_move_in_board(Board* pboard,Coord coord){
   int x=coord.x;
   int y=coord.y;
@@ -160,6 +175,9 @@ bool is_move_in_board(Board* pboard,Coord coord){
   return false;
 }
 
+/*@requires pboard not null
+  @assigns nothing
+  @ensures returns true if point of coordinates coord exists already, else false */
 bool is_move_exists_already(Board* pboard,Coord coord){
   int x=coord.x;
   int y=coord.y;
@@ -170,6 +188,9 @@ bool is_move_exists_already(Board* pboard,Coord coord){
   return true;
 }
 
+/*@requires pboard,pcand_lines not null
+  @assigns pcand_lines
+  @ensures searches horizontally for hypothetical lines, calls candidate_line to test if they are possible, then adds them to pcand_lines*/
 void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard){
   Move cand_lines=*pcand_lines;
   int i=coord.y;
@@ -181,24 +202,24 @@ void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard){
       break;
     }
     counter++;
-  }
+  }/*searching for points on the horizontal right*/
   j=test;
-  int firstpoint=test;
+  int firstpoint=test; /* <- useful to determine number of lines possible */
   for (j=test-1;j>test-5;j--){
     if (!(j>=0 && pboard->points[i][j])){
       break;
     }
     counter++;
     firstpoint=j;
-  }
+  }/*searching for points on the horizontal left*/
   if (counter >= 5){
     j=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint<=test;firstpoint++){
-      for (j=firstpoint;j<firstpoint+5;j++){
-	Move_addM(&cand_lines,j,i);
+    for (firstpoint=k;firstpoint<=test;firstpoint++){/* for each firstpoint (every possible line)*/
+      for (j=firstpoint;j<firstpoint+5;j++){/* add line to cand_lines */
+	Move_addM(&cand_lines,j,i); 
       }
-      if (!candidate_line(&cand_lines)){
+      if (!candidate_line(&cand_lines)){ /*if candidate line has more than one point in common with another line remove it*/
 	j=0;
 	for (j=0;j<5;j++){
 	  Move_popM(&cand_lines);
@@ -206,9 +227,12 @@ void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard){
       }
     }
   }
-  *pcand_lines=cand_lines;
+  *pcand_lines=cand_lines;/*updates list of possible lines*/
 }
 
+/*@requires pboard,pcand_lines not null
+  @assigns pcand_lines
+  @ensures searches vertically for hypothetical lines, calls candidate_line to test if they are possible, then adds them to pcand_lines*/
 void vertical_search(Move* pcand_lines,Coord coord,Board* pboard){
   Move cand_lines=*pcand_lines;
   int j=coord.x;
@@ -220,24 +244,24 @@ void vertical_search(Move* pcand_lines,Coord coord,Board* pboard){
       break;
     }
     counter++;
-  }
+  }/*searching for points on the downoard vertical */
   i=test;
-  int firstpoint=test;
+  int firstpoint=test; /* <- useful to determine number of lines possible */
   for (i=test-1;i>test-5;i--){
     if (!(i>=0 && pboard->points[i][j])){
       break;
     }
     counter++;
     firstpoint=i;
-  }
+  }/*searching for points on the upwoard vertical */
   if (counter >= 5){
     i=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint<=test;firstpoint++){
-      for (i=firstpoint;i<firstpoint+5;i++){
+    for (firstpoint=k;firstpoint<=test;firstpoint++){/* for each firstpoint (every possible line)*/
+      for (i=firstpoint;i<firstpoint+5;i++){/* add line to cand_lines */
 	Move_addM(&cand_lines,j,i);
       }
-      if (!candidate_line(&cand_lines)){
+      if (!candidate_line(&cand_lines)){ /*if candidate line has more than one point in common with another line remove it*/
 	i=0;
 	for (i=0;i<5;i++){
 	  Move_popM(&cand_lines);
@@ -245,9 +269,12 @@ void vertical_search(Move* pcand_lines,Coord coord,Board* pboard){
       }
     }
   }
-  *pcand_lines=cand_lines;
+  *pcand_lines=cand_lines;/*updates list of possible lines*/
 }
 
+/*@requires pboard,pcand_lines not null
+  @assigns pcand_lines
+  @ensures searches on the north east diagonal for hypothetical lines, calls candidate_line to test if they are possible, then adds them to pcand_lines*/
 void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
   Move cand_lines=*pcand_lines;
   int testx=coord.x;
@@ -259,24 +286,24 @@ void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
       break;
     }
     counter++;
-  }
+  }/*searching for points on the north east diagonal */
   i=0;
-  int firstpoint=0;
+  int firstpoint=0;/* <- useful to determine number of lines possible */
   for (i=1;i<5;i++){
     if (!(testy+i<pboard->height && testx-i>=0 && pboard->points[testy+i][testx-i])){
       break;
     }
     counter++;
     firstpoint=i;
-  }
+  }/*searching for points on the south west diagonal */
   if (counter >= 5){
     i=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint>=0;firstpoint--){
-      for (i=firstpoint;i>firstpoint-5;i--){
+    for (firstpoint=k;firstpoint>=0;firstpoint--){/* for each firstpoint (every possible line)*/
+      for (i=firstpoint;i>firstpoint-5;i--){/* add line to cand_lines */
 	Move_addM(&cand_lines,testx-i,testy+i);
       }
-      if (!candidate_line(&cand_lines)){
+      if (!candidate_line(&cand_lines)){/*if candidate line has more than one point in common with another line remove it*/
 	i=0;
 	for (i=0;i<5;i++){
 	  Move_popM(&cand_lines);
@@ -284,9 +311,12 @@ void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
       }
     }
   }
-  *pcand_lines=cand_lines;
+  *pcand_lines=cand_lines;/*updates list of possible lines*/
 }
 
+/*@requires pboard,pcand_lines not null
+  @assigns pcand_lines
+  @ensures searches on the north west diagonal for hypothetical lines, calls candidate_line to test if they are possible, then adds them to pcand_lines*/
 void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
   Move cand_lines=*pcand_lines;
   int testx=coord.x;
@@ -298,24 +328,24 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
       break;
     }
     counter++;
-  }
+  }/*searching for points on the north west diagonal */
   i=0;
-  int firstpoint=0;
+  int firstpoint=0;/* <- useful to determine number of lines possible */
   for (i=1;i<5;i++){
     if (!(testy+i<pboard->height && testx+i<pboard->width && pboard->points[testy+i][testx+i])){
       break;
     }
     counter++;
     firstpoint=i;
-  }
+  }/*searching for points on the south east diagonal */
   if (counter >= 5){
     i=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint>=0;firstpoint--){
-      for (i=firstpoint;i>firstpoint-5;i--){
+    for (firstpoint=k;firstpoint>=0;firstpoint--){/* for each firstpoint (every possible line)*/
+      for (i=firstpoint;i>firstpoint-5;i--){/* add line to cand_lines */
 	Move_addM(&cand_lines,testx+i,testy+i);
       }
-      if (!candidate_line(&cand_lines)){
+      if (!candidate_line(&cand_lines)){/*if candidate line has more than one point in common with another line remove it*/
 	i=0;
 	for (i=0;i<5;i++){
 	  Move_popM(&cand_lines);
@@ -323,9 +353,12 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
       }
     }
   }
-  *pcand_lines=cand_lines;
+  *pcand_lines=cand_lines;/*updates list of possible lines*/
 }
 
+/*@requires nothing
+  @assigns board
+  @ensures creates empty board and fills it with random distribution of points*/
 Board initialize_rand(void)
 {
   int width = get_random_number(10, 15);
@@ -350,6 +383,9 @@ Board initialize_rand(void)
   return board;
 }
 
+/*@requires pboard not null
+  @assigns pboard
+  @ensures executes action of the enum action action*/
 void execute_action(Board* pboard, enum action action)
 {
   if (action == PLAY_MOVE){
@@ -367,13 +403,19 @@ void execute_action(Board* pboard, enum action action)
   }
 }
 
+/*@requires pboard not null
+  @assigns nothing
+  @ensures returns true if game is over(if no moves available), else false*/
 bool is_game_over(Board* pboard)
 {
-  if(!get_valid_moves(pboard))
+  if(!get_valid_moves(pboard))   /* <- à discuter */
     return true;
   return false;
 }
 
+/*@requires nothing 
+  @assigns nothing
+  @ensures returns randon number between min and max */
 int get_random_number(int min, int max)
 {
   int random = rand() % (max - min + 1) + min;

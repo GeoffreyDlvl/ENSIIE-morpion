@@ -6,14 +6,23 @@
 #include "stdio.h"
 #include <stdbool.h>
 
+/*@requires nothing
+  @assigns nothing
+  @ensures returns empty move*/
 Move Move_create(){
   return NULL;
 }
 
+/*@requires nothing
+  @assigns nothing
+  @ensures returns true if move is empty else false*/
 bool Move_isEmpty(Move move){
   return (move==NULL);
 }
 
+/*@requires pMove not null
+  @assigns pMove
+  @ensures adds(with allocation) struct Coord of coordinates x,y to Move list*/
 void Move_addM(Move* pMove,int x,int y){
   Move newMove=(Move)malloc(sizeof(Coord));
   newMove->x=x;
@@ -22,6 +31,9 @@ void Move_addM(Move* pMove,int x,int y){
   *pMove=newMove;
 }
 
+/*@requires pMove not null
+  @assigns pMove
+  @ensures removes and frees allocated last added struct Coord of Move list*/
 void Move_popM(Move* pMove){
   Move tmp=*pMove;
   *pMove=(*pMove)->previous;
@@ -29,7 +41,7 @@ void Move_popM(Move* pMove){
   tmp=NULL;
 }
 
-/* to test validity of lists */
+/* to test validity of lists, prints Move list */
 void Move_print(Move move){
   Move currentMove=move;
   while (!Move_isEmpty(currentMove)){
@@ -38,7 +50,7 @@ void Move_print(Move move){
   }
   printf("[  ]\n");
 }
-
+/*returns Move list length*/
 int pMove_length(Move* pMove){
   Move current=*pMove;
   int counter=0;
@@ -48,14 +60,14 @@ int pMove_length(Move* pMove){
   }
   return counter;
 }
-
+/*frees allocated memory of Move list*/
 void pMove_free(Move* pMove){
   Move move=*pMove;
   while (!Move_isEmpty(move)){
     Move_popM(&move);
   }
 }
-
+/*searches for Move of coordinates x,y in Move list and assigns index to positions*/
 bool Move_search(Move move,int x, int y,int index[]){
   Move current=move;
   int i=0;
@@ -94,7 +106,7 @@ Move get_lines_history(){
 }
 
 Move get_points_history(){
-  return history.PlastSavedMove;
+  return history.PlastPlayedMove;
 }
 
 bool play_move(Board* pboard,Coord coord){
@@ -102,14 +114,14 @@ bool play_move(Board* pboard,Coord coord){
     return false;
   }
   if (history.moves >= 1 && history.PlastSavedMove->x!=history.PlastPlayedMove->x && history.PlastSavedMove->y!=history.PlastPlayedMove->y){
-    Move_popM(&history.PlastPlayedMove);
+    Move_popM(&history.PlastSavedMove);/* <- removes last saved move if PlastPlayedMove and PlastSavedMove are not same moves*/
   }
   Move_addM(&history.PlastPlayedMove,coord.x,coord.y);
   history.moves+=1;
   if (history.moves==1){
-    *history.PfirstMove=*history.PlastPlayedMove;
+    history.PfirstMove=&coord;
   }
-  *history.PlastSavedMove=*history.PlastPlayedMove;
+  history.PlastSavedMove=&coord;
   return true;
 }
 
@@ -142,7 +154,7 @@ void free_history(void)
 void add_line(Move* pmove){
   Move line=*pmove;
   if (pMove_length(&line)>5){
-    line=select_line(&line);
+    select_line(&line);
   }
   while(!Move_isEmpty(line)){
     Move_addM(&lines.lines_history,line->x,line->y);
@@ -189,10 +201,9 @@ bool candidate_line(Move* cand_line){
   Move current=lines.lines_history;
   while (!Move_isEmpty(current)){
     if(!no_more_than_one_move_in_two_lines(cand_line,&current)){
-      printf("MORE_THAN_ONE_POINT\n");
+      printf("MORE_THAN_ONE_POINT_IN_COMMON\n");
       return false;
     }
-    printf("TWO_LINES_COMPARISON_WORKS\n");
     for (i=0;i<5;i++){
       current=current->previous;
     }
