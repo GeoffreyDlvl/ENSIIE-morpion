@@ -252,7 +252,7 @@ bool candidate_line(Move* cand_line){
   @assigns lines history
   @ensures removes all lines containing move from lines history */
 void remove_lines(Move move){
-  int index[4]={-1,-1,-1,-1,-1,-1,-1,-1};
+  int index[8]={-1,-1,-1,-1,-1,-1,-1,-1};
   line_numbers_of_Move(move,index);
   int i,j;
   int counter=0;

@@ -9,7 +9,7 @@ void print_board(Board* pboard, bool hint)
 {
   int m = pboard->width;
   int n = pboard->height;
-  int index[4]={-1,-1,-1,-1,-1,-1,-1,-1};
+  int index[8]={-1,-1,-1,-1,-1,-1,-1,-1};
   int i,j;
     for(i=-1;i<n;i+=1) {
       for(j=-1;j<m;j+=1) {
