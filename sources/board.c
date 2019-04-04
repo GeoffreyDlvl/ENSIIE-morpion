@@ -114,24 +114,37 @@ bool check_file(char* path)
   }
   return true;
 }
-/*
-int get_file_board_width(char* path){
 
+/*
+int get_file_board_width(FILE *fp){
+    char* array = NULL;
+    size_t longeur = 0;
+    return sizeof(getline(&array,&longeur,fp));
 }
 
-int get_file_board_height(char* path){
-
+int get_file_board_height(FILE *fp){
+    int cpt = 0;
+    char* array;
+    size_t longeur = 0;
+    while((getline(&array,&longeur,fp)) !=  EOF){
+        cpt++;
+    }
+    return cpt;
 }
 bool read_file(Board* pboard, char* path)
 {
     if(!check_file(path)){
         return -1;
     }else {
-        pboard = create_empty_board()
+        FILE *fp;
+        char currentChar;
+        fp = fopen(path, "r");
+        *pboard = (create_empty_board(get_file_board_width(fp),get_file_board_height(fp)));
     }
   return NULL;
 }
-*/
+ */
+
 
 Move get_valid_moves(Board* pboard)
 {
