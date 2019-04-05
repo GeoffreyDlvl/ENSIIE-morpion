@@ -115,7 +115,7 @@ bool check_file(char* path)
   }
   return true;
 }
-/*
+
 
 int get_file_board_width(FILE *fp){
     char* array = NULL;
@@ -147,7 +147,8 @@ bool read_file(Board* pboard, char* path)
         while((getline(&chars,&longeur,fp)) !=  EOF){
             for(int col = 0 ; col < sizeof(chars) ; col++){
                 if(chars[col] == knownChars[1]){ // if chars[col] == O
-                    pboard->points[line][col] = 1;
+                    pboard->points[col][line] = (int * ) malloc(sizeof(int));
+                    *(pboard->points[col][line]) = 1;
                 }
             }
             line++;
@@ -156,7 +157,7 @@ bool read_file(Board* pboard, char* path)
     }
   return true;
 }
-*/
+
 
 Move get_valid_moves(Board* pboard)
 {
