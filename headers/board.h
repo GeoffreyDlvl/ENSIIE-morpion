@@ -24,7 +24,7 @@ enum action
 	CANCEL_MOVE, /**< Cancel last move */
 	REPLAY_MOVE, /**< Replay a canceled move */
 	LIST_MOVES, /**< List all valid moves */
-	ASK_HELP /**< Ask for help to be displayed */
+	ASK_HELP, /**< Ask for help to be displayed */
 	QUIT_GAME /**<Quit the game */
 };
 
