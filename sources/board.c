@@ -115,7 +115,7 @@ bool check_file(char* path)
   }
   return true;
 }
-/*
+
 
 int get_file_board_width(FILE *fp){
     char* array = NULL;
@@ -147,7 +147,8 @@ bool read_file(Board* pboard, char* path)
         while((getline(&chars,&longeur,fp)) !=  EOF){
             for(int col = 0 ; col < sizeof(chars) ; col++){
                 if(chars[col] == knownChars[1]){ // if chars[col] == O
-                    pboard->points[line][col] = 1;
+                    pboard->points[col][line] = (int * ) malloc(sizeof(int));
+                    *(pboard->points[col][line]) = 1;
                 }
             }
             line++;
@@ -156,7 +157,7 @@ bool read_file(Board* pboard, char* path)
     }
   return true;
 }
-*/
+
 
 Move get_valid_moves(Board* pboard)
 {
@@ -194,6 +195,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   NW_diagonal_search(&candidate_lines,coord,pboard);
   if (Move_isEmpty(candidate_lines)){
     printf("This movement is not possible\n");
+    return false;
   }
   *pMove=candidate_lines; /*at this stage *pMove is the list of all possible lines */
   return true;
@@ -398,7 +400,7 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
   @ensures creates empty board and fills it with random distribution of points*/
 Board initialize_rand(void)
 {
-  int width = get_random_number(10, 15);
+/*  int width = get_random_number(10, 15);
   int height = get_random_number(10, 15);
   Board board=create_empty_board(width,height);
   int i, j;
@@ -408,16 +410,29 @@ Board initialize_rand(void)
     for (j = 0 ; j < width ; j++)
     {
       random = get_random_number(0, 100);
-      /* 50% chance to add a point */
+      *//* 50% chance to add a point *//*
       if (random < 50)
       {
-        int* point = malloc(sizeof(int));
+        Ppoint point = malloc(sizeof(enum point));
         *point = 1;
         board.points[i][j] = point;
       }
     }
   }
-  return board;
+  *//*horizontal_lines_on_init(&board);*//*
+  return board;*/
+
+    Board board = create_empty_board(6,6);
+    Ppoint p1 = malloc(sizeof(enum point));
+    Ppoint p2 = malloc(sizeof(enum point));
+    Ppoint p3 = malloc(sizeof(enum point));
+    Ppoint p4 = malloc(sizeof(enum point));
+    board.points[0][0] = p1;
+    board.points[0][1] = p2;
+    board.points[0][2] = p3;
+    board.points[0][3] = p4;
+
+    return board;
 }
 
 /*@requires pboard not null
@@ -461,3 +476,26 @@ int get_random_number(int min, int max)
   int random = rand() % (max - min + 1) + min;
   return random;
 }
+
+/* UNFINISHED + WILL NOT BE IMPLEMENTED RIGHT NOW
+void horizontal_lines_on_init(Board* pboard)
+{
+    int i, j;
+    int neighbors_count;
+    bool lineFound;
+    for(i=0 ; i<pboard->height ; i++) {
+        neighbors_count = 0;
+        lineFound = false;
+        for(j=0 ; j<pboard->width ; j++) {
+            if(pboard->points[i][j]) {
+                neighbors_count++;
+            } else {
+                neighbors_count = 0;
+            }
+            if(neighbors_count == 5) {
+                lineFound = true;
+            }
+            if(neighbors_count > )
+        }
+    }
+}*/

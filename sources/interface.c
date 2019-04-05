@@ -187,11 +187,11 @@ void select_line(Move* pmove){
   }while(0 > choice || choice > (i/5));
   i=0;
   current=*pmove;
-  Move current2=*pmove;
   for (i=0;i<(choice-1)*5;i++){
-    current=current->previous;
+    Move_popM(&current);
   }
-  for (i=0;i<choice*5-1;i++){
+  Move current2=current;
+  for (i=0;i<4;i++){
     current2=current2->previous;
   }
   Move tmp=current2->previous;
