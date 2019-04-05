@@ -58,6 +58,13 @@ int main(int argc, char* argv[]){
     Move_print(get_points_history());
     print_board(&board, hint);
     playerAction = select_action();
+    if(playerAction == QUIT_GAME) {
+	/* Free all allocated pointers */
+  	/*free_history();*/
+  	remove_points(&board);
+  	free_board(&board);
+  	return EXIT_SUCCESS;
+    }
     execute_action(&board, playerAction);
     i++;
   }

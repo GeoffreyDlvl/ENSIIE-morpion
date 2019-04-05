@@ -147,12 +147,15 @@ void ask_help(Board* pboard)
 {
    TO DO 
 }
-
+*/
 void print_help(void)
 {
-   TO DO 
+	printf("------- HELP -------\n\n");
+
+	printf("> The goal is to add points on the board.\n");
+	printf("> A point can be added to the board if it creates a line of 5 points vertically, horizontally or diagonally.\n");
+	printf("> Two lines can't have more than one point in common.\n\n");
 }
-*/
 
 /*@requires pmove not null
   @assings pmove
