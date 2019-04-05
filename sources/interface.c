@@ -75,7 +75,7 @@ void print_board(Board* pboard, bool hint)
 	                if (Move_search(get_lines_history(),j,i,index)) {
 	                    printf("[0]");
 	                } else {
-	                    printf("[X]");
+	                    printf("[\u2022]");
 	                }
 	            } else {
 	                printf("[ ]");
