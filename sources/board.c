@@ -412,12 +412,13 @@ Board initialize_rand(void)
       /* 50% chance to add a point */
       if (random < 50)
       {
-        int* point = malloc(sizeof(int));
+        Ppoint point = malloc(sizeof(enum point));
         *point = 1;
         board.points[i][j] = point;
       }
     }
   }
+  /*horizontal_lines_on_init(&board);*/
   return board;
 }
 
@@ -459,3 +460,26 @@ int get_random_number(int min, int max)
   int random = rand() % (max - min + 1) + min;
   return random;
 }
+
+/* UNFINISHED + WILL NOT BE IMPLEMENTED RIGHT NOW
+void horizontal_lines_on_init(Board* pboard)
+{
+    int i, j;
+    int neighbors_count;
+    bool lineFound;
+    for(i=0 ; i<pboard->height ; i++) {
+        neighbors_count = 0;
+        lineFound = false;
+        for(j=0 ; j<pboard->width ; j++) {
+            if(pboard->points[i][j]) {
+                neighbors_count++;
+            } else {
+                neighbors_count = 0;
+            }
+            if(neighbors_count == 5) {
+                lineFound = true;
+            }
+            if(neighbors_count > )
+        }
+    }
+}*/
