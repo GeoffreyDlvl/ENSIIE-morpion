@@ -194,6 +194,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   NW_diagonal_search(&candidate_lines,coord,pboard);
   if (Move_isEmpty(candidate_lines)){
     printf("This movement is not possible\n");
+    return false;
   }
   *pMove=candidate_lines; /*at this stage *pMove is the list of all possible lines */
   return true;
