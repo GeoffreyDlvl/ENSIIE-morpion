@@ -450,6 +450,9 @@ void execute_action(Board* pboard, enum action action)
   else if (action == REPLAY_MOVE){
     replay_move(pboard);
   }
+  else if (action == ASK_HELP){
+    print_help();
+  }
   else{
     printf("On essaie déjà de faire compiler puis on verra après\n");
   }
