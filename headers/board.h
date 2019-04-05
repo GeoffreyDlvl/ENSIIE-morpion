@@ -178,4 +178,6 @@ int get_random_number(int min, int max);
 void remove_point(Board* pboard,Coord coord);
 
 void remove_points(Board* pboard);
+
+/*void horizontal_lines_on_init(Board* pboard);*/
 #endif
