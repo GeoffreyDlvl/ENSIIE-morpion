@@ -136,9 +136,9 @@ bool play_move(Board* pboard,Coord coord){
   if (!add_point(pboard,coord)){
     return false;
   }
-  if (history.moves >= 1 && history.PlastSavedMove->x!=history.PlastPlayedMove->x && history.PlastSavedMove->y!=history.PlastPlayedMove->y){
-    Move_popM(&history.PlastSavedMove);/* <- removes last saved move if PlastPlayedMove and PlastSavedMove are not same moves (player is cancelling more than once consecutively) */
-  }
+  /*if (history.moves >= 1 && history.PlastSavedMove->x!=history.PlastPlayedMove->x && history.PlastSavedMove->y!=history.PlastPlayedMove->y){
+    Move_popM(&history.PlastSavedMove);/* <- removes last saved move if PlastPlayedMove and PlastSavedMove are not same moves (player is cancelling more than once consecutively)
+  }*/
   Move_addM(&history.PlastPlayedMove,coord.x,coord.y);
   history.moves+=1;
   if (history.moves==1){ 
