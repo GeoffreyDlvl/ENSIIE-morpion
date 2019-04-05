@@ -116,7 +116,7 @@ bool check_file(char* path)
   return true;
 }
 
-
+/*
 int get_file_board_width(FILE *fp){
     char* array = NULL;
     size_t longeur = 0;
@@ -157,7 +157,7 @@ bool read_file(Board* pboard, char* path)
     }
   return true;
 }
-
+*/
 
 Move get_valid_moves(Board* pboard)
 {
@@ -254,7 +254,7 @@ void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard){
   if (counter >= 5){
     j=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint<=test;firstpoint++){/* for each firstpoint (every possible line)*/
+    for (firstpoint=k;firstpoint<=k+counter-5;firstpoint++){/* for each firstpoint (every possible line)*/
       for (j=firstpoint;j<firstpoint+5;j++){/* add line to cand_lines */
 	Move_addM(&cand_lines,j,i); 
       }
@@ -296,7 +296,7 @@ void vertical_search(Move* pcand_lines,Coord coord,Board* pboard){
   if (counter >= 5){
     i=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint<=test;firstpoint++){/* for each firstpoint (every possible line)*/
+    for (firstpoint=k;firstpoint<=k+counter-5;firstpoint++){/* for each firstpoint (every possible line)*/
       for (i=firstpoint;i<firstpoint+5;i++){/* add line to cand_lines */
 	Move_addM(&cand_lines,j,i);
       }
@@ -338,7 +338,7 @@ void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
   if (counter >= 5){
     i=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint>=0;firstpoint--){/* for each firstpoint (every possible line)*/
+    for (firstpoint=k;firstpoint>=k-(counter-5);firstpoint--){/* for each firstpoint (every possible line)*/
       for (i=firstpoint;i>firstpoint-5;i--){/* add line to cand_lines */
 	Move_addM(&cand_lines,testx-i,testy+i);
       }
@@ -380,7 +380,7 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
   if (counter >= 5){
     i=firstpoint;
     int k=firstpoint;
-    for (firstpoint=k;firstpoint>=0;firstpoint--){/* for each firstpoint (every possible line)*/
+    for (firstpoint=k;firstpoint>=k-(counter-5);firstpoint--){/* for each firstpoint (every possible line)*/
       for (i=firstpoint;i>firstpoint-5;i--){/* add line to cand_lines */
 	Move_addM(&cand_lines,testx+i,testy+i);
       }
