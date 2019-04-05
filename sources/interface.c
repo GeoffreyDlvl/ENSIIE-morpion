@@ -105,7 +105,7 @@ Coord select_move()
 
 enum action select_action()
 {
-    printf("Select : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h]\n");
+    printf("Select : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h] / Quit game [q]\n");
 	char c;
 	while (true) {
 	    fflush(stdin);
@@ -163,17 +163,25 @@ void select_line(Move* pmove){
   int i=0;
   printf("List of possible moves :\n");
   printf("1 : ");
+  printf("[%d,%d]",current->x,current->y);
+  current=current->previous;
+  i++;
+
   while(!Move_isEmpty(current)){
-    printf("[%d,%d]->",current->x,current->y);
+    if (i%5==0){
+      printf("\n");
+      printf("%d : ",(i/5)+1);
+      printf("[%d,%d]",current->x,current->y);
+    } else {
+	  printf("->[%d,%d]",current->x,current->y);
+    }
     current=current->previous;
     i++;
-    if (i%5==0){
-      printf("[ ]\n");
-      printf("%d : ",(i/5)+1);
-    }
   }
-  printf("Choose your line.\n");
-  scanf("%d",&choice);
+  printf("\nChoose your line.\n");
+  do{
+  	scanf("%d",&choice);
+  }while(0 > choice || choice > (i/5));
   i=0;
   current=*pmove;
   Move current2=*pmove;

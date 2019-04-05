@@ -45,12 +45,19 @@ void Move_popM(Move* pMove){
    @assigns nothing
    @ensures prints Move list */
 void Move_print(Move move){
+  int len = pMove_length(&move);
   Move currentMove=move;
-  while (!Move_isEmpty(currentMove)){
-    printf("[%d,%d]->",currentMove->x,currentMove->y);
+  if(len > 0) {
+    printf("[%d,%d]",currentMove->x,currentMove->y);
     currentMove=currentMove->previous;
   }
-  printf("[  ]\n");
+  if(len > 1) {
+  while (!Move_isEmpty(currentMove)){
+    printf("->[%d,%d]",currentMove->x,currentMove->y);
+    currentMove=currentMove->previous;
+  }
+  }
+  printf("\n");
 }
 /*@requires pMove not null
   @assigns nothing
