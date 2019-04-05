@@ -105,31 +105,31 @@ Coord select_move()
 
 enum action select_action()
 {
+    printf("Select : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h]\n");
 	char c;
-	while (1) {
-	printf("Select : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h]\n");
-	scanf("%c",&c);
-	switch(c) {
-		case 'p':
-			return PLAY_MOVE;
-		break;
-		case 'c':
-		        return CANCEL_MOVE;
-
-		break;
-		case 'r': 
-			return REPLAY_MOVE;
-		break;
-		case 'l':
-			return LIST_MOVES;
-		break;
-		case 'h':
-			return ASK_HELP;
-		break;
+	while (true) {
+	    fflush(stdin);
+	    scanf("%c",&c);
+        switch(c) {
+            case 'p':
+                return PLAY_MOVE;
+            break;
+            case 'c':
+                return CANCEL_MOVE;
+            break;
+            case 'r':
+                return REPLAY_MOVE;
+            break;
+            case 'l':
+                return LIST_MOVES;
+            break;
+            case 'h':
+                return ASK_HELP;
+            break;
+            default:
+                break;
+        }
 	}
-	}
-
-  return -1;
 }
 /*
 void list_available_moves(Board* pboard)
