@@ -27,6 +27,12 @@ enum action
 	ASK_HELP /**< Ask for help to be displayed */
 };
 
+enum point
+{
+    DOT,
+    DOT_LINE
+};
+
 /**
  * \struct playedMove
  * \brief Played moves since the beginning of the game.
@@ -49,7 +55,7 @@ typedef struct coord{
 /**
  * \brief Pointer to Coord
  */
-typedef int* Ppoint; 
+typedef enum point* Ppoint;
 
 /**
  * \struct board
