@@ -185,7 +185,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   if (!is_move_in_board(pboard,coord)){
     return false;
   }
-  if (!is_move_exists_already(pboard,coord)){
+  if (is_move_exists_already(pboard,coord)){
     return false;
   }
   Move candidate_lines=Move_create();
@@ -207,7 +207,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
 bool is_move_in_board(Board* pboard,Coord coord){
   int x=coord.x;
   int y=coord.y;
-  if (x >= 0 && y>= 0 && x <= pboard->width && y <= pboard->height){
+  if (x >= 0 && y>= 0 && x < pboard->width && y < pboard->height){
     return true;
   }
   printf("Selected coordinates are invalid.\n");
@@ -222,9 +222,9 @@ bool is_move_exists_already(Board* pboard,Coord coord){
   int y=coord.y;
   if (pboard->points[y][x]){
     printf("This point exists already.\n");
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
 
 /*@requires pboard,pcand_lines not null
