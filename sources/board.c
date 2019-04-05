@@ -399,7 +399,7 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard){
   @ensures creates empty board and fills it with random distribution of points*/
 Board initialize_rand(void)
 {
-  int width = get_random_number(10, 15);
+/*  int width = get_random_number(10, 15);
   int height = get_random_number(10, 15);
   Board board=create_empty_board(width,height);
   int i, j;
@@ -409,7 +409,7 @@ Board initialize_rand(void)
     for (j = 0 ; j < width ; j++)
     {
       random = get_random_number(0, 100);
-      /* 50% chance to add a point */
+      *//* 50% chance to add a point *//*
       if (random < 50)
       {
         Ppoint point = malloc(sizeof(enum point));
@@ -418,8 +418,20 @@ Board initialize_rand(void)
       }
     }
   }
-  /*horizontal_lines_on_init(&board);*/
-  return board;
+  *//*horizontal_lines_on_init(&board);*//*
+  return board;*/
+
+    Board board = create_empty_board(6,6);
+    Ppoint p1 = malloc(sizeof(enum point));
+    Ppoint p2 = malloc(sizeof(enum point));
+    Ppoint p3 = malloc(sizeof(enum point));
+    Ppoint p4 = malloc(sizeof(enum point));
+    board.points[0][0] = p1;
+    board.points[0][1] = p2;
+    board.points[0][2] = p3;
+    board.points[0][3] = p4;
+
+    return board;
 }
 
 /*@requires pboard not null
