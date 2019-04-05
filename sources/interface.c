@@ -126,9 +126,12 @@ enum action select_action()
             case 'h':
                 return ASK_HELP;
             break;
-            default:
-                break;
-        }
+	    case 'q':
+		return QUIT_GAME;
+	    break;
+	    default:
+	    break;
+	}
 	}
 }
 /*
