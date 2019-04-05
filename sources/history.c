@@ -245,7 +245,6 @@ bool candidate_line(Move* cand_line){
   Move current=lines.lines_history;
   while (!Move_isEmpty(current)){/*loop on lines history to compare with each line of lines history */
     if(!no_more_than_one_move_in_two_lines(cand_line,&current)){
-      printf("MORE_THAN_ONE_POINT_IN_COMMON\n");
       return false;
     }
     for (i=0;i<5;i++){

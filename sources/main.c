@@ -50,7 +50,7 @@ int main(int argc, char* argv[]){
   /* Declare a new unallocated pointer: it will be allocated if required and manipulated in functions */
   enum action playerAction = PLAY_MOVE;
   int i=0;
-  while(i<5)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici */
+  while(i<20)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici */
   {
     printf("Lines_history :\n");
     Move_print(get_lines_history());
