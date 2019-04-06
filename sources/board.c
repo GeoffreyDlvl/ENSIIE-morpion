@@ -6,7 +6,7 @@
 #include <time.h>
 #include <stdio.h>
 
-static char knownChars[4] = {'X','O','[',']'}; /* the known chars according to display */
+static char knownChars[7] = {'X','O','[',']','_',' ','\n'}; /* the known chars according to display */
 
 /*@requires width and height greater than 0
   @assigns board
@@ -116,20 +116,38 @@ bool check_file(char* path)
   return true;
 }
 
-/*
-int get_file_board_width(FILE *fp){
-    char* array = NULL;
-    size_t longeur = 0;
-    return sizeof(getline(&array,&longeur,fp));
+void clean_file(char* path){
+    /* TODO should delete non desired chars in the file as ('\n') & other chars */
 }
 
-int get_file_board_height(FILE *fp){
+int get_file_board_width(char* path){
+    char c;
+    int len = 0;
+    char *buffer = NULL;
+    FILE* fp = fopen(path, "r"); /* put the file's cursor at the beginning of the file , perhaps not necessary in this case */
+    fseek(fp,0, SEEK_SET);
+    while((c = fgetc(fp)) != EOF) {
+        if (c == '\n') {
+            break;
+        }
+        len++;
+    }
+    fseek(fp,0, SEEK_SET); /* put the file's cursor at the beginning of the file , perhaps not necessary in this case */
+    fclose(fp);
+    return (len/3);
+}
+
+int get_file_board_height(char* path){
     int cpt = 0;
+    FILE* fp = fopen(path, "r");
+    fseek(fp,0, SEEK_SET); /* put the file's cursor at the beginning of the file , perhaps not necessary in this case */
     char* array;
     size_t longeur = 0;
     while((getline(&array,&longeur,fp)) !=  EOF){
         cpt++;
     }
+    fseek(fp,0, SEEK_SET); /* put the file's cursor at the beginning of the file , perhaps not necessary in this case */
+    fclose(fp);
     return cpt;
 }
 bool read_file(Board* pboard, char* path)
@@ -138,16 +156,17 @@ bool read_file(Board* pboard, char* path)
         return false;
     }else {
         FILE *fp;
-        char currentChar;
         fp = fopen(path, "r");
-        *pboard = (create_empty_board(get_file_board_width(fp),get_file_board_height(fp)));
+        pboard = (Board*) malloc(sizeof(Board));
+        *pboard = (create_empty_board(get_file_board_width(path),get_file_board_height(path)));
         char* chars;
-        size_t longeur = 0;
+        size_t long_ = 0;
         int line = 0;
-        while((getline(&chars,&longeur,fp)) !=  EOF){
+        while((getline(&chars,&long_,fp)) !=  EOF){
             for(int col = 0 ; col < sizeof(chars) ; col++){
-                if(chars[col] == knownChars[1]){ // if chars[col] == O
-                    pboard->points[col][line] = (int * ) malloc(sizeof(int));
+                if(chars[col] == knownChars[1]){  // if chars[col] == O
+                    Ppoint point =(Ppoint) malloc(sizeof(enum point));
+                    pboard->points[col][line] = point; // <== SEGMENTATION FAULT HERE
                     *(pboard->points[col][line]) = 1;
                 }
             }
@@ -157,7 +176,7 @@ bool read_file(Board* pboard, char* path)
     }
   return true;
 }
-*/
+
 
 Move get_valid_moves(Board* pboard)
 {
