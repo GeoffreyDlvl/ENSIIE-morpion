@@ -100,20 +100,24 @@ bool checkIfCharExist(char c){
 
 bool check_file(char* path)
 {
-  FILE *fp;
-  char currentChar;
-  fp = fopen(path, "r");
-  if(fp == NULL){
-    return false;
-  }else{
-    while((currentChar = fgetc(fp)) != EOF){
-      if(!checkIfCharExist(currentChar)){
+    FILE *fp = fopen(path, "r");
+    if(fp == NULL) {
+        printf("Error while opening the file.");
         return false;
-      }
     }
+
+    char c;
+    while((c = fgetc(fp)) != EOF) {
+        /* Check if char is valid */
+        if(c != '.' && c != 'o' && c != '\n')
+        {
+            printf("File error: unknown character.");
+            return false;
+        }
+    }
+
     fclose(fp);
-  }
-  return true;
+    return true;
 }
 
 void clean_file(char* path){
@@ -162,11 +166,12 @@ bool read_file(Board* pboard, char* path)
         char* chars;
         size_t long_ = 0;
         int line = 0;
+        int col;
         while((getline(&chars,&long_,fp)) !=  EOF){
-            for(int col = 0 ; col < sizeof(chars) ; col++){
-                if(chars[col] == knownChars[1]){  // if chars[col] == O
+            for(col = 0 ; col < sizeof(chars) ; col++){
+                if(chars[col] == knownChars[1]){  /*if chars[col] == O*/
                     Ppoint point =(Ppoint) malloc(sizeof(enum point));
-                    pboard->points[col][line] = point; // <== SEGMENTATION FAULT HERE
+                    pboard->points[col][line] = point; /*<== SEGMENTATION FAULT HERE*/
                     *(pboard->points[col][line]) = 1;
                 }
             }
