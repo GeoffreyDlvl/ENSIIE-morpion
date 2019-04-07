@@ -167,7 +167,7 @@ void execute_action(Board* pboard, enum action action);
 bool is_game_over(Board* pboard);
 
 /**
- * \fn void free_board(Board* pboard);
+ * \fn void free_board(Board* pboard)
  * \brief free allocated memory of board
  *
  * \param Board* pboard pointer to board 
@@ -181,4 +181,13 @@ void remove_point(Board* pboard,Coord coord);
 void remove_points(Board* pboard);
 
 /*void horizontal_lines_on_init(Board* pboard);*/
+
+/**
+ * \fn void save_game(Board* pboard)
+ * \brief Save the current board into a file.
+ *
+ * @param pboard Pointer to the board being played
+ */
+void save_game(Board* pboard);
+
 #endif
