@@ -66,20 +66,18 @@ int main(int argc, char* argv[]){
     print_board(&board, hint);
     playerAction = select_action();
     if(playerAction == QUIT_GAME)
+    {
+        save_board(&board);
         break;
+    }
     execute_action(&board, playerAction);
     i++;
   }
   /* Free all allocated pointers */
-  free_history();
+  /*free_history();
   remove_points(&board);
-  free_board(&board);
+  free_board(&board);*/
 
-  /*
-  Board* pboard = NULL;
-  char* fileTest = "/home/remi/CLionProjects/ENSIIE-morpion/sources/TestImportFile.txt";
-  read_file(pboard,fileTest);
-  */
   return EXIT_SUCCESS;
 }
       

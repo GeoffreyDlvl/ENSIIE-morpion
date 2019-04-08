@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include <linux/limits.h>
 
 static char knownChars[7] = {'X','O','[',']','_',' ','\n'}; /* the known chars according to display */
 
@@ -105,26 +106,32 @@ bool check_file(FILE *fp)
         return false;
     }
 
-    char c;
-    char* line = NULL;
-    size_t len = 0;
-    size_t width = getline(&line, &len, fp) - 1; /* Get the length line, ie the width (minus '\n') */
-    free(line); /* Line buffer will not be used, we might as well free that now */
+    char* lineBuffer = NULL;
+    size_t bufferSize = 0; /* if set to 0, then getline() will allocate the buffer */
+    size_t width = getline(&lineBuffer, &bufferSize, fp) - 1; /* Get the length line, ie the width (minus '\n') */
+    free(lineBuffer);
+
+    lineBuffer = NULL;
+    bufferSize = 0;
     fseek(fp, 0, SEEK_SET); /* Set cursor at the beginning of the file */
-    int count = 0;
-    while((c = fgetc(fp)) != EOF) {
-        /* Check if char is valid */
-        if(c != '.' && c != 'o' && c != '\n') {
-            fprintf(stderr, "File error: unknown character.");
-            return false;
-        }
-        if(c != '\n')
-            count++;
-        else if(count != width) {
+    int col;
+    while((getline(&lineBuffer, &bufferSize, fp)) !=  EOF) {
+        /* Line history delimiter, exit while loop */
+        if(strcmp(lineBuffer, "====\n") == 0)
+            break;
+
+        if(strlen(lineBuffer) - 1 != width) {
             fprintf(stderr, "File error: board width must be equal for each line.");
             return false;
-        } else
-            count = 0;
+        }
+
+        for (col = 0; col < width ; col++) {
+            /* check if char is valid */
+            if (lineBuffer[col] != '.' && lineBuffer[col] != 'o' && lineBuffer[col] != '\n') {
+                fprintf(stderr, "File error: unknown character.");
+                return false;
+            }
+        }
     }
     return true;
 }
@@ -150,6 +157,10 @@ size_t get_file_board_height(FILE *fp){
     char* line = NULL;
     size_t lineLength = 0;
     while((getline(&line, &lineLength, fp)) !=  EOF){
+        /* line history delimiter */
+        if(strcmp(line, "====\n") == 0)
+            break;
+
         height++;
     }
     free(line);
@@ -162,36 +173,25 @@ bool read_file(Board* pboard, char* path)
         return false;
     }
 
-    *pboard = create_empty_board(get_file_board_width(fp), get_file_board_height(fp));
+    size_t width = get_file_board_width(fp);
+    size_t height = get_file_board_height(fp);
+    *pboard = create_empty_board(width, height);
 
     int line = 0, col = 0;
     char* lineBuffer;
-    size_t lineLength;
+    size_t bufferSize;
     fseek(fp, 0, SEEK_SET);
-    while(getline(&lineBuffer, &lineLength, fp) != EOF) {
-        for(col = 0 ; col < lineLength ; col++) {
-            if(lineBuffer[col] == '\n') break;
-            if(lineBuffer[col] == 'o' || lineBuffer[col] == 'x') {
+    while(getline(&lineBuffer, &bufferSize, fp) != EOF) {
+        if(strcmp(lineBuffer, "====\n") == 0) break;
+        for(col = 0 ; col < width ; col++) {
+            if(lineBuffer[col] == 'o') {
                 Ppoint point = malloc(sizeof(int));
                 pboard->points[line][col] = point;
             }
         }
         line++;
     }
-    /*char* chars;
-    size_t long_ = 0;
-    int line = 0;
-    int col;
-    while((getline(&chars,&long_,fp)) !=  EOF){
-        for(col = 0 ; col < sizeof(chars) ; col++){
-            if(chars[col] == knownChars[1]){  /*if chars[col] == O
-                Ppoint point =(Ppoint) malloc(sizeof(enum point));
-                pboard->points[col][line] = point; /*<== SEGMENTATION FAULT HERE
-                *(pboard->points[col][line]) = 1;
-            }
-        }
-        line++;
-    }*/
+    free(lineBuffer);
     fclose(fp);
     return true;
 }
@@ -514,6 +514,45 @@ int get_random_number(int min, int max)
 {
   int random = rand() % (max - min + 1) + min;
   return random;
+}
+
+void save_board(Board* pboard) {
+    char resolved_path[PATH_MAX];
+    realpath("boards/save", resolved_path);
+
+    FILE *fp = fopen(resolved_path, "w");
+    int line, col;
+    for(line = 0 ; line < pboard->height ; line++) {
+        for(col = 0 ; col < pboard->width ; col++) {
+            if (pboard->points[line][col]) {
+                fputc('o', fp);
+            } else {
+                fputc('.', fp);
+            }
+        }
+        fputc('\n', fp);
+    }
+    /* Save lines */
+    fputs("\n====\n", fp);
+    Move history = get_lines_history();
+    int len = pMove_length(&history);
+    Move currentMove = history;
+    char buffer[16] = {0};
+    if(len > 0) {
+        sprintf(buffer, "[%d,%d]", currentMove->x, currentMove->y);
+        fputs(buffer, fp);
+        currentMove=currentMove->previous;
+    }
+    if(len > 1) {
+        while (!Move_isEmpty(currentMove)){
+            sprintf(buffer, "->[%d,%d]", currentMove->x, currentMove->y);
+            fputs(buffer, fp);
+            currentMove=currentMove->previous;
+        }
+    }
+    fputc('\n', fp);
+
+    fclose(fp);
 }
 
 /* UNFINISHED + WILL NOT BE IMPLEMENTED RIGHT NOW

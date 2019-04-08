@@ -182,11 +182,11 @@ void remove_points(Board* pboard);
 /*void horizontal_lines_on_init(Board* pboard);*/
 
 /**
- * \fn void save_game(Board* pboard)
+ * \fn void save_board(Board* pboard)
  * \brief Save the current board into a file.
  *
  * @param pboard Pointer to the board being played
  */
-void save_game(Board* pboard);
+void save_board(Board* pboard);
 
 #endif
