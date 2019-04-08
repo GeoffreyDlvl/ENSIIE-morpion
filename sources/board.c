@@ -98,24 +98,33 @@ bool checkIfCharExist(char c){
   return false;
 }
 
-bool check_file(char* path)
+bool check_file(FILE *fp)
 {
-    FILE *fp = fopen(path, "r");
     if(fp == NULL) {
         printf("Error while opening the file.");
         return false;
     }
 
     char c;
+    char* line;
+    size_t len;
+    int width = getline(&line,&len,fp) - 1; /* Get the length line, ie the width (minus '\n') */
+    fseek(fp, 0, SEEK_SET); /* Set cursor at the beginning of the file */
+    int count = 0;
     while((c = fgetc(fp)) != EOF) {
         /* Check if char is valid */
-        if(c != '.' && c != 'o' && c != '\n')
-        {
-            printf("File error: unknown character.");
+        if(c != '.' && c != 'o' && c != '\n') {
+            fprintf(stderr, "File error: unknown character.");
             return false;
         }
+        if(c != '\n')
+            count++;
+        else if(count != width) {
+            fprintf(stderr, "File error: board width must be equal for each line.");
+            return false;
+        } else
+            count = 0;
     }
-
     fclose(fp);
     return true;
 }
@@ -156,11 +165,10 @@ int get_file_board_height(char* path){
 }
 bool read_file(Board* pboard, char* path)
 {
-    if(!check_file(path)){
+    FILE *fp = fopen(path, "r");
+    if(!check_file(fp)){
         return false;
-    }else {
-        FILE *fp;
-        fp = fopen(path, "r");
+    } else {
         pboard = (Board*) malloc(sizeof(Board));
         *pboard = (create_empty_board(get_file_board_width(path),get_file_board_height(path)));
         char* chars;
