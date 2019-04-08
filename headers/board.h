@@ -29,12 +29,6 @@ enum action
 	QUIT_GAME /**<Quit the game */
 };
 
-enum point
-{
-    DOT,
-    DOT_LINE
-};
-
 /**
  * \struct playedMove
  * \brief Played moves since the beginning of the game.
@@ -57,7 +51,7 @@ typedef struct coord{
 /**
  * \brief Pointer to Coord
  */
-typedef enum point* Ppoint;
+typedef int* Ppoint;
 
 /**
  * \struct board
