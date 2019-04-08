@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <linux/limits.h>
 
-static char knownChars[7] = {'X','O','[',']','_',' ','\n'}; /* the known chars according to display */
-
 /*@requires width and height greater than 0
   @assigns board
   @ensures return empty board (all points set to NULL) */
@@ -90,15 +88,6 @@ void remove_points(Board* pboard){
   }
 }
 
-bool checkIfCharExist(char c){
-  int i;
-  for(i=0 ; i < (int)sizeof(knownChars) ; i++){
-    if(c == knownChars[i])
-      return true;
-  }
-  return false;
-}
-
 bool check_file(FILE *fp)
 {
     if(fp == NULL) {
@@ -136,11 +125,6 @@ bool check_file(FILE *fp)
     return true;
 }
 
-void clean_file(char* path){
-    /* TODO should delete non desired chars in the file as ('\n') & other chars */
-}
-
-
 size_t get_file_board_width(FILE *fp) {
     fseek(fp, 0, SEEK_SET);
     char* line = NULL;
@@ -169,7 +153,7 @@ size_t get_file_board_height(FILE *fp){
 bool read_file(Board* pboard, char* path)
 {
     FILE *fp = fopen(path, "r");
-    if(!check_file(fp)){
+    if(!check_file(fp)) {
         return false;
     }
 
@@ -195,7 +179,6 @@ bool read_file(Board* pboard, char* path)
     fclose(fp);
     return true;
 }
-
 
 Move get_valid_moves(Board* pboard)
 {
