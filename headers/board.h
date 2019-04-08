@@ -12,7 +12,8 @@
  *
  */
 
-#include <stdbool.h> 
+#include <stdbool.h>
+#include <stdio.h>
 
 /**
  * \enum action
@@ -77,7 +78,7 @@ typedef struct board
  * \param path : the path to the file to verify
  * \return true if file structure is correct, false otherwise
  */
-bool check_file(char* path); 
+bool check_file(FILE *fp);
 
 /**
  * \fn bool read_file(Board* pboard, char* path)
@@ -87,7 +88,11 @@ bool check_file(char* path);
  * \param path File absolute path
  * \return true if no error occured, false otherwise
  */
-bool read_file(Board* pboard, char* path); 
+bool read_file(Board* pboard, char* path);
+
+size_t get_file_board_width(FILE *fp);
+
+size_t get_file_board_height(FILE *fp);
 
 /**
  * \fn void create_empty_board(Board* pboard)

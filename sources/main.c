@@ -44,12 +44,9 @@ int main(int argc, char* argv[]){
         char resolved_path[PATH_MAX];
         realpath(argv[2], resolved_path);
 
-        /* If file given as a parameter is invalid*/
-        if (!check_file(resolved_path)) {
+        /* Construct board if file is valid, exit otherwise */
+        if (!read_file(&board, resolved_path)) {
             return EXIT_FAILURE;
-        }
-        else {
-
         }
     }
   }
