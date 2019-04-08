@@ -168,5 +168,7 @@ bool candidate_line(Move* cand_line);
  */
 void remove_lines(Move move);
 
+void initialize_HistoryList_from_string(char* s);
+
 #endif
 

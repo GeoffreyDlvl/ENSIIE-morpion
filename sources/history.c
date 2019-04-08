@@ -2,9 +2,11 @@
 #include "../headers/board.h"
 #include "../headers/interface.h"
 
-#include "stdlib.h"
-#include "stdio.h"
+#include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
+#include <assert.h>
+#include <string.h>
 
 /*@requires nothing
   @assigns nothing
@@ -103,17 +105,21 @@ bool Move_search(Move move,int x, int y,int index[]){
 
 static HistoryList history;
 void initialize_HistoryList(){
-  history.moves=0;
-  Move move=Move_create();
-  history.PfirstMove=move;
-  history.PlastPlayedMove=move;
-  history.PlastSavedMove=move;
+    if(history.moves == 0) {
+        history.moves=0;
+        Move move=Move_create();
+        history.PfirstMove=move;
+        history.PlastPlayedMove=move;
+        history.PlastSavedMove=move;
+    }
 }
 
 static LinesList lines;
 void initialize_LinesList(){
-  lines.n_lines=0;
-  lines.lines_history=Move_create();
+    if(lines.n_lines == 0) {
+        lines.n_lines=0;
+        lines.lines_history=Move_create();
+    }
 }
 /*@requires nothing
   @assigns nothing
@@ -285,4 +291,82 @@ void remove_lines(Move move){
       }
     }
   }
+}
+
+char** str_split(char* str, const char delim)
+{
+    char** result = 0;
+    size_t count = 0;
+    char* tmp = str;
+    char* lastComma = 0;
+    char delimArr[2];
+    delimArr[0] = delim;
+    delimArr[1] = 0;
+
+    /* Count how many elements will be extracted. */
+    while(*tmp) {
+        if(delim == *tmp) {
+            count++;
+            lastComma = tmp;
+        }
+        tmp++;
+    }
+
+    /* Add space for trailing token. */
+    count += lastComma < (str + strlen(str) - 1);
+
+    /* Add space for terminating null string so caller
+       knows where the list of returned strings ends. */
+    count++;
+
+    result = malloc(sizeof(char*) * count);
+
+    if (result)
+    {
+        size_t idx  = 0;
+        char* token = strtok(str, delimArr);
+
+        while (token)
+        {
+            assert(idx < count);
+            *(result + idx++) = strdup(token);
+            token = strtok(0, delimArr);
+        }
+        assert(idx == count - 1);
+        *(result + idx) = 0;
+    }
+
+    return result;
+}
+
+void initialize_HistoryList_from_string(char* s) {
+    char* pch;
+
+    printf("Splitting string %s into tokens:\n", s);
+    pch = strtok (s,",|");
+    bool xySwitch = true;
+    int x, y;
+    int count = 0;
+    Move move;
+    while (pch != NULL)
+    {
+        if(count % 10 == 0)
+            move = Move_create();
+
+        printf ("%s\n",pch);
+        if(xySwitch) {
+            x = atoi(pch);
+        }
+        else {
+            y = atoi(pch);
+            Move_addM(&move, x, y);
+        }
+        xySwitch = !xySwitch;
+        count++;
+        if (count % 10 == 0) {
+            add_line(&move);
+        }
+
+        pch = strtok (NULL, ",|");
+    }
 }

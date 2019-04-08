@@ -166,7 +166,11 @@ bool read_file(Board* pboard, char* path)
     size_t bufferSize;
     fseek(fp, 0, SEEK_SET);
     while(getline(&lineBuffer, &bufferSize, fp) != EOF) {
-        if(strcmp(lineBuffer, "====\n") == 0) break;
+        if(strcmp(lineBuffer, "====\n") == 0) {
+            getline(&lineBuffer, &bufferSize, fp);
+            initialize_HistoryList_from_string(lineBuffer);
+            break;
+        }
         for(col = 0 ; col < width ; col++) {
             if(lineBuffer[col] == 'o') {
                 Ppoint point = malloc(sizeof(int));
@@ -516,19 +520,19 @@ void save_board(Board* pboard) {
         fputc('\n', fp);
     }
     /* Save lines */
-    fputs("\n====\n", fp);
+    fputs("====\n", fp);
     Move history = get_lines_history();
     int len = pMove_length(&history);
     Move currentMove = history;
     char buffer[16] = {0};
     if(len > 0) {
-        sprintf(buffer, "[%d,%d]", currentMove->x, currentMove->y);
+        sprintf(buffer, "%d,%d", currentMove->x, currentMove->y);
         fputs(buffer, fp);
         currentMove=currentMove->previous;
     }
     if(len > 1) {
         while (!Move_isEmpty(currentMove)){
-            sprintf(buffer, "->[%d,%d]", currentMove->x, currentMove->y);
+            sprintf(buffer, "|%d,%d", currentMove->x, currentMove->y);
             fputs(buffer, fp);
             currentMove=currentMove->previous;
         }
