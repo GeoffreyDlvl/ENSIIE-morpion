@@ -73,6 +73,5 @@ void print_help(void);
  */
 void select_line(Move* pmove);
 
-char get_board_char(Board *pboard, int x, int y);
 
 #endif
