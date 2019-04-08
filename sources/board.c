@@ -162,24 +162,38 @@ bool read_file(Board* pboard, char* path)
         return false;
     }
 
-    pboard = (Board*) malloc(sizeof(Board));
-    *pboard = create_empty_board(get_file_board_width(fp),get_file_board_height(fp));
-    char* chars;
+    *pboard = create_empty_board(get_file_board_width(fp), get_file_board_height(fp));
+
+    int line = 0, col = 0;
+    char* lineBuffer;
+    size_t lineLength;
+    fseek(fp, 0, SEEK_SET);
+    while(getline(&lineBuffer, &lineLength, fp) != EOF) {
+        for(col = 0 ; col < lineLength ; col++) {
+            if(lineBuffer[col] == '\n') break;
+            if(lineBuffer[col] == 'o' || lineBuffer[col] == 'x') {
+                Ppoint point = malloc(sizeof(int));
+                pboard->points[line][col] = point;
+            }
+        }
+        line++;
+    }
+    /*char* chars;
     size_t long_ = 0;
     int line = 0;
     int col;
     while((getline(&chars,&long_,fp)) !=  EOF){
         for(col = 0 ; col < sizeof(chars) ; col++){
-            if(chars[col] == knownChars[1]){  /*if chars[col] == O*/
+            if(chars[col] == knownChars[1]){  /*if chars[col] == O
                 Ppoint point =(Ppoint) malloc(sizeof(enum point));
-                pboard->points[col][line] = point; /*<== SEGMENTATION FAULT HERE*/
+                pboard->points[col][line] = point; /*<== SEGMENTATION FAULT HERE
                 *(pboard->points[col][line]) = 1;
             }
         }
         line++;
-    }
+    }*/
     fclose(fp);
-  return true;
+    return true;
 }
 
 
@@ -437,8 +451,7 @@ Board initialize_rand(void)
       /* 50% chance to add a point */
       if (random < 50)
       {
-        Ppoint point = malloc(sizeof(enum point));
-        *point = 1;
+        Ppoint point = malloc(sizeof(int));
         board.points[i][j] = point;
       }
     }
