@@ -503,9 +503,9 @@ int get_random_number(int min, int max)
 }
 
 void save_board(Board* pboard) {
-    char resolved_path[PATH_MAX];
-    realpath("boards/save", resolved_path);
-
+    char resolved_path[PATH_MAX]; /* 4096 chars */
+    char* path = strcat("boards/",ask_savefile_name());/*concatenate filename and saves folder in order to create path*/
+    realpath(path, resolved_path);
     FILE *fp = fopen(resolved_path, "w");
     int line, col;
     for(line = 0 ; line < pboard->height ; line++) {

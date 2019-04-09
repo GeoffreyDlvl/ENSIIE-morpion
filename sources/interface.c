@@ -1,6 +1,7 @@
 #include "../headers/history.h"
 #include "../headers/interface.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /*@requires pboard not null
   @assigns nothing
@@ -199,5 +200,8 @@ bool confirm_quit_save(Board* pboard) {
 
 
 char* ask_savefile_name(){
-    // TODO
+    char* fileName = NULL;
+    printf("What name does the file should have ? :> ");
+    scanf(&fileName);
+    return fileName;
 }
