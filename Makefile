@@ -1,18 +1,22 @@
+MKDIR_P = mkdir -p
+
+BIN_DIR = $(MKDIR_P) bin
+
 CC = gcc -Wall -Wextra -pedantic
 
-all : sources/main.out
+all : morpion
 
-sources/main.out : sources/interface.o sources/history.o sources/board.o sources/main.o
+morpion : bin/interface.o bin/history.o bin/board.o bin/main.o
 	$(CC) $^ -o $@
 
-sources/interface.o : sources/interface.c headers/interface.h headers/history.h
+$(BIN_DIR)/interface.o : sources/interface.c headers/interface.h headers/history.h
 	$(CC) -c $< -o $@
 
-sources/history.o : sources/history.c headers/board.h headers/history.h headers/interface.h
+bin/history.o : sources/history.c headers/board.h headers/history.h headers/interface.h
 	$(CC) -c $< -o $@
 
-sources/board.o : sources/board.c headers/board.h headers/history.h headers/interface.h
+bin/board.o : sources/board.c headers/board.h headers/history.h headers/interface.h
 	$(CC) -c $< -o $@
 
-sources/main.o : sources/main.c headers/board.h headers/history.h headers/interface.h
+$(BIN_DIR)/main.o : sources/main.c headers/board.h headers/history.h headers/interface.h
 	$(CC) -c $< -o $@
