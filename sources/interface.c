@@ -2,6 +2,7 @@
 #include "../headers/interface.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <linux/limits.h>
 
 /*@requires pboard not null
   @assigns nothing
@@ -200,8 +201,7 @@ bool confirm_quit_save(Board* pboard) {
 
 
 char* ask_savefile_name(){
-    char* fileName = NULL;
+    char fileName [100];
     printf("What name does the file should have ? :> ");
-    scanf(&fileName);
-    return fileName;
+    return fgets(fileName,100,stdin);
 }
