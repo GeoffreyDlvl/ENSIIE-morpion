@@ -339,7 +339,6 @@ char** str_split(char* str, const char delim)
 void initialize_HistoryList_from_string(char* s) {
     char* pch;
 
-    printf("Splitting string %s into tokens:\n", s);
     pch = strtok (s,",|");
     bool xySwitch = true;
     int x, y;
@@ -350,7 +349,6 @@ void initialize_HistoryList_from_string(char* s) {
         if(count % 10 == 0)
             move = Move_create();
 
-        printf ("%s\n",pch);
         if(xySwitch) {
             x = atoi(pch);
         }
