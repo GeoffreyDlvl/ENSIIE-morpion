@@ -1,22 +1,23 @@
-MKDIR_P = mkdir -p
-
-BIN_DIR = $(MKDIR_P) bin
+HEADERS_DIR = headers
+SOURCES_DIR = sources
+BINARIES_DIR = bin
 
 CC = gcc -Wall -Wextra -pedantic
 
 all : morpion
 
-morpion : bin/interface.o bin/history.o bin/board.o bin/main.o
+morpion : $(BINARIES_DIR)/interface.o $(BINARIES_DIR)/history.o $(BINARIES_DIR)/board.o $(BINARIES_DIR)/main.o
 	$(CC) $^ -o $@
 
-$(BIN_DIR)/interface.o : sources/interface.c headers/interface.h headers/history.h
+$(BINARIES_DIR)/interface.o : $(SOURCES_DIR)/interface.c $(HEADERS_DIR)/interface.h $(HEADERS_DIR)/history.h
 	$(CC) -c $< -o $@
 
-bin/history.o : sources/history.c headers/board.h headers/history.h headers/interface.h
+$(BINARIES_DIR)/history.o : $(SOURCES_DIR)/history.c $(HEADERS_DIR)/board.h $(HEADERS_DIR)/history.h $(HEADERS_DIR)/interface.h
 	$(CC) -c $< -o $@
 
-bin/board.o : sources/board.c headers/board.h headers/history.h headers/interface.h
+$(BINARIES_DIR)/board.o : $(SOURCES_DIR)/board.c $(HEADERS_DIR)/board.h $(HEADERS_DIR)/history.h $(HEADERS_DIR)/interface.h
 	$(CC) -c $< -o $@
 
-$(BIN_DIR)/main.o : sources/main.c headers/board.h headers/history.h headers/interface.h
+$(BINARIES_DIR)/main.o : $(SOURCES_DIR)/main.c $(HEADERS_DIR)/board.h $(HEADERS_DIR)/history.h $(HEADERS_DIR)/interface.h
 	$(CC) -c $< -o $@
+
