@@ -21,3 +21,4 @@ $(BINARIES_DIR)/board.o : $(SOURCES_DIR)/board.c $(HEADERS_DIR)/board.h $(HEADER
 $(BINARIES_DIR)/main.o : $(SOURCES_DIR)/main.c $(HEADERS_DIR)/board.h $(HEADERS_DIR)/history.h $(HEADERS_DIR)/interface.h
 	$(CC) -c $< -o $@
 
+$(shell mkdir -p $(BINARIES_DIR))
