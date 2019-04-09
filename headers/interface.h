@@ -75,4 +75,11 @@ void select_line(Move* pmove);
 
 bool confirm_quit_save(Board* pboard);
 
+/**
+ * \fn ask_savefile_name()
+ * \brief ask the user for the saved file name
+ * \return char* the FileName
+ */
+char* ask_savefile_name();
+
 #endif

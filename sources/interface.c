@@ -196,3 +196,8 @@ bool confirm_quit_save(Board* pboard) {
     else
         return false;
 }
+
+
+char* ask_savefile_name(){
+    // TODO
+}
