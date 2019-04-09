@@ -6,6 +6,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <linux/limits.h>
+#include <string.h>
 
 /*@requires width and height greater than 0
   @assigns board
@@ -103,7 +104,7 @@ bool check_file(FILE *fp)
     lineBuffer = NULL;
     bufferSize = 0;
     fseek(fp, 0, SEEK_SET); /* Set cursor at the beginning of the file */
-    int col;
+    size_t col;
     while((getline(&lineBuffer, &bufferSize, fp)) !=  EOF) {
         /* Line history delimiter, exit while loop */
         if(strcmp(lineBuffer, "====\n") == 0)
@@ -161,7 +162,7 @@ bool read_file(Board* pboard, char* path)
     size_t height = get_file_board_height(fp);
     *pboard = create_empty_board(width, height);
 
-    int line = 0, col = 0;
+    size_t line = 0, col = 0;
     char* lineBuffer;
     size_t bufferSize;
     fseek(fp, 0, SEEK_SET);
