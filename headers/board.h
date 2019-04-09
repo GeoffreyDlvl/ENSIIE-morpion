@@ -154,7 +154,7 @@ bool add_point(Board* pboard, Coord coord);
  * \param action Action to execute
  * \param p_point Coordinates affected by the action (NULL if action does not affect any coordinate)
  */
-void execute_action(Board* pboard, enum action action);
+void execute_action(Board* pboard, enum action action, bool* quit);
 
 /**
  * \fn bool is_game_over(Board* pboard);

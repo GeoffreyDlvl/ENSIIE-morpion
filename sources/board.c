@@ -465,24 +465,22 @@ Board initialize_rand(void)
 /*@requires pboard not null
   @assigns pboard
   @ensures executes action of the enum action action*/
-void execute_action(Board* pboard, enum action action)
+void execute_action(Board* pboard, enum action action, bool* quit)
 {
-  if (action == PLAY_MOVE){
-    Coord coord=select_move();
-    play_move(pboard,coord);
-  }
-  else if (action == CANCEL_MOVE){
-    cancel_move(pboard);
-  }
-  else if (action == REPLAY_MOVE){
-    replay_move(pboard);
-  }
-  else if (action == ASK_HELP){
-    print_help();
-  }
-  else{
-    printf("On essaie déjà de faire compiler puis on verra après\n");
-  }
+    if (action == PLAY_MOVE){
+        Coord coord=select_move();
+        play_move(pboard,coord);
+    } else if (action == CANCEL_MOVE){
+        cancel_move(pboard);
+    } else if (action == REPLAY_MOVE){
+        replay_move(pboard);
+    } else if (action == ASK_HELP){
+        print_help();
+    } else if (action == QUIT_GAME){
+        *quit = confirm_quit_save(pboard);
+    } else{
+        fprintf(stderr, "Execute action: action is undefined.");
+    }
 }
 
 /*@requires pboard not null

@@ -93,11 +93,11 @@ enum action select_action()
             case 'h':
                 return ASK_HELP;
             break;
-	    case 'q':
-		return QUIT_GAME;
-	    break;
+	        case 'q':
+		        return QUIT_GAME;
+	        break;
 	    default:
-	    break;
+	        break;
 	}
 	}
 }
@@ -167,4 +167,32 @@ void select_line(Move* pmove){
   printf("You have chosen:\n");
   Move_print(current);
   *pmove=current;
+}
+
+bool confirm_quit_save(Board* pboard) {
+    char quit;
+    do {
+        printf("Do you really want to exit the game? (y/n)\n");
+        scanf(" %c", &quit);
+        if (quit != 'y' && quit != 'n')
+            printf("\nWrong input.\n");
+
+    } while (quit != 'y' && quit != 'n');
+
+    if(quit == 'y') {
+        char save;
+        do {
+            printf("Do you want to save the current board? (y/n)\n");
+            scanf(" %c", &save);
+            if (save != 'y' && save != 'n')
+                printf("\nWrong input.\n");
+
+        } while (save != 'y' && save != 'n');
+
+        if (save == 'y')
+            save_board(pboard);
+        return true;
+    }
+    else
+        return false;
 }

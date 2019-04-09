@@ -73,5 +73,6 @@ void print_help(void);
  */
 void select_line(Move* pmove);
 
+bool confirm_quit_save(Board* pboard);
 
 #endif
