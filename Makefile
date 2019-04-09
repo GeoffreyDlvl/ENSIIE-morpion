@@ -1,4 +1,4 @@
-CC = gcc -Wall -Wextra -ansi
+CC = gcc -Wall -Wextra -pedantic
 
 all : sources/main.out
 
