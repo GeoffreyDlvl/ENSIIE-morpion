@@ -14,6 +14,7 @@ void print_board(Board* pboard, bool hint)
     int indexLines[4] = {-1,-1,-1,-1};
     int i, j;
     /* print header (y coordinates) */
+    printf("\t\t\t\t Points scored :  %d \n\n",get_points_scored());
     printf("  ");
     for(i = 0 ; i < width ; i++) {
         /* Header not displayed correctly if size > 99

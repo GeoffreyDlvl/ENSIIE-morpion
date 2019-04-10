@@ -199,6 +199,7 @@ void add_line(Move* pmove){
     Move_popM(&line);
   }
   lines.n_lines+=1;
+  increment_points_scored();
 }
 
 /*@requires line1 and line2 not null AND BOTH LISTS OF LENGTH AT LEAST 5

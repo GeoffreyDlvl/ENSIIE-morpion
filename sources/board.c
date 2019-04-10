@@ -8,6 +8,16 @@
 #include <linux/limits.h>
 #include <string.h>
 
+static int points_scored;
+
+void increment_points_scored(){
+    points_scored++;
+}
+
+int get_points_scored(){
+    return points_scored;
+}
+
 /*@requires width and height greater than 0
   @assigns board
   @ensures return empty board (all points set to NULL) */
@@ -180,6 +190,7 @@ bool read_file(Board* pboard, char* path)
         }
         line++;
     }
+    points_scored = 0;
     free(lineBuffer);
     fclose(fp);
     return true;

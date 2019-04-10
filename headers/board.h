@@ -65,6 +65,11 @@ typedef struct board
 } Board;
 /**< \brief board structure alias */
 
+
+void increment_points_scored();
+
+int get_points_scored();
+
 /**
  * \fn bool check_file(char* path)
  * \brief Check the integrity and structure of a file.
