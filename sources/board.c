@@ -503,8 +503,11 @@ int get_random_number(int min, int max)
 }
 
 void save_board(Board* pboard) {
-    char resolved_path[PATH_MAX]; /* 4096 chars */
-    char* path = strcat("boards/",ask_savefile_name());/*concatenate filename and saves folder in order to create path*/
+    char resolved_path[PATH_MAX];
+    char* fileName = ask_savefile_name();
+    char path[PATH_MAX] = "boards/";
+    strcat( path, fileName );
+    free(fileName); /* No longer needed */
     realpath(path, resolved_path);
     FILE *fp = fopen(resolved_path, "w");
     int line, col;

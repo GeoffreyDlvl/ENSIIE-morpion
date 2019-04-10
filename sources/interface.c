@@ -201,7 +201,8 @@ bool confirm_quit_save(Board* pboard) {
 
 
 char* ask_savefile_name(){
-    char fileName [100];
+    char* fileName = (char*)malloc(sizeof(char)*MAX_INPUT);
     printf("What name does the file should have ? :> ");
-    return fgets(fileName,100,stdin);
+    scanf(" %s", fileName);
+    return fileName;
 }
