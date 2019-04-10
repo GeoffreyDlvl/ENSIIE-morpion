@@ -9,6 +9,7 @@
 #include <string.h>
 
 static int points_scored;
+static const char* saving_path = "boards/saves/";
 
 void increment_points_scored(){
     points_scored++;
@@ -516,7 +517,8 @@ int get_random_number(int min, int max)
 void save_board(Board* pboard) {
     char resolved_path[PATH_MAX];
     char* fileName = ask_savefile_name();
-    char path[PATH_MAX] = "boards/";
+    char path[PATH_MAX];
+    strcpy(path,saving_path);
     strcat( path, fileName );
     free(fileName); /* No longer needed */
     realpath(path, resolved_path);
