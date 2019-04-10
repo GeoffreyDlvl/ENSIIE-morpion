@@ -49,6 +49,7 @@ int main(int argc, char* argv[]){
             }
         }
     }
+    display_logo();
     bool hint = false;
     initialize_HistoryList();
     initialize_LinesList();
@@ -59,6 +60,7 @@ int main(int argc, char* argv[]){
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(i<20 && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
     {
+        clear_screen();
         printf("Lines_history :\n");
         Move_print(get_lines_history());
         printf("Points_history_from_last_played_move :\n");

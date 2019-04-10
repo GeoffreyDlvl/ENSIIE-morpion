@@ -54,7 +54,6 @@ void print_board(Board* pboard, bool hint)
         }
         printf("\n");
     }
-
     if (hint) {
     /*list_available_moves(pboard);*/
     }
@@ -206,4 +205,38 @@ char* ask_savefile_name(){
     printf("What name does the file should have ? :> ");
     scanf(" %s", fileName);
     return fileName;
+}
+
+
+void display_logo(){
+    char resolved_path[PATH_MAX];
+    FILE * fp;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    realpath("assets/logo", resolved_path);
+    fp = fopen(resolved_path, "r");
+    if (fp == NULL)
+        exit(EXIT_FAILURE);
+    while ((read = getline(&line, &len, fp)) != -1) {
+        printf("%s", line);
+    }
+    fclose(fp);
+    if (line)
+        free(line);
+    char key;
+    printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
+    scanf("%c",&key);
+    clear_screen();
+}
+
+void clear_screen(){
+    system("clear");
+}
+
+void press_a_key_to_continue(){
+    char key;
+    printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
+    scanf("%c",&key);
+    scanf("%c",&key);
 }

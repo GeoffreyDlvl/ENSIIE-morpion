@@ -82,4 +82,10 @@ bool confirm_quit_save(Board* pboard);
  */
 char* ask_savefile_name();
 
+void display_logo();
+
+void clear_screen();
+
+void press_a_key_to_continue();
+
 #endif
