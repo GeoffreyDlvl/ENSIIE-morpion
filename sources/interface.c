@@ -7,11 +7,11 @@
 /*@requires pboard not null
   @assigns nothing
   @ensures prints board, shows possible moves if hint set to true */
-void print_board(Board* pboard, bool hint)
+void print_board(Board* pboard, bool hint,Move* possible_moves)
 {
     int width = pboard->width;
     int height = pboard->height;
-    int indexLines[4] = {-1,-1,-1,-1};
+    int indexLines[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
     int i, j;
     /* print header (y coordinates) */
     printf("\t\t\t\t Points scored :  %d \n\n",get_points_scored());
@@ -103,20 +103,19 @@ enum action select_action()
 	}
 	}
 }
-/*
+
 void list_available_moves(Board* pboard)
 {
-   TO DO 
-	Coord coord = get_valid_moves(pboard);
+     get_valid_moves(pboard);
 }
 
-
+/*
 	 
 void ask_help(Board* pboard)
 {
    TO DO 
-}
-*/
+   }*/
+
 void print_help(void)
 {
 	printf("------- HELP -------\n\n");

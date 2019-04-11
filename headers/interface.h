@@ -22,7 +22,7 @@
  * \param pboard Board pointer 
  * \param hint true if hint requested, false if hint NOT requested
  */
-void print_board(Board* pboard, bool hint);
+void print_board(Board* pboard, bool hint,Move* possible_moves);
 
 /**
  * \fn select_move(Board* pboard, Coord coord)
