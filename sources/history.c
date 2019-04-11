@@ -149,6 +149,9 @@ bool play_move(Board* pboard,Coord coord){
   if (!add_point(pboard,coord)){
     return false;
   }
+  while (pMove_length(&history.PlastPlayedMove)!=pMove_length(&history.PlastSavedMove)){
+    Move_popM(&history.PlastSavedMove);
+  }
   Move_addM(&history.PlastPlayedMove,coord.x,coord.y);
   Move_addM(&history.PlastSavedMove,coord.x,coord.y);
   history.moves+=1;
@@ -170,6 +173,7 @@ void cancel_move(Board* pboard)
   else{
     remove_point(pboard,*cancelled_move);
     Move_popM(&history.PlastPlayedMove);
+    history.moves-=1;
   }
 }
 
@@ -179,7 +183,14 @@ void cancel_move(Board* pboard)
 void replay_move(Board* pboard)
 {
   Move cancelled_move=history.PlastSavedMove;
-  play_move(pboard,*cancelled_move);
+  if (pMove_length(&history.PlastPlayedMove)==pMove_length(&history.PlastSavedMove)){
+    printf("Cannot replay move : no move has been cancelled\n");
+  }
+  else{
+    add_point(pboard,*cancelled_move);
+    Move_addM(&history.PlastPlayedMove,cancelled_move->x,cancelled_move->y);
+    history.moves+=1;
+  }
 }
 
 /*@requires nothing
