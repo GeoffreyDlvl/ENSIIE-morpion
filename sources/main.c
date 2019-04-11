@@ -13,16 +13,15 @@
 #include <linux/limits.h>
 
 void install_dependencies(){
-    FILE* fp;
     char resolved_path[PATH_MAX];
-    realpath("assets/install_dependencies.sh", resolved_path);
-    fp = fopen(resolved_path,"r");
-    char* line = NULL;
-    size_t lineLength = 0;
-    while((getline(&line, &lineLength, fp)) !=  EOF){
-        system(line);
-    }
-    free(line);
+    char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
+    realpath("assets/", resolved_path);
+    strcat(command,"sudo ");
+    strcat(command,resolved_path);
+    strcat(command,"/./install_dependencies.sh");
+    system(command);
+    printf("%s",command);
+    free(command);
 }
                                                                                 
 int main(int argc, char* argv[]){
