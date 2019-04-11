@@ -53,7 +53,7 @@ void print_board(Board* pboard,bool hint)
 	}
       }
       else if (hint && Move_search(possible_moves,j,i,indexLines)){
-	printf("$");
+	printf("*");
       }
       else {
 	printf(" ");
