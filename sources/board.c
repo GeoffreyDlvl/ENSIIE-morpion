@@ -217,6 +217,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
       }
     }
   }
+  *pvalid_points=valid_points;
 }
 
 void print_error(int* error){
