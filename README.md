@@ -5,17 +5,17 @@ Morpion is a solitaire game. Rules and goals are explained in ['instructions.pdf
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine.
+>These instructions will get you a copy of the project up and running on your local machine.
 
 ### Prerequisites
 
-The project runs preferably on a linux machine. The only required tools are GCC, the GNU Compiler Collection, and make, the GNU make utility. They should be installed by default. If they are not, the following linux command will install gcc
+>The project runs preferably on a linux machine. The only required tools are GCC, the GNU Compiler Collection, and make, the GNU make utility. They should be installed by default. If they are not, the following linux command will install gcc
 
 ```
 sudo apt install gcc
 ```
 
-And this command will install make
+>And this command will install make
 
 ```
 sudo apt install build-essential
@@ -23,11 +23,31 @@ sudo apt install build-essential
 
 ### Building
 
-To build the project, simple type the following command on the root of the project
+>To build the project, simple type the following command on the root of the project
 
 ```
 make
 ```
+### Testing
+
+> Installing CUnit
+
+```console
+foo@bar$ sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev
+```
+
+> Including it in c file
+
+```c
+#include <CUnit/CUnit.h>
+```
+> Including it in build
+
+
+```console
+gcc  -o test test.c  -lcunit
+```
+
 
 ## Running the game
 
