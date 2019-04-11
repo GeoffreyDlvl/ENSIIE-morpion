@@ -122,14 +122,14 @@ bool check_file(FILE *fp)
             break;
 
         if(strlen(lineBuffer) - 1 != width) {
-            fprintf(stderr, "File error: board width must be equal for each line.");
+            /*fprintf(stderr, "File error: board width must be equal for each line.");*/
             return false;
         }
 
         for (col = 0; col < width ; col++) {
             /* check if char is valid */
             if (lineBuffer[col] != '.' && lineBuffer[col] != 'o' && lineBuffer[col] != '\n') {
-                fprintf(stderr, "File error: unknown character.");
+                /*fprintf(stderr, "File error: unknown character.");*/
                 return false;
             }
         }
