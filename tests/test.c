@@ -34,10 +34,20 @@ int clean_suite(void)
     }*/
     return 0;
 }
+
+/************* TESTS *************/
 void test_read_file_char_is_invalid(void)
 {
     char resolved_path[PATH_MAX];
     realpath("test/test-files/board-char-invalid", resolved_path);
+    FILE *fp = fopen(resolved_path, "r");
+    CU_ASSERT_FALSE(check_file(fp));
+}
+
+void test_read_file_dimensions_are_invalid(void)
+{
+    char resolved_path[PATH_MAX];
+    realpath("test/test-files/board-dimensions-invalid", resolved_path);
     FILE *fp = fopen(resolved_path, "r");
     CU_ASSERT_FALSE(check_file(fp));
 }
@@ -58,7 +68,9 @@ int main(void)
     }
 
     /* add the tests to the suite */
-    if ((NULL == CU_add_test(pSuite, "Read_board_file_invalid_char", test_read_file_char_is_invalid)))
+    if( (NULL == CU_add_test(pSuite, "Read_board_file_invalid_char", test_read_file_char_is_invalid))
+        ||
+        (NULL == CU_add_test(pSuite, "Read_board_file_dimensions_invalid", test_read_file_dimensions_are_invalid)) )
     {
         CU_cleanup_registry();
         return CU_get_error();
