@@ -11,6 +11,19 @@
 #include <errno.h>
 #include <time.h>
 #include <linux/limits.h>
+
+void install_dependencies(){
+    FILE* fp;
+    char resolved_path[PATH_MAX];
+    realpath("assets/install_dependencies.sh", resolved_path);
+    fp = fopen(resolved_path,"r");
+    char* line = NULL;
+    size_t lineLength = 0;
+    while((getline(&line, &lineLength, fp)) !=  EOF){
+        system(line);
+    }
+    free(line);
+}
                                                                                 
 int main(int argc, char* argv[]){
     srand(time(NULL));
@@ -49,6 +62,10 @@ int main(int argc, char* argv[]){
             }
         }
     }
+    //printf("INTALLING DEPENDENCIES");
+    //system("sudo apt-get install wmctrl");
+    install_dependencies();
+    system("wmctrl -r ':ACTIVE:' -b toggle,fullscreen");
     display_logo();
     bool hint = false;
     initialize_HistoryList();
