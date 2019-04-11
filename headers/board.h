@@ -108,7 +108,7 @@ Board create_empty_board(int width,int height);
  * \param pboard Board pointer
  * \return A p_point list
  */
-Coord* get_valid_moves(Board* pboard);
+void get_valid_moves(Board* pboard,Move* pvalid_points);
 
 /**
  * \fn bool is_move_valid(Board* pboard,p_point p_point);

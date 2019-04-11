@@ -205,7 +205,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
   int j;
   int error=0;
   Move valid_points=*pvalid_points;
-  Move valid_move=Move_create();
+  Move valid_moves=Move_create();
   Coord coord_temp;
   for(i=0 ; i < pboard->height ; i++){
     for(j=0 ; j < pboard->width ; j++){
@@ -516,13 +516,13 @@ void execute_action(Board* pboard, enum action action, bool* quit)
 
 /*@requires pboard not null
   @assigns nothing
-  @ensures returns true if game is over(if no moves available), else false*/
+  @ensures returns true if game is over(if no moves available), else false
 bool is_game_over(Board* pboard)
 {
-  if(!get_valid_moves(pboard))   /* <- à discuter */
+  if(!get_valid_moves(pboard))   
     return true;
-  return false;
-}
+    return false;
+    }*/
 
 /*@requires nothing 
   @assigns nothing

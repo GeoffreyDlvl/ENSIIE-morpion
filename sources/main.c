@@ -67,7 +67,6 @@ int main(int argc, char* argv[]){
     install_dependencies();
     system("wmctrl -r ':ACTIVE:' -b toggle,fullscreen");
     display_logo();
-    bool hint = false;
     initialize_HistoryList();
     initialize_LinesList();
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
@@ -84,7 +83,7 @@ int main(int argc, char* argv[]){
         Move_print(get_points_history());
 	printf("Points_history_from_last_saved_move :\n");
         Move_print(get_points_saved_history());
-        print_board(&board, hint);
+        print_board(&board);
         playerAction = select_action();
         execute_action(&board, playerAction, &quitGame);
         i++;
