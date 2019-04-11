@@ -61,14 +61,16 @@ void free_board(Board* pboard){
 bool add_point(Board* pboard, Coord coord){
   int i=coord.y;
   int j=coord.x;
+  int error=0;
   Move move=Move_create(); /* <- becomes list of possible moves after is_move_valid is called */
-  if (is_move_valid(pboard,coord,&move)){
+  if (is_move_valid(pboard,coord,&move,&error)){
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
     *(pboard->points[i][j])=1;
     add_line(&move);/* adds line to line history, calls select_line if there is more than 1 possible line*/
     return true;
   }
   else{
+    print_error(&error);
     return false;
   }
 }
@@ -197,33 +199,49 @@ bool read_file(Board* pboard, char* path)
     return true;
 }
 
-Move get_valid_moves(Board* pboard)
+void get_valid_moves(Board* pboard,Move* pvalid_points)
 {
   int i;
   int j;
-  Move* pmove=NULL;
-  Move valid_moves = Move_create();
+  int error=0;
+  Move valid_points=*pvalid_points;
+  Move valid_move=Move_create();
   Coord coord_temp;
-  for(i=0 ; i < pboard->width ; i++){
-    for(j=0 ; j < pboard->height ; j++){
-        coord_temp.x = i;
-        coord_temp.y = j;
-        if(is_move_valid(pboard,coord_temp,pmove)){
-          Move_addM(&valid_moves,i,j);
-	      }
+  for(i=0 ; i < pboard->height ; i++){
+    for(j=0 ; j < pboard->width ; j++){
+      coord_temp.x = j;
+      coord_temp.y = i;
+      if(is_move_valid(pboard,coord_temp,&valid_moves,&error)){
+	pMove_free(&valid_moves);
+	Move_addM(&valid_points,coord_temp.x,coord_temp.y);
+      }
     }
   }
-  return valid_moves;
+}
+
+void print_error(int* error){
+  int n_error=*error;
+  if (n_error==1){
+    printf("Selected coordinates are invalid.\n");
+  }
+  else if (n_error==2){
+    printf("This point exists already.\n");
+  }
+  else if (n_error==3){
+    printf("Impossible move : either no available alignement or all available alignements have more than one point in common with selected point.\n");
+  }
 }
 
 /*@requires pboard not null
   @assigns pMove
   @ensures tests if point is valid -> see subsequent functions for details on conditions */
-bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
+bool is_move_valid(Board* pboard,Coord coord,Move* pMove,int* error){
   if (!is_move_in_board(pboard,coord)){
+    *error=1;
     return false;
   }
   if (is_move_exists_already(pboard,coord)){
+    *error=2;
     return false;
   }
   Move candidate_lines=Move_create();
@@ -232,7 +250,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove){
   NE_diagonal_search(&candidate_lines,coord,pboard);
   NW_diagonal_search(&candidate_lines,coord,pboard);
   if (Move_isEmpty(candidate_lines)){
-    printf("This movement is not possible\n");
+    *error=3;
     return false;
   }
   *pMove=candidate_lines; /*at this stage *pMove is the list of all possible lines */
@@ -248,7 +266,6 @@ bool is_move_in_board(Board* pboard,Coord coord){
   if (x >= 0 && y>= 0 && x < pboard->width && y < pboard->height){
     return true;
   }
-  printf("Selected coordinates are invalid.\n");
   return false;
 }
 
@@ -259,7 +276,6 @@ bool is_move_exists_already(Board* pboard,Coord coord){
   int x=coord.x;
   int y=coord.y;
   if (pboard->points[y][x]){
-    printf("This point exists already.\n");
     return true;
   }
   return false;
@@ -486,7 +502,9 @@ void execute_action(Board* pboard, enum action action, bool* quit)
         cancel_move(pboard);
     } else if (action == REPLAY_MOVE){
         replay_move(pboard);
-    } else if (action == ASK_HELP){
+    } else if (action == LIST_MOVES){
+        list_available_moves(pboard);
+    }else if (action == ASK_HELP){
         print_help();
         press_a_key_to_continue();
     } else if (action == QUIT_GAME){
