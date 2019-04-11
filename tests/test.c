@@ -39,17 +39,32 @@ int clean_suite(void)
 void test_read_file_char_is_invalid(void)
 {
     char resolved_path[PATH_MAX];
-    realpath("test/test-files/board-char-invalid", resolved_path);
+    realpath("test-files/board-invalid-char", resolved_path);
     FILE *fp = fopen(resolved_path, "r");
+
     CU_ASSERT_FALSE(check_file(fp));
+    fclose(fp);
+    free(fp);
 }
 
 void test_read_file_dimensions_are_invalid(void)
 {
     char resolved_path[PATH_MAX];
-    realpath("test/test-files/board-dimensions-invalid", resolved_path);
+    realpath("test-files/board-invalid-dimensions", resolved_path);
     FILE *fp = fopen(resolved_path, "r");
     CU_ASSERT_FALSE(check_file(fp));
+    fclose(fp);
+    free(fp);
+}
+
+void test_read_file_board_is_valid(void)
+{
+    char resolved_path[PATH_MAX];
+    realpath("test-files/board-valid", resolved_path);
+    FILE *fp = fopen(resolved_path, "r");
+    CU_ASSERT(check_file(fp));
+    fclose(fp);
+    free(fp);
 }
 
 int main(void)
@@ -70,7 +85,9 @@ int main(void)
     /* add the tests to the suite */
     if( (NULL == CU_add_test(pSuite, "Read_board_file_invalid_char", test_read_file_char_is_invalid))
         ||
-        (NULL == CU_add_test(pSuite, "Read_board_file_dimensions_invalid", test_read_file_dimensions_are_invalid)) )
+        (NULL == CU_add_test(pSuite, "Read_board_file_dimensions_invalid", test_read_file_dimensions_are_invalid))
+        ||
+        (NULL == CU_add_test(pSuite, "Read_board_valid", test_read_file_board_is_valid)) )
     {
         CU_cleanup_registry();
         return CU_get_error();
