@@ -7,6 +7,10 @@ Morpion is a solitaire game. Rules and goals are explained in ['instructions.pdf
 
 >These instructions will get you a copy of the project up and running on your local machine.
 
+```console
+    foo@bar$ git clone https://github.com/GeoffreyDlvl/ENSIIE-morpion.git
+```
+
 ### Prerequisites
 
 >The project runs preferably on a linux machine. The only required tools are GCC, the GNU Compiler Collection, and make, the GNU make utility. They should be installed by default. If they are not, the following linux command will install gcc
@@ -54,10 +58,8 @@ gcc  -o test test.c  -lcunit
 Go to the sources directory and execute the program
 
 ```
-./run
+./morpion
 ```
-
-Note that the executable is not produced during the build yet. The game cannot be run in *lot a* version.
 
 ## Built With
 
