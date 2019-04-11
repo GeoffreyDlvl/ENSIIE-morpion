@@ -7,12 +7,16 @@
 /*@requires pboard not null
   @assigns nothing
   @ensures prints board, shows possible moves if hint set to true */
-void print_board(Board* pboard)
+void print_board(Board* pboard,bool hint)
 {
   int width = pboard->width;
   int height = pboard->height;
   int indexLines[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
   int i, j;
+  Move possible_moves=Move_create();
+  if (hint){
+    get_valid_moves(pboard,&possible_moves);
+  }
   /* print header (y coordinates) */
   printf("\t\t\t\t Points scored :  %d \n\n",get_points_scored());
   printf("  ");
@@ -47,7 +51,11 @@ void print_board(Board* pboard)
 	} else {
 	  printf("\u2022");
 	}
-      } else {
+      }
+      else if (hint && Move_search(possible_moves,j,i,indexLines)){
+	printf("*");
+      }
+      else {
 	printf(" ");
       }
       printf("]");

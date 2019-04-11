@@ -217,6 +217,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
       }
     }
   }
+  *pvalid_points=valid_points;
 }
 
 void print_error(int* error){
@@ -516,13 +517,17 @@ void execute_action(Board* pboard, enum action action, bool* quit)
 
 /*@requires pboard not null
   @assigns nothing
-  @ensures returns true if game is over(if no moves available), else false
+  @ensures returns true if game is over(if no moves available), else false*/
 bool is_game_over(Board* pboard)
 {
-  if(!get_valid_moves(pboard))   
+  Move possible_moves=Move_create();
+  get_valid_moves(pboard,&possible_moves);
+  if (pMove_length(&possible_moves)==0){
     return true;
-    return false;
-    }*/
+  }
+  return false;
+}
+
 
 /*@requires nothing 
   @assigns nothing
