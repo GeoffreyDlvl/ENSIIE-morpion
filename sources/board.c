@@ -77,8 +77,8 @@ bool add_point(Board* pboard, Coord coord){
   @assigns pboard->points[i][j]
   @ensures frees allocated memory of point of coordinates coord and removes associates line*/
 void remove_point(Board* pboard,Coord coord){
-  int i=coord.x;
-  int j=coord.y;
+  int j=coord.x;
+  int i=coord.y;
   free(pboard->points[i][j]);
   pboard->points[i][j]=NULL;
   remove_lines(&coord); /* remove all lines containing coord in lines history */

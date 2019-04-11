@@ -135,6 +135,13 @@ Move get_points_history(){
   return history.PlastPlayedMove;
 }
 
+/*@requires nothing
+  @assigns nothing
+  @ensures makes points saved history accessible outside of history.c */
+Move get_points_saved_history(){
+  return history.PlastSavedMove;
+}
+
 /*@requires pboard not null
   @assigns pboard
   @ensures plays desired move, returning true if successful, else false */
@@ -143,11 +150,11 @@ bool play_move(Board* pboard,Coord coord){
     return false;
   }
   Move_addM(&history.PlastPlayedMove,coord.x,coord.y);
+  Move_addM(&history.PlastSavedMove,coord.x,coord.y);
   history.moves+=1;
   if (history.moves==1){ 
     history.PfirstMove=&coord;
   }
-  history.PlastSavedMove=&coord; /* once a move is played PlastSavedMove and PlastPlayedMove point to same Coord */
   return true;
 }
 
@@ -157,10 +164,12 @@ bool play_move(Board* pboard,Coord coord){
 void cancel_move(Board* pboard)
 {
   Move cancelled_move=history.PlastPlayedMove;
-  remove_point(pboard,*cancelled_move);
-  history.PlastPlayedMove=cancelled_move->previous;
-  if (history.moves >= 1 && history.PlastSavedMove->x != cancelled_move->x && history.PlastSavedMove->y != cancelled_move->y){
-    Move_popM(&history.PlastSavedMove);
+  if (pMove_length(&history.PlastPlayedMove)==0){
+    printf("Nothing to cancel : no move has been played\n");
+  }
+  else{
+    remove_point(pboard,*cancelled_move);
+    Move_popM(&history.PlastPlayedMove);
   }
 }
 
@@ -178,12 +187,12 @@ void replay_move(Board* pboard)
   @ensures frees allocated memory of lines and points histories */
 void free_history(void)
 {
-  Move moveH=history.PlastSavedMove;
+  Move moveHS=history.PlastSavedMove;
+  Move moveHP=history.PlastPlayedMove;
   Move moveL=lines.lines_history;
-  Move_print(moveL);
-  Move_print(moveH);
-  /*pMove_free(&moveH);
-    pMove_free(&moveL);*/
+  pMove_free(&moveHS);
+  pMove_free(&moveHP);
+  pMove_free(&moveL);
 }
 
 /*@requires pmove not null

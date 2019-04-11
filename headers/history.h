@@ -142,6 +142,8 @@ Move get_lines_history();
 
 Move get_points_history();
 
+Move get_points_saved_history();
+
 /**
  * \fn void initialize_LinesList();
  * \brief initializes LinesList 
