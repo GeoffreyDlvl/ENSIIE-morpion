@@ -12,6 +12,7 @@
 #include <time.h>
 #include <linux/limits.h>
 
+/*This function will install the required dependencies */
 void install_dependencies(){
     char resolved_path[PATH_MAX];
     char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
@@ -20,7 +21,6 @@ void install_dependencies(){
     strcat(command,resolved_path);
     strcat(command,"/./install_dependencies.sh");
     system(command);
-    printf("%s",command);
     free(command);
 }
                                                                                 
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]){
     //printf("INTALLING DEPENDENCIES");
     //system("sudo apt-get install wmctrl");
     install_dependencies();
-    system("wmctrl -r ':ACTIVE:' -b toggle,fullscreen");
+    system("wmctrl -r ':ACTIVE:' -b toggle,fullscreen &> /dev/null");
     display_logo();
     initialize_HistoryList();
     initialize_LinesList();

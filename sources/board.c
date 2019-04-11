@@ -505,6 +505,7 @@ void execute_action(Board* pboard, enum action action, bool* quit)
         replay_move(pboard);
     } else if (action == LIST_MOVES){
         list_available_moves(pboard);
+        press_a_key_to_continue();
     }else if (action == ASK_HELP){
         print_help();
         press_a_key_to_continue();
