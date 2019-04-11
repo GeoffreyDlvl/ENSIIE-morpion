@@ -187,6 +187,9 @@ void replay_move(Board* pboard)
     printf("Cannot replay move : no move has been cancelled\n");
   }
   else{
+    while (pMove_length(&history.PlastPlayedMove)+1!=pMove_length(&cancelled_move)){
+      cancelled_move=cancelled_move->previous;
+    }
     add_point(pboard,*cancelled_move);
     Move_addM(&history.PlastPlayedMove,cancelled_move->x,cancelled_move->y);
     history.moves+=1;
