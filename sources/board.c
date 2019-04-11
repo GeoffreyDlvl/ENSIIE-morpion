@@ -11,13 +11,18 @@
 static int points_scored;
 static const char* saving_path = "boards/saves/";
 
-void increment_points_scored(){
-    points_scored++;
+void update_points_scored(){
+    points_scored = get_move_count()+1;
+}
+
+void update_points_scored_val(int val){
+    points_scored += val;
 }
 
 int get_points_scored(){
     return points_scored;
 }
+
 
 /*@requires width and height greater than 0
   @assigns board

@@ -114,6 +114,10 @@ void initialize_HistoryList(){
     }
 }
 
+size_t get_move_count(){
+    return history.moves;
+}
+
 static LinesList lines;
 void initialize_LinesList(){
     if(lines.n_lines == 0) {
@@ -174,6 +178,7 @@ void cancel_move(Board* pboard)
     remove_point(pboard,*cancelled_move);
     Move_popM(&history.PlastPlayedMove);
     history.moves-=1;
+    update_points_scored_val(-1);
   }
 }
 
@@ -222,7 +227,7 @@ void add_line(Move* pmove){
     Move_popM(&line);
   }
   lines.n_lines+=1;
-  increment_points_scored();
+    update_points_scored();
 }
 
 /*@requires line1 and line2 not null AND BOTH LISTS OF LENGTH AT LEAST 5

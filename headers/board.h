@@ -66,9 +66,11 @@ typedef struct board
 /**< \brief board structure alias */
 
 
-void increment_points_scored();
+void update_points_scored();
 
 int get_points_scored();
+
+void update_points_scored_val(int val);
 
 /**
  * \fn bool check_file(char* path)
