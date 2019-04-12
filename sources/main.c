@@ -59,7 +59,7 @@ int main(int argc, char* argv[]){
     initialize_LinesList();
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
     enum action playerAction = PLAY_MOVE;
-    bool hint = false;
+    set_hint(false);
     bool quitGame = false;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
@@ -71,16 +71,16 @@ int main(int argc, char* argv[]){
         Move_print(get_points_history());
 	printf("Points_history_from_last_saved_move :\n");
         Move_print(get_points_saved_history());
-        print_board(&board,hint);
-        hint = false;
+        print_board(&board);
+        set_hint(false);
         playerAction = select_action();
-        execute_action(&board, playerAction, &hint, &quitGame);
+        execute_action(&board, playerAction, &quitGame);
     }
   /* Free all allocated pointers */
   free_history();
   remove_points(&board);
   free_board(&board);
-
+  system("wmctrl -r ':ACTIVE:' -b remove,fullscreen &> /dev/null");
   return EXIT_SUCCESS;
 }
       

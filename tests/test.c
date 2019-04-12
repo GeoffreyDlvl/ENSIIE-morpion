@@ -67,6 +67,22 @@ void test_read_file_board_is_valid(void)
     free(fp);
 }
 
+void test_adding_already_existing_points(void)
+{
+    Board* pboard = (Board*) malloc(sizeof(Board));
+    *pboard = create_empty_board(10,10);
+    int* point = (int*) malloc(sizeof(int));
+    *point =1;
+    pboard->points[0][0] = point;
+    Coord* coord = (Coord*) malloc(sizeof(Coord));
+    coord->x = 0;
+    coord->y = 0;
+    CU_ASSERT_EQUAL(add_point(pboard,*coord),false);
+    free_board(pboard);
+    free(coord);
+    free(point);
+}
+
 int main(void)
 {
     CU_pSuite pSuite = NULL;
@@ -87,7 +103,9 @@ int main(void)
         ||
         (NULL == CU_add_test(pSuite, "Read_board_file_dimensions_invalid", test_read_file_dimensions_are_invalid))
         ||
-        (NULL == CU_add_test(pSuite, "Read_board_valid", test_read_file_board_is_valid)) )
+        (NULL == CU_add_test(pSuite, "Read_board_valid", test_read_file_board_is_valid))
+        ||
+        (NULL == CU_add_test(pSuite, "Adding_already_existing_points", test_adding_already_existing_points)) )
     {
         CU_cleanup_registry();
         return CU_get_error();
