@@ -4,6 +4,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+
+typedef enum error
+{
+    FILE_DIMENSION_ERR, /**< Board dimensions in file are not NxM */
+    FILE_UNKNOWN_CHAR_ERR, /**< Board character in file is unknown */
+    POINT_ALREADY_EXIST_ERR, /**< The point already exists */
+    INVALID_COORDINATES_ERR, /**< Coordinates are invalid */
+    ALIGNMENT_ERR, /**< Alignment is incorrect */
+    /* ADD MORE ENUMERATIONS IF REQUIRED */
+} Error;
+
 void install_dependencies(void);
 
 size_t get_file_board_width(FILE *fp);

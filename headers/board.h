@@ -14,6 +14,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include "utils.h"
 
 /**
  * \enum action
@@ -96,7 +97,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points);
  * \param p_point Coordinates of the selected move
  * \return true if no error occured, false otherwise
  */
-bool is_move_valid(Board* pboard,Coord coord,Move* pmove,int* error);
+bool is_move_valid(Board* pboard,Coord coord,Move* pmove, Error* error);
 
 /**
  * \fn void print_error(int* error);
@@ -104,7 +105,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pmove,int* error);
  *
  * \param int* error not null
  */
-void print_error(int* error);
+/*void print_error(int* error);*/
 
 /**
  * \fn bool is_move_in_board(Board* pboard,Coord coord);

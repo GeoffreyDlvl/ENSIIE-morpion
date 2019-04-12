@@ -68,7 +68,7 @@ void free_board(Board* pboard){
 bool add_point(Board* pboard, Coord coord){
   int i=coord.y;
   int j=coord.x;
-  int error=0;/* if move isn't valid, it is called by print_error */
+  Error error; /* if move isn't valid, it is called by print_error */
   Move move=Move_create(); /* <- becomes list of possible moves after is_move_valid is called */
   if (is_move_valid(pboard,coord,&move,&error)){
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
@@ -77,7 +77,7 @@ bool add_point(Board* pboard, Coord coord){
     return true;
   }
   else{
-    print_error(&error);
+    print_error(error);
     return false;
   }
 }
@@ -151,7 +151,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
 {
   int i;
   int j;
-  int error=0;/* needs to be called by is_move_valid */
+  Error error;/* needs to be called by is_move_valid */
   Move valid_points=*pvalid_points;
   Move valid_moves=Move_create();/* list of available alignements : needs to be called by is_move_valid */
   Coord coord_temp;
@@ -171,7 +171,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
 /*@requires error not null
   @assigns nothing
   @ensures prints error reported by is_move_valid */
-void print_error(int* error){
+/*void print_error(int* error){
   int n_error=*error;
   if (n_error==1){
     printf("Selected coordinates are invalid.\n");
@@ -185,18 +185,18 @@ void print_error(int* error){
     printf("Impossible move : either no available alignement or all available alignements have more than one point in common with selected point.\n");
     press_a_key_to_continue();
   }
-}
+}*/
 
 /*@requires pboard not null
   @assigns pMove
   @ensures tests if point is valid -> see subsequent functions for details on conditions */
-bool is_move_valid(Board* pboard,Coord coord,Move* pMove,int* error){
+bool is_move_valid(Board* pboard,Coord coord,Move* pMove,Error* error){
   if (!is_move_in_board(pboard,coord)){
-    *error=1;
+    *error=POINT_ALREADY_EXIST_ERR;
     return false;
   }
   if (is_move_exists_already(pboard,coord)){
-    *error=2;
+    *error=INVALID_COORDINATES_ERR;
     return false;
   }
   Move candidate_lines=Move_create();
@@ -205,7 +205,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove,int* error){
   NE_diagonal_search(&candidate_lines,coord,pboard);
   NW_diagonal_search(&candidate_lines,coord,pboard);
   if (Move_isEmpty(candidate_lines)){
-    *error=3;
+    *error=ALIGNMENT_ERR;
     return false;
   }
   *pMove=candidate_lines; /*at this stage *pMove is the list of all possible lines */

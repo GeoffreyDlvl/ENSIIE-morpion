@@ -14,6 +14,7 @@
 
 #include <stdbool.h> 
 #include "board.h"
+#include "utils.h"
 
 void set_hint(bool boolean);
 
@@ -93,5 +94,14 @@ void display_logo();
 void clear_screen();
 
 void press_a_key_to_continue();
+
+/**
+ * \fn void print_error(Error error);
+ * \brief Print error message
+ *
+ * \param err Error to be displayed
+ */
+void print_error(Error err);
+
 
 #endif

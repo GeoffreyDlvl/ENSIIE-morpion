@@ -4,6 +4,25 @@
 #include <stdlib.h>
 #include <linux/limits.h>
 
+/* Color support */
+#define RESET   "\033[0m"
+#define BLACK   "\033[30m"      /* Black */
+#define RED     "\033[31m"      /* Red */
+#define GREEN   "\033[32m"      /* Green */
+#define YELLOW  "\033[33m"      /* Yellow */
+#define BLUE    "\033[34m"      /* Blue */
+#define MAGENTA "\033[35m"      /* Magenta */
+#define CYAN    "\033[36m"      /* Cyan */
+#define WHITE   "\033[37m"      /* White */
+#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
+#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
+#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
+#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
+#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
+#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
+#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
+#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
+
 static bool hint;
 
 void set_hint(bool boolean){
@@ -274,4 +293,30 @@ void press_a_key_to_continue(){
     printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
     scanf("%c",&key);
     scanf("%c",&key);
+}
+
+void print_error(Error err) {
+    switch (err) {
+        case FILE_DIMENSION_ERR:
+            fprintf(stderr, BOLDRED "File error: board width must be equal for each line.\n" RESET);
+            break;
+        case FILE_UNKNOWN_CHAR_ERR:
+            fprintf(stderr, BOLDRED "File error: unknown character.\n" RESET);
+            break;
+        case POINT_ALREADY_EXIST_ERR:
+            fprintf(stderr, BOLDRED "This point already exists.\n" RESET);
+            break;
+        case INVALID_COORDINATES_ERR:
+            fprintf(stderr, BOLDRED "Selected coordinates are invalid.\n" RESET);
+            break;
+        case ALIGNMENT_ERR:
+            fprintf(stderr, BOLDRED "Impossible move : there is either no available alignment or all available alignments have "
+                            "more than one point in common with selected point.\n" RESET);
+            break;
+        default:
+            fprintf(stderr, RED "Undefined error (requires implementation)." RESET);
+            break;
+
+        /* TODO: press_a_key_to_continue() should be called be functions calling print_error */
+    }
 }
