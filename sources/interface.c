@@ -23,6 +23,8 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
+#define BLINK   "\033[5m"
+
 static bool hint;
 
 void set_hint(bool boolean){
@@ -80,13 +82,13 @@ void print_board(Board* pboard)
       printf("[");
       if(pboard->points[i][j]) {
 	if (Move_search(get_lines_history(),j,i,indexLines)) {
-	  printf("x");
+	  printf(MAGENTA "x" RESET);
 	} else {
 	  printf("\u2022");
 	}
       }
       else if (hint && Move_search(possible_moves,j,i,indexLines)){
-	printf("*");
+	printf(BLINK "*" RESET);
       }
       else {
 	printf(" ");
