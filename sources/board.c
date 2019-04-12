@@ -67,7 +67,7 @@ void free_board(Board* pboard){
 bool add_point(Board* pboard, Coord coord){
   int i=coord.y;
   int j=coord.x;
-  int error=0;
+  int error=0;/* if move isn't valid, it is called by print_error */
   Move move=Move_create(); /* <- becomes list of possible moves after is_move_valid is called */
   if (is_move_valid(pboard,coord,&move,&error)){
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
@@ -87,7 +87,7 @@ bool add_point(Board* pboard, Coord coord){
 void remove_point(Board* pboard,Coord coord){
   int j=coord.x;
   int i=coord.y;
-  free(pboard->points[i][j]);
+  free(pboard->points[i][j]);/* free point from board */
   pboard->points[i][j]=NULL;
   remove_lines(&coord); /* remove all lines containing coord in lines history */
 }
@@ -205,20 +205,23 @@ bool read_file(Board* pboard, char* path)
     return true;
 }
 
+/*@requires pboard,pvalid_points not null
+  @assigns pvalid_points
+  @ensures pvalid_points points to a list of all the possible moves to be played */
 void get_valid_moves(Board* pboard,Move* pvalid_points)
 {
   int i;
   int j;
-  int error=0;
+  int error=0;/* needs to be called by is_move_valid */
   Move valid_points=*pvalid_points;
-  Move valid_moves=Move_create();
+  Move valid_moves=Move_create();/* list of available alignements : needs to be called by is_move_valid */
   Coord coord_temp;
   for(i=0 ; i < pboard->height ; i++){
     for(j=0 ; j < pboard->width ; j++){
       coord_temp.x = j;
       coord_temp.y = i;
       if(is_move_valid(pboard,coord_temp,&valid_moves,&error)){
-	pMove_free(&valid_moves);
+	pMove_free(&valid_moves);/*free list of available alignements */
 	Move_addM(&valid_points,coord_temp.x,coord_temp.y);
       }
     }
@@ -226,6 +229,9 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
   *pvalid_points=valid_points;
 }
 
+/*@requires error not null
+  @assigns nothing
+  @ensures prints error reported by is_move_valid */
 void print_error(int* error){
   int n_error=*error;
   if (n_error==1){
@@ -255,7 +261,7 @@ bool is_move_valid(Board* pboard,Coord coord,Move* pMove,int* error){
     return false;
   }
   Move candidate_lines=Move_create();
-  horizontal_search(&candidate_lines,coord,pboard);
+  horizontal_search(&candidate_lines,coord,pboard);/*search in each direction */
   vertical_search(&candidate_lines,coord,pboard);
   NE_diagonal_search(&candidate_lines,coord,pboard);
   NW_diagonal_search(&candidate_lines,coord,pboard);
@@ -517,9 +523,13 @@ bool is_game_over(Board* pboard)
 {
   Move possible_moves=Move_create();
   get_valid_moves(pboard,&possible_moves);
-  if (pMove_length(&possible_moves)==0){
+  if (pMove_length(&possible_moves)==0){ /* if no moves available */
+    printf("No points to be played : the game is over!\n");
+    printf("Your final score is : %d\n",points_scored);
+    pMove_free(&possible_moves);/* deallocate memory of possible moves */
     return true;
   }
+  pMove_free(&possible_moves);/* deallocate memory of possible moves */
   return false;
 }
 
