@@ -98,18 +98,76 @@ void get_valid_moves(Board* pboard,Move* pvalid_points);
  */
 bool is_move_valid(Board* pboard,Coord coord,Move* pmove,int* error);
 
+/**
+ * \fn void print_error(int* error);
+ * \brief print error type.
+ *
+ * \param int* error not null
+ */
 void print_error(int* error);
 
+/**
+ * \fn bool is_move_in_board(Board* pboard,Coord coord);
+ * \brief tests if desired move is within the board
+ *
+ * \param pboard pointer to board
+ * \param coord Coord structure of desired point
+ * \return true if move is in board else false
+ */
 bool is_move_in_board(Board* pboard,Coord coord);
 
+/**
+ * \fn bool is_move_exists_already(Board* pboard,Coord coord);
+ * \brief tests if desired move exists already
+ *
+ * \param pboard pointer to board
+ * \param coord Coord structure of desired point
+ * \return true if move exists already else false
+ */
 bool is_move_exists_already(Board* pboard,Coord coord);
 
+/**
+ * \fn void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard);
+ * \brief searches for possible alignements on horizontal axis
+ *
+ * \param pboard pointer to board
+ * \param coord Coord structure of desired point
+ * \param pcand_lines pointer to list of possible alignements
+ * \ensures pcand_lines contains all possible horizontal alignements
+ */
 void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
+/**
+ * \fn void vertical_search(Move* pcand_lines,Coord coord,Board* pboard);
+ * \brief searches for possible alignements on vertical axis
+ *
+ * \param pboard pointer to board
+ * \param coord Coord structure of desired point
+ * \param pcand_lines pointer to list of possible alignements
+ * \ensures pcand_lines contains all possible vertical alignements
+ */
 void vertical_search(Move* pcand_lines,Coord coord,Board* pboard);
 
+/**
+ * \fn void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
+ * \brief searches for possible alignements on north east diagonal axis
+ *
+ * \param pboard pointer to board
+ * \param coord Coord structure of desired point
+ * \param pcand_lines pointer to list of possible alignements
+ * \ensures pcand_lines contains all possible north east diagonal alignements
+ */
 void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
+/**
+ * \fn void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
+ * \brief searches for possible alignements on north west diagonal axis
+ *
+ * \param pboard pointer to board
+ * \param coord Coord structure of desired point
+ * \param pcand_lines pointer to list of possible alignements
+ * \ensures pcand_lines contains all possible north west diagonal alignements
+ */
 void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
 
@@ -152,8 +210,23 @@ void free_board(Board* pboard);
 
 int get_random_number(int min, int max);
 
+/**
+ * \fn void remove_point(Board* pboard,Coord coord);
+ * \brief removes point from board
+ *
+ * \param Board* pboard pointer to board 
+ * \param coord Coord structure of point to be removed
+ * \ensures removes point from board by freeing allocated memory and by calling remove_lines to remove all corresponding alignements
+ */
 void remove_point(Board* pboard,Coord coord);
 
+/**
+ * \fn void remove_points(Board* pboard);
+ * \brief remove all points from board
+ *
+ * \param Board* pboard pointer to board
+ * \ensures removes all points from board, freeing allocated memory, without calling remove lines 
+ */
 void remove_points(Board* pboard);
 
 /*void horizontal_lines_on_init(Board* pboard);*/
