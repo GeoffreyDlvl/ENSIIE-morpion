@@ -194,11 +194,11 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
   @ensures tests if point is valid -> see subsequent functions for details on conditions */
 bool is_move_valid(Board* pboard,Coord coord,Move* pMove,Error* error){
   if (!is_move_in_board(pboard,coord)){
-    *error=POINT_ALREADY_EXIST_ERR;
+    *error=INVALID_COORDINATES_ERR;
     return false;
   }
   if (is_move_exists_already(pboard,coord)){
-    *error=INVALID_COORDINATES_ERR;
+    *error=POINT_ALREADY_EXIST_ERR;
     return false;
   }
   Move candidate_lines=Move_create();
