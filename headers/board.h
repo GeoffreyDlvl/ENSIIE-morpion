@@ -66,9 +66,11 @@ typedef struct board
 /**< \brief board structure alias */
 
 
-void increment_points_scored();
+void update_points_scored();
 
 int get_points_scored();
+
+void update_points_scored_val(int val);
 
 /**
  * \fn bool check_file(char* path)
@@ -108,7 +110,7 @@ Board create_empty_board(int width,int height);
  * \param pboard Board pointer
  * \return A p_point list
  */
-Coord* get_valid_moves(Board* pboard);
+void get_valid_moves(Board* pboard,Move* pvalid_points);
 
 /**
  * \fn bool is_move_valid(Board* pboard,p_point p_point);

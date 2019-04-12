@@ -12,17 +12,16 @@
 #include <time.h>
 #include <linux/limits.h>
 
+/*This function will install the required dependencies */
 void install_dependencies(){
-    FILE* fp;
     char resolved_path[PATH_MAX];
-    realpath("assets/install_dependencies.sh", resolved_path);
-    fp = fopen(resolved_path,"r");
-    char* line = NULL;
-    size_t lineLength = 0;
-    while((getline(&line, &lineLength, fp)) !=  EOF){
-        system(line);
-    }
-    free(line);
+    char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
+    realpath("assets/", resolved_path);
+    strcat(command,"sudo ");
+    strcat(command,resolved_path);
+    strcat(command,"/./install_dependencies.sh");
+    system(command);
+    free(command);
 }
                                                                                 
 int main(int argc, char* argv[]){
@@ -65,17 +64,16 @@ int main(int argc, char* argv[]){
     //printf("INTALLING DEPENDENCIES");
     //system("sudo apt-get install wmctrl");
     install_dependencies();
-    system("wmctrl -r ':ACTIVE:' -b toggle,fullscreen");
+    system("wmctrl -r ':ACTIVE:' -b toggle,fullscreen &> /dev/null");
     display_logo();
-    bool hint = false;
     initialize_HistoryList();
     initialize_LinesList();
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
     enum action playerAction = PLAY_MOVE;
-    int i=0;
+    bool hint = true;
     bool quitGame = false;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
-    while(i<20 && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
+    while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
     {
         clear_screen();
         printf("Lines_history :\n");
@@ -84,10 +82,9 @@ int main(int argc, char* argv[]){
         Move_print(get_points_history());
 	printf("Points_history_from_last_saved_move :\n");
         Move_print(get_points_saved_history());
-        print_board(&board, hint);
+        print_board(&board,hint);
         playerAction = select_action();
         execute_action(&board, playerAction, &quitGame);
-        i++;
     }
   /* Free all allocated pointers */
   free_history();

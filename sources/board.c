@@ -11,13 +11,18 @@
 static int points_scored;
 static const char* saving_path = "boards/saves/";
 
-void increment_points_scored(){
-    points_scored++;
+void update_points_scored(){
+    points_scored = get_move_count()+1;
+}
+
+void update_points_scored_val(int val){
+    points_scored += val;
 }
 
 int get_points_scored(){
     return points_scored;
 }
+
 
 /*@requires width and height greater than 0
   @assigns board
@@ -205,7 +210,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
   int j;
   int error=0;
   Move valid_points=*pvalid_points;
-  Move valid_move=Move_create();
+  Move valid_moves=Move_create();
   Coord coord_temp;
   for(i=0 ; i < pboard->height ; i++){
     for(j=0 ; j < pboard->width ; j++){
@@ -217,6 +222,7 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
       }
     }
   }
+  *pvalid_points=valid_points;
 }
 
 void print_error(int* error){
@@ -504,6 +510,7 @@ void execute_action(Board* pboard, enum action action, bool* quit)
         replay_move(pboard);
     } else if (action == LIST_MOVES){
         list_available_moves(pboard);
+        press_a_key_to_continue();
     }else if (action == ASK_HELP){
         print_help();
         press_a_key_to_continue();
@@ -519,10 +526,14 @@ void execute_action(Board* pboard, enum action action, bool* quit)
   @ensures returns true if game is over(if no moves available), else false*/
 bool is_game_over(Board* pboard)
 {
-  if(!get_valid_moves(pboard))   /* <- à discuter */
+  Move possible_moves=Move_create();
+  get_valid_moves(pboard,&possible_moves);
+  if (pMove_length(&possible_moves)==0){
     return true;
+  }
   return false;
 }
+
 
 /*@requires nothing 
   @assigns nothing

@@ -32,7 +32,7 @@ typedef struct{
 	size_t moves; /**< Number of played moves since the beginning of the game */
 	Move PfirstMove; /**< Pointer to the first move */ 
 	Move PlastPlayedMove; /**< Pointer to the last played move */
-        Move PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
+	Move PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
 }HistoryList;
 /**< \brief historyList structure alias */
 
@@ -171,6 +171,8 @@ bool candidate_line(Move* cand_line);
 void remove_lines(Move move);
 
 void initialize_HistoryList_from_string(char* s);
+
+size_t get_move_count();
 
 #endif
 

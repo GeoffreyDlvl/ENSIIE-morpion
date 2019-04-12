@@ -7,56 +7,61 @@
 /*@requires pboard not null
   @assigns nothing
   @ensures prints board, shows possible moves if hint set to true */
-void print_board(Board* pboard, bool hint,Move* possible_moves)
+void print_board(Board* pboard,bool hint)
 {
-    int width = pboard->width;
-    int height = pboard->height;
-    int indexLines[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
-    int i, j;
-    /* print header (y coordinates) */
-    printf("\t\t\t\t Points scored :  %d \n\n",get_points_scored());
-    printf("  ");
-    for(i = 0 ; i < width ; i++) {
-        /* Header not displayed correctly if size > 99
-         * Accepted because a board should not be as big.
-         * A game on a board this big would be way too
-         * long anyway.
-         */
-        if(i < 10)
-            printf(" %d ", i);
-        else {
-            printf(" %d", i);
-        }
+  int width = pboard->width;
+  int height = pboard->height;
+  int indexLines[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+  int i, j;
+  Move possible_moves=Move_create();
+  if (hint){
+    get_valid_moves(pboard,&possible_moves);
+  }
+  /* print header (y coordinates) */
+  printf("\t\t\t\t Points scored :  %d \n\n",get_points_scored());
+  printf("  ");
+  for(i = 0 ; i < width ; i++) {
+    /* Header not displayed correctly if size > 99
+     * Accepted because a board should not be as big.
+     * A game on a board this big would be way too
+     * long anyway.
+     */
+    if(i < 10)
+      printf(" %d ", i);
+    else {
+      printf(" %d", i);
+    }
+  }
+  printf("\n");
+  /* print x coordinates and board */
+  for(i = 0 ; i < height ; i++) {
+    /* print x coordinates */
+    if(i < 10)
+      printf("%d ", i);
+    else
+      printf("%d", i);
+
+    for(j = 0 ; j < width ; j++) {
+
+      /* print board line */
+      printf("[");
+      if(pboard->points[i][j]) {
+	if (Move_search(get_lines_history(),j,i,indexLines)) {
+	  printf("x");
+	} else {
+	  printf("\u2022");
+	}
+      }
+      else if (hint && Move_search(possible_moves,j,i,indexLines)){
+	printf("*");
+      }
+      else {
+	printf(" ");
+      }
+      printf("]");
     }
     printf("\n");
-    /* print x coordinates and board */
-    for(i = 0 ; i < height ; i++) {
-        /* print x coordinates */
-        if(i < 10)
-            printf("%d ", i);
-        else
-            printf("%d", i);
-
-        for(j = 0 ; j < width ; j++) {
-
-            /* print board line */
-            printf("[");
-            if(pboard->points[i][j]) {
-                if (Move_search(get_lines_history(),j,i,indexLines)) {
-                    printf("x");
-                } else {
-                    printf("\u2022");
-                }
-            } else {
-                printf(" ");
-            }
-            printf("]");
-        }
-        printf("\n");
-    }
-    if (hint) {
-    /*list_available_moves(pboard);*/
-    }
+  }
 }
 
 Coord select_move()
@@ -106,7 +111,16 @@ enum action select_action()
 
 void list_available_moves(Board* pboard)
 {
-     get_valid_moves(pboard);
+  Move possible_moves=Move_create();
+  get_valid_moves(pboard,&possible_moves);
+  Move current=possible_moves;
+  printf("Here is a list of possible moves:\n");
+  while (!Move_isEmpty(current)){
+    printf("[%d,%d] ",current->x,current->y);
+    current=current->previous;
+  }
+  printf("\n");
+  pMove_free(&possible_moves);
 }
 
 /*
