@@ -19,6 +19,8 @@ void set_hint(bool boolean);
 
 bool get_hint();
 
+void set_fullscreen(void);
+
 /**
  * \fn print_board(Board* pboard, bool hint)
  * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
