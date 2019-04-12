@@ -30,10 +30,10 @@
  */
 typedef struct{
 	size_t moves; /**< Number of played moves since the beginning of the game */
-	Move PfirstMove; /**< Pointer to the first move */ 
-	Move PlastPlayedMove; /**< Pointer to the last played move */
-	Move PlastSavedMove; /**< Pointer to the last saved move (e.g. move before a canceled move) */
-}HistoryList;
+	Move PfirstMove; /**< first move */ 
+	Move PlastPlayedMove; /**< last played move */
+	Move PlastSavedMove; /**< last saved move (e.g. move before a canceled move) */
+}HistoryList;/* PlastPlayedMove and PlastPlayedMove are two seperate lists : allows cancelling and replaying consecutively multiple times */
 /**< \brief historyList structure alias */
 
 /**
@@ -45,7 +45,7 @@ typedef struct{
  */
 typedef struct{
   size_t n_lines;
-  Move lines_history; /* lines (of length 5) are concatenated */
+  Move lines_history; /* alignements (of length 5) are concatenated into one list*/
 }LinesList;
 
 /**
@@ -120,11 +120,14 @@ int pMove_length(Move* pMove);
  * \brief frees all allocated memory of pMove
  * 
  */
-
-void Move_print(Move move);
-
 void pMove_free(Move* pMove);
 
+/**
+ * \fn function Move_print(Move move);
+ * \brief prints move list
+ * 
+ */
+void Move_print(Move move);
 /**
  * \fn void pMove_search(Move move,int x,int y,int index[]);
  * \brief returns ordered index list of element position of length 4 
@@ -138,10 +141,25 @@ bool Move_search(Move move,int x, int y,int index[]);
  */
 void initialize_HistoryList();
 
+/**
+ * \fn Move get_lines_history();
+ * \brief returns lines.lines_history
+ * \ensures makes lines history accessible outside of history 
+ */
 Move get_lines_history();
 
+/**
+ * \fn Move get_points_history();
+ * \brief returns history of points from PlastPlayedMove
+ * \ensures makes points history accessible outside of history 
+ */
 Move get_points_history();
 
+/**
+ * \fn Move get_points_saved_history();
+ * \brief returns history of points from PlastSavedMove
+ * \ensures makes points history accessible outside of history 
+ */
 Move get_points_saved_history();
 
 /**
