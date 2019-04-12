@@ -53,7 +53,7 @@ int main(int argc, char* argv[]){
     //printf("INTALLING DEPENDENCIES");
     //system("sudo apt-get install wmctrl");
     install_dependencies();
-    system("wmctrl -r ':ACTIVE:' -b add,fullscreen &> /dev/null");
+    set_fullscreen();
     display_logo();
     initialize_HistoryList();
     initialize_LinesList();

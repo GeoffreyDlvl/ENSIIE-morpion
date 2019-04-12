@@ -14,6 +14,10 @@ bool get_hint(){
   return hint;
 }
 
+void set_fullscreen(void) {
+    system("wmctrl -r ':ACTIVE:' -b add,fullscreen &> /dev/null");
+}
+
 /*@requires pboard not null
   @assigns nothing
   @ensures prints board, shows possible moves if hint set to true */
