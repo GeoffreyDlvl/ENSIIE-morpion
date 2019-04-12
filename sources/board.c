@@ -8,6 +8,7 @@
 #include <linux/limits.h>
 #include <string.h>
 
+
 static int points_scored;
 static const char* saving_path = "boards/saves/";
 
@@ -229,12 +230,15 @@ void print_error(int* error){
   int n_error=*error;
   if (n_error==1){
     printf("Selected coordinates are invalid.\n");
+    press_a_key_to_continue();
   }
   else if (n_error==2){
     printf("This point exists already.\n");
+    press_a_key_to_continue();
   }
   else if (n_error==3){
     printf("Impossible move : either no available alignement or all available alignements have more than one point in common with selected point.\n");
+    press_a_key_to_continue();
   }
 }
 
@@ -478,28 +482,13 @@ Board initialize_rand(void)
       }
     }
   }
-  /*horizontal_lines_on_init(&board);*/
-  /*
-    return board;*/
-  /*
-    Board board = create_empty_board(6,6);
-    Ppoint p1 = malloc(sizeof(enum point));
-    Ppoint p2 = malloc(sizeof(enum point));
-    Ppoint p3 = malloc(sizeof(enum point));
-    Ppoint p4 = malloc(sizeof(enum point));
-    board.points[0][0] = p1;
-    board.points[0][1] = p2;
-    board.points[0][2] = p3;
-    board.points[0][3] = p4;
-
-    return board;*/
   return board;
 }
 
 /*@requires pboard not null
   @assigns pboard
   @ensures executes action of the enum action action*/
-void execute_action(Board* pboard, enum action action, bool* quit)
+void execute_action(Board* pboard, enum action action, bool* hint, bool* quit)
 {
     if (action == PLAY_MOVE){
         Coord coord=select_move();
@@ -509,8 +498,8 @@ void execute_action(Board* pboard, enum action action, bool* quit)
     } else if (action == REPLAY_MOVE){
         replay_move(pboard);
     } else if (action == LIST_MOVES){
-        list_available_moves(pboard);
-        press_a_key_to_continue();
+        /*list_available_moves(pboard);  NOT NEEDED */
+        *hint = true;
     }else if (action == ASK_HELP){
         print_help();
         press_a_key_to_continue();
