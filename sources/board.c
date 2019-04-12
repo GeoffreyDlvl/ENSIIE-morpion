@@ -469,9 +469,9 @@ Board initialize_rand(void)
   Board board=create_empty_board(width,height);
   int i, j;
   int random;
-  for (i = 0 ; i < height ; i++)
+  for (i = 1 ; i < height-1 ; i++)
   {
-    for (j = 0 ; j < width ; j++)
+    for (j = 1 ; j < width-1 ; j++)
     {
       random = get_random_number(0, 100);
       /* 50% chance to add a point */
