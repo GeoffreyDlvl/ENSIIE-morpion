@@ -1,6 +1,7 @@
 #include "../headers/board.h"
 #include "../headers/history.h"
 #include "../headers/interface.h"
+#include "../headers/utils.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -108,69 +109,7 @@ void remove_points(Board* pboard){
   }
 }
 
-bool check_file(FILE *fp)
-{
-    if(fp == NULL) {
-        printf("Error while opening the file.");
-        return false;
-    }
-
-    char* lineBuffer = NULL;
-    size_t bufferSize = 0; /* if set to 0, then getline() will allocate the buffer */
-    size_t width = getline(&lineBuffer, &bufferSize, fp) - 1; /* Get the length line, ie the width (minus '\n') */
-    free(lineBuffer);
-
-    lineBuffer = NULL;
-    bufferSize = 0;
-    fseek(fp, 0, SEEK_SET); /* Set cursor at the beginning of the file */
-    size_t col;
-    while((getline(&lineBuffer, &bufferSize, fp)) !=  EOF) {
-        /* Line history delimiter, exit while loop */
-        if(strcmp(lineBuffer, "====\n") == 0)
-            break;
-
-        if(strlen(lineBuffer) - 1 != width) {
-            fprintf(stderr, "File error: board width must be equal for each line.");
-            return false;
-        }
-
-        for (col = 0; col < width ; col++) {
-            /* check if char is valid */
-            if (lineBuffer[col] != '.' && lineBuffer[col] != 'o' && lineBuffer[col] != '\n') {
-                fprintf(stderr, "File error: unknown character.");
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
-size_t get_file_board_width(FILE *fp) {
-    fseek(fp, 0, SEEK_SET);
-    char* line = NULL;
-    size_t lineLength = 0;
-    size_t width;
-    width = getline(&line,&lineLength,fp) - 1; /* Get the length line, ie the width (minus '\n') */
-    free(line);
-    return width;
-}
-
-size_t get_file_board_height(FILE *fp){
-    fseek(fp,0, SEEK_SET);
-    size_t height = 0;
-    char* line = NULL;
-    size_t lineLength = 0;
-    while((getline(&line, &lineLength, fp)) !=  EOF){
-        /* line history delimiter */
-        if(strcmp(line, "====\n") == 0)
-            break;
-
-        height++;
-    }
-    free(line);
-    return height;
-}
-bool read_file(Board* pboard, char* path)
+bool initialize_file(Board* pboard, char* path)
 {
     FILE *fp = fopen(path, "r");
     if(!check_file(fp)) {

@@ -1,6 +1,7 @@
 #include "../headers/board.h"
 #include "../headers/interface.h"
 #include "../headers/history.h"
+#include "../headers/utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -11,17 +12,6 @@
 #include <errno.h>
 #include <time.h>
 #include <linux/limits.h>
-
-/*This function will install the required dependencies */
-void install_dependencies(){
-    char resolved_path[PATH_MAX];
-    char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
-    realpath("assets/", resolved_path);
-    strcat(command,resolved_path);
-    strcat(command,"/./install_dependencies.sh");
-    system(command);
-    free(command);
-}
 
 int main(int argc, char* argv[]){
     srand(time(NULL));
@@ -55,7 +45,7 @@ int main(int argc, char* argv[]){
             realpath(argv[2], resolved_path);
 
             /* Construct board if file is valid, exit otherwise */
-            if (!read_file(&board, resolved_path)) {
+            if (!initialize_file(&board, resolved_path)) {
                 return EXIT_FAILURE;
             }
         }

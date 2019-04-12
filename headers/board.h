@@ -65,35 +65,11 @@ typedef struct board
 } Board;
 /**< \brief board structure alias */
 
-
 void update_points_scored();
 
 int get_points_scored();
 
 void update_points_scored_val(int val);
-
-/**
- * \fn bool check_file(char* path)
- * \brief Check the integrity and structure of a file.
- *
- * \param path : the path to the file to verify
- * \return true if file structure is correct, false otherwise
- */
-bool check_file(FILE *fp);
-
-/**
- * \fn bool read_file(Board* pboard, char* path)
- * \brief Read the given file and initialize the Board accordingly.
- *
- * \param pboard Board pointer, SHOULD be NULL
- * \param path File absolute path
- * \return true if no error occured, false otherwise
- */
-bool read_file(Board* pboard, char* path);
-
-size_t get_file_board_width(FILE *fp);
-
-size_t get_file_board_height(FILE *fp);
 
 /**
  * \fn void create_empty_board(Board* pboard)
@@ -196,14 +172,6 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
 
 /**
- * \fn Board* initialize_rand(void)
- * \brief Randomly initalize a Board.
- *
- * \return Pointer to a Board
- */
-Board initialize_rand(void);
-
-/**
  * \fn bool add_point(Board* pboard, p_point p_point)
  * \brief Add a point on the Board.
  *
@@ -270,5 +238,23 @@ void remove_points(Board* pboard);
  * @param pboard Pointer to the board being played
  */
 void save_board(Board* pboard);
+
+/**
+ * \fn Board* initialize_rand(void)
+ * \brief Randomly initalize a Board.
+ *
+ * \return Pointer to a Board
+ */
+Board initialize_rand(void);
+
+/**
+ * \fn bool read_file(Board* pboard, char* path)
+ * \brief Read the given file and initialize the Board accordingly.
+ *
+ * \param pboard Board pointer, SHOULD be NULL
+ * \param path File absolute path
+ * \return true if no error occured, false otherwise
+ */
+bool initialize_file(Board* pboard, char* path);
 
 #endif
