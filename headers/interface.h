@@ -15,6 +15,10 @@
 #include <stdbool.h> 
 #include "board.h"
 
+void set_hint(bool boolean);
+
+bool get_hint();
+
 /**
  * \fn print_board(Board* pboard, bool hint)
  * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
@@ -22,7 +26,7 @@
  * \param pboard Board pointer 
  * \param hint true if hint requested, false if hint NOT requested
  */
-void print_board(Board* pboard,bool hint);
+void print_board(Board* pboard);
 
 /**
  * \fn select_move(Board* pboard, Coord coord)

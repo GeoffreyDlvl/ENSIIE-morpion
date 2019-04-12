@@ -4,11 +4,20 @@
 #include <stdlib.h>
 #include <linux/limits.h>
 
+static bool hint;
+
+void set_hint(bool boolean){
+  hint=boolean;
+}
+
+bool get_hint(){
+  return hint;
+}
 
 /*@requires pboard not null
   @assigns nothing
   @ensures prints board, shows possible moves if hint set to true */
-void print_board(Board* pboard,bool hint)
+void print_board(Board* pboard)
 {
   int width = pboard->width;
   int height = pboard->height;

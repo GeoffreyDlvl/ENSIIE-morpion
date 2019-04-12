@@ -488,7 +488,7 @@ Board initialize_rand(void)
 /*@requires pboard not null
   @assigns pboard
   @ensures executes action of the enum action action*/
-void execute_action(Board* pboard, enum action action, bool* hint, bool* quit)
+void execute_action(Board* pboard, enum action action, bool* quit)
 {
     if (action == PLAY_MOVE){
         Coord coord=select_move();
@@ -499,7 +499,7 @@ void execute_action(Board* pboard, enum action action, bool* hint, bool* quit)
         replay_move(pboard);
     } else if (action == LIST_MOVES){
         /*list_available_moves(pboard);  NOT NEEDED */
-        *hint = true;
+      set_hint(true);
     }else if (action == ASK_HELP){
         print_help();
         press_a_key_to_continue();
