@@ -102,7 +102,7 @@ bool Move_search(Move move,int x, int y,int index[]){
   }
   return false;
 }
-
+/* history of points (played and saved)*/
 static HistoryList history;
 void initialize_HistoryList(){
     if(history.moves == 0) {
@@ -117,7 +117,7 @@ void initialize_HistoryList(){
 size_t get_move_count(){
     return history.moves;
 }
-
+/* history of alignements (all allignements are concatenated into one list) */
 static LinesList lines;
 void initialize_LinesList(){
     if(lines.n_lines == 0) {
