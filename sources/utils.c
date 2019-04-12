@@ -11,7 +11,6 @@ void install_dependencies(){
     char resolved_path[PATH_MAX];
     char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
     realpath("assets/", resolved_path);
-    strcat(command,"sudo ");
     strcat(command,resolved_path);
     strcat(command,"/./install_dependencies.sh");
     system(command);
