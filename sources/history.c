@@ -162,6 +162,9 @@ bool play_move(Board* pboard,Coord coord){
   if (history.moves==1){ 
     history.PfirstMove=&coord;
   }
+  if (coord.x==0 || coord.x==pboard->width-1 || coord.y==0 || coord.y==pboard->height-1){
+    board_expansion(pboard,coord);
+  }
   return true;
 }
 
@@ -393,4 +396,53 @@ void initialize_HistoryList_from_string(char* s) {
 
         pch = strtok (NULL, ",|");
     }
+}
+
+void translate_history_x_axis(){
+  Move currentPS=history.PlastPlayedMove;
+  Move currentPP=history.PlastSavedMove;
+  Move currentL=lines.lines_history;
+  while (!Move_isEmpty(currentL)){
+    currentL->x+=1;
+    currentL=currentL->previous;
+  }
+  while (!Move_isEmpty(currentPP)){
+    currentPP->x+=1;
+    currentPP=currentPP->previous;
+  }
+  while (!Move_isEmpty(currentPS)){
+    currentPS->x+=1;
+    currentPS=currentPS->previous;
+  }
+}
+
+void translate_history_y_axis(){
+  Move currentPS=history.PlastPlayedMove;
+  Move currentPP=history.PlastSavedMove;
+  Move currentL=lines.lines_history;
+  while (!Move_isEmpty(currentL)){
+    currentL->y+=1;
+    currentL=currentL->previous;
+  }
+  while (!Move_isEmpty(currentPP)){
+    currentPP->y+=1;
+    currentPP=currentPP->previous;
+  }
+  while (!Move_isEmpty(currentPS)){
+    currentPS->y+=1;
+    currentPS=currentPS->previous;
+  }
+}
+
+void board_expansion_history_translation(Coord coord){
+  if (coord.x==0 && coord.y==0){
+    translate_history_x_axis();
+    translate_history_y_axis();
+  }
+  else if (coord.x==0){
+    translate_history_x_axis();
+  }
+  else if (coord.y==0){
+    translate_history_y_axis();
+  }
 }

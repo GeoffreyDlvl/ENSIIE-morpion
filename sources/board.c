@@ -549,3 +549,65 @@ void horizontal_lines_on_init(Board* pboard)
         }
     }
 }*/
+
+void board_expansion(Board* pboard,Coord coord){
+  int i,j;
+  int dx,dy;
+  Board board=*pboard;
+  Board board_copy;
+  board_expansion_history_translation(coord);
+  if (coord.x>0 && coord.x<board.width-1){
+    board_copy=create_empty_board(board.width,board.height+1);
+    dx=0;
+    if (coord.y==0){
+      dy=1;
+    }
+    else{
+      dy=0;
+    }
+  }
+  else if (coord.y>0 && coord.y<board.height-1){
+    board_copy=create_empty_board(board.width+1,board.height);
+    dy=0;
+    if (coord.x==0){
+      dx=1;
+    }
+    else{
+      dx=0;
+    }
+  }
+  else{
+    board_copy=create_empty_board(board.width+1,board.height+1);
+    if (coord.x==0){
+      if (coord.y==0){
+	dx=1;
+	dy=1;
+      }
+      else{
+	dx=1;
+	dy=0;
+      }
+    }
+    if (coord.x==board.width-1){
+      if (coord.y==0){
+	dx=0;
+	dy=1;
+      }
+      else{
+	dx=0;
+	dy=0;
+      }
+    }
+  }
+  for (i=0;i<board.height;i++){
+    for (j=0;j<board.width;j++){
+      if (board.points[i][j]){
+	board_copy.points[i+dy][j+dx] = (Ppoint)malloc(sizeof(int));
+        *(board_copy.points[i+dy][j+dx])=1;
+      }
+    }
+  }
+  remove_points(&board);
+  free_board(&board);
+  *pboard=board_copy;
+}

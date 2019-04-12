@@ -258,4 +258,6 @@ Board initialize_rand(void);
  */
 bool initialize_file(Board* pboard, char* path);
 
+void board_expansion(Board* pboard,Coord coord);
+
 #endif

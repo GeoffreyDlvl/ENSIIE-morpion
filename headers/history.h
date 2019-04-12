@@ -192,5 +192,11 @@ void initialize_HistoryList_from_string(char* s);
 
 size_t get_move_count();
 
+void translate_history_x_axis();
+
+void translate_history_y_axis();
+
+void board_expansion_history_translation(Coord coord);
+
 #endif
 
