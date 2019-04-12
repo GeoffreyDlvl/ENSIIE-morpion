@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <linux/limits.h>
 
+
 /*@requires pboard not null
   @assigns nothing
   @ensures prints board, shows possible moves if hint set to true */
@@ -69,7 +70,7 @@ Coord select_move()
 	int x,y;
 	/* Ppoint p_point ;*/
 	printf("Select next point coordinates [x,y] (press x then ENTER then press y then ENTER) :\n");
-	scanf("%d%d",&x,&y);
+	scanf(" %d%d",&x,&y);
 	Coord coord;
 	coord.x=x;
 	coord.y=y;
@@ -77,13 +78,15 @@ Coord select_move()
 	return coord;
 }
 
+
 enum action select_action()
 {
-    printf("Select : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h] / Quit game [q]\n");
+    printf("\nSelect : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h] / Quit game [q]\n");
 	char c;
 	while (true) {
-	    fflush(stdin);
-	    scanf("%c",&c);
+        fflush(stdin);
+        printf(":> ");
+	    scanf(" %c",&c);
         switch(c) {
             case 'p':
                 return PLAY_MOVE;
@@ -103,9 +106,9 @@ enum action select_action()
 	        case 'q':
 		        return QUIT_GAME;
 	        break;
-	    default:
-	        break;
-	}
+	        default:
+	            break;
+	    }
 	}
 }
 
@@ -115,9 +118,15 @@ void list_available_moves(Board* pboard)
   get_valid_moves(pboard,&possible_moves);
   Move current=possible_moves;
   printf("Here is a list of possible moves:\n");
+  int nb_points__displayed = 0;
   while (!Move_isEmpty(current)){
+    if(nb_points__displayed > 15){
+        printf("\n");
+        nb_points__displayed = 0;
+    }
     printf("[%d,%d] ",current->x,current->y);
     current=current->previous;
+    nb_points__displayed++;
   }
   printf("\n");
   pMove_free(&possible_moves);

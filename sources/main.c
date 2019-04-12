@@ -64,13 +64,13 @@ int main(int argc, char* argv[]){
     //printf("INTALLING DEPENDENCIES");
     //system("sudo apt-get install wmctrl");
     install_dependencies();
-    system("wmctrl -r ':ACTIVE:' -b toggle,fullscreen &> /dev/null");
+    system("wmctrl -r ':ACTIVE:' -b add,fullscreen &> /dev/null");
     display_logo();
     initialize_HistoryList();
     initialize_LinesList();
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
     enum action playerAction = PLAY_MOVE;
-    bool hint = true;
+    bool hint = false;
     bool quitGame = false;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
@@ -83,8 +83,9 @@ int main(int argc, char* argv[]){
 	printf("Points_history_from_last_saved_move :\n");
         Move_print(get_points_saved_history());
         print_board(&board,hint);
+        hint = false;
         playerAction = select_action();
-        execute_action(&board, playerAction, &quitGame);
+        execute_action(&board, playerAction, &hint, &quitGame);
     }
   /* Free all allocated pointers */
   free_history();
