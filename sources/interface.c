@@ -292,11 +292,13 @@ void press_a_key_to_continue(){
     char key;
     printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
     scanf("%c",&key);
-    scanf("%c",&key);
 }
 
 void print_error(Error err) {
     switch (err) {
+        case FILE_PTR_ERR:
+            fprintf(stderr, BOLDRED "File could not be opened.\n" RESET);
+            break;
         case FILE_DIMENSION_ERR:
             fprintf(stderr, BOLDRED "File error: board width must be equal for each line.\n" RESET);
             break;

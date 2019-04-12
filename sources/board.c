@@ -112,7 +112,9 @@ void remove_points(Board* pboard){
 bool initialize_file(Board* pboard, char* path)
 {
     FILE *fp = fopen(path, "r");
-    if(!check_file(fp)) {
+    Error err;
+    if(!check_file(fp, &err)) {
+        print_error(err);
         return false;
     }
 

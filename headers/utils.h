@@ -7,6 +7,7 @@
 
 typedef enum error
 {
+    FILE_PTR_ERR, /**< File could not be opened */
     FILE_DIMENSION_ERR, /**< Board dimensions in file are not NxM */
     FILE_UNKNOWN_CHAR_ERR, /**< Board character in file is unknown */
     POINT_ALREADY_EXIST_ERR, /**< The point already exists */
@@ -28,6 +29,6 @@ size_t get_file_board_height(FILE *fp);
  * \param path : the path to the file to verify
  * \return true if file structure is correct, false otherwise
  */
-bool check_file(FILE *fp);
+bool check_file(FILE *fp, Error* err);
 
 #endif

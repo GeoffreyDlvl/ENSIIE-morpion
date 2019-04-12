@@ -45,10 +45,10 @@ size_t get_file_board_height(FILE *fp){
 }
 
 
-bool check_file(FILE *fp)
+bool check_file(FILE *fp, Error* err)
 {
     if(fp == NULL) {
-        printf("Error while opening the file.");
+        *err = FILE_PTR_ERR;
         return false;
     }
 
@@ -67,14 +67,14 @@ bool check_file(FILE *fp)
             break;
 
         if(strlen(lineBuffer) - 1 != width) {
-            /*fprintf(stderr, "File error: board width must be equal for each line.");*/
+            *err = FILE_DIMENSION_ERR;
             return false;
         }
 
         for (col = 0; col < width ; col++) {
             /* check if char is valid */
             if (lineBuffer[col] != '.' && lineBuffer[col] != 'o' && lineBuffer[col] != '\n') {
-                /*fprintf(stderr, "File error: unknown character.");*/
+                *err = FILE_UNKNOWN_CHAR_ERR;
                 return false;
             }
         }
