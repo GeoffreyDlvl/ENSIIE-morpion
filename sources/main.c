@@ -17,13 +17,12 @@ void install_dependencies(){
     char resolved_path[PATH_MAX];
     char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
     realpath("assets/", resolved_path);
-    strcat(command,"sudo ");
     strcat(command,resolved_path);
     strcat(command,"/./install_dependencies.sh");
     system(command);
     free(command);
 }
-                                                                                
+
 int main(int argc, char* argv[]){
     srand(time(NULL));
     /*If user gives more than 2 arguments*/
@@ -91,7 +90,7 @@ int main(int argc, char* argv[]){
   free_history();
   remove_points(&board);
   free_board(&board);
-
+  system("wmctrl -r ':ACTIVE:' -b remove,fullscreen &> /dev/null");
   return EXIT_SUCCESS;
 }
       
