@@ -449,7 +449,6 @@ void execute_action(Board* pboard, enum action action, bool* quit)
       set_hint(true);
     }else if (action == ASK_HELP){
         print_help();
-        press_a_key_to_continue();
     } else if (action == QUIT_GAME){
         *quit = confirm_quit_save(pboard);
     } else{

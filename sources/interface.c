@@ -170,6 +170,7 @@ void print_help(void)
 	printf("> The goal is to add points on the board.\n");
 	printf("> A point can be added to the board if it creates a line of 5 points vertically, horizontally or diagonally.\n");
 	printf("> Two lines can't have more than one point in common.\n\n");
+    press_enter_to_continue();
 }
 
 /*@requires pmove not null
@@ -269,7 +270,7 @@ void display_logo(){
     fclose(fp);
     if (line)
         free(line);
-    press_a_key_to_continue();
+    press_enter_to_continue();
     clear_screen();
 }
 
@@ -277,7 +278,7 @@ void clear_screen(){
     system("clear");
 }
 
-void press_a_key_to_continue(){
+void press_enter_to_continue(){
     printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
     getchar();
 }
@@ -307,6 +308,6 @@ void print_error(Error err) {
             fprintf(stderr, RED "Undefined error (requires implementation)." RESET);
             break;
 
-        /* TODO: press_a_key_to_continue() should be called be functions calling print_error */
+        /* TODO: press_enter_to_continue() should be called be functions calling print_error */
     }
 }

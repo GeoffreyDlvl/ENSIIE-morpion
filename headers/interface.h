@@ -93,7 +93,7 @@ void display_logo();
 
 void clear_screen();
 
-void press_a_key_to_continue();
+void press_enter_to_continue();
 
 /**
  * \fn void print_error(Error error);
