@@ -94,7 +94,7 @@ Coord select_move()
 {
 	int x,y;
 	/* Ppoint p_point ;*/
-	printf("Select next point coordinates [x,y] (press x then ENTER then press y then ENTER) :\n");
+	printf("Type the point coordinates [x,y] (type x <space> y <enter>) :\n");
 	scanf(" %d%d",&x,&y);
 	Coord coord;
 	coord.x=x;
