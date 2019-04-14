@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <linux/limits.h>
+#include <ctype.h>
 
 /* Colors and effects support */
 #define RESET   "\033[0m"
@@ -108,10 +109,12 @@ enum action select_action()
     printf("\nSelect : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h] / Quit game [q]\n");
 	char c;
 	while (true) {
-        fflush(stdin);
         printf(":> ");
-	    scanf(" %c",&c);
-        switch(c) {
+        /*scanf(" %c",&c);*/
+	    c = getchar();
+	    while('\n'!=getchar()); /* only capture the first character */
+	    c = tolower(c);
+	    switch(c) {
             case 'p':
                 return PLAY_MOVE;
             break;
@@ -131,9 +134,10 @@ enum action select_action()
 		        return QUIT_GAME;
 	        break;
 	        default:
-	            break;
-	    }
-	}
+	            print_error(WRONG_INPUT_ERR);
+                break;
+            }
+    }
 }
 
 void list_available_moves(Board* pboard)
@@ -280,11 +284,18 @@ void clear_screen(){
 
 void press_enter_to_continue(){
     printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
-    getchar();
+    while (true) {
+        char c=getchar();
+        if (c=='\n' || c==EOF)
+            break;
+    }
 }
 
 void print_error(Error err) {
     switch (err) {
+        case WRONG_INPUT_ERR:
+            fprintf(stderr, RED "Wrong input.\n" RESET);
+            break;
         case FILE_PTR_ERR:
             fprintf(stderr, BOLDRED "File could not be opened.\n" RESET);
             break;

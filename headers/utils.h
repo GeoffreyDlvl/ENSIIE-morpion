@@ -7,6 +7,7 @@
 
 typedef enum error
 {
+    WRONG_INPUT_ERR, /**< Wrong user input */
     FILE_PTR_ERR, /**< File could not be opened */
     FILE_DIMENSION_ERR, /**< Board dimensions in file are not NxM */
     FILE_UNKNOWN_CHAR_ERR, /**< Board character in file is unknown */
