@@ -19,47 +19,48 @@
 
 
 /**
- * \struct historyList
- * \brief Convenience structure for accessing played moves.
+ * \struct HistoryList
+ * \brief Linked list of previously played moves.
  *
- * Upper layer of the double linked-list that allows to 
- * decrease memory load by offering direct access to head
- * and tail of playedMoved double-linked list data structure. 
+ * PlastPlayedMove and PlastSavedMove may hold different values:
+ * After the player cancels a move, PlastSavedMove still points to the
+ * same value while PlastPlayedMove points to the 'previous' move.
+ * This allows to replay a canceled move.
  *
- * It is intended to be used as a static variable inside history source.
+ * It is intended to be used as a static variable inside the history source file.
  */
 typedef struct{
 	size_t moves; /**< Number of played moves since the beginning of the game */
-	Move PfirstMove; /**< first move */ 
-	Move PlastPlayedMove; /**< last played move */
-	Move PlastSavedMove; /**< last saved move (e.g. move before a canceled move) */
-}HistoryList;/* PlastPlayedMove and PlastPlayedMove are two seperate lists : allows cancelling and replaying consecutively multiple times */
-/**< \brief historyList structure alias */
+	Move PfirstMove; /**< Pointer to first move */
+	Move PlastPlayedMove; /**< Pointer to last played move */
+	Move PlastSavedMove; /**< Pointer to last saved move (i.e. move before a canceled move) */
+} HistoryList; /* PlastPlayedMove and PlastSavedMove are two seperate lists : allows cancelling and replaying consecutively multiple times */
 
 /**
  * \struct LinesList
- * \brief Convenience structure for accessing lines list.
- * 
+ * \brief Linked list of previously formed alignments.
  *
- * It is intended to be used as a static variable inside history source.
+ * Holds all moves forming alignments. Every 5 moves represents an alignment.
+ *
+ * It is intended to be used as a static variable inside the history source file.
  */
 typedef struct{
   size_t n_lines;
-  Move lines_history; /* alignements (of length 5) are concatenated into one list*/
-}LinesList;
+  Move lines_history;
+} LinesList;
 
 /**
- * \fn bool play_move(Board* pboard, p_point p_point)
+ * \fn bool play_move(Board* pboard, Coord coord)
  * \brief Play a move, i.e. add a point on the Board.
  *
  * \param pboard Pointer to the Board being played.
- * \param p_point Pointer to selected coordinates.
+ * \param coord Coordinates of the point to be played.
  * \return true if point successfully added, false otherwise.
  */
 bool play_move(Board* pboard, Coord coord);
 
 /**
- * \fn void cancel_move(Board* pboard, p_point* pp_point)
+ * \fn void cancel_move(Board* pboard)
  * \brief Withdraw a point from the Board.
  *
  * \param pboard Pointer to the Board being played.
@@ -67,11 +68,10 @@ bool play_move(Board* pboard, Coord coord);
 void cancel_move(Board* pboard);
 
 /**
- * \fn void replay_move(Board* pboard, p_point* pp_point)
- * \brief Add a previously withdrawn point to the Board.
+ * \fn void replay_move(Board* pboard)
+ * \brief Replay a previously canceled move.
  *
  * \param pboard Pointer to the Board being played.
- * \param pp_point Pointer to pointer to replayed coordinates.
  */
 void replay_move(Board* pboard);
 
@@ -82,120 +82,196 @@ void replay_move(Board* pboard);
 void free_history(void);
 
 /**
- * \fn function Move Move_create();
- * \brief creates empty Move
- *
+ * \fn Move Move_create();
+ * \brief Create an empty Move.
  */
 Move Move_create();
 
 /**
- * \fn function Move Move_isEmpty();
- * \brief checks if move is empty
+ * \fn bool Move_isEmpty(Move move);
+ * \brief Check if a Move is empty.
  *
+ * \param move Move to check.
  */
 bool Move_isEmpty(Move move);
 
 /**
- * \fn function Move Move_addM(Move* pMove,int x,int y);
- * \brief adds Move to pMove allocating memory on heap
+ * \fn void Move_addM(Move* pMove,int x,int y);
+ * \brief Add Move to pMove by allocating memory on heap.
  *
+ * \param pMove Pointer to Move.
+ * \param x X coordinate.
+ * \param y Y coordinate.
  */
-void Move_addM(Move* pMove,int x,int y);
+void Move_addM(Move* pMove, int x, int y);
 
 /**
- * \fn function Move Move_popM(Move* pMove);
- * \brief removes last move, pMove points to previous and
- * frees allocated memory
+ * \fn void Move_popM(Move* pMove);
+ * \brief Remove last Move from pMove.
+ *
+ * pMove points to previous Move and frees allocated memory.
+ *
+ * \param pMove Pointer to Move.
  */
 void Move_popM(Move* pMove);
 
 /**
- * \fn function pMove_length(Move* pMove);
- * \brief returns pMove length 
+ * \fn int pMove_length(Move* pMove);
+ * \brief Get pMove length.
+ *
+ * \param pMove Pointer to Move.
+ * \return pMove length.
  */
 int pMove_length(Move* pMove);
 
 /**
- * \fn function pMove_free(Move* pMove);
- * \brief frees all allocated memory of pMove
- * 
+ * \fn void pMove_free(Move* pMove);
+ * \brief Free all allocated memory of pMove
+ *
+ * \param pMove Pointer to Move.
  */
 void pMove_free(Move* pMove);
 
 /**
- * \fn function Move_print(Move move);
- * \brief prints move list
- * 
+ * \fn void Move_print(Move move);
+ * \brief Print a Move list
+ *
+ * \param move Move to be printed.
  */
 void Move_print(Move move);
+
 /**
- * \fn void pMove_search(Move move,int x,int y,int index[]);
- * \brief returns ordered index list of element position of length 4 
- * (a point can belong to maximum 4 lines) 
+ * \fn bool Move_search(Move move, int x, int y, int index[]);
+ * \brief Search for Move of coordinates x,y in Move list and assigns index to positions.
+ *
+ * \param move Move to be searched.
+ * \param x X coordinate to be searched.
+ * \param y Y coordinate to be searched.
+ * \param index Array of length 8.
+ * \return Ordered index list of element position of length 4 (a point can belong to a maximum 4 lines)
 */  
-bool Move_search(Move move,int x, int y,int index[]);
+bool Move_search(Move move, int x, int y, int index[]);
 
 /**
- * \fn void initialize_HistoryList();
- * \brief initializes HistoryList 
+ * \fn void initialize_HistoryList(void);
+ * \brief Initialize HistoryList linked list.
  */
-void initialize_HistoryList();
+void initialize_HistoryList(void);
 
 /**
- * \fn Move get_lines_history();
- * \brief returns lines.lines_history
- * \ensures makes lines history accessible outside of history 
+ * \fn Move get_lines_history(void);
+ * \brief Get LinesList static list.
+ *
+ * Allows for LineList to be accessible outside of history.
+ *
+ * \return A pointer to the first Coord of the line history list.
  */
-Move get_lines_history();
+Move get_lines_history(void);
 
 /**
- * \fn Move get_points_history();
- * \brief returns history of points from PlastPlayedMove
- * \ensures makes points history accessible outside of history 
+ * \fn Move get_points_history(void);
+ * \brief Get history of points from PlastPlayedMove.
+ *
+ * Allows for points history to be accessible outside of history.
+ *
+ * \return The PlastPlayedMove
  */
-Move get_points_history();
+Move get_points_history(void);
 
 /**
- * \fn Move get_points_saved_history();
- * \brief returns history of points from PlastSavedMove
- * \ensures makes points history accessible outside of history 
+ * \fn Move get_points_saved_history(void);
+ * \brief Get history of points from PlastSavedMove.
+ *
+ * Allows for points history to be accessible outside of history.
+ *
+ * \return The PlastSavedMove
  */
-Move get_points_saved_history();
+Move get_points_saved_history(void);
 
 /**
- * \fn void initialize_LinesList();
- * \brief initializes LinesList 
+ * \fn void initialize_LinesList(void);
+ * \brief Initialize LinesList linked list.
  */
-void initialize_LinesList();
+void initialize_LinesList(void);
 
 /**
- * \fn function add_line(Move* pmove)
- * \brief adds line to LinesList
+ * \fn void add_line(Move* pmove)
+ * \brief Add a line to LinesList.
+ *
+ * \param pmove Pointer to Move.
  */
 void add_line(Move* pmove);
 
-
+/**
+ * \fn void line_numbers_of_Move(Move move,int index[]);
+ * \brief Ensure that index contains positions of lines containing move in lines history.
+ *
+ * \param move Move
+ * \param index Array of length 8 initialized with -1 values.
+ */
 void line_numbers_of_Move(Move move,int index[]);
 
+/**
+ * \fn bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2);
+ * \brief Check that no more than two lines can be added.
+ *
+ * \param line1 Line to be checked.
+ * @param line2 Line to be checked.
+ * @return True if no more than one common move in both lines, false otherwise.
+ */
 bool no_more_than_one_move_in_two_lines(Move* line1,Move* line2);
 
+/**
+ * \fn bool candidate_line(Move* cand_line);
+ * \brief Check if candidate line has more than one move in common with other lines.
+ *
+ * \param cand_line Candidate line
+ * \return True if candidate line has no more than one move in common with other lines, false otherwise.
+ */
 bool candidate_line(Move* cand_line);
 
 /**
- * \fn void remove_line(Move move)
- * \param index={-1,-1,-1,-1}
- * \brief index contains line numbers containing move
+ * \fn void remove_lines(Move move)
+ * \brief Remove all lines containing move from lines history.
+ *
+ * \param move Move to be removed.
  */
 void remove_lines(Move move);
 
+/**
+ * \fn void initialize_HistoryList_from_string(char* s);
+ * \brief Initialize HistoryList static variable from a string.
+ *
+ * \param s String used to initialise HistoryList
+ */
 void initialize_HistoryList_from_string(char* s);
 
-size_t get_move_count();
+/**
+ * \fn size_t get_move_count(void);
+ * \brief Get number of moves in history.
+ *
+ * \return The number of moves.
+ */
+size_t get_move_count(void);
 
-void translate_history_x_axis();
+/**
+ * \fn void translate_history_x_axis(void);
+ * \brief Translate history on a x axis.
+ */
+void translate_history_x_axis(void);
 
-void translate_history_y_axis();
+/**
+ * \fn void translate_history_y_axis(void);
+ * \brief Translate history on a y axis.
+ */
+void translate_history_y_axis(void);
 
+/**
+ * \fn void board_expansion_history_translation(Coord coord);
+ * \brief Translate history on a x or y (or both) axis depending on Coord
+ *
+ * \param coord Coordinates
+ */
 void board_expansion_history_translation(Coord coord);
 
 #endif
