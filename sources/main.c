@@ -76,12 +76,16 @@ int main(int argc, char* argv[]){
         playerAction = select_action();
         execute_action(&board, playerAction, &quitGame);
     }
-  /* Free all allocated pointers */
-  free_history();
-  remove_points(&board);
-  free_board(&board);
-  set_fullscreen(false);
-  return EXIT_SUCCESS;
+    print_game_over();
+    print_score();
+    press_enter_to_continue();
+    /* Free all allocated pointers */
+    free_history();
+    remove_points(&board);
+    free_board(&board);
+    set_fullscreen(false);
+    clear_screen();
+    return EXIT_SUCCESS;
 }
       
    

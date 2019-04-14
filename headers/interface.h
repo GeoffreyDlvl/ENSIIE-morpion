@@ -103,5 +103,9 @@ void press_enter_to_continue();
  */
 void print_error(Error err);
 
+void print_game_over(void);
+
+void print_score(void);
+
 
 #endif

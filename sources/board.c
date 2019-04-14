@@ -465,8 +465,6 @@ bool is_game_over(Board* pboard)
   Move possible_moves=Move_create();
   get_valid_moves(pboard,&possible_moves);
   if (pMove_length(&possible_moves)==0){ /* if no moves available */
-    printf("No points to be played : the game is over!\n");
-    printf("Your final score is : %d\n",points_scored);
     pMove_free(&possible_moves);/* deallocate memory of possible moves */
     return true;
   }

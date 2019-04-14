@@ -328,3 +328,11 @@ void print_error(Error err) {
         /* TODO: press_enter_to_continue() should be called be functions calling print_error */
     }
 }
+
+void print_game_over(void) {
+    printf("No more point to be played: the game is over!\n");
+}
+
+void print_score(void) {
+    printf("Your final score is : %d\n", get_points_scored());
+}
