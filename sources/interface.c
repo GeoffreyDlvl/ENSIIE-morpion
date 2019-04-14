@@ -259,20 +259,17 @@ void display_logo(){
     FILE * fp;
     char * line = NULL;
     size_t len = 0;
-    ssize_t read;
     realpath("assets/logo", resolved_path);
     fp = fopen(resolved_path, "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
-    while ((read = getline(&line, &len, fp)) != -1) {
+    while ((getline(&line, &len, fp)) != -1) {
         printf("%s", line);
     }
     fclose(fp);
     if (line)
         free(line);
-    char key;
-    printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
-    scanf("%c",&key);
+    press_a_key_to_continue();
     clear_screen();
 }
 
@@ -281,9 +278,8 @@ void clear_screen(){
 }
 
 void press_a_key_to_continue(){
-    char key;
     printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
-    scanf("%c",&key);
+    getchar();
 }
 
 void print_error(Error err) {
