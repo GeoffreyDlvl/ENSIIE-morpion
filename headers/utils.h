@@ -34,4 +34,6 @@ bool check_file(FILE *fp, Error* err);
 
 void empty_input_buffer(void);
 
+int get_random_number(int min, int max);
+
 #endif

@@ -84,3 +84,12 @@ bool check_file(FILE *fp, Error* err)
 void empty_input_buffer(void) {
     while (getchar()!='\n');
 }
+
+/*@requires nothing
+  @assigns nothing
+  @ensures returns randon number between min and max */
+int get_random_number(int min, int max)
+{
+    int random = rand() % (max - min + 1) + min;
+    return random;
+}

@@ -209,8 +209,6 @@ bool is_game_over(Board* pboard);
  */
 void free_board(Board* pboard);
 
-int get_random_number(int min, int max);
-
 /**
  * \fn void remove_point(Board* pboard,Coord coord);
  * \brief removes point from board

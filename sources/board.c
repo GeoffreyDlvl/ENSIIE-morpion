@@ -473,14 +473,7 @@ bool is_game_over(Board* pboard)
 }
 
 
-/*@requires nothing 
-  @assigns nothing
-  @ensures returns randon number between min and max */
-int get_random_number(int min, int max)
-{
-  int random = rand() % (max - min + 1) + min;
-  return random;
-}
+
 
 void save_board(Board* pboard) {
     char resolved_path[PATH_MAX];
