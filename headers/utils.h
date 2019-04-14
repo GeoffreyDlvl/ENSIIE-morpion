@@ -32,4 +32,6 @@ size_t get_file_board_height(FILE *fp);
  */
 bool check_file(FILE *fp, Error* err);
 
+void empty_input_buffer(void);
+
 #endif

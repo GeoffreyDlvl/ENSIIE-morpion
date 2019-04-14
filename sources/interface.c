@@ -93,9 +93,16 @@ void print_board(Board* pboard)
 Coord select_move()
 {
 	int x,y;
-	/* Ppoint p_point ;*/
 	printf("Type the point coordinates [x,y] (type x <space> y <enter>) :\n");
-	scanf(" %d%d",&x,&y);
+	int succAffect = -1; /* number of successfull affectations */
+	while(succAffect != 2) {
+	    printf(":> ");
+        succAffect = scanf(" %d%d", &x, &y);
+	    if (succAffect != 2) {
+            print_error(WRONG_INPUT_ERR);
+        }
+	    empty_input_buffer();
+    }
 	Coord coord;
 	coord.x=x;
 	coord.y=y;
@@ -110,8 +117,8 @@ enum action select_action()
 	char c;
 	while (true) {
         printf(":> ");
-        /*scanf(" %c",&c);*/
-	    c = getchar();
+        scanf(" %c",&c);
+	    /*c = getchar();*/
 	    while('\n'!=getchar()); /* only capture the first character */
 	    c = tolower(c);
 	    switch(c) {

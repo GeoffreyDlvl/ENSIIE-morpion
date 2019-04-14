@@ -80,3 +80,7 @@ bool check_file(FILE *fp, Error* err)
     }
     return true;
 }
+
+void empty_input_buffer(void) {
+    while (getchar()!='\n');
+}
