@@ -53,7 +53,7 @@ int main(int argc, char* argv[]){
     //printf("INTALLING DEPENDENCIES");
     //system("sudo apt-get install wmctrl");
     install_dependencies();
-    set_fullscreen();
+    set_fullscreen(true);
     display_logo();
     initialize_HistoryList();
     initialize_LinesList();
@@ -69,7 +69,7 @@ int main(int argc, char* argv[]){
         Move_print(get_lines_history());
         printf("Points_history_from_last_played_move :\n");
         Move_print(get_points_history());
-	printf("Points_history_from_last_saved_move :\n");
+	    printf("Points_history_from_last_saved_move :\n");
         Move_print(get_points_saved_history());
         print_board(&board);
         set_hint(false);
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]){
   free_history();
   remove_points(&board);
   free_board(&board);
-  system("wmctrl -r ':ACTIVE:' -b remove,fullscreen &> /dev/null");
+  set_fullscreen(false);
   return EXIT_SUCCESS;
 }
       

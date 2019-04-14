@@ -20,7 +20,7 @@ void set_hint(bool boolean);
 
 bool get_hint();
 
-void set_fullscreen(void);
+void set_fullscreen(bool set);
 
 /**
  * \fn print_board(Board* pboard, bool hint)

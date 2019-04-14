@@ -22,8 +22,11 @@ bool get_hint(){
   return hint;
 }
 
-void set_fullscreen(void) {
-    system("wmctrl -r ':ACTIVE:' -b add,fullscreen &> /dev/null");
+void set_fullscreen(bool set) {
+    if (set)
+        system("wmctrl -r ':ACTIVE:' -b add,fullscreen &> /dev/null");
+    else
+        system("wmctrl -r ':ACTIVE:' -b remove,fullscreen &> /dev/null");
 }
 
 /*@requires pboard not null
