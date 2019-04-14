@@ -94,7 +94,7 @@ Coord select_move()
 {
 	int x,y;
 	printf("Type the point coordinates [x,y] (type x <space> y <enter>) :\n");
-	int succAffect = -1; /* number of successfull affectations */
+	int succAffect = -1; /* number of successful affectations */
 	while(succAffect != 2) {
 	    printf(":> ");
         succAffect = scanf(" %d%d", &x, &y);
@@ -316,11 +316,10 @@ void print_error(Error err) {
             fprintf(stderr, BOLDRED "This point already exists.\n" RESET);
             break;
         case INVALID_COORDINATES_ERR:
-            fprintf(stderr, BOLDRED "Selected coordinates are invalid.\n" RESET);
+            fprintf(stderr, BOLDRED "Coordinates are invalid.\n" RESET);
             break;
         case ALIGNMENT_ERR:
-            fprintf(stderr, BOLDRED "Impossible move : there is either no available alignment or all available alignments have "
-                            "more than one point in common with selected point.\n" RESET);
+            fprintf(stderr, BOLDRED "No valid alignment.\n" RESET);
             break;
         default:
             fprintf(stderr, RED "Undefined error (requires implementation)." RESET);

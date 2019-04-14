@@ -65,12 +65,12 @@ int main(int argc, char* argv[]){
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
     {
         clear_screen();
-        printf("Lines_history :\n");
+        /*printf("Lines_history :\n");
         Move_print(get_lines_history());
         printf("Points_history_from_last_played_move :\n");
         Move_print(get_points_history());
 	    printf("Points_history_from_last_saved_move :\n");
-        Move_print(get_points_saved_history());
+        Move_print(get_points_saved_history());*/
         print_board(&board);
         set_hint(false);
         playerAction = select_action();

@@ -78,6 +78,7 @@ bool add_point(Board* pboard, Coord coord){
   }
   else{
     print_error(error);
+    press_enter_to_continue();
     return false;
   }
 }
