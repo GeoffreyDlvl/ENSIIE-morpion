@@ -16,96 +16,111 @@
 #include "board.h"
 #include "utils.h"
 
+/**
+ * \fn void set_hint(bool boolean);
+ * \brief Set hint value.
+ *
+ * \param boolean Value to set.
+ */
 void set_hint(bool boolean);
 
-bool get_hint();
-
+/**
+ * \fn void set_fullscreen(bool set);
+ * \brief Set full screen for terminal.
+ *
+ * \param set True to activate full screen, false to disable full screen.
+ */
 void set_fullscreen(bool set);
 
 /**
- * \fn print_board(Board* pboard, bool hint)
+ * \fn print_board(Board* pboard)
  * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
  *
  * \param pboard Board pointer 
- * \param hint true if hint requested, false if hint NOT requested
  */
 void print_board(Board* pboard);
 
 /**
- * \fn select_move(Board* pboard, Coord coord)
+ * \fn select_move(void)
  * \brief Ask the user to play a move.
  *
- * \param pboard Pointer to the Board
- * \param coord Coordinates of the moves 
+ * \return Coord of the Move to play.
  */
-Coord select_move();
+Coord select_move(void);
 
 /**
- * \fn enum action select_action(Board* pboard, p_point p_point, bool* hint)
+ * \fn enum action select_action(void)
  * \brief Ask the user for the next action.
  *
- * \param pboard Pointer to the Board
- * \param move_number Move number since game started
- * \param hint Hold the boolean signifying whether the user wishes to get a hint
+ * \return Desired action.
  */
-enum action select_action();
-
-/**
- * \fn list_available_moves(Board* pboard)
- * \brief Prints a list of all valid moves.
- *
- * \param pboard Pointer to the Board 
- */
-void list_available_moves(Board* pboard);
-
-/**
- * \fn ask_help(Board* pboard)
- * \brief Ask the user for help (i.e. after a few failed
- * moves).
- *
- * \param pboard Pointer to the Board 
- * \return void
- */
-void ask_help(Board* pboard);
+enum action select_action(void);
 
 /**
  * \fn print_help(void)
- * \brief Print help for the user
+ * \brief Print help for the user.
  */
 void print_help(void);
 
 /**
  * \fn select_line(Move* pmove)
- * \brief select among available lines (if more than 1 are available)
+ * \brief Select among available lines (if more than 1 are available)
  */
 void select_line(Move* pmove);
 
+/**
+ * \fn bool confirm_quit_save(Board* pboard);
+ * \brief Ask user for confirmation to quit and/or save game.
+ *
+ * \param pboard Pointer to Board.
+ * \return True if user decides to quit the game, false otherwise.
+ */
 bool confirm_quit_save(Board* pboard);
 
 /**
- * \fn ask_savefile_name()
- * \brief ask the user for the saved file name
- * \return char* the FileName
+ * \fn ask_savefile_name(void)
+ * \brief Ask the user for the saved file name.
+ *
+ * \return The filename.
  */
-char* ask_savefile_name();
+char* ask_savefile_name(void);
 
-void display_logo();
+/**
+ * \fn void display_logo(void);
+ * \brief Print game logo (starting screen)
+ */
+void display_logo(void);
 
-void clear_screen();
+/**
+ * \fn void clear_screen(void);
+ * \brief Clear the terminal.
+ */
+void clear_screen(void);
 
-void press_enter_to_continue();
+/**
+ * \fn void press_enter_to_continue(void);
+ * \brief Block terminal and wait for user to type <enter>
+ */
+void press_enter_to_continue(void);
 
 /**
  * \fn void print_error(Error error);
- * \brief Print error message
+ * \brief Print error message.
  *
- * \param err Error to be displayed
+ * \param err Error to be displayed.
  */
 void print_error(Error err);
 
+/**
+ * \fn void print_game_over(void);
+ * \brief Print game over message.
+ */
 void print_game_over(void);
 
+/**
+ * \fn void print_score(void);
+ * \brief Print user score.
+ */
 void print_score(void);
-
 
 #endif
