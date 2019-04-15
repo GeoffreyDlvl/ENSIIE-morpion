@@ -5,8 +5,8 @@
  * \file interface.h
  * \brief Displays the Board and manages the user/program interactions.
  * \authors Geoffrey DELVAL, Rémi GUIJARRO ESPINOSA, Gabriel MORAN, Clément PERESSE
- * \version lot_a
- * \date 03.2019 
+ * \version lot_b
+ * \date 04.2019
  *
  * Handles displaying and asks the user for input.
  *

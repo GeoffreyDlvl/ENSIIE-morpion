@@ -5,8 +5,8 @@
  * \file history.h
  * \brief Records player moves during a game.
  * \authors Geoffrey DELVAL, Rémi GUIJARRO ESPINOSA, Gabriel MORAN, Clément PERESSE
- * \version lot_a
- * \date 03.2019
+ * \version lot_b
+ * \date 04.2019
  *
  * Represents board.h upper layer. 
  * This class records player moves and allows to cancel or replay a move.
