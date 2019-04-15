@@ -5,7 +5,7 @@
 #include <linux/limits.h>
 
 /*This function will install the required dependencies */
-void install_dependencies(){
+void install_dependencies(void){
     char resolved_path[PATH_MAX];
     char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
     realpath("assets/", resolved_path);

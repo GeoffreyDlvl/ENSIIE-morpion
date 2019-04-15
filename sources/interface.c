@@ -91,7 +91,7 @@ void print_board(Board* pboard)
   }
 }
 
-Coord select_move()
+Coord select_move(void)
 {
 	int x,y;
 	printf("Type the point coordinates [x,y] (type x <space> y <enter>) :\n");
@@ -112,7 +112,7 @@ Coord select_move()
 }
 
 
-enum action select_action()
+enum action select_action(void)
 {
     printf("\nSelect : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h] / Quit game [q]\n");
 	char c;
@@ -232,7 +232,7 @@ bool confirm_quit_save(Board* pboard) {
 }
 
 
-char* ask_savefile_name(){
+char* ask_savefile_name(void){
     char* fileName = (char*)malloc(sizeof(char)*MAX_INPUT);
     printf("What name does the file should have ? :> ");
     scanf(" %s", fileName);
@@ -240,7 +240,7 @@ char* ask_savefile_name(){
 }
 
 
-void display_logo(){
+void display_logo(void){
     char resolved_path[PATH_MAX];
     FILE * fp;
     char * line = NULL;
@@ -259,11 +259,11 @@ void display_logo(){
     clear_screen();
 }
 
-void clear_screen(){
+void clear_screen(void){
     system("clear");
 }
 
-void press_enter_to_continue(){
+void press_enter_to_continue(void){
     printf("\n\n \t\t\t\t =================== Press enter to continue ===================\n");
     while (true) {
         char c=getchar();

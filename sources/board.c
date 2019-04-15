@@ -12,7 +12,7 @@
 static int points_scored;
 static const char* saving_path = "boards/saves/";
 
-void update_points_scored(){
+void update_points_scored(void){
     points_scored = get_move_count()+1;
 }
 
@@ -20,7 +20,7 @@ void update_points_scored_val(int val){
     points_scored += val;
 }
 
-int get_points_scored(){
+int get_points_scored(void){
     return points_scored;
 }
 

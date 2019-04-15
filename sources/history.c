@@ -10,7 +10,7 @@
 /*@requires nothing
   @assigns nothing
   @ensures returns empty move*/
-Move Move_create(){
+Move Move_create(void){
   return NULL;
 }
 
@@ -113,7 +113,7 @@ void initialize_HistoryList(){
     }
 }
 
-size_t get_move_count(){
+size_t get_move_count(void){
     return history.moves;
 }
 /* history of alignements (all allignements are concatenated into one list) */
@@ -127,21 +127,21 @@ void initialize_LinesList(){
 /*@requires nothing
   @assigns nothing
   @ensures makes lines history accessible outside of history.c */
-Move get_lines_history(){
+Move get_lines_history(void){
   return lines.lines_history;
 }
 
 /*@requires nothing
   @assigns nothing
   @ensures makes points history accessible outside of history.c */
-Move get_points_history(){
+Move get_points_history(void){
   return history.PlastPlayedMove;
 }
 
 /*@requires nothing
   @assigns nothing
   @ensures makes points saved history accessible outside of history.c */
-Move get_points_saved_history(){
+Move get_points_saved_history(void){
   return history.PlastSavedMove;
 }
 
@@ -351,7 +351,7 @@ void initialize_HistoryList_from_string(char* s) {
     }
 }
 
-void translate_history_x_axis(){
+void translate_history_x_axis(void){
   Move currentPS=history.PlastPlayedMove;
   Move currentPP=history.PlastSavedMove;
   Move currentL=lines.lines_history;
@@ -369,7 +369,7 @@ void translate_history_x_axis(){
   }
 }
 
-void translate_history_y_axis(){
+void translate_history_y_axis(void){
   Move currentPS=history.PlastPlayedMove;
   Move currentPP=history.PlastSavedMove;
   Move currentL=lines.lines_history;

@@ -50,8 +50,6 @@ int main(int argc, char* argv[]){
             }
         }
     }
-    //printf("INTALLING DEPENDENCIES");
-    //system("sudo apt-get install wmctrl");
     install_dependencies();
     set_fullscreen(true);
     display_logo();
