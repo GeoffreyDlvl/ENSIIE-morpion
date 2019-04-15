@@ -1,14 +1,15 @@
 var searchData=
 [
-  ['pcoord',['Pcoord',['../board_8h.html#ab8cc720589a392832ddcc5e65efcbb47',1,'board.h']]],
-  ['pfirstmove',['PfirstMove',['../structhistory_list.html#a6c241bff39776a3474b353f7c95e26b7',1,'historyList']]],
-  ['plastplayedmove',['PlastPlayedMove',['../structhistory_list.html#add21c432af64a474240b0dcbeb21478a',1,'historyList']]],
-  ['plastsavedmove',['PlastSavedMove',['../structhistory_list.html#a06eb9e37622d16b0dfbc2360be31334b',1,'historyList']]],
-  ['play_5fmove',['PLAY_MOVE',['../board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4a629aa79ab022ac3614bc93f638271346',1,'PLAY_MOVE():&#160;board.h'],['../history_8h.html#afe23ec837d11f38398ad928e0bec55b9',1,'play_move(Board *pboard, Pcoord pcoord):&#160;history.h']]],
-  ['playedmove',['playedMove',['../structplayed_move.html',1,'']]],
-  ['pnextplayedmove',['PnextPlayedMove',['../structplayed_move.html#a3d7384aebd5f0ff66a5ab19773ea1136',1,'playedMove']]],
-  ['points',['points',['../structboard.html#a8c2f9ff4e64bb7766dbb8623d7326433',1,'board']]],
-  ['ppreviousplayedmove',['PpreviousPlayedMove',['../structplayed_move.html#ae1f0ee9fe8e8a08023879b9656a55f62',1,'playedMove']]],
-  ['print_5fboard',['print_board',['../interface_8h.html#a8ad7b6fdcab6025f32be230471f5aec1',1,'interface.h']]],
-  ['print_5fhelp',['print_help',['../interface_8h.html#a3fa0edb5266bb1f8ca0473473e982829',1,'interface.h']]]
+  ['initialize_5ffile',['initialize_file',['../board_8h.html#a5cc3c0d7a093ab5dcfeda39b2afe21b5',1,'board.c']]],
+  ['initialize_5fhistorylist',['initialize_HistoryList',['../history_8h.html#ad34349a654d9f8404fef9f4f942d0230',1,'history.c']]],
+  ['initialize_5fhistorylist_5ffrom_5fstring',['initialize_HistoryList_from_string',['../history_8h.html#a55835117d3548997f50c0319dad37db7',1,'history.c']]],
+  ['initialize_5flineslist',['initialize_LinesList',['../history_8h.html#aa7fa9db4ab4e184943eb2d828befa3b4',1,'history.c']]],
+  ['initialize_5frand',['initialize_rand',['../board_8h.html#a6b1404f3fadcea941e50356fa372b065',1,'board.c']]],
+  ['install_5fdependencies',['install_dependencies',['../utils_8h.html#a99de89093b7869d9f4c246539c7bd326',1,'utils.c']]],
+  ['interface_2eh',['interface.h',['../interface_8h.html',1,'']]],
+  ['invalid_5fcoordinates_5ferr',['INVALID_COORDINATES_ERR',['../utils_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5abf97c5c6dbab3484e8774ce9ad51127c',1,'utils.h']]],
+  ['is_5fgame_5fover',['is_game_over',['../board_8h.html#ad2f7f36f846fb4cff7a1fc576cd4ad65',1,'board.c']]],
+  ['is_5fmove_5fexists_5falready',['is_move_exists_already',['../board_8h.html#af1c714eea0df5fe2b1a3ed705de411e6',1,'board.c']]],
+  ['is_5fmove_5fin_5fboard',['is_move_in_board',['../board_8h.html#ac61147cc0b0ab740dfa57313e469b108',1,'board.c']]],
+  ['is_5fmove_5fvalid',['is_move_valid',['../board_8h.html#a366aa2270a466d23c03d1f93fbe998c5',1,'board.c']]]
 ];

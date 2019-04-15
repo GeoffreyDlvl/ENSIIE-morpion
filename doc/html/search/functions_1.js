@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['cancel_5fmove',['cancel_move',['../history_8h.html#a7547f6701284c7d81f582e287994d83c',1,'history.h']]],
-  ['check_5ffile',['check_file',['../board_8h.html#a9e5ad6b1d72df2036e4cc86eabe8e549',1,'board.h']]],
-  ['create_5fempty_5fboard',['create_empty_board',['../board_8h.html#a691a2b50a077aad7b0d2903a2e05b369',1,'board.h']]]
+  ['board_5fexpansion',['board_expansion',['../board_8h.html#afeeff3b517bd958674e3e479f018937f',1,'board.c']]],
+  ['board_5fexpansion_5fhistory_5ftranslation',['board_expansion_history_translation',['../history_8h.html#ae6cb618a289fc2706612b7ce083a994a',1,'history.c']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['read_5ffile',['read_file',['../board_8h.html#a44e3978c82e006d1c88847d8853ea1b4',1,'board.h']]],
-  ['replay_5fmove',['replay_move',['../history_8h.html#a7c0bc5f65ff5ed18831e0700fb9aea15',1,'replay_move(Board *pboard, Pcoord *ppcoord):&#160;history.h'],['../board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4a40124c578e3826e8b13a42db2269f569',1,'REPLAY_MOVE():&#160;board.h']]]
+  ['line_5fnumbers_5fof_5fmove',['line_numbers_of_Move',['../history_8h.html#aa249b201107d70028bde7d330e1bb994',1,'history.c']]],
+  ['lineslist',['LinesList',['../struct_lines_list.html',1,'']]],
+  ['list_5fmoves',['LIST_MOVES',['../board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4a83883c465a0283d7c4e5a4bd2d2380d8',1,'board.h']]],
+  ['license',['LICENSE',['../md__home_geoffrey_cours_projet-morpion__e_n_s_i_i_e-morpion__l_i_c_e_n_s_e.html',1,'']]]
 ];

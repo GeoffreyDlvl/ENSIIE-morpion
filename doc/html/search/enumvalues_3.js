@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['play_5fmove',['PLAY_MOVE',['../board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4a629aa79ab022ac3614bc93f638271346',1,'board.h']]]
+  ['invalid_5fcoordinates_5ferr',['INVALID_COORDINATES_ERR',['../utils_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5abf97c5c6dbab3484e8774ce9ad51127c',1,'utils.h']]]
 ];

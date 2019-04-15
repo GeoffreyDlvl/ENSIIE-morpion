@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['historylist',['historyList',['../structhistory_list.html',1,'']]]
+  ['historylist',['HistoryList',['../struct_history_list.html',1,'']]]
 ];

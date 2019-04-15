@@ -1,7 +1,7 @@
 var annotated_dup =
 [
-    [ "board", "structboard.html", "structboard" ],
+    [ "Board", "struct_board.html", "struct_board" ],
     [ "coord", "structcoord.html", "structcoord" ],
-    [ "historyList", "structhistory_list.html", "structhistory_list" ],
-    [ "playedMove", "structplayed_move.html", "structplayed_move" ]
+    [ "HistoryList", "struct_history_list.html", "struct_history_list" ],
+    [ "LinesList", "struct_lines_list.html", "struct_lines_list" ]
 ];

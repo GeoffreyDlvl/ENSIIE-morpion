@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['board',['board',['../structboard.html',1,'board'],['../board_8h.html#ae032fdcf74f6a7ee3aca153eda146374',1,'Board():&#160;board.h']]],
-  ['board_2eh',['board.h',['../board_8h.html',1,'']]]
+  ['board',['Board',['../struct_board.html',1,'']]],
+  ['board_2eh',['board.h',['../board_8h.html',1,'']]],
+  ['board_5fexpansion',['board_expansion',['../board_8h.html#afeeff3b517bd958674e3e479f018937f',1,'board.c']]],
+  ['board_5fexpansion_5fhistory_5ftranslation',['board_expansion_history_translation',['../history_8h.html#ae6cb618a289fc2706612b7ce083a994a',1,'history.c']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ENSIIE-Morpion: headers/interface.h File Reference</title>
+<title>ENSIIE-Morpion: /home/geoffrey/cours/projet-morpion/ENSIIE-morpion/headers/interface.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ENSIIE-Morpion
-   &#160;<span id="projectnumber">lot_a</span>
+   &#160;<span id="projectnumber">lot_b</span>
    </div>
   </td>
  </tr>
@@ -87,97 +87,126 @@ $(document).ready(function(){initNavTree('interface_8h.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Displays the Board and manages the user/program interactions.  
+<p>Displays the <a class="el" href="struct_board.html" title="Represents the Board of the game with width, height and a 2d table of Coord pointers. ">Board</a> and manages the user/program interactions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 </div>
 <p><a href="interface_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8ad7b6fdcab6025f32be230471f5aec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a8ad7b6fdcab6025f32be230471f5aec1">print_board</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, bool hint)</td></tr>
-<tr class="memdesc:a8ad7b6fdcab6025f32be230471f5aec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the Board, as well as a hint (i.e. a list of available moves) if required.  <a href="#a8ad7b6fdcab6025f32be230471f5aec1">More...</a><br /></td></tr>
-<tr class="separator:a8ad7b6fdcab6025f32be230471f5aec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae62e7ad92bd875150ff3c26bb2be372f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ae62e7ad92bd875150ff3c26bb2be372f">select_move</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard)</td></tr>
-<tr class="memdesc:ae62e7ad92bd875150ff3c26bb2be372f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user to play a move.  <a href="#ae62e7ad92bd875150ff3c26bb2be372f">More...</a><br /></td></tr>
-<tr class="separator:ae62e7ad92bd875150ff3c26bb2be372f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1534f32f3fb80e9b226dc817d9bb572"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ae1534f32f3fb80e9b226dc817d9bb572">select_action</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard, <a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a> pcoord, bool *hint)</td></tr>
-<tr class="memdesc:ae1534f32f3fb80e9b226dc817d9bb572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for the next action.  <a href="#ae1534f32f3fb80e9b226dc817d9bb572">More...</a><br /></td></tr>
-<tr class="separator:ae1534f32f3fb80e9b226dc817d9bb572"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bbf1cb282e55f7ef1b9a2f497731862"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a0bbf1cb282e55f7ef1b9a2f497731862">list_available_moves</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard)</td></tr>
-<tr class="memdesc:a0bbf1cb282e55f7ef1b9a2f497731862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a list of all valid moves.  <a href="#a0bbf1cb282e55f7ef1b9a2f497731862">More...</a><br /></td></tr>
-<tr class="separator:a0bbf1cb282e55f7ef1b9a2f497731862"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f19b99811b1ccd67e49806b8678a46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a2f19b99811b1ccd67e49806b8678a46e">ask_help</a> (<a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *pboard)</td></tr>
-<tr class="memdesc:a2f19b99811b1ccd67e49806b8678a46e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for help (i.e. after a few failed moves).  <a href="#a2f19b99811b1ccd67e49806b8678a46e">More...</a><br /></td></tr>
-<tr class="separator:a2f19b99811b1ccd67e49806b8678a46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b19d43039cf75c7631efcd41cdf6a76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a6b19d43039cf75c7631efcd41cdf6a76">set_hint</a> (bool boolean)</td></tr>
+<tr class="memdesc:a6b19d43039cf75c7631efcd41cdf6a76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set hint value.  <a href="#a6b19d43039cf75c7631efcd41cdf6a76">More...</a><br /></td></tr>
+<tr class="separator:a6b19d43039cf75c7631efcd41cdf6a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a056061a3bfaee6bd70c8f4d072ccbfd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a056061a3bfaee6bd70c8f4d072ccbfd3">set_fullscreen</a> (bool set)</td></tr>
+<tr class="memdesc:a056061a3bfaee6bd70c8f4d072ccbfd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set full screen for terminal.  <a href="#a056061a3bfaee6bd70c8f4d072ccbfd3">More...</a><br /></td></tr>
+<tr class="separator:a056061a3bfaee6bd70c8f4d072ccbfd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a712edb41f724a5859617ba309ba9b7b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a712edb41f724a5859617ba309ba9b7b0">print_board</a> (<a class="el" href="struct_board.html">Board</a> *pboard)</td></tr>
+<tr class="memdesc:a712edb41f724a5859617ba309ba9b7b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the <a class="el" href="struct_board.html" title="Represents the Board of the game with width, height and a 2d table of Coord pointers. ">Board</a>, as well as a hint (i.e. a list of available moves) if required.  <a href="#a712edb41f724a5859617ba309ba9b7b0">More...</a><br /></td></tr>
+<tr class="separator:a712edb41f724a5859617ba309ba9b7b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6bcb4730b4e2fa09b6ca4b8ebb2f2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="board_8h.html#a071b7f0468b2f683ac3f7051c93b9264">Coord</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a6b6bcb4730b4e2fa09b6ca4b8ebb2f2e">select_move</a> (void)</td></tr>
+<tr class="memdesc:a6b6bcb4730b4e2fa09b6ca4b8ebb2f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user to play a move.  <a href="#a6b6bcb4730b4e2fa09b6ca4b8ebb2f2e">More...</a><br /></td></tr>
+<tr class="separator:a6b6bcb4730b4e2fa09b6ca4b8ebb2f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a462fefbb6ebd10cb4bdf65de86e421ca"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4">action</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a462fefbb6ebd10cb4bdf65de86e421ca">select_action</a> (void)</td></tr>
+<tr class="memdesc:a462fefbb6ebd10cb4bdf65de86e421ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for the next action.  <a href="#a462fefbb6ebd10cb4bdf65de86e421ca">More...</a><br /></td></tr>
+<tr class="separator:a462fefbb6ebd10cb4bdf65de86e421ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fa0edb5266bb1f8ca0473473e982829"><td class="memItemLeft" align="right" valign="top"><a id="a3fa0edb5266bb1f8ca0473473e982829"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a3fa0edb5266bb1f8ca0473473e982829">print_help</a> (void)</td></tr>
 <tr class="memdesc:a3fa0edb5266bb1f8ca0473473e982829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print help for the user. <br /></td></tr>
 <tr class="separator:a3fa0edb5266bb1f8ca0473473e982829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9ef5a8759063c9ea97a256c3870948"><td class="memItemLeft" align="right" valign="top"><a id="afe9ef5a8759063c9ea97a256c3870948"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#afe9ef5a8759063c9ea97a256c3870948">select_line</a> (<a class="el" href="board_8h.html#ac83a93723fc34d069b4100723cf90581">Move</a> *pmove)</td></tr>
+<tr class="memdesc:afe9ef5a8759063c9ea97a256c3870948"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select among available lines (if more than 1 are available) <br /></td></tr>
+<tr class="separator:afe9ef5a8759063c9ea97a256c3870948"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a798add81b5b748cf332e93e63eedb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a20a798add81b5b748cf332e93e63eedb">confirm_quit_save</a> (<a class="el" href="struct_board.html">Board</a> *pboard)</td></tr>
+<tr class="memdesc:a20a798add81b5b748cf332e93e63eedb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask user for confirmation to quit and/or save game.  <a href="#a20a798add81b5b748cf332e93e63eedb">More...</a><br /></td></tr>
+<tr class="separator:a20a798add81b5b748cf332e93e63eedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1b6a0d21d9d54683fc55aa38382187"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a7e1b6a0d21d9d54683fc55aa38382187">ask_savefile_name</a> (void)</td></tr>
+<tr class="memdesc:a7e1b6a0d21d9d54683fc55aa38382187"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the user for the saved file name.  <a href="#a7e1b6a0d21d9d54683fc55aa38382187">More...</a><br /></td></tr>
+<tr class="separator:a7e1b6a0d21d9d54683fc55aa38382187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75e081d660be9c65d37efbebbf538597"><td class="memItemLeft" align="right" valign="top"><a id="a75e081d660be9c65d37efbebbf538597"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a75e081d660be9c65d37efbebbf538597">display_logo</a> (void)</td></tr>
+<tr class="memdesc:a75e081d660be9c65d37efbebbf538597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print game logo (starting screen) <br /></td></tr>
+<tr class="separator:a75e081d660be9c65d37efbebbf538597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc40cd622f423abf44084c8f8595f57f"><td class="memItemLeft" align="right" valign="top"><a id="abc40cd622f423abf44084c8f8595f57f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#abc40cd622f423abf44084c8f8595f57f">clear_screen</a> (void)</td></tr>
+<tr class="memdesc:abc40cd622f423abf44084c8f8595f57f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the terminal. <br /></td></tr>
+<tr class="separator:abc40cd622f423abf44084c8f8595f57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53523c3c191c0859a4a2961e5c55d482"><td class="memItemLeft" align="right" valign="top"><a id="a53523c3c191c0859a4a2961e5c55d482"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a53523c3c191c0859a4a2961e5c55d482">press_enter_to_continue</a> (void)</td></tr>
+<tr class="memdesc:a53523c3c191c0859a4a2961e5c55d482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Block terminal and wait for user to type &lt;enter&gt; <br /></td></tr>
+<tr class="separator:a53523c3c191c0859a4a2961e5c55d482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37f04bf9390d55425ee7855d326dbabf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a37f04bf9390d55425ee7855d326dbabf">print_error</a> (<a class="el" href="utils_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5">Error</a> err)</td></tr>
+<tr class="memdesc:a37f04bf9390d55425ee7855d326dbabf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print error message.  <a href="#a37f04bf9390d55425ee7855d326dbabf">More...</a><br /></td></tr>
+<tr class="separator:a37f04bf9390d55425ee7855d326dbabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63035894419a3dd5c11afc2bd56c910"><td class="memItemLeft" align="right" valign="top"><a id="ad63035894419a3dd5c11afc2bd56c910"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ad63035894419a3dd5c11afc2bd56c910">print_game_over</a> (void)</td></tr>
+<tr class="memdesc:ad63035894419a3dd5c11afc2bd56c910"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print game over message. <br /></td></tr>
+<tr class="separator:ad63035894419a3dd5c11afc2bd56c910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4fa86c99c07dbfd696ac44c05c71d83"><td class="memItemLeft" align="right" valign="top"><a id="ae4fa86c99c07dbfd696ac44c05c71d83"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#ae4fa86c99c07dbfd696ac44c05c71d83">print_score</a> (void)</td></tr>
+<tr class="memdesc:ae4fa86c99c07dbfd696ac44c05c71d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print user score. <br /></td></tr>
+<tr class="separator:ae4fa86c99c07dbfd696ac44c05c71d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Displays the Board and manages the user/program interactions. </p>
+<div class="textblock"><p>Displays the <a class="el" href="struct_board.html" title="Represents the Board of the game with width, height and a 2d table of Coord pointers. ">Board</a> and manages the user/program interactions. </p>
 <dl class="section author"><dt>Authors</dt><dd>Geoffrey DELVAL, Rémi GUIJARRO ESPINOSA, Gabriel MORAN, Clément PERESSE </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>lot_a </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>03.2019</dd></dl>
+<dl class="section version"><dt>Version</dt><dd>lot_b </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>04.2019</dd></dl>
 <p>Handles displaying and asks the user for input. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a2f19b99811b1ccd67e49806b8678a46e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f19b99811b1ccd67e49806b8678a46e">&#9670;&nbsp;</a></span>ask_help()</h2>
+<a id="a7e1b6a0d21d9d54683fc55aa38382187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1b6a0d21d9d54683fc55aa38382187">&#9670;&nbsp;</a></span>ask_savefile_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ask_help </td>
+          <td class="memname">ask_savefile_name </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ask the user for the saved file name. </p>
+<dl class="section return"><dt>Returns</dt><dd>The filename. </dd></dl>
+
+</div>
+</div>
+<a id="a20a798add81b5b748cf332e93e63eedb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a798add81b5b748cf332e93e63eedb">&#9670;&nbsp;</a></span>confirm_quit_save()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool confirm_quit_save </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
           <td class="paramname"><em>pboard</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ask the user for help (i.e. after a few failed moves). </p>
+<p>Ask user for confirmation to quit and/or save game. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
+    <tr><td class="paramname">pboard</td><td>Pointer to <a class="el" href="struct_board.html" title="Represents the Board of the game with width, height and a 2d table of Coord pointers. ">Board</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if user decides to quit the game, false otherwise. </dd></dl>
 
 </div>
 </div>
-<a id="a0bbf1cb282e55f7ef1b9a2f497731862"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bbf1cb282e55f7ef1b9a2f497731862">&#9670;&nbsp;</a></span>list_available_moves()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">list_available_moves </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
-          <td class="paramname"><em>pboard</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Prints a list of all valid moves. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a8ad7b6fdcab6025f32be230471f5aec1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ad7b6fdcab6025f32be230471f5aec1">&#9670;&nbsp;</a></span>print_board()</h2>
+<a id="a712edb41f724a5859617ba309ba9b7b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a712edb41f724a5859617ba309ba9b7b0">&#9670;&nbsp;</a></span>print_board()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -185,36 +214,51 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
         <tr>
           <td class="memname">print_board </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
-          <td class="paramname"><em>pboard</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="struct_board.html">Board</a> *&#160;</td>
+          <td class="paramname"><em>pboard</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>hint</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Print the Board, as well as a hint (i.e. a list of available moves) if required. </p>
+<p>Print the <a class="el" href="struct_board.html" title="Represents the Board of the game with width, height and a 2d table of Coord pointers. ">Board</a>, as well as a hint (i.e. a list of available moves) if required. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Board pointer </td></tr>
-    <tr><td class="paramname">hint</td><td>true if hint requested, false if hint NOT requested </td></tr>
+    <tr><td class="paramname">pboard</td><td><a class="el" href="struct_board.html" title="Represents the Board of the game with width, height and a 2d table of Coord pointers. ">Board</a> pointer </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ae1534f32f3fb80e9b226dc817d9bb572"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1534f32f3fb80e9b226dc817d9bb572">&#9670;&nbsp;</a></span>select_action()</h2>
+<a id="a37f04bf9390d55425ee7855d326dbabf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37f04bf9390d55425ee7855d326dbabf">&#9670;&nbsp;</a></span>print_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_error </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="utils_8h.html#a2c3e4bb40f36b262a5214e2da2bca9c5">Error</a>&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print error message. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">err</td><td>Error to be displayed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a462fefbb6ebd10cb4bdf65de86e421ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a462fefbb6ebd10cb4bdf65de86e421ca">&#9670;&nbsp;</a></span>select_action()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,43 +266,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
         <tr>
           <td class="memname">enum <a class="el" href="board_8h.html#a2f4ab7bf743142dae2e459aa18f9f1d4">action</a> select_action </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
-          <td class="paramname"><em>pboard</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="board_8h.html#ab8cc720589a392832ddcc5e65efcbb47">Pcoord</a>&#160;</td>
-          <td class="paramname"><em>pcoord</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool *&#160;</td>
-          <td class="paramname"><em>hint</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Ask the user for the next action. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
-    <tr><td class="paramname">move_number</td><td>Move number since game started </td></tr>
-    <tr><td class="paramname">hint</td><td>Hold the boolean signifying whether the user wishes to get a hint </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>Desired action. </dd></dl>
 
 </div>
 </div>
-<a id="ae62e7ad92bd875150ff3c26bb2be372f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae62e7ad92bd875150ff3c26bb2be372f">&#9670;&nbsp;</a></span>select_move()</h2>
+<a id="a6b6bcb4730b4e2fa09b6ca4b8ebb2f2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b6bcb4730b4e2fa09b6ca4b8ebb2f2e">&#9670;&nbsp;</a></span>select_move()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,17 +287,64 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
         <tr>
           <td class="memname">select_move </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="board_8h.html#ae032fdcf74f6a7ee3aca153eda146374">Board</a> *&#160;</td>
-          <td class="paramname"><em>pboard</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Ask the user to play a move. </p>
+<dl class="section return"><dt>Returns</dt><dd>Coord of the Move to play. </dd></dl>
+
+</div>
+</div>
+<a id="a056061a3bfaee6bd70c8f4d072ccbfd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a056061a3bfaee6bd70c8f4d072ccbfd3">&#9670;&nbsp;</a></span>set_fullscreen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_fullscreen </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>set</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set full screen for terminal. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pboard</td><td>Pointer to the Board </td></tr>
+    <tr><td class="paramname">set</td><td>True to activate full screen, false to disable full screen. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6b19d43039cf75c7631efcd41cdf6a76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b19d43039cf75c7631efcd41cdf6a76">&#9670;&nbsp;</a></span>set_hint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_hint </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>boolean</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set hint value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">boolean</td><td>Value to set. </td></tr>
   </table>
   </dd>
 </dl>

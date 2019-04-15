@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['play_5fmove',['play_move',['../history_8h.html#afe23ec837d11f38398ad928e0bec55b9',1,'history.h']]],
-  ['print_5fboard',['print_board',['../interface_8h.html#a8ad7b6fdcab6025f32be230471f5aec1',1,'interface.h']]],
-  ['print_5fhelp',['print_help',['../interface_8h.html#a3fa0edb5266bb1f8ca0473473e982829',1,'interface.h']]]
+  ['free_5fboard',['free_board',['../board_8h.html#af8ad9f8501e991400b3f7dfb08a656f2',1,'board.c']]],
+  ['free_5fhistory',['free_history',['../history_8h.html#a3e1cd324cef21a7e982c1b4755b3c0ee',1,'history.c']]]
 ];

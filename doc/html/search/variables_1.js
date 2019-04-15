@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['height',['height',['../structboard.html#ad12fc34ce789bce6c8a05d8a17138534',1,'board']]]
+  ['moves',['moves',['../struct_history_list.html#aa8ce773e4eb2cb8a58847adeba38dd0b',1,'HistoryList']]]
 ];

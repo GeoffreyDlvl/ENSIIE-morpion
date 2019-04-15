@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">ENSIIE-Morpion
-   &#160;<span id="projectnumber">lot_a</span>
+   &#160;<span id="projectnumber">lot_b</span>
    </div>
   </td>
  </tr>
@@ -86,18 +86,27 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="contents">
 <div class="textblock"><p><em>Imperative programming project.</em><br />
 <br />
- Morpion is a solitaire game. Rules and goals are explained in <a href="doc/instructions.pdf">'instruction.pdf'</a>.</p>
+ Morpion is a solitaire game. Rules and goals are explained in <a href="doc/instructions.pdf">'instructions.pdf'</a>.</p>
 <h2>Getting Started</h2>
-<p>These instructions will get you a copy of the project up and running on your local machine.</p>
-<h3>Prerequisites</h3>
-<p>The project runs preferably on a linux machine. The only required tools are GCC, the GNU Compiler Collection, and make, the GNU make utility. They should be installed by default. If they are not, the following linux command will install gcc</p>
-<div class="fragment"><div class="line">sudo apt install gcc</div></div><!-- fragment --><p>And this command will install make</p>
-<div class="fragment"><div class="line">sudo apt install build-essential</div></div><!-- fragment --><h3>Building</h3>
-<p>To build the project, simple type the following command on the root of the project</p>
-<div class="fragment"><div class="line">make</div></div><!-- fragment --><h2>Running the game</h2>
+<p>&gt;These instructions will get you a copy of the project up and running on your local machine.</p>
+<div class="fragment"><div class="line">foo@bar$ git clone https://github.com/GeoffreyDlvl/ENSIIE-morpion.git</div></div><!-- fragment --><h3>Prerequisites</h3>
+<p>&gt;The project runs preferably on a linux machine. The only required tools are GCC, the GNU Compiler Collection, and make, the GNU make utility. They should be installed by default. If they are not, the following linux command will install gcc</p>
+<div class="fragment"><div class="line">foo@bar$ sudo apt install gcc</div></div><!-- fragment --><p>&gt;And this command will install make</p>
+<div class="fragment"><div class="line">foo@bar$ sudo apt install build-essential</div></div><!-- fragment --><h3>Building</h3>
+<p>&gt;To build the project, simple type the following command on the root of the project</p>
+<div class="fragment"><div class="line">foo@bar$ make</div></div><!-- fragment --> <h3>Testing</h3>
+<blockquote class="doxtable">
+<p>Installing CUnit </p>
+</blockquote>
+<div class="fragment"><div class="line">foo@bar$ sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev</div></div><!-- fragment --><blockquote class="doxtable">
+<p>Including it in c file </p>
+</blockquote>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;CUnit/CUnit.h&gt;</span></div></div><!-- fragment --> <blockquote class="doxtable">
+<p>Including it in build </p>
+</blockquote>
+<div class="fragment"><div class="line">foo@bar$ gcc  -o test test.c  -lcunit</div></div><!-- fragment --><h2>Running the game</h2>
 <p>Go to the sources directory and execute the program</p>
-<div class="fragment"><div class="line">./run</div></div><!-- fragment --><p>Note that the executable is not produced during the build yet. The game cannot be run in <em>lot a</em> version.</p>
-<h2>Built With</h2>
+<div class="fragment"><div class="line">foo@bar$ ./morpion</div></div><!-- fragment --><h2>Built With</h2>
 <ul>
 <li><a href="http://gcc.gnu.org">GCC</a> - The GNU Compiler Collection</li>
 </ul>
