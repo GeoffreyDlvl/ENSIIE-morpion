@@ -30,165 +30,167 @@ enum action
 	QUIT_GAME /**<Quit the game */
 };
 
-/**
- * \struct playedMove
- * \brief Played moves since the beginning of the game.
- *
- * Data are saved in a double linked-list structure that contains all the played moves.
- */
+
+
+typedef struct coord* Move; ///< Pointer to Coord, represents a move
 
 /**
  * \struct coord
  * \brief Coordinates on the Board
  */
-typedef struct coord* Move;
-typedef struct coord{
+typedef struct coord {
   int x; /**< Horizontal address */
   int y; /**< Vertical address */
-  Move previous;
-} Coord;
-/**< \brief coord structure alias */
+  Move previous; /**< Previous Move */
+} Coord; /**< struct coord alias */
 
 /**
- * \brief Pointer to Coord
+ * \brief Represents a point on the board
+ *
+ * Pointer to int, is NULL when the point is nonexistant, has a value if the point exists.
  */
 typedef int* Ppoint;
 
 /**
- * \struct board
- * \brief Represent the Board of the game with width, height and a 2d table of Coord pointers.
+ * \struct Board
+ * \brief Represents the Board of the game with width, height and a 2d table of Coord pointers.
  */
-typedef struct board
-{
+typedef struct {
     int width; /**< Board width */
     int height; /**< Board height */
     Ppoint** points; /**< Bidimensionnal array of Ppoint */ 
 } Board;
-/**< \brief board structure alias */
 
-void update_points_scored();
+/**
+ * \fn void update_points_scored(void);
+ * \brief Update the user score by incrementing the move count.
+ */
+void update_points_scored(void);
 
-int get_points_scored();
+/**
+ * \fn int get_points_scored(void);
+ * \brief Get the current user score.
+ *
+ * \return The score.
+ */
+int get_points_scored(void);
 
+/**
+ * \fn void update_points_scored_val(int val);
+ * \brief Update the user score by adding passed value to current score.
+ *
+ * \param val Value to add to score.
+ */
 void update_points_scored_val(int val);
 
 /**
- * \fn void create_empty_board(Board* pboard)
+ * \fn void create_empty_board(int width,int height)
  * \brief Initialize an empty Board
  *
- * \param pboard : Pointer to Board, pboard->points SHOULD be NULL
+ * \param width Width of the Board.
+ * \param height Height of the Board.
  */
 Board create_empty_board(int width,int height); 
 
 /**
- * \fn p_point* get_valid_moves(Board* pboard)
+ * \fn void get_valid_moves(Board* pboard, Move* pvalid_points)
  * \brief Give a list of all valid moves.
  *
- * \param pboard Board pointer
- * \return A p_point list
+ * \param pboard Pointer to current Board.
+ * \param pvalid_points Pointer to Move that will hold valid points
  */
-void get_valid_moves(Board* pboard,Move* pvalid_points);
+void get_valid_moves(Board* pboard, Move* pvalid_points);
 
 /**
- * \fn bool is_move_valid(Board* pboard,p_point p_point);
+ * \fn bool is_move_valid(Board* pboard,Coord coord,Move* pmove, Error* error);
  * \brief Check if a move is valid.
  *
- * \param pboard Board pointer
- * \param p_point Coordinates of the selected move
- * \return true if no error occured, false otherwise
+ * \param pboard Pointer to current Board.
+ * \param coord Coordinates of the move to check.
+ * \param pmove Pointer to Move.
+ * \para error Error pointer to hold to potential error.
+ * \return True if no error occurred, false otherwise.
  */
 bool is_move_valid(Board* pboard,Coord coord,Move* pmove, Error* error);
 
 /**
- * \fn void print_error(int* error);
- * \brief print error type.
- *
- * \param int* error not null
- */
-/*void print_error(int* error);*/
-
-/**
  * \fn bool is_move_in_board(Board* pboard,Coord coord);
- * \brief tests if desired move is within the board
+ * \brief Test if desired move is within the Board.
  *
- * \param pboard pointer to board
- * \param coord Coord structure of desired point
- * \return true if move is in board else false
+ * \param pboard Pointer to Board.
+ * \param coord Coord structure of desired point.
+ * \return True if move is in board, false otherwise.
  */
 bool is_move_in_board(Board* pboard,Coord coord);
 
 /**
  * \fn bool is_move_exists_already(Board* pboard,Coord coord);
- * \brief tests if desired move exists already
+ * \brief Test if desired move already exists.
  *
- * \param pboard pointer to board
- * \param coord Coord structure of desired point
- * \return true if move exists already else false
+ * \param pboard Pointer to Board.
+ * \param coord Coord structure of desired point.
+ * \return True if move already exists, false otherwise.
  */
 bool is_move_exists_already(Board* pboard,Coord coord);
 
 /**
  * \fn void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard);
- * \brief searches for possible alignements on horizontal axis
+ * \brief Search for possible alignments on horizontal axis.
  *
- * \param pboard pointer to board
- * \param coord Coord structure of desired point
- * \param pcand_lines pointer to list of possible alignements
- * \ensures pcand_lines contains all possible horizontal alignements
+ * \param pboard Pointer to Board.
+ * \param coord Coord structure of desired point.
+ * \param pcand_lines Pointer to list of possible alignments.
  */
 void horizontal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
 /**
  * \fn void vertical_search(Move* pcand_lines,Coord coord,Board* pboard);
- * \brief searches for possible alignements on vertical axis
+ * \brief Search for possible alignments on vertical axis.
  *
- * \param pboard pointer to board
- * \param coord Coord structure of desired point
- * \param pcand_lines pointer to list of possible alignements
- * \ensures pcand_lines contains all possible vertical alignements
+ * \param pboard Pointer to Board.
+ * \param coord Coord structure of desired point.
+ * \param pcand_lines Pointer to list of possible alignments.
  */
 void vertical_search(Move* pcand_lines,Coord coord,Board* pboard);
 
 /**
  * \fn void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
- * \brief searches for possible alignements on north east diagonal axis
+ * \brief Search for possible alignments on north east diagonal axis.
  *
- * \param pboard pointer to board
- * \param coord Coord structure of desired point
- * \param pcand_lines pointer to list of possible alignements
- * \ensures pcand_lines contains all possible north east diagonal alignements
+ * \param pboard Pointer to Board.
+ * \param coord Coord structure of desired point.
+ * \param pcand_lines Pointer to list of possible alignments.
  */
 void NE_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
 /**
  * \fn void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
- * \brief searches for possible alignements on north west diagonal axis
+ * \brief Search for possible alignments on north west diagonal axis
  *
- * \param pboard pointer to board
- * \param coord Coord structure of desired point
- * \param pcand_lines pointer to list of possible alignements
- * \ensures pcand_lines contains all possible north west diagonal alignements
+ * \param pboard Pointer to Board.
+ * \param coord Coord structure of desired point.
+ * \param pcand_lines Pointer to list of possible alignments.
  */
 void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
 
 
 /**
- * \fn bool add_point(Board* pboard, p_point p_point)
+ * \fn bool add_point(Board* pboard, Coord coord)
  * \brief Add a point on the Board.
  *
  * \param pboard Pointer to the Board being played
- * \param p_point Pointer to selected coordinates
- * \return true if point successfully added, false otherwise.
+ * \param coord Coordinates of the point being played
+ * \return True if point successfully added, false otherwise.
  */
 bool add_point(Board* pboard, Coord coord);
 
 /**
- * \fn void execute_action(Board* pboard, enum choice choice, p_point p_point)
+ * \fn void execute_action(Board* pboard, enum action action, bool* quit)
  * \brief Execute action passed as a parameter.
  * 
- * \param pboard Pointer to the Board being played
- * \param action Action to execute
- * \param p_point Coordinates affected by the action (NULL if action does not affect any coordinate)
+ * \param pboard Pointer to the Board being played.
+ * \param action Action to execute.
+ * \param quit Pointer to bool holding true if user wishes to quit the game.
  */
 void execute_action(Board* pboard, enum action action, bool* quit);
 
@@ -197,65 +199,68 @@ void execute_action(Board* pboard, enum action action, bool* quit);
  * \brief Check if game is over. 
  *
  * \param pboard Pointer to the Board being played.
- * \return true if game is over, false otherwise.
+ * \return True if game is over, false otherwise.
  */
 bool is_game_over(Board* pboard);
 
 /**
  * \fn void free_board(Board* pboard)
- * \brief free allocated memory of board
+ * \brief Free allocated memory of Board.
  *
- * \param Board* pboard pointer to board 
+ * \param pboard Pointer to Board.
  */
 void free_board(Board* pboard);
 
 /**
  * \fn void remove_point(Board* pboard,Coord coord);
- * \brief removes point from board
+ * \brief removes point from board.
  *
- * \param Board* pboard pointer to board 
- * \param coord Coord structure of point to be removed
- * \ensures removes point from board by freeing allocated memory and by calling remove_lines to remove all corresponding alignements
+ * \param pboard Pointer to Board.
+ * \param coord Coord structure of the point to be removed.
  */
 void remove_point(Board* pboard,Coord coord);
 
 /**
  * \fn void remove_points(Board* pboard);
- * \brief remove all points from board
+ * \brief Remove all points from Board.
  *
- * \param Board* pboard pointer to board
- * \ensures removes all points from board, freeing allocated memory, without calling remove lines 
+ * \param pboard Pointer to Board
  */
 void remove_points(Board* pboard);
-
-/*void horizontal_lines_on_init(Board* pboard);*/
 
 /**
  * \fn void save_board(Board* pboard)
  * \brief Save the current board into a file.
  *
- * @param pboard Pointer to the board being played
+ * @param pboard Pointer to the Board being played
  */
 void save_board(Board* pboard);
 
 /**
  * \fn Board* initialize_rand(void)
- * \brief Randomly initalize a Board.
+ * \brief Randomly initialize a Board.
  *
  * \return Pointer to a Board
  */
 Board initialize_rand(void);
 
 /**
- * \fn bool read_file(Board* pboard, char* path)
+ * \fn bool initialize_file(Board* pboard, char* path)
  * \brief Read the given file and initialize the Board accordingly.
  *
  * \param pboard Board pointer, SHOULD be NULL
  * \param path File absolute path
- * \return true if no error occured, false otherwise
+ * \return True if no error occurred, false otherwise
  */
 bool initialize_file(Board* pboard, char* path);
 
+/**
+ * \fn void board_expansion(Board* pboard,Coord coord);
+ * \brief Extend the board size.
+ *
+ * \param pboard Pointer to Board being played.
+ * \param coord Coordinates impacting the Board dimensions.
+ */
 void board_expansion(Board* pboard,Coord coord);
 
 #endif
