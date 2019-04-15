@@ -5,7 +5,6 @@
 
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 #include <linux/limits.h>
 #include <string.h>
 
@@ -170,25 +169,6 @@ void get_valid_moves(Board* pboard,Move* pvalid_points)
   }
   *pvalid_points=valid_points;
 }
-
-/*@requires error not null
-  @assigns nothing
-  @ensures prints error reported by is_move_valid */
-/*void print_error(int* error){
-  int n_error=*error;
-  if (n_error==1){
-    printf("Selected coordinates are invalid.\n");
-    press_a_key_to_continue();
-  }
-  else if (n_error==2){
-    printf("This point exists already.\n");
-    press_a_key_to_continue();
-  }
-  else if (n_error==3){
-    printf("Impossible move : either no available alignement or all available alignements have more than one point in common with selected point.\n");
-    press_a_key_to_continue();
-  }
-}*/
 
 /*@requires pboard not null
   @assigns pMove
@@ -472,9 +452,6 @@ bool is_game_over(Board* pboard)
   return false;
 }
 
-
-
-
 void save_board(Board* pboard) {
     char resolved_path[PATH_MAX];
     char* fileName = ask_savefile_name();
@@ -517,29 +494,6 @@ void save_board(Board* pboard) {
 
     fclose(fp);
 }
-
-/* UNFINISHED + WILL NOT BE IMPLEMENTED RIGHT NOW
-void horizontal_lines_on_init(Board* pboard)
-{
-    int i, j;
-    int neighbors_count;
-    bool lineFound;
-    for(i=0 ; i<pboard->height ; i++) {
-        neighbors_count = 0;
-        lineFound = false;
-        for(j=0 ; j<pboard->width ; j++) {
-            if(pboard->points[i][j]) {
-                neighbors_count++;
-            } else {
-                neighbors_count = 0;
-            }
-            if(neighbors_count == 5) {
-                lineFound = true;
-            }
-            if(neighbors_count > )
-        }
-    }
-}*/
 
 void board_expansion(Board* pboard,Coord coord){
   int i,j;

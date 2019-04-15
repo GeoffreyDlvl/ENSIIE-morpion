@@ -13,9 +13,10 @@
  *
  */
 
-#include <stdbool.h> 
-#include <stddef.h>
 #include "board.h"
+
+#include <stdbool.h>
+#include <stddef.h>
 
 
 /**

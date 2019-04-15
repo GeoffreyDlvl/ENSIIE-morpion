@@ -12,9 +12,10 @@
  *
  */
 
-#include <stdbool.h> 
 #include "board.h"
 #include "utils.h"
+
+#include <stdbool.h>
 
 /**
  * \fn void set_hint(bool boolean);

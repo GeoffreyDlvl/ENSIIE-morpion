@@ -1,9 +1,10 @@
 #include "../headers/history.h"
 #include "../headers/interface.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <linux/limits.h>
 #include <ctype.h>
+#include <linux/limits.h>
 
 /* Colors and effects support */
 #define RESET   "\033[0m"
@@ -146,33 +147,6 @@ enum action select_action()
             }
     }
 }
-
-void list_available_moves(Board* pboard)
-{
-  Move possible_moves=Move_create();
-  get_valid_moves(pboard,&possible_moves);
-  Move current=possible_moves;
-  printf("Here is a list of possible moves:\n");
-  int nb_points__displayed = 0;
-  while (!Move_isEmpty(current)){
-    if(nb_points__displayed > 15){
-        printf("\n");
-        nb_points__displayed = 0;
-    }
-    printf("[%d,%d] ",current->x,current->y);
-    current=current->previous;
-    nb_points__displayed++;
-  }
-  printf("\n");
-  pMove_free(&possible_moves);
-}
-
-/*
-	 
-void ask_help(Board* pboard)
-{
-   TO DO 
-   }*/
 
 void print_help(void)
 {

@@ -12,9 +12,10 @@
  *
  */
 
+#include "utils.h"
+
 #include <stdbool.h>
 #include <stdio.h>
-#include "utils.h"
 
 /**
  * \enum action
