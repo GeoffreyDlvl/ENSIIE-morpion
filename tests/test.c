@@ -84,6 +84,13 @@ void test_creating_empty_board(void){
     free(pboard);
 }
 
+void test_is_move_valid(void){
+    /*TODO :2 Cases
+     * - invalid move
+     * - valid move
+     */
+}
+
 int main(void)
 {
     CU_pSuite pSuite = NULL;
