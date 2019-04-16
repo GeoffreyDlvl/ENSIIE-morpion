@@ -3,19 +3,18 @@
 #include "CUnit/Basic.h"
 #include "linux/limits.h"
 #include "../headers/board.h"
+#include "../headers/utils.h"
+
+
+static Error* error;
 
 /* The suite initialization function.
- * Opens the temporary file used by the tests.
- * Returns zero on success, non-zero otherwise.
+ * Opens a file and write the date of the execution of the test suite
+ * Returns the zero on success, non-zero otherwise.
  */
-int init_suite(void)
-{
-/*    if (NULL == (temp_file = fopen("temp.txt", "w+"))) {
-        return -1;
-    }
-    else {
-        return 0;
-    }*/
+int init_suite(void){
+    error = (Error*) malloc(sizeof(Error));
+    system("date");
     return 0;
 }
 
@@ -25,13 +24,7 @@ int init_suite(void)
  */
 int clean_suite(void)
 {
-/*    if (0 != fclose(temp_file)) {
-        return -1;
-    }
-    else {
-        temp_file = NULL;
-        return 0;
-    }*/
+    free(error);
     return 0;
 }
 
@@ -41,8 +34,7 @@ void test_read_file_char_is_invalid(void)
     char resolved_path[PATH_MAX];
     realpath("test-files/board-invalid-char", resolved_path);
     FILE *fp = fopen(resolved_path, "r");
-
-    CU_ASSERT_FALSE(check_file(fp));
+    CU_ASSERT_FALSE(check_file(fp,error))
     fclose(fp);
     free(fp);
 }
@@ -52,7 +44,7 @@ void test_read_file_dimensions_are_invalid(void)
     char resolved_path[PATH_MAX];
     realpath("test-files/board-invalid-dimensions", resolved_path);
     FILE *fp = fopen(resolved_path, "r");
-    CU_ASSERT_FALSE(check_file(fp));
+    CU_ASSERT_FALSE(check_file(fp,error));
     fclose(fp);
     free(fp);
 }
@@ -62,7 +54,7 @@ void test_read_file_board_is_valid(void)
     char resolved_path[PATH_MAX];
     realpath("test-files/board-valid", resolved_path);
     FILE *fp = fopen(resolved_path, "r");
-    CU_ASSERT(check_file(fp));
+    CU_ASSERT(check_file(fp,error));
     fclose(fp);
     free(fp);
 }
@@ -90,7 +82,6 @@ int main(void)
     /* initialize the CUnit test registry */
     if (CUE_SUCCESS != CU_initialize_registry())
         return CU_get_error();
-
     /* add a suite to the registry */
     pSuite = CU_add_suite("Board_suite", init_suite, clean_suite);
     if (NULL == pSuite) {
@@ -99,7 +90,7 @@ int main(void)
     }
 
     /* add the tests to the suite */
-    if( (NULL == CU_add_test(pSuite, "Read_board_file_invalid_char", test_read_file_char_is_invalid))
+    if((NULL == CU_add_test(pSuite, "Read_board_file_invalid_char", test_read_file_char_is_invalid))
         ||
         (NULL == CU_add_test(pSuite, "Read_board_file_dimensions_invalid", test_read_file_dimensions_are_invalid))
         ||
@@ -117,7 +108,6 @@ int main(void)
     printf("\n");
     CU_basic_show_failures(CU_get_failure_list());
     printf("\n\n");
-
     /* Clean up registry and return */
     CU_cleanup_registry();
     return CU_get_error();
