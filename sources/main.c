@@ -50,6 +50,7 @@ int main(int argc, char* argv[]){
             }
         }
     }
+
     install_dependencies();
     set_fullscreen(true);
     display_logo();
@@ -74,6 +75,7 @@ int main(int argc, char* argv[]){
         playerAction = select_action();
         execute_action(&board, playerAction, &quitGame);
     }
+
     print_game_over();
     print_score();
     press_enter_to_continue();

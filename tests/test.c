@@ -75,6 +75,13 @@ void test_adding_already_existing_points(void)
     free(point);
 }
 
+void test_is_move_valid(void){
+    Board* pboard;
+    char resolved_path[PATH_MAX];
+    realpath("test-files/board-valid-move", resolved_path);
+    initialize_file(pboard,resolved_path);
+}
+
 void test_creating_empty_board(void){
     Board* pboard = (Board*) malloc(sizeof(Board));
     *pboard = create_empty_board(300,300);
@@ -82,13 +89,6 @@ void test_creating_empty_board(void){
     CU_ASSERT_EQUAL(pboard->height,300);
     CU_ASSERT_EQUAL(pboard->width,300);
     free(pboard);
-}
-
-void test_is_move_valid(void){
-    /*TODO :2 Cases
-     * - invalid move
-     * - valid move
-     */
 }
 
 int main(void)
