@@ -10,7 +10,7 @@ void install_dependencies(void){
     char* command = (char*) malloc(sizeof(char)*MAX_INPUT);
     realpath("assets/", resolved_path);
     strcat(command,resolved_path);
-    strcat(command,"/./install_dependencies.sh");
+    strcat(command,"/./install_binary_dependencies.sh");
     system(command);
     free(command);
 }
@@ -77,6 +77,7 @@ bool check_file(FILE *fp, Error* err)
         }
     }
     return true;
+
 }
 
 void empty_input_buffer(void) {
