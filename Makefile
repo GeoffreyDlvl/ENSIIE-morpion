@@ -2,7 +2,7 @@ HEADERS_DIR = headers
 SOURCES_DIR = sources
 BINARIES_DIR = bin
 VALGRIND_TEST_CONTEXT = tests/valgrind-test
-COPY_BIN_TO_VALGRIND_CONTEXT = cp -v morpion $(VALGRIND_TEST_CONTEXT)
+COPY_BIN_TO_VALGRIND_CONTEXT = cp -v  morpion $(VALGRIND_TEST_CONTEXT)/morpion; cp -Rv assets $(VALGRIND_TEST_CONTEXT)
 CC = gcc -Wall -Wextra -pedantic
 
 all : morpion
