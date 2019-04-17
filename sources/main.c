@@ -43,7 +43,7 @@ int main(int argc, char* argv[]){
     Error* err = malloc(sizeof(Error));
     *err = NO_ERR;
     /* If a file has been passed as argument */
-    if((strcmp(argv[1], "-r") == 0) && argc == 3) {
+    if(argc == 3 && (strcmp(argv[1], "-r") == 0)) {
         /* Get the file argument absolute path (i.e. resolved path) */
         char resolved_path[PATH_MAX];
         realpath(argv[2], resolved_path);
