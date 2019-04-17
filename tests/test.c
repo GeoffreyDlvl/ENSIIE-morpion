@@ -5,6 +5,7 @@
 #include "../headers/board.h"
 #include "../headers/utils.h"
 #include "../headers/history.h"
+#include "../headers/interface.h"
 
 
 static Error* error;
@@ -88,27 +89,6 @@ void test_read_file_board_is_valid(void)
     free(fp);
 }
 
-void test_add_already_existing_point(void)
-{
-    Board board;
-    *error = NO_ERR;
-    char resolved_path[PATH_MAX];
-    realpath("test-files/board-valid", resolved_path);
-    FILE *fp = fopen(resolved_path, "r");
-    /* Check that initialization went well */
-    CU_ASSERT(initialize_file(&board, resolved_path, error))
-    /* Check return value of a played move */
-        /* Create the coord of the played move */
-        Coord coord;
-        coord.x = 3;
-        coord.y = 0;
-    CU_ASSERT_FALSE(play_move(&board,coord,error));
-    /* Deeper test: check error value */
-    CU_ASSERT(*error == POINT_ALREADY_EXIST_ERR);
-    fclose(fp);
-    free(fp);
-}
-
 void test_create_empty_board_size_300(void){
     Board* pboard = NULL;
     Board board;
@@ -117,6 +97,88 @@ void test_create_empty_board_size_300(void){
     CU_ASSERT_NOT_EQUAL(pboard,NULL);
     CU_ASSERT_EQUAL(pboard->height,300);
     CU_ASSERT_EQUAL(pboard->width,300);
+    free_board(&board);
+}
+
+void test_create_board_from_file(void)
+{
+    Board board;
+    *error = NO_ERR;
+    char resolved_path[PATH_MAX];
+    realpath("test-files/board-valid", resolved_path);
+    /* Check that initialization went well */
+    CU_ASSERT(initialize_file(&board, resolved_path, error))
+    /* Check board size */
+    CU_ASSERT_TRUE(board.height == 5);
+    CU_ASSERT_TRUE(board.width == 6);
+    /* Deeper test: check error value */
+    CU_ASSERT(*error == NO_ERR);
+    /*remove_points(&board);
+    free_board(&board);*/
+}
+
+void test_add_already_existing_point(void)
+{
+    Board board;
+    *error = NO_ERR;
+    char resolved_path[PATH_MAX];
+    realpath("test-files/board-valid", resolved_path);
+    /* Check that initialization went well */
+    CU_ASSERT(initialize_file(&board, resolved_path, error))
+    /* Check return value of a played move */
+        /* Create the coord of the played move */
+        Coord coord;
+        coord.x = 3;
+        coord.y = 0;
+        /* A point exists in 3,0 */
+    CU_ASSERT_FALSE(play_move(&board,coord,error));
+    /* Deeper test: check error value */
+    CU_ASSERT(*error == POINT_ALREADY_EXIST_ERR);
+    /*remove_points(&board);
+    free_board(&board);*/
+}
+
+void test_add_valid_alignment(void)
+{
+    Board board;
+    *error = NO_ERR;
+    char resolved_path[PATH_MAX];
+    realpath("test-files/board-valid", resolved_path);
+    /* Check that initialization went well */
+    CU_ASSERT(initialize_file(&board, resolved_path, error))
+    /* Check return value of a played move */
+        /* Create the coord of the played move */
+        Coord coord;
+        coord.x = 4;
+        coord.y = 3;
+        /* An alignment is possible in 4,3 */
+    CU_ASSERT(play_move(&board,coord,error));
+    /* Deeper test: check error value */
+    CU_ASSERT(*error == NO_ERR);
+    /*remove_points(&board);
+    free_board(&board);*/
+
+}
+
+void test_add_invalid_alignment(void)
+{
+    Board board;
+    *error = NO_ERR;
+    char resolved_path[PATH_MAX];
+    realpath("test-files/board-valid", resolved_path);
+    /* Check that initialization went well */
+    CU_ASSERT(initialize_file(&board, resolved_path, error))
+    /* Check return value of a played move */
+        /* Create the coord of the played move */
+        Coord coord;
+        coord.x = 0;
+        coord.y = 0;
+        /* No alignment possible in 0,0 */
+    CU_ASSERT_FALSE(play_move(&board,coord,error));
+    /* Deeper test: check error value */
+    CU_ASSERT(*error == ALIGNMENT_ERR);
+    /*remove_points(&board);
+    free_board(&board);*/
 }
 
 int main(void)
@@ -148,9 +210,15 @@ int main(void)
         ||
         (NULL == CU_add_test(pSuiteReadFile, "Read_board_valid", test_read_file_board_is_valid))
         ||
-        (NULL == CU_add_test(pSuiteBoard, "Create_empty_board_size_300", test_create_empty_board_size_300)))
+        (NULL == CU_add_test(pSuiteBoard, "Create_empty_board_size_300", test_create_empty_board_size_300))
+        ||
+        (NULL == CU_add_test(pSuiteBoard, "Create_board_from_file", test_create_board_from_file))
         ||
         (NULL == CU_add_test(pSuiteBoard, "Add_already_existing_point", test_add_already_existing_point))
+        ||
+        NULL == CU_add_test(pSuiteBoard, "Add_valid_alignment", test_add_valid_alignment)
+        ||
+        NULL == CU_add_test(pSuiteBoard, "Add_invalid_alignment", test_add_invalid_alignment))
     {
         CU_cleanup_registry();
         return CU_get_error();

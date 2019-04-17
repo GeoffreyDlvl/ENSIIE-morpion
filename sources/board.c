@@ -112,7 +112,6 @@ bool initialize_file(Board* pboard, char* path, Error* error)
     if(!check_file(fp, error)) {
         return false;
     }
-
     size_t width = get_file_board_width(fp);
     size_t height = get_file_board_height(fp);
     *pboard = create_empty_board(width, height);
@@ -129,7 +128,8 @@ bool initialize_file(Board* pboard, char* path, Error* error)
         }
         for(col = 0 ; col < width ; col++) {
             if(lineBuffer[col] == 'o') {
-                Ppoint point = malloc(sizeof(int));
+                Ppoint point = NULL;
+                point = (int*)malloc(sizeof(int));
                 pboard->points[line][col] = point;
             }
         }
