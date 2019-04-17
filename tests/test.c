@@ -4,6 +4,7 @@
 #include "linux/limits.h"
 #include "../headers/board.h"
 #include "../headers/utils.h"
+#include "../headers/history.h"
 
 
 static Error* error;
@@ -87,7 +88,7 @@ void test_read_file_board_is_valid(void)
     free(fp);
 }
 
-void test_adding_already_existing_points(void)
+void test_add_already_existing_point(void)
 {
     Board board;
     *error = NO_ERR;
@@ -95,73 +96,61 @@ void test_adding_already_existing_points(void)
     realpath("test-files/board-valid", resolved_path);
     FILE *fp = fopen(resolved_path, "r");
     /* Check that initialization went well */
-    CU_ASSERT(initialize_file(&board, resolved_path, err))
+    CU_ASSERT(initialize_file(&board, resolved_path, error))
     /* Check return value of a played move */
         /* Create the coord of the played move */
         Coord coord;
         coord.x = 3;
         coord.y = 0;
-    /* I NEED TO FINISH */
-    CU_ASSERT_FALSE(play_move(&board, ));
+    CU_ASSERT_FALSE(play_move(&board,coord,error));
     /* Deeper test: check error value */
-    CU_ASSERT(*error == NO_ERR);
+    CU_ASSERT(*error == POINT_ALREADY_EXIST_ERR);
     fclose(fp);
     free(fp);
-    board = create_empty_board(10,10);
-    int* point = (int*) malloc(sizeof(int));
-    *point =1;
-    pboard->points[0][0] = point;
-    Coord* coord = (Coord*) malloc(sizeof(Coord));
-    coord->x = 0;
-    coord->y = 0;
-    CU_ASSERT_EQUAL(add_point(pboard,*coord,NULL),false);
-    free_board(pboard);
-    free(coord);
-    free(point);
 }
 
-void test_is_move_valid(void){
-    Board* pboard;
-    char resolved_path[PATH_MAX];
-    realpath("test-files/board-valid-move", resolved_path);
-    initialize_file(pboard,resolved_path,error);
-}
-
-void test_creating_empty_board(void){
-    Board* pboard = (Board*) malloc(sizeof(Board));
-    *pboard = create_empty_board(300,300);
+void test_create_empty_board_size_300(void){
+    Board* pboard = NULL;
+    Board board;
+    board = create_empty_board(300,300);
+    pboard = &board;
     CU_ASSERT_NOT_EQUAL(pboard,NULL);
     CU_ASSERT_EQUAL(pboard->height,300);
     CU_ASSERT_EQUAL(pboard->width,300);
-    free(pboard);
 }
 
 int main(void)
 {
-    CU_pSuite pSuite = NULL;
+    CU_pSuite pSuiteReadFile = NULL;
+    CU_pSuite pSuiteBoard = NULL;
 
     /* initialize the CUnit test registry */
     if (CUE_SUCCESS != CU_initialize_registry())
         return CU_get_error();
     /* add a suite to the registry */
-    pSuite = CU_add_suite("Board_suite", init_suite, clean_suite);
-    if (NULL == pSuite) {
+    pSuiteReadFile = CU_add_suite("Read_file_suite", init_suite, clean_suite);
+    pSuiteBoard = CU_add_suite("Board_suite", NULL, NULL);
+    if (NULL == pSuiteReadFile) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+    if (NULL == pSuiteBoard) {
         CU_cleanup_registry();
         return CU_get_error();
     }
 
     /* add the tests to the suite */
-    if((NULL == CU_add_test(pSuite, "Read_board_file_invalid_char", test_read_file_char_is_invalid))
+    if((NULL == CU_add_test(pSuiteReadFile, "Read_board_file_invalid_char", test_read_file_char_is_invalid))
         ||
-        (NULL == CU_add_test(pSuite, "Read_board_file_dimensions_invalid", test_read_file_dimensions_are_invalid))
+        (NULL == CU_add_test(pSuiteReadFile, "Read_board_file_dimensions_invalid", test_read_file_dimensions_are_invalid))
         ||
-        (NULL == CU_add_test(pSuite, "Read_board_file_path_invalid", test_read_file_path_is_invalid))
+        (NULL == CU_add_test(pSuiteReadFile, "Read_board_file_path_invalid", test_read_file_path_is_invalid))
         ||
-        (NULL == CU_add_test(pSuite, "Read_board_valid", test_read_file_board_is_valid))
+        (NULL == CU_add_test(pSuiteReadFile, "Read_board_valid", test_read_file_board_is_valid))
         ||
-        (NULL == CU_add_test(pSuite, "Adding_already_existing_points", test_adding_already_existing_points))
+        (NULL == CU_add_test(pSuiteBoard, "Create_empty_board_size_300", test_create_empty_board_size_300)))
         ||
-        (NULL == CU_add_test(pSuite, "Adding_already_existing_points", test_creating_empty_board)))
+        (NULL == CU_add_test(pSuiteBoard, "Add_already_existing_point", test_add_already_existing_point))
     {
         CU_cleanup_registry();
         return CU_get_error();
@@ -170,6 +159,7 @@ int main(void)
     // Run all tests using the basic interface
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
+    CU_cleanup_registry();
     printf("\n");
     CU_basic_show_failures(CU_get_failure_list());
     printf("\n\n");
