@@ -72,10 +72,12 @@ bool check_file(FILE *fp, Error* err)
             /* check if char is valid */
             if (lineBuffer[col] != '.' && lineBuffer[col] != 'o' && lineBuffer[col] != '\n') {
                 *err = FILE_UNKNOWN_CHAR_ERR;
+                free(lineBuffer);
                 return false;
             }
         }
     }
+    free(lineBuffer);
     return true;
 
 }
