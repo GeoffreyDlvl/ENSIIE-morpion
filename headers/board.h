@@ -253,7 +253,7 @@ Board initialize_rand(void);
  * \param path File absolute path
  * \return True if no error occurred, false otherwise
  */
-bool initialize_file(Board* pboard, char* path);
+bool initialize_file(Board* pboard, char* path, Error* error);
 
 /**
  * \fn void board_expansion(Board* pboard,Coord coord);

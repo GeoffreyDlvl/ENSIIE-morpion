@@ -15,6 +15,7 @@
 
 int main(int argc, char* argv[]){
     srand(time(NULL));
+
     /*If user gives more than 2 arguments*/
     if (argc>3){
         fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc-1);
@@ -28,26 +29,30 @@ int main(int argc, char* argv[]){
         /*If first argument is neither option -r and -h
         OR
         first argument is option -r but is not followed by a parameter*/
-        if ( (strcmp(argv[1],"-r") != 0 && strcmp(argv[1],"-h") != 0) ||
-          ((strcmp(argv[1],"-r")==0) && argc==2) ) {
-            fprintf(stderr,"%s:FATAL: %s invalid args (none, -r FILE or -h expected) \n",argv[0],argv[1]);
+        if ((strcmp(argv[1], "-r") != 0 && strcmp(argv[1], "-h") != 0) ||
+            ((strcmp(argv[1], "-r") == 0) && argc == 2)) {
+            fprintf(stderr, "%s:FATAL: %s invalid args (none, -r FILE or -h expected) \n", argv[0], argv[1]);
             return EXIT_FAILURE;
         }
         /*If first argument is option -h*/
-        if (strcmp(argv[1],"-h")==0){
+        if (strcmp(argv[1], "-h") == 0) {
             print_help();
             return EXIT_SUCCESS;
         }
-        /* A file has been passed as argument */
-        else {
-            /* Get the file argument absolute path (i.e. resolved path) */
-            char resolved_path[PATH_MAX];
-            realpath(argv[2], resolved_path);
+    }
+    Error* err = malloc(sizeof(Error));
+    *err = NO_ERR;
+    /* If a file has been passed as argument */
+    if((strcmp(argv[1], "-r") == 0) && argc == 3) {
+        /* Get the file argument absolute path (i.e. resolved path) */
+        char resolved_path[PATH_MAX];
+        realpath(argv[2], resolved_path);
 
-            /* Construct board if file is valid, exit otherwise */
-            if (!initialize_file(&board, resolved_path)) {
-                return EXIT_FAILURE;
-            }
+        /* Construct board if file is valid, exit otherwise */
+        if (!initialize_file(&board, resolved_path, err)) {
+            print_error(*err);
+            free(err);
+            return EXIT_FAILURE;
         }
     }
 
@@ -60,8 +65,6 @@ int main(int argc, char* argv[]){
     enum action playerAction = PLAY_MOVE;
     set_hint(false);
     bool quitGame = false;
-    Error *err = malloc(sizeof(Error));
-    *err = NO_ERR;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
     {
