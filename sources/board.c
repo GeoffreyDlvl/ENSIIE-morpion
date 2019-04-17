@@ -64,20 +64,17 @@ void free_board(Board* pboard){
 /*@requires pboard not null
   @assigns pboard
   @ensures calls is_move_valid, allocates memory for square, sets it to 1 and adds associated line*/
-bool add_point(Board* pboard, Coord coord){
+bool add_point(Board* pboard, Coord coord, Error* error){
   int i=coord.y;
   int j=coord.x;
-  Error error; /* if move isn't valid, it is called by print_error */
   Move move=Move_create(); /* <- becomes list of possible moves after is_move_valid is called */
-  if (is_move_valid(pboard,coord,&move,&error)){
+  if (is_move_valid(pboard,coord,&move,error)){
     pboard->points[i][j] = (Ppoint)malloc(sizeof(int));
     *(pboard->points[i][j])=1;
     add_line(&move);/* adds line to line history, calls select_line if there is more than 1 possible line*/
     return true;
   }
   else{
-    print_error(error);
-    press_enter_to_continue();
     return false;
   }
 }
@@ -416,15 +413,15 @@ Board initialize_rand(void)
 /*@requires pboard not null
   @assigns pboard
   @ensures executes action of the enum action action*/
-void execute_action(Board* pboard, enum action action, bool* quit)
+void execute_action(Board* pboard, enum action action, bool* quit, Error* error)
 {
     if (action == PLAY_MOVE){
         Coord coord=select_move();
-        play_move(pboard,coord);
+        play_move(pboard,coord,error);
     } else if (action == CANCEL_MOVE){
-        cancel_move(pboard);
+        cancel_move(pboard,error);
     } else if (action == REPLAY_MOVE){
-        replay_move(pboard);
+        replay_move(pboard,error);
     } else if (action == LIST_MOVES){
         /*list_available_moves(pboard);  NOT NEEDED */
       set_hint(true);
@@ -434,6 +431,7 @@ void execute_action(Board* pboard, enum action action, bool* quit)
         *quit = confirm_quit_save(pboard);
     } else{
         fprintf(stderr, "Execute action: action is undefined.");
+        exit(EXIT_FAILURE);
     }
 }
 

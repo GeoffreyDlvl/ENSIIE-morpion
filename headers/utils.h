@@ -22,6 +22,7 @@
  */
 typedef enum
 {
+    NO_ERR, /** Success: no error */
     WRONG_INPUT_ERR, /**< Wrong user input */
     FILE_PTR_ERR, /**< File could not be opened */
     FILE_DIMENSION_ERR, /**< Board dimensions in file are not NxM */
@@ -29,6 +30,8 @@ typedef enum
     POINT_ALREADY_EXIST_ERR, /**< The point already exists */
     INVALID_COORDINATES_ERR, /**< Coordinates are invalid */
     ALIGNMENT_ERR, /**< Alignment is incorrect */
+    CANCEL_ERR, /**< Cannot cancel: no move to cancel */
+    REPLAY_ERR /**< Cannot replay: no move has been cancelled */
 } Error;
 
 /**

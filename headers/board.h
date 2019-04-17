@@ -183,7 +183,7 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
  * \param coord Coordinates of the point being played
  * \return True if point successfully added, false otherwise.
  */
-bool add_point(Board* pboard, Coord coord);
+bool add_point(Board* pboard, Coord coord, Error* error);
 
 /**
  * \fn void execute_action(Board* pboard, enum action action, bool* quit)
@@ -193,7 +193,7 @@ bool add_point(Board* pboard, Coord coord);
  * \param action Action to execute.
  * \param quit Pointer to bool holding true if user wishes to quit the game.
  */
-void execute_action(Board* pboard, enum action action, bool* quit);
+void execute_action(Board* pboard, enum action action, bool* quit, Error* error);
 
 /**
  * \fn bool is_game_over(Board* pboard);

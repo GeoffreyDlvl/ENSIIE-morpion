@@ -58,7 +58,7 @@ typedef struct{
  * \param coord Coordinates of the point to be played.
  * \return true if point successfully added, false otherwise.
  */
-bool play_move(Board* pboard, Coord coord);
+bool play_move(Board* pboard, Coord coord, Error* error);
 
 /**
  * \fn void cancel_move(Board* pboard)
@@ -66,7 +66,7 @@ bool play_move(Board* pboard, Coord coord);
  *
  * \param pboard Pointer to the Board being played.
  */
-void cancel_move(Board* pboard);
+void cancel_move(Board* pboard, Error* error);
 
 /**
  * \fn void replay_move(Board* pboard)
@@ -74,7 +74,7 @@ void cancel_move(Board* pboard);
  *
  * \param pboard Pointer to the Board being played.
  */
-void replay_move(Board* pboard);
+void replay_move(Board* pboard,Error* error);
 
 /**
  * \fn void free_history();

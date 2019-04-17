@@ -69,7 +69,7 @@ void test_adding_already_existing_points(void)
     Coord* coord = (Coord*) malloc(sizeof(Coord));
     coord->x = 0;
     coord->y = 0;
-    CU_ASSERT_EQUAL(add_point(pboard,*coord),false);
+    CU_ASSERT_EQUAL(add_point(pboard,*coord,NULL),false);
     free_board(pboard);
     free(coord);
     free(point);

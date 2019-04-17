@@ -148,8 +148,8 @@ Move get_points_saved_history(void){
 /*@requires pboard not null
   @assigns pboard
   @ensures plays desired move, returning true if successful, else false */
-bool play_move(Board* pboard,Coord coord){
-  if (!add_point(pboard,coord)){
+bool play_move(Board* pboard,Coord coord, Error* error){
+  if (!add_point(pboard,coord,error)){
     return false;
   }
   while (pMove_length(&history.PlastPlayedMove)!=pMove_length(&history.PlastSavedMove)){
@@ -170,11 +170,11 @@ bool play_move(Board* pboard,Coord coord){
 /*@requires pboard not null
   @assigns pboard
   @ensures cancels last played move by calling remove point*/
-void cancel_move(Board* pboard)
+void cancel_move(Board* pboard, Error* error)
 {
   Move cancelled_move=history.PlastPlayedMove;
   if (pMove_length(&history.PlastPlayedMove)==0){
-    printf("Nothing to cancel : no move has been played\n");
+      *error=CANCEL_ERR;
   }
   else{
     remove_point(pboard,*cancelled_move);
@@ -187,17 +187,17 @@ void cancel_move(Board* pboard)
 /*@requires pboard not null
   @assigns pboard
   @ensures replays last saved move */
-void replay_move(Board* pboard)
+void replay_move(Board* pboard, Error* error)
 {
   Move cancelled_move=history.PlastSavedMove;
   if (pMove_length(&history.PlastPlayedMove)==pMove_length(&history.PlastSavedMove)){
-    printf("Cannot replay move : no move has been cancelled\n");
+    *error=REPLAY_ERR;
   }
   else{
     while (pMove_length(&history.PlastPlayedMove)+1!=pMove_length(&cancelled_move)){
       cancelled_move=cancelled_move->previous;
     }
-    add_point(pboard,*cancelled_move);
+    add_point(pboard,*cancelled_move, error);
     Move_addM(&history.PlastPlayedMove,cancelled_move->x,cancelled_move->y);
     history.moves+=1;
   }

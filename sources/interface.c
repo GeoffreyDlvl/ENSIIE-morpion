@@ -295,8 +295,15 @@ void print_error(Error err) {
         case ALIGNMENT_ERR:
             fprintf(stderr, BOLDRED "No valid alignment.\n" RESET);
             break;
+        case CANCEL_ERR:
+            fprintf(stderr, BOLDRED "Cannot cancel: no move to cancel.\n" RESET);
+            break;
+        case REPLAY_ERR:
+            fprintf(stderr, BOLDRED "Cannot replay: no move has been cancelled.\n" RESET);
+            break;
         default:
             fprintf(stderr, RED "Undefined error (requires implementation)." RESET);
+            exit(EXIT_FAILURE);
             break;
 
         /* TODO: press_enter_to_continue() should be called be functions calling print_error */

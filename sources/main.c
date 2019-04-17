@@ -60,11 +60,14 @@ int main(int argc, char* argv[]){
     enum action playerAction = PLAY_MOVE;
     set_hint(false);
     bool quitGame = false;
+    Error *err = malloc(sizeof(Error));
+    *err = NO_ERR;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
     {
         clear_screen();
-        /*printf("Lines_history :\n");
+        /* DEBUG PURPOSE
+        printf("Lines_history :\n");
         Move_print(get_lines_history());
         printf("Points_history_from_last_played_move :\n");
         Move_print(get_points_history());
@@ -73,13 +76,20 @@ int main(int argc, char* argv[]){
         print_board(&board);
         set_hint(false);
         playerAction = select_action();
-        execute_action(&board, playerAction, &quitGame);
-    }
+        execute_action(&board, playerAction, &quitGame, err);
 
+        if(*err != NO_ERR)
+        {
+            print_error(*err);
+            press_enter_to_continue();
+            *err = NO_ERR;
+        }
+    }
     print_game_over();
     print_score();
     press_enter_to_continue();
     /* Free all allocated pointers */
+    free(err);
     free_history();
     remove_points(&board);
     free_board(&board);
