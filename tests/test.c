@@ -16,6 +16,8 @@ static Error* error;
  */
 int init_suite(void){
     error = malloc(sizeof(Error));
+    initialize_HistoryList();
+    initialize_LinesList();
     system("date");
     return 0;
 }
@@ -218,7 +220,8 @@ int main(void)
         ||
         NULL == CU_add_test(pSuiteBoard, "Add_valid_alignment", test_add_valid_alignment)
         ||
-        NULL == CU_add_test(pSuiteBoard, "Add_invalid_alignment", test_add_invalid_alignment))
+        NULL == CU_add_test(pSuiteBoard, "Add_invalid_alignment", test_add_invalid_alignment)
+        )
     {
         CU_cleanup_registry();
         return CU_get_error();
