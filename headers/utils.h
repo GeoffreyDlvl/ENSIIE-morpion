@@ -22,16 +22,16 @@
  */
 typedef enum
 {
-    NO_ERR, /** Success: no error */
-    WRONG_INPUT_ERR, /**< Wrong user input */
-    FILE_PTR_ERR, /**< File could not be opened */
-    FILE_DIMENSION_ERR, /**< Board dimensions in file are not NxM */
-    FILE_UNKNOWN_CHAR_ERR, /**< Board character in file is unknown */
-    POINT_ALREADY_EXIST_ERR, /**< The point already exists */
-    INVALID_COORDINATES_ERR, /**< Coordinates are invalid */
-    ALIGNMENT_ERR, /**< Alignment is incorrect */
-    CANCEL_ERR, /**< Cannot cancel: no move to cancel */
-    REPLAY_ERR /**< Cannot replay: no move has been cancelled */
+    NO_ERR = 0, /** Success: no error */
+    WRONG_INPUT_ERR = -1, /**< Wrong user input */
+    FILE_PTR_ERR = -2, /**< File could not be opened */
+    FILE_DIMENSION_ERR = -3, /**< Board dimensions in file are not NxM */
+    FILE_UNKNOWN_CHAR_ERR = -4, /**< Board character in file is unknown */
+    POINT_ALREADY_EXIST_ERR = -5, /**< The point already exists */
+    INVALID_COORDINATES_ERR = -6, /**< Coordinates are invalid */
+    ALIGNMENT_ERR = -7, /**< Alignment is incorrect */
+    CANCEL_ERR = -8, /**< Cannot cancel: no move to cancel */
+    REPLAY_ERR = -9 /**< Cannot replay: no move has been cancelled */
 } Error;
 
 /**
