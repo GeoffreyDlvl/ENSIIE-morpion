@@ -398,7 +398,7 @@ Board initialize_rand(void)
     {
       random = get_random_number(0, 100);
       /* 50% chance to add a point */
-      if (random < 50)
+      if (random < 30)
       {
         Ppoint point = malloc(sizeof(int));
         board.points[i][j] = point;
