@@ -21,6 +21,7 @@ int main(int argc, char* argv[]){
         fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc-1);
         return EXIT_FAILURE;
     }
+
     Board board;
     /*If user does not give any argument*/
     if (argc == 1){
