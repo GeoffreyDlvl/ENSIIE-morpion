@@ -1,11 +1,17 @@
 # Executables #
 ##############
+morpion_console
+morpion_gtk
 morpion
 test
 
 # Compiled source #
 ###################
 *.o
+
+# Editor generated files #
+##########################
+CMakeLists.txt
 
 # OS generated files #
 ######################
