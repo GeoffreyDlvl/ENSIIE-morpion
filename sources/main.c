@@ -16,8 +16,6 @@
 int main(int argc, char* argv[]){
     srand(time(NULL));
 
-    init();
-
     /*If user gives more than 2 arguments*/
     if (argc>3){
         fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc-1);
@@ -67,10 +65,15 @@ int main(int argc, char* argv[]){
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
     enum action playerAction = PLAY_MOVE;
     set_hint(false);
+
+    // init interface
+    init(&board);
+
     bool quitGame = false;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
     {
+
         clear_screen();
         /* DEBUG PURPOSE
         printf("Lines_history :\n");
@@ -83,6 +86,7 @@ int main(int argc, char* argv[]){
         set_hint(false);
         playerAction = select_action();
         execute_action(&board, playerAction, &quitGame, err);
+        add_line_to_board(*err);
 
         if(*err != NO_ERR)
         {

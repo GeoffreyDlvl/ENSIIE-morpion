@@ -319,7 +319,9 @@ void print_score(void) {
     printf("Your final score is : %d\n", get_points_scored());
 }
 
-void init(void)
+void init(Board* pboard)
 {
     //NOT REQUIRED IN CONSOLE
 }
+
+void add_line_to_board(Error err) {}

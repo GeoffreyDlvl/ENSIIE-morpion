@@ -22,7 +22,7 @@
 
 
 
-static Tint2 points[]    = { { 4,4}, {5,5} };
+static Tint2 points[9999];//    = { { 4,4}, {5,5} };
 static Tsegm lines[]     = { { { 6,6}, {6,11} },  { { 6,6}, {11,6} },
                              { { 6,6}, {10,8} }, { { 2,4}, { 6,6} },
                              { { 6,6}, {10,4} }, { { 2,8}, { 6,6} },
@@ -32,7 +32,8 @@ static Tsegm linesHelp[] = { { { 1,1}, { 1,5} }, { { 1,2}, { 1, 6} },
                              { { 1,5}, { 1,9} }, { { 1,6}, { 1,10} },
                              { { 1,1}, { 5,5} }, { { 1,1}, { 5, 1} },
 };
-
+static Tgui* gui;
+static Tsegm   line;
 
 
 
@@ -57,18 +58,47 @@ void set_fullscreen(bool set) {
   @ensures prints board, shows possible moves if hint set to true */
 void print_board(Board* pboard)
 {
-    /* TO DO */
+    gui_redraw(gui);
+}
+
+
+void add_line_to_board(Error err)
+{
+    if(err == NO_ERR) {
+        fprintf(stderr,"no error\n");
+        gui_addLines(gui,&line,1);
+    } else
+        fprintf(stderr,"error\n");
 }
 
 Coord select_move(void)
 {
-    /* TO DO */
+    Coord coord;
+    coord.x = line.p2.x;
+    coord.y = line.p2.y;
+    coord.previous = NULL;
+    return coord;
 }
 
 
 enum action select_action(void)
 {
-    /* TO DO */
+    switch ( gui_getAction(gui,&line) ) {
+        case GUI_ACT_Segment:
+            return PLAY_MOVE;
+            break;
+        case GUI_ACT_Undo:
+            return CANCEL_MOVE;
+            break;
+        case GUI_ACT_Help:
+            return ASK_HELP;
+            break;
+        case GUI_ACT_Quit:
+            return QUIT_GAME;
+            break;
+        default:
+            fprintf(stderr,"unexpected action\n");
+    }
 }
 
 void print_help(void)
@@ -80,11 +110,11 @@ void print_help(void)
   @assings pmove
   @ensures asks player to chose amongst possible lines and frees all those not chosen*/
 void select_line(Move* pmove){
-    /* TO DO */
+
 }
 
 bool confirm_quit_save(Board* pboard) {
-    /* TO DO */
+    gui_close(gui);
 }
 
 
@@ -106,7 +136,39 @@ void press_enter_to_continue(void){
 }
 
 void print_error(Error err) {
-    /* TO DO */
+    switch (err) {
+        case WRONG_INPUT_ERR:
+            fprintf(stderr, RED "Wrong input.\n" RESET);
+            break;
+        case FILE_PTR_ERR:
+            fprintf(stderr, BOLDRED "File could not be opened.\n" RESET);
+            break;
+        case FILE_DIMENSION_ERR:
+            fprintf(stderr, BOLDRED "File error: board width must be equal for each line.\n" RESET);
+            break;
+        case FILE_UNKNOWN_CHAR_ERR:
+            fprintf(stderr, BOLDRED "File error: unknown character.\n" RESET);
+            break;
+        case POINT_ALREADY_EXIST_ERR:
+            fprintf(stderr, BOLDRED "This point already exists.\n" RESET);
+            break;
+        case INVALID_COORDINATES_ERR:
+            fprintf(stderr, BOLDRED "Coordinates are invalid.\n" RESET);
+            break;
+        case ALIGNMENT_ERR:
+            fprintf(stderr, BOLDRED "No valid alignment.\n" RESET);
+            break;
+        case CANCEL_ERR:
+            fprintf(stderr, BOLDRED "Cannot cancel: no move to cancel.\n" RESET);
+            break;
+        case REPLAY_ERR:
+            fprintf(stderr, BOLDRED "Cannot replay: no move has been cancelled.\n" RESET);
+            break;
+        default:
+            fprintf(stderr, RED "Undefined error (requires implementation)." RESET);
+            exit(EXIT_FAILURE);
+            break;
+    }
 }
 
 void print_game_over(void) {
@@ -117,9 +179,46 @@ void print_score(void) {
     /* TO DO */
 }
 
-void init(void)
+void initPoints(Board* pboard) {
+    /*Move current = get_points_history();
+    fprintf(stderr, "point : %s %s", current->x, current->y);*/
+
+    //count points
+/*    int count = 0;
+    int i, j;
+    for(i=0 ; i<pboard->width ; ++i)
+    {
+        for(j=0 ; j<pboard->height ; ++j)
+        {
+            if (pboard->points[i][j] != NULL) {
+                count++;
+            }
+        }
+    }*/
+
+    int i,j,k = 0;
+    for(i=0 ; i<pboard->width ; ++i)
+    {
+        for(j=0 ; j<pboard->height ; ++j)
+        {
+            if (pboard->points[i][j] != NULL) {
+                Tint2 p = {j, i};
+                points[k++] = p;
+            }
+        }
+    }
+}
+
+void init(Board* pboard)
 {
-    Taction action;
+    gui = gui_open(300,20);
+
+    initPoints(pboard);
+    gui_addPoints(gui , points , TABLE_NB(points));
+
+    //gui_addLines (gui , lines  , TABLE_NB(lines));
+
+    /*Taction action;
     Tsegm   line;
     Tgui* gui = gui_open(300,20);
 
@@ -153,10 +252,10 @@ void init(void)
             default:
                 fprintf(stderr,"unexpected action\n");
         }
-        
+
     }
 
 end:
-    gui_close(gui);
+    gui_close(gui);*/
 
 }

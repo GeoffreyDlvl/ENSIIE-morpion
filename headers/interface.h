@@ -18,8 +18,7 @@
 #include <stdbool.h>
 
 
-void init();
-
+void init(Board* pboard);
 
 /**
  * \fn void set_hint(bool boolean);
@@ -127,5 +126,7 @@ void print_game_over(void);
  * \brief Print user score.
  */
 void print_score(void);
+
+void add_line_to_board(Error err);
 
 #endif
