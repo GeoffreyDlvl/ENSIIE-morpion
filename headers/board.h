@@ -185,15 +185,6 @@ void NW_diagonal_search(Move* pcand_lines,Coord coord,Board* pboard);
  */
 bool add_point(Board* pboard, Coord coord, Error* error);
 
-/**
- * \fn void execute_action(Board* pboard, enum action action, bool* quit)
- * \brief Execute action passed as a parameter.
- * 
- * \param pboard Pointer to the Board being played.
- * \param action Action to execute.
- * \param quit Pointer to bool holding true if user wishes to quit the game.
- */
-void execute_action(Board* pboard, enum action action, bool* quit, Error* error);
 
 /**
  * \fn bool is_game_over(Board* pboard);
