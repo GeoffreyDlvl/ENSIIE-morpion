@@ -17,6 +17,10 @@
 
 #include <stdbool.h>
 
+
+void init();
+
+
 /**
  * \fn void set_hint(bool boolean);
  * \brief Set hint value.

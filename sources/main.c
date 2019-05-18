@@ -16,6 +16,8 @@
 int main(int argc, char* argv[]){
     srand(time(NULL));
 
+    init();
+
     /*If user gives more than 2 arguments*/
     if (argc>3){
         fprintf(stderr,"%s:FATAL: %d invalid nber of args (no more than two expected)\n",argv[0],argc-1);
@@ -57,7 +59,7 @@ int main(int argc, char* argv[]){
         }
     }
 
-    install_dependencies();
+    //install_dependencies();
     set_fullscreen(true);
     display_logo();
     initialize_HistoryList();

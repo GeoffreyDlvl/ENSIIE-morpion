@@ -318,3 +318,8 @@ void print_game_over(void) {
 void print_score(void) {
     printf("Your final score is : %d\n", get_points_scored());
 }
+
+void init(void)
+{
+    //NOT REQUIRED IN CONSOLE
+}
