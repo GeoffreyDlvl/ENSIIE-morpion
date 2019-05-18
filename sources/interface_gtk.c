@@ -36,7 +36,7 @@ static Tsegm linesHelp[] = { { { 1,1}, { 1,5} }, { { 1,2}, { 1, 6} },
 
 
 
-
+static Tsegm line;
 
 static bool hint;
 
@@ -66,9 +66,10 @@ Coord select_move(void)
 }
 
 
-enum action select_action(void)
+void* select_action(Interface* Interface)
 {
-    /* TO DO */
+    Taction action;
+    return (void*) gui_getAction(Interface->gui,&line);
 }
 
 void print_help(void)
@@ -117,46 +118,42 @@ void print_score(void) {
     /* TO DO */
 }
 
-void init(void)
+void redraw(Board* pboard,Interface* interface){
+    gui_redraw((Tgui*)interface->gui);
+}
+
+Interface* init(void)
 {
-    Taction action;
-    Tsegm   line;
-    Tgui* gui = gui_open(300,20);
+    Interface* gui = (Interface*) malloc(sizeof(Interface));
+    gui->gui = gui_open(300,20);
+    return gui; 
+}
 
-    gui_addPoints(gui , points , TABLE_NB(points));
-    gui_addLines (gui , lines  , TABLE_NB(lines));
-
-    int fini=0;
-    while ( ! fini ) {
-        gui_redraw(gui);
-
-        switch ( gui_getAction(gui,&line) ) {
+/*@requires pboard not null
+  @assigns pboard
+  @ensures executes action of the enum action action*/
+void execute_action(Board* pboard,Interface* interface, void* action, bool* quit, Error* error)
+{
+    switch ( gui_getAction((Tgui*)interface->gui,&line) ) {
             case GUI_ACT_Segment:
                 if ( abs(line.p1.x-line.p2.x)>9||
                      abs(line.p1.y-line.p2.y)>9 )
-                    gui_error(gui, "le segment (%d,%d) --> (%d,%d) est invalide",
+                    gui_error(interface->gui, "le segment (%d,%d) --> (%d,%d) est invalide",
                               line.p1.x,line.p1.x, line.p2.y,line.p2.y);
                 else
-                    gui_addLines(gui,&line,1);
+                    gui_addLines(interface->gui,&line,1);
                 break;
             case GUI_ACT_Undo:
-                gui_supLastLine(gui);
+                gui_supLastLine(interface->gui);
                 break;
             case GUI_ACT_Help:
-                if ( gui_getSegOfSet(gui,linesHelp, TABLE_NB(linesHelp), &line)==GUI_ACT_Quit)
-                    goto end;
-                gui_addLines(gui,&line,1);
+                if ( gui_getSegOfSet(interface->gui,linesHelp, TABLE_NB(linesHelp), &line)==GUI_ACT_Quit)
+                    gui_close(interface->gui);
+                gui_addLines(interface->gui,&line,1);
                 break;
             case GUI_ACT_Quit:
-                fini = 1;
                 break;
             default:
                 fprintf(stderr,"unexpected action\n");
         }
-        
-    }
-
-end:
-    gui_close(gui);
-
 }
