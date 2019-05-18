@@ -51,4 +51,7 @@ $(BINARIES_DIR)/utils.o : $(SOURCES_DIR)/utils.c $(HEADERS_DIR)/utils.h
 $(BINARIES_DIR)/main.o : $(SOURCES_DIR)/main.c $(HEADERS_DIR)/board.h $(HEADERS_DIR)/history.h $(HEADERS_DIR)/interface.h $(HEADERS_DIR)/utils.h
 	$(CC) -c $< -o $@
 
+clean:
+	rm $(BINARIES_DIR)/*.o
+
 $(shell mkdir -p $(BINARIES_DIR))
