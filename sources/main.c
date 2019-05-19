@@ -73,7 +73,7 @@ int main(int argc, char* argv[]){
     bool quitGame = false;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
-
+    {
         /* DEBUG PURPOSE
         printf("Lines_history :\n");
         Move_print(get_lines_history());
