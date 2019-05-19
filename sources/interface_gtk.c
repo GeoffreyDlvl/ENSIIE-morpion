@@ -240,13 +240,15 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                 break;
             case CANCEL_MOVE:
                 gui_supLastLine(interface->gui);
+                cancel_move(pboard, error);
                 break;
             case ASK_HELP:
-                if ( gui_getSegOfSet(interface->gui,linesHelp, TABLE_NB(linesHelp), &line)==GUI_ACT_Quit){
+                /*if ( gui_getSegOfSet(interface->gui,linesHelp, TABLE_NB(linesHelp), &line)==GUI_ACT_Quit){
                     gui_close(interface->gui);
                     free_interface(interface);
                 }                    
-                gui_addLines(interface->gui,&line,1);
+                gui_addLines(interface->gui,&line,1);*/
+                gui_error(interface->gui, "Help is not available");
                 break;
             case QUIT_GAME:
                 gui_close(interface->gui);
