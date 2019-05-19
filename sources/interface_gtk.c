@@ -20,6 +20,10 @@
 #define LIGHTGREEN   "\033[92m"         /* Light Green */
 #define BLINK   "\033[5m"               /* Blinking effect */
 
+#define HORIZONTAL 0
+#define VERTICAL 1
+#define DIAG_UP 2
+#define DIAG_DOWN 3
 
 
 static Tint2 points[9999];//    = { { 4,4}, {5,5} };
@@ -53,18 +57,131 @@ void set_fullscreen(bool set) {
   @ensures prints board, shows possible moves if hint set to true */
 void print_board(Board* pboard)
 {
-    // TO DO
+    // TO DOadd_line(getPoints(line.p1,line.p2,get_direction_diagona(line.p1,line.p2)))
+}
+Coord get_cord_fromTint2(Tint2 point){
+    Coord newCoord;
+    newCoord.x = point.x;
+    newCoord.y = point.y;
+    return newCoord;
 }
 
+int get_direction_diagonal(Tint2 arr, Tint2 dep) {
+    Coord smallest_x;
+    Coord bigest_x;
+    Coord p1 = get_cord_fromTint2(arr);
+    Coord p2 = get_cord_fromTint2(dep);
+    if(p1.x<p2.x) {
+        smallest_x=p1;
+        bigest_x=p2;
+    } else {
+        smallest_x=p2;
+        bigest_x=p1;
+    }
+    if(smallest_x.y<bigest_x.y) return DIAG_UP;
+    return DIAG_DOWN;
+}
+
+int isPointsEqual(Coord a, Coord b){
+    if(a.x == b.x && a.y == b.y)
+        return true;
+    else
+        return false;
+}
+
+Coord add_x_and_y(Coord point, int x, int y){
+    Coord coord;
+    coord.x = point.x+x;
+    coord.y = point.y+y;
+    coord.previous = NULL;
+    return coord;
+}
+
+
+Move* getPoints(Tint2 dep, Tint2 arr,int direction){
+    Move plist = (Move) malloc(sizeof(Coord));
+    plist->x = dep.x;
+    plist->y = dep.y;
+    plist->previous = NULL;
+    Coord point = get_cord_fromTint2(dep);
+    if(direction == HORIZONTAL){
+        while (!isPointsEqual(get_cord_fromTint2(arr),point))
+        {   if(plist==NULL) fprintf(stderr,"nique ta mère");
+            point = add_x_and_y(point,1,0);
+            fprint(stderr," x: %d",point.x)
+            fprint(stderr," y: %d",point.y)
+            point.previous = NULL;
+            plist->previous = &point;
+            plist = &point;
+        }
+        return &plist;
+    } else if(direction == VERTICAL ) {
+        while (!isPointsEqual(get_cord_fromTint2(arr),point))
+        {
+            if(plist==NULL) fprintf(stderr,"nique ta mère");
+            fprint(stderr," x: %d",point.x)
+            fprint(stderr," y: %d",point.y)
+            point = add_x_and_y(point,0,1);
+            point.previous = NULL;
+            plist->previous = &point;
+            plist = &point;
+        }
+        return &plist;
+    } else if(direction == DIAG_DOWN) {
+        while (!isPointsEqual(get_cord_fromTint2(arr),point))
+        {
+            fprint(stderr," x: %d",point.x)
+            fprint(stderr," y: %d",point.y)
+            if(plist==NULL) fprintf(stderr,"nique ta mère");
+            point = add_x_and_y(point,1,-1);
+            point.previous = NULL;
+            plist->previous = &point;
+            plist = &point;
+        }
+        return &plist;
+    } else if(direction == DIAG_UP) {
+        while (!isPointsEqual(get_cord_fromTint2(arr),point))
+        {
+            fprint(stderr," x: %d",point.x)
+            fprint(stderr," y: %d",point.y)
+            if(plist==NULL) fprintf(stderr,"nique ta mère");
+            point = add_x_and_y(point,1,1);
+            point.previous = NULL;
+            plist->previous = &point;
+            plist = &point;
+        }
+        return &plist;
+    }
+    
+}
 
 void add_line_to_board(Error err,Interface* Interface)
 {
     if(err == NO_ERR) {
         fprintf(stderr,"no error\n");
-        gui_addLines(Interface->gui,&line,1);
+        if(line.p1.x == line.p2.x){
+            if(line.p1.y < line.p2.y){
+              add_line(getPoints(line.p1,line.p2,VERTICAL));
+            } else {
+            add_line(getPoints(line.p2,line.p1,VERTICAL));
+            }
+        } else if(line.p1.y == line.p2.y) {
+            if(line.p1.x < line.p2.x){
+              add_line(getPoints(line.p1,line.p2,HORIZONTAL));
+            } else {
+            add_line(getPoints(line.p2,line.p1,HORIZONTAL));
+            }            
+        } else {
+            if(line.p1.x<line.p2.x) {
+                add_line(getPoints(line.p1,line.p2,get_direction_diagonal(line.p1,line.p2)));
+            } else {
+                add_line(getPoints(line.p2,line.p1,get_direction_diagonal(line.p1,line.p2)));
+            }
+        }
     } else
         fprintf(stderr,"error\n");
 }
+
 
 Coord select_move(void)
 {
@@ -200,14 +317,15 @@ Interface* init(Board* board)
         for (j=0;j<board->width;j++){    
             if(board->points[i][j] != NULL){
                 Tint2* points = (Cint2*) malloc( sizeof(Cint2));
-                points->x = i;
-                points->y = j;
+                points->x = j;
+                points->y = i;
                 gui_addPoints(gui->gui , points , TABLE_NB(points));
             }
         }
     }
     return gui; 
 }
+
 
 /*@requires pboard not null
   @assigns pboard
@@ -219,8 +337,16 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                      abs(line.p1.y-line.p2.y)>9 )
                     gui_error(interface->gui, "le segment (%d,%d) --> (%d,%d) est invalide",
                               line.p1.x,line.p1.x, line.p2.y,line.p2.y);
-                else
-                    gui_addLines(interface->gui,&line,1);
+                else{
+                    if(line.p1.x==line.p2.x && line.p1.y==line.p2.y) {
+                        gui_addPoints(interface->gui ,&line.p1,1);
+                    } else {
+                        gui_addLines(interface->gui,&line,1);
+                        add_line_to_board(*error,interface);
+                    }
+
+                }
+              
                 break;
             case CANCEL_MOVE:
                 gui_supLastLine(interface->gui);

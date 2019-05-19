@@ -220,6 +220,9 @@ void free_history(void)
   @assings pmove,lines history
   @ensures adds line to lines history, calls select line if more than 1 */
 void add_line(Move* pmove){
+  if(pmove == NULL) {
+    fprintf(stderr,"coucou 1");
+  }
   Move line=*pmove;
   if (pMove_length(&line)>5){
     select_line(&line);
