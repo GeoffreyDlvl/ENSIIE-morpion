@@ -155,9 +155,9 @@ Move* getPoints(Tint2 dep, Tint2 arr,int direction){
     
 }
 
-void add_line_to_board(Error err,Interface* Interface)
+void add_line_to_board(Error err,Interface* interface)
 {
-    if(err == NO_ERR) {
+    /*if(err == NO_ERR) {
         fprintf(stderr,"no error\n");
         if(line.p1.x == line.p2.x){
             if(line.p1.y < line.p2.y){
@@ -179,7 +179,10 @@ void add_line_to_board(Error err,Interface* Interface)
             }
         }
     } else
-        fprintf(stderr,"error\n");
+        fprintf(stderr,"error\n");*/
+
+    if (err == NO_ERR)
+        gui_addLines(interface->gui,&line,1);
 }
 
 
@@ -341,7 +344,7 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                    /* if(line.p1.x==line.p2.x && line.p1.y==line.p2.y) {
                         gui_addPoints(interface->gui ,&line.p1,1);
                     } else {*/
-                        gui_addLines(interface->gui,&line,1);
+                        /*gui_addLines(interface->gui,&line,1);*/
                         /*add_line_to_board(*error,interface);*/
                     /*}*/
                     Coord coord;
