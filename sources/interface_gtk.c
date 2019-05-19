@@ -347,13 +347,21 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                         /*gui_addLines(interface->gui,&line,1);*/
                         /*add_line_to_board(*error,interface);*/
                     /*}*/
+
+
                     Coord coord;
                     coord.x = line.p2.x;
                     coord.y = line.p2.y;
                     coord.previous = NULL;
+                    if(is_move_exists_already(pboard, coord)) {
+                        coord.x = line.p1.x;
+                        coord.y = line.p1.y;
+                        coord.previous = NULL;
+                    }
                     play_move(pboard,coord,error);
+
                 }
-              
+
                 break;
             case CANCEL_MOVE:
                 gui_supLastLine(interface->gui);
