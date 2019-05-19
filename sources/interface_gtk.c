@@ -108,8 +108,8 @@ Move* getPoints(Tint2 dep, Tint2 arr,int direction){
         while (!isPointsEqual(get_cord_fromTint2(arr),point))
         {   if(plist==NULL) fprintf(stderr,"nique ta mère");
             point = add_x_and_y(point,1,0);
-            fprint(stderr," x: %d",point.x)
-            fprint(stderr," y: %d",point.y)
+            fprintf(stderr," x: %d",point.x);
+            fprintf(stderr," y: %d",point.y);
             point.previous = NULL;
             plist->previous = &point;
             plist = &point;
@@ -119,8 +119,8 @@ Move* getPoints(Tint2 dep, Tint2 arr,int direction){
         while (!isPointsEqual(get_cord_fromTint2(arr),point))
         {
             if(plist==NULL) fprintf(stderr,"nique ta mère");
-            fprint(stderr," x: %d",point.x)
-            fprint(stderr," y: %d",point.y)
+            fprintf(stderr," x: %d",point.x);
+            fprintf(stderr," y: %d",point.y);
             point = add_x_and_y(point,0,1);
             point.previous = NULL;
             plist->previous = &point;
@@ -130,8 +130,8 @@ Move* getPoints(Tint2 dep, Tint2 arr,int direction){
     } else if(direction == DIAG_DOWN) {
         while (!isPointsEqual(get_cord_fromTint2(arr),point))
         {
-            fprint(stderr," x: %d",point.x)
-            fprint(stderr," y: %d",point.y)
+            fprintf(stderr," x: %d",point.x);
+            fprintf(stderr," y: %d",point.y);
             if(plist==NULL) fprintf(stderr,"nique ta mère");
             point = add_x_and_y(point,1,-1);
             point.previous = NULL;
@@ -142,8 +142,8 @@ Move* getPoints(Tint2 dep, Tint2 arr,int direction){
     } else if(direction == DIAG_UP) {
         while (!isPointsEqual(get_cord_fromTint2(arr),point))
         {
-            fprint(stderr," x: %d",point.x)
-            fprint(stderr," y: %d",point.y)
+            fprintf(stderr," x: %d",point.x);
+            fprintf(stderr," y: %d",point.y);
             if(plist==NULL) fprintf(stderr,"nique ta mère");
             point = add_x_and_y(point,1,1);
             point.previous = NULL;
@@ -338,13 +338,17 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                     gui_error(interface->gui, "le segment (%d,%d) --> (%d,%d) est invalide",
                               line.p1.x,line.p1.x, line.p2.y,line.p2.y);
                 else{
-                    if(line.p1.x==line.p2.x && line.p1.y==line.p2.y) {
+                   /* if(line.p1.x==line.p2.x && line.p1.y==line.p2.y) {
                         gui_addPoints(interface->gui ,&line.p1,1);
-                    } else {
+                    } else {*/
                         gui_addLines(interface->gui,&line,1);
-                        add_line_to_board(*error,interface);
-                    }
-
+                        /*add_line_to_board(*error,interface);*/
+                    /*}*/
+                    Coord coord;
+                    coord.x = line.p2.x;
+                    coord.y = line.p2.y;
+                    coord.previous = NULL;
+                    play_move(pboard,coord,error);
                 }
               
                 break;
