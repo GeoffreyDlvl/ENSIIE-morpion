@@ -6,7 +6,7 @@
 /****************************************************************************/
 
 #include <gtk/gtk.h>
-
+#include <string.h>
 #include "gui.h"
 #include "canvas.h"
 
@@ -97,6 +97,12 @@ extern Tgui* gui_open (int cvspixsize, int cvspixstep)
     gtk_widget_show_all(gui->topwidget);
 
     return gui;
+}
+
+extern void changeLabelText(Tgui* gui,char* msg){
+    char label_msg[10+sizeof(msg)] = "Score : ";
+    strcat(label_msg,msg);
+    gtk_label_set_text(gui->score_label,label_msg);
 }
 
 extern void gui_close(Tgui*gui)
