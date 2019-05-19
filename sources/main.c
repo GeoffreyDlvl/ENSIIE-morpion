@@ -61,7 +61,7 @@ int main(int argc, char* argv[]){
     display_logo();
     initialize_HistoryList();
     initialize_LinesList();
-    Interface* interface = init();
+    Interface* interface = init(&board);
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
     enum action playerAction = PLAY_MOVE;
     set_hint(false);

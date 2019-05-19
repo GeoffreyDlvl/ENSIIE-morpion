@@ -324,7 +324,7 @@ void print_score(void) {
     printf("Your final score is : %d\n", get_points_scored());
 }
 
-Interface* init(void)
+Interface* init(Board* board)
 {
     Interface* console = (Interface*) malloc(sizeof(Interface));
     return console;
@@ -350,8 +350,14 @@ void execute_action(Board* pboard,Interface* interface, void* action, bool* quit
         print_help();
     } else if (act == QUIT_GAME){
         *quit = confirm_quit_save(pboard);
+        free_interface(interface);
     } else{
         fprintf(stderr, "Execute action: action is undefined.");
         exit(EXIT_FAILURE);
     }
+}
+
+
+void free_interface(Interface* interface){
+    free(interface);
 }

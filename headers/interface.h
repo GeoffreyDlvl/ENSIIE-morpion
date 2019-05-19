@@ -22,7 +22,7 @@ typedef struct{
 } Interface;
 
 
-Interface* init();
+Interface* init(Board* board);
 
 
 /**
@@ -150,5 +150,7 @@ void print_score(void);
  * \param quit Pointer to bool holding true if user wishes to quit the game.
  */
 void execute_action(Board* pboard,Interface* interface,void* action, bool* quit, Error* error);
+
+void free_interface(Interface* interface);
 
 #endif
