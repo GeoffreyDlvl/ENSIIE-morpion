@@ -231,6 +231,7 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
             case QUIT_GAME:
                 gui_close(interface->gui);
                 free_interface(interface);
+                *quit = true;
                 break;
             default:
                 fprintf(stderr,"unexpected action\n");

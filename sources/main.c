@@ -74,6 +74,10 @@ int main(int argc, char* argv[]){
         redraw(&board,interface);
         set_hint(false);
         execute_action(&board,interface,select_action(interface), &quitGame, err);
+
+        if(quitGame)
+            break;
+
         add_line_to_board(*err, interface);
         if(*err != NO_ERR)
         {
