@@ -154,7 +154,7 @@ enum action select_action(Interface* Interface)
     }
 }
 
-void print_help(void)
+void print_help(Interface *interface)
 {
 	printf("------- HELP -------\n\n");
 
@@ -320,7 +320,7 @@ void print_game_over(void) {
     printf("No more point to be played: the game is over!\n");
 }
 
-void print_score(void) {
+void print_score(Interface* interface) {
     printf("Your final score is : %d\n", get_points_scored());
 }
 
@@ -348,7 +348,7 @@ void execute_action(Board* pboard,Interface* interface,enum action action, bool*
         /*list_available_moves(pboard);  NOT NEEDED */
       set_hint(true);
     }else if (action == ASK_HELP){
-        print_help();
+        print_help(interface);
     } else if (action == QUIT_GAME){
         *quit = confirm_quit_save(pboard);
         free_interface(interface);

@@ -65,11 +65,7 @@ void add_line_to_board(Error err,Interface* interface)
 
 Coord select_move(void)
 {
-    Coord coord;
-    coord.x = line.p2.x;
-    coord.y = line.p2.y;
-    coord.previous = NULL;
-    return coord;
+    // NOT IMPLEMENTED
 }
 
 
@@ -90,9 +86,12 @@ enum action select_action(Interface* Interface)
     }
 }
 
-void print_help(void)
+void print_help(Interface *interface)
 {
-	/* TO DO */
+    gui_error(interface->gui,"------- HELP -------\n\n"
+                             "> The goal is to add points on the board.\n"
+                             "> A point can be added to the board if it creates a line of 5 points vertically, horizontally or diagonally.\n"
+                             "> Two lines can't have more than one point in common.\n\n");
 }
 
 /*@requires pmove not null
@@ -108,20 +107,20 @@ void select_line(Move* pmove){
 
 
 char* ask_savefile_name(void){
-    /* TO DO */
+    /* NOT IMPLEMENTED */
 }
 
 
 void display_logo(void){
-    /* TO DO */
+    /* NOT IMPLEMENTED */
 }
 
 void clear_screen(void){
-    /* TO DO */
+    /* NOT IMPLEMENTED */
 }
 
 void press_enter_to_continue(void){
-    /* TO DO */
+    /* NOT IMPLEMENTED */
 }
 
 void print_error(Error err, Interface* interface) {
@@ -161,11 +160,11 @@ void print_error(Error err, Interface* interface) {
 }
 
 void print_game_over(void) {
-    /* TO DO */
+    /* NOT IMPLEMENTED */
 }
 
-void print_score(void) {
-    /* TO DO */
+void print_score(Interface* interface) {
+    gui_error(interface->gui, "Game over: score is %i", get_points_scored());
 }
 
 void redraw(Board* pboard,Interface* interface){
@@ -206,7 +205,21 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                     gui_error(interface->gui, "le segment (%d,%d) --> (%d,%d) est invalide",
                               line.p1.x,line.p1.x, line.p2.y,line.p2.y);
                 else{
+                    Tint2 segPoints[5];
+                    gui_getPointsOfSegment(segPoints,5,line);
+                    int i;
                     Coord coord;
+                    for(i=0 ; i<5 ; ++i) {
+                        coord.x = segPoints[i].x;
+                        coord.y = segPoints[i].y;
+                        coord.previous = NULL;
+                        if(!is_move_exists_already(pboard, coord))
+                        {
+                            break;
+                        }
+                    }
+
+                    /*
                     coord.x = line.p2.x;
                     coord.y = line.p2.y;
                     coord.previous = NULL;
@@ -214,7 +227,7 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                         coord.x = line.p1.x;
                         coord.y = line.p1.y;
                         coord.previous = NULL;
-                    }
+                    }*/
                     play_move(pboard,coord,error);
                 }
                 break;

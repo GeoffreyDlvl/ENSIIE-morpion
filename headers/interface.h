@@ -61,7 +61,7 @@ enum action select_action(Interface* interface);
  * \fn print_help(void)
  * \brief Print help for the user.
  */
-void print_help(void);
+void print_help(Interface *interface);
 
 /**
  * \fn select_line(Move* pmove)
@@ -137,7 +137,7 @@ void print_game_over(void);
  * \fn void print_score(void);
  * \brief Print user score.
  */
-void print_score(void);
+void print_score(Interface* interface);
 
 
 void add_line_to_board(Error err,Interface* interface);

@@ -38,7 +38,10 @@ int main(int argc, char* argv[]){
         }
         /*If first argument is option -h*/
         if (strcmp(argv[1], "-h") == 0) {
-            print_help();
+            // random board only useful to display help
+            board = initialize_rand();
+            interface = init(&board);
+            print_help(interface);
             return EXIT_SUCCESS;
         }
     }
@@ -88,7 +91,7 @@ int main(int argc, char* argv[]){
         }
     }
     print_game_over();
-    print_score();
+    print_score(interface);
     press_enter_to_continue();
     /* Free all allocated pointers */
     free(err);
