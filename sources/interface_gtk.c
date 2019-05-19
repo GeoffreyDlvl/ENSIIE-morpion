@@ -205,6 +205,13 @@ void execute_action(Board* pboard,Interface* interface, enum action action, bool
                     gui_error(interface->gui, "le segment (%d,%d) --> (%d,%d) est invalide",
                               line.p1.x,line.p1.x, line.p2.y,line.p2.y);
                 else{
+                    if(abs(line.p2.x-line.p1.x)+1 != 5 &&
+                        abs(line.p2.y-line.p1.y)+1 != 5 )
+                    {
+                        gui_error(interface->gui, "Line must be of length 5");
+                        *error = ALIGNMENT_ERR;
+                        return;
+                    }
                     Tint2 segPoints[5];
                     gui_getPointsOfSegment(segPoints,5,line);
                     int i;
