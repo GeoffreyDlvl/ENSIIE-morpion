@@ -62,6 +62,7 @@ int main(int argc, char* argv[]){
     display_logo();
     initialize_HistoryList();
     initialize_LinesList();
+    Interface* interface = init(&board);
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
     enum action playerAction = PLAY_MOVE;
     set_hint(false);
@@ -72,9 +73,7 @@ int main(int argc, char* argv[]){
     bool quitGame = false;
     /*Loop termination : board size is finite therefore number of playable moves if finite*/
     while(!is_game_over(&board) && !quitGame)/*(!is_game_over(&board))  erreurs de segmentation résolus jusqu'ici*/
-    {
 
-        clear_screen();
         /* DEBUG PURPOSE
         printf("Lines_history :\n");
         Move_print(get_lines_history());
@@ -82,11 +81,11 @@ int main(int argc, char* argv[]){
         Move_print(get_points_history());
 	    printf("Points_history_from_last_saved_move :\n");
         Move_print(get_points_saved_history());*/
-        print_board(&board);
+        //print_board(&board);
+        redraw(&board,interface);
         set_hint(false);
-        playerAction = select_action();
-        execute_action(&board, playerAction, &quitGame, err);
-        add_line_to_board(*err);
+
+        execute_action(&board,interface,select_action(interface), &quitGame, err);
 
         if(*err != NO_ERR)
         {

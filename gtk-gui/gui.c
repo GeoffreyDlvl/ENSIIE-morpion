@@ -20,6 +20,8 @@ struct _Tgui {
     GtkWidget*  btn_undo;
     GtkWidget*  btn_help;
     GtkWidget*  btn_quit;
+    GtkWidget*  score_label;
+
     Tcvs*       canvas;
 
     // run time data
@@ -78,6 +80,7 @@ extern Tgui* gui_open (int cvspixsize, int cvspixstep)
     gui->btn_undo = gui_btn_create(gui,"Undo",gui_btn_undo_cb);
     gui->btn_help = gui_btn_create(gui,"Help",gui_btn_help_cb);
     gui->btn_quit = gui_btn_create(gui,"Quit",gui_btn_quit_cb);
+    gui->score_label = gtk_label_new("Score : ");
     gui->canvas   = cvs_new(300,15,gui);
 
   /* place sub-widget in top window */ 
@@ -86,6 +89,7 @@ extern Tgui* gui_open (int cvspixsize, int cvspixstep)
     gtk_grid_attach(GTK_GRID(gui->topgrid), gui->btn_undo           ,1,0,1,1);
     gtk_grid_attach(GTK_GRID(gui->topgrid), gui->btn_help           ,1,1,1,1);
     gtk_grid_attach(GTK_GRID(gui->topgrid), gui->btn_quit           ,1,2,1,1);
+    gtk_grid_attach(GTK_GRID(gui->topgrid), gui->score_label        ,1,3,1,1);
     gtk_grid_attach(GTK_GRID(gui->topgrid), cvs_widget(gui->canvas) ,0,0,1,3);
 
   /* build the dialog */

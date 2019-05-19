@@ -408,30 +408,7 @@ Board initialize_rand(void)
   return board;
 }
 
-/*@requires pboard not null
-  @assigns pboard
-  @ensures executes action of the enum action action*/
-void execute_action(Board* pboard, enum action action, bool* quit, Error* error)
-{
-    if (action == PLAY_MOVE){
-        Coord coord=select_move();
-        play_move(pboard,coord,error);
-    } else if (action == CANCEL_MOVE){
-        cancel_move(pboard,error);
-    } else if (action == REPLAY_MOVE){
-        replay_move(pboard,error);
-    } else if (action == LIST_MOVES){
-        /*list_available_moves(pboard);  NOT NEEDED */
-      set_hint(true);
-    }else if (action == ASK_HELP){
-        print_help();
-    } else if (action == QUIT_GAME){
-        *quit = confirm_quit_save(pboard);
-    } else{
-        fprintf(stderr, "Execute action: action is undefined.");
-        exit(EXIT_FAILURE);
-    }
-}
+
 
 /*@requires pboard not null
   @assigns nothing

@@ -32,6 +32,11 @@ void set_fullscreen(bool set) {
         system("wmctrl -r ':ACTIVE:' -b remove,fullscreen &> /dev/null");
 }
 
+void redraw(Board* pboard,Interface* interface){
+  clear_screen();
+  print_board(pboard);
+}
+
 /*@requires pboard not null
   @assigns nothing
   @ensures prints board, shows possible moves if hint set to true */
@@ -113,7 +118,7 @@ Coord select_move(void)
 }
 
 
-enum action select_action(void)
+void* select_action(Interface* Interface)
 {
     printf("\nSelect : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h] / Quit game [q]\n");
 	char c;
@@ -319,9 +324,42 @@ void print_score(void) {
     printf("Your final score is : %d\n", get_points_scored());
 }
 
-void init(Board* pboard)
+void add_line_to_board(Error err) {}
+
+Interface* init(Board* board)
 {
-    //NOT REQUIRED IN CONSOLE
+    Interface* console = (Interface*) malloc(sizeof(Interface));
+    return console;
 }
 
-void add_line_to_board(Error err) {}
+/*@requires pboard not null
+  @assigns pboard
+  @ensures executes action of the enum action action*/
+void execute_action(Board* pboard,Interface* interface, void* action, bool* quit, Error* error)
+{  
+    enum action act = (enum action) action;
+    if (act == PLAY_MOVE){
+        Coord coord=select_move();
+        play_move(pboard,coord,error);
+    } else if (act == CANCEL_MOVE){
+        cancel_move(pboard,error);
+    } else if (act == REPLAY_MOVE){
+        replay_move(pboard,error);
+    } else if (act == LIST_MOVES){
+        /*list_available_moves(pboard);  NOT NEEDED */
+      set_hint(true);
+    }else if (act == ASK_HELP){
+        print_help();
+    } else if (act == QUIT_GAME){
+        *quit = confirm_quit_save(pboard);
+        free_interface(interface);
+    } else{
+        fprintf(stderr, "Execute action: action is undefined.");
+        exit(EXIT_FAILURE);
+    }
+}
+
+
+void free_interface(Interface* interface){
+    free(interface);
+}

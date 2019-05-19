@@ -17,8 +17,12 @@
 
 #include <stdbool.h>
 
+typedef struct{
+    void* gui;
+} Interface;
 
-void init(Board* pboard);
+
+Interface* init(Board* board);
 
 /**
  * \fn void set_hint(bool boolean);
@@ -36,13 +40,6 @@ void set_hint(bool boolean);
  */
 void set_fullscreen(bool set);
 
-/**
- * \fn print_board(Board* pboard)
- * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
- *
- * \param pboard Board pointer 
- */
-void print_board(Board* pboard);
 
 /**
  * \fn select_move(void)
@@ -58,7 +55,7 @@ Coord select_move(void);
  *
  * \return Desired action.
  */
-enum action select_action(void);
+void* select_action(Interface* interface);
 
 /**
  * \fn print_help(void)
@@ -99,7 +96,22 @@ void display_logo(void);
  * \fn void clear_screen(void);
  * \brief Clear the terminal.
  */
-void clear_screen(void);
+
+
+//void clear_screen(void);
+
+
+
+/**
+ * \fn print_board(Board* pboard)
+ * \brief Print the Board, as well as a hint (i.e. a list of available moves) if required.
+ *
+ * \param pboard Board pointer 
+ */
+//void print_board(Board* pboard);
+
+
+void redraw(Board* pboard,Interface* interface);
 
 /**
  * \fn void press_enter_to_continue(void);
@@ -127,6 +139,19 @@ void print_game_over(void);
  */
 void print_score(void);
 
+
 void add_line_to_board(Error err);
+
+/**
+ * \fn void execute_action(Board* pboard, enum action action, bool* quit)
+ * \brief Execute action passed as a parameter.
+ * 
+ * \param pboard Pointer to the Board being played.
+ * \param action Action to execute.
+ * \param quit Pointer to bool holding true if user wishes to quit the game.
+ */
+void execute_action(Board* pboard,Interface* interface,void* action, bool* quit, Error* error);
+
+void free_interface(Interface* interface);
 
 #endif
