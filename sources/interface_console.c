@@ -118,7 +118,7 @@ Coord select_move(void)
 }
 
 
-void* select_action(Interface* Interface)
+enum action select_action(Interface* Interface)
 {
     printf("\nSelect : Play move [p] / Cancel previous move [c] / Replay cancelled move [r]\n         List valid moves [l] / Ask help [h] / Quit game [q]\n");
 	char c;
@@ -324,7 +324,7 @@ void print_score(void) {
     printf("Your final score is : %d\n", get_points_scored());
 }
 
-void add_line_to_board(Error err) {}
+void add_line_to_board(Error err,Interface* Interface) {}
 
 Interface* init(Board* board)
 {
@@ -335,22 +335,21 @@ Interface* init(Board* board)
 /*@requires pboard not null
   @assigns pboard
   @ensures executes action of the enum action action*/
-void execute_action(Board* pboard,Interface* interface, void* action, bool* quit, Error* error)
+void execute_action(Board* pboard,Interface* interface,enum action action, bool* quit, Error* error)
 {  
-    enum action act = (enum action) action;
-    if (act == PLAY_MOVE){
+    if (action == PLAY_MOVE){
         Coord coord=select_move();
         play_move(pboard,coord,error);
-    } else if (act == CANCEL_MOVE){
+    } else if (action == CANCEL_MOVE){
         cancel_move(pboard,error);
-    } else if (act == REPLAY_MOVE){
+    } else if (action == REPLAY_MOVE){
         replay_move(pboard,error);
-    } else if (act == LIST_MOVES){
+    } else if (action == LIST_MOVES){
         /*list_available_moves(pboard);  NOT NEEDED */
       set_hint(true);
-    }else if (act == ASK_HELP){
+    }else if (action == ASK_HELP){
         print_help();
-    } else if (act == QUIT_GAME){
+    } else if (action == QUIT_GAME){
         *quit = confirm_quit_save(pboard);
         free_interface(interface);
     } else{

@@ -55,7 +55,7 @@ Coord select_move(void);
  *
  * \return Desired action.
  */
-void* select_action(Interface* interface);
+enum action select_action(Interface* interface);
 
 /**
  * \fn print_help(void)
@@ -140,7 +140,7 @@ void print_game_over(void);
 void print_score(void);
 
 
-void add_line_to_board(Error err);
+void add_line_to_board(Error err,Interface* interface);
 
 /**
  * \fn void execute_action(Board* pboard, enum action action, bool* quit)
@@ -150,7 +150,7 @@ void add_line_to_board(Error err);
  * \param action Action to execute.
  * \param quit Pointer to bool holding true if user wishes to quit the game.
  */
-void execute_action(Board* pboard,Interface* interface,void* action, bool* quit, Error* error);
+void execute_action(Board* pboard,Interface* interface,enum action action, bool* quit, Error* error);
 
 void free_interface(Interface* interface);
 

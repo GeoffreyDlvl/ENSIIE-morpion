@@ -32,11 +32,6 @@ static Tsegm linesHelp[] = { { { 1,1}, { 1,5} }, { { 1,2}, { 1, 6} },
                              { { 1,5}, { 1,9} }, { { 1,6}, { 1,10} },
                              { { 1,1}, { 5,5} }, { { 1,1}, { 5, 1} },
 };
-static Tgui* gui;
-static Tsegm   line;
-
-
-
 static Tsegm line;
 
 static bool hint;
@@ -58,15 +53,15 @@ void set_fullscreen(bool set) {
   @ensures prints board, shows possible moves if hint set to true */
 void print_board(Board* pboard)
 {
-    gui_redraw(gui);
+    // TO DO
 }
 
 
-void add_line_to_board(Error err)
+void add_line_to_board(Error err,Interface* Interface)
 {
     if(err == NO_ERR) {
         fprintf(stderr,"no error\n");
-        gui_addLines(gui,&line,1);
+        gui_addLines(Interface->gui,&line,1);
     } else
         fprintf(stderr,"error\n");
 }
@@ -81,21 +76,17 @@ Coord select_move(void)
 }
 
 
-void* select_action(Interface* Interface)
+enum action select_action(Interface* Interface)
 {
-    switch ( gui_getAction(gui,&line) ) {
+    switch (gui_getAction(Interface->gui,&line) ) {
         case GUI_ACT_Segment:
             return PLAY_MOVE;
-            break;
         case GUI_ACT_Undo:
             return CANCEL_MOVE;
-            break;
         case GUI_ACT_Help:
             return ASK_HELP;
-            break;
         case GUI_ACT_Quit:
             return QUIT_GAME;
-            break;
         default:
             fprintf(stderr,"unexpected action\n");
     }
@@ -113,9 +104,9 @@ void select_line(Move* pmove){
 
 }
 
-bool confirm_quit_save(Board* pboard) {
-    gui_close(gui);
-}
+// bool confirm_quit_save(Board* pboard) {
+//     gui_close(gui);
+// }
 
 
 char* ask_savefile_name(void){
@@ -198,6 +189,7 @@ void print_score(void) {
 void redraw(Board* pboard,Interface* interface){
     gui_redraw((Tgui*)interface->gui);
 }
+
 Interface* init(Board* board)
 {
     Interface* gui = (Interface*) malloc(sizeof(Interface));
@@ -220,9 +212,9 @@ Interface* init(Board* board)
 /*@requires pboard not null
   @assigns pboard
   @ensures executes action of the enum action action*/
-void execute_action(Board* pboard,Interface* interface, void* action, bool* quit, Error* error) {
-    switch ( gui_getAction((Tgui*)interface->gui,&line) ) {
-            case GUI_ACT_Segment:
+void execute_action(Board* pboard,Interface* interface, enum action action, bool* quit, Error* error) {
+    switch (action) {
+            case PLAY_MOVE:
                 if ( abs(line.p1.x-line.p2.x)>9||
                      abs(line.p1.y-line.p2.y)>9 )
                     gui_error(interface->gui, "le segment (%d,%d) --> (%d,%d) est invalide",
@@ -230,17 +222,17 @@ void execute_action(Board* pboard,Interface* interface, void* action, bool* quit
                 else
                     gui_addLines(interface->gui,&line,1);
                 break;
-            case GUI_ACT_Undo:
+            case CANCEL_MOVE:
                 gui_supLastLine(interface->gui);
                 break;
-            case GUI_ACT_Help:
+            case ASK_HELP:
                 if ( gui_getSegOfSet(interface->gui,linesHelp, TABLE_NB(linesHelp), &line)==GUI_ACT_Quit){
                     gui_close(interface->gui);
                     free_interface(interface);
                 }                    
                 gui_addLines(interface->gui,&line,1);
                 break;
-            case GUI_ACT_Quit:
+            case QUIT_GAME:
                 gui_close(interface->gui);
                 free_interface(interface);
                 break;
