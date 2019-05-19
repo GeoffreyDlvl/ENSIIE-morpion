@@ -106,7 +106,7 @@ Coord select_move(void)
 	    printf(":> ");
         succAffect = scanf(" %d%d", &x, &y);
 	    if (succAffect != 2) {
-            print_error(WRONG_INPUT_ERR);
+            print_error(WRONG_INPUT_ERR, NULL);
         }
 	    empty_input_buffer();
     }
@@ -148,7 +148,7 @@ enum action select_action(Interface* Interface)
 		        return QUIT_GAME;
 	        break;
 	        default:
-	            print_error(WRONG_INPUT_ERR);
+	            print_error(WRONG_INPUT_ERR, NULL);
                 break;
             }
     }
@@ -278,7 +278,7 @@ void press_enter_to_continue(void){
     }
 }
 
-void print_error(Error err) {
+void print_error(Error err, Interface* interface) {
     switch (err) {
         case WRONG_INPUT_ERR:
             fprintf(stderr, RED "Wrong input.\n" RESET);

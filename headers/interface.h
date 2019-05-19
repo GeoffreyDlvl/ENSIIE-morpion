@@ -125,7 +125,7 @@ void press_enter_to_continue(void);
  *
  * \param err Error to be displayed.
  */
-void print_error(Error err);
+void print_error(Error err, Interface* interface);
 
 /**
  * \fn void print_game_over(void);

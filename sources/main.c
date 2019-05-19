@@ -14,6 +14,7 @@
 #include <linux/limits.h>
 
 int main(int argc, char* argv[]){
+    Interface* interface;
     srand(time(NULL));
 
     /*If user gives more than 2 arguments*/
@@ -51,7 +52,7 @@ int main(int argc, char* argv[]){
 
         /* Construct board if file is valid, exit otherwise */
         if (!initialize_file(&board, resolved_path, err)) {
-            print_error(*err);
+            print_error(*err, interface);
             free(err);
             return EXIT_FAILURE;
         }
@@ -62,7 +63,6 @@ int main(int argc, char* argv[]){
     display_logo();
     initialize_HistoryList();
     initialize_LinesList();
-    Interface* interface;
     /*Declare a new unallocated pointer: it will be allocated if required and manipulated in functions*/
     enum action playerAction = PLAY_MOVE;
     set_hint(false);
@@ -77,11 +77,12 @@ int main(int argc, char* argv[]){
 
         if(quitGame)
             break;
+        if(interface->gui)
+            add_line_to_board(*err, interface);
 
-        add_line_to_board(*err, interface);
         if(*err != NO_ERR)
         {
-            print_error(*err);
+            print_error(*err, interface);
             press_enter_to_continue();
             *err = NO_ERR;
         }

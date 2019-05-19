@@ -124,37 +124,37 @@ void press_enter_to_continue(void){
     /* TO DO */
 }
 
-void print_error(Error err) {
+void print_error(Error err, Interface* interface) {
     switch (err) {
         case WRONG_INPUT_ERR:
-            fprintf(stderr, RED "Wrong input.\n" RESET);
+            gui_error(interface->gui, "Wrong input.");
             break;
         case FILE_PTR_ERR:
-            fprintf(stderr, BOLDRED "File could not be opened.\n" RESET);
+            gui_error(interface->gui, "File could not be opened.");
             break;
         case FILE_DIMENSION_ERR:
-            fprintf(stderr, BOLDRED "File error: board width must be equal for each line.\n" RESET);
+            gui_error(interface->gui, "File error: board width must be equal for each line.");
             break;
         case FILE_UNKNOWN_CHAR_ERR:
-            fprintf(stderr, BOLDRED "File error: unknown character.\n" RESET);
+            gui_error(interface->gui, "File error: unknown character.");
             break;
         case POINT_ALREADY_EXIST_ERR:
-            fprintf(stderr, BOLDRED "This point already exists.\n" RESET);
+            gui_error(interface->gui, "This point already exists.");
             break;
         case INVALID_COORDINATES_ERR:
-            fprintf(stderr, BOLDRED "Coordinates are invalid.\n" RESET);
+            gui_error(interface->gui, "Coordinates are invalid.");
             break;
         case ALIGNMENT_ERR:
-            fprintf(stderr, BOLDRED "No valid alignment.\n" RESET);
+            gui_error(interface->gui, "No valid alignment.");
             break;
         case CANCEL_ERR:
-            fprintf(stderr, BOLDRED "Cannot cancel: no move to cancel.\n" RESET);
+            gui_error(interface->gui, "Cannot cancel: no move to cancel.");
             break;
         case REPLAY_ERR:
-            fprintf(stderr, BOLDRED "Cannot replay: no move has been cancelled.\n" RESET);
+            gui_error(interface->gui, "Cannot replay: no move has been cancelled.");
             break;
         default:
-            fprintf(stderr, RED "Undefined error (requires implementation)." RESET);
+            gui_error(interface->gui, "Undefined error (requires implementation).");
             exit(EXIT_FAILURE);
             break;
     }
